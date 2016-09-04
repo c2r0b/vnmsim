@@ -1,0 +1,25 @@
+#overlayer
+  +stretch()
+  position: fixed
+  background: black
+  opacity: 0.6
+  z-index: 9000
+
+.panel
+  +stretch(0,0,0,35%)
+  position: fixed
+  background: white
+  z-index: 9999
+  overflow-y: auto
+
+  article
+    padding: 10px 35px
+    p
+      line-height: 1.5
+      text-align: justify
+    table
+      width: 100%
+      border-collapse: collapse
+      tr td
+        padding: 10px
+        border: 1px solid #ddd

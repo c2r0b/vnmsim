@@ -1,0 +1,166 @@
+#simulator
+  +stretch()
+  width: 100%
+  height: 100%
+  max-height: 700px
+  min-height: 500px
+
+  input
+    position: absolute
+    background: white
+    padding: 5px 12px
+    border: 1px solid #aaa
+    +border-radius(0)
+    font-size: 23px
+    text-align: center
+
+  label
+    position: absolute
+    font:
+      family: 'Share Tech Mono', monospace
+      size: 22px
+    &.tooltip
+      cursor: help
+
+.dataBus, .addressBus
+  +stretch(10px, 0, 0, 12px)
+  float: center
+  margin: 0 auto
+
+  width: 100%
+  height: 100% !important
+
+  overflow-y: hidden
+
+  @for $i from 0 through 3
+    &.status#{$i}
+      fill: nth($dataBusClr,$i+1)
+
+.addressBus
+  @for $i from 0 through 3
+    &.status#{$i}
+      fill: nth($addressesBusClr,$i+1)
+
+// program counter _____________________________________________________________
+#pc
+  position: relative
+  top: 15%
+  left: 75%
+  width: 125px
+  height: 200px
+  label
+    +stretch(auto, auto, 45px, 50px)
+  input
+    +stretch(auto, auto, 0, 0)
+    width: 100%
+    padding: 7px 12px
+  select
+    -webkit-appearance: none
+    +stretch(80px, auto, auto, 95px)
+    background: white
+    width: auto
+
+    padding: 10px
+    border: 1px solid #aaa
+    text-align: center
+    +border-radius(100px)
+    font-size: 19px
+    cursor: pointer
+
+// arithmetic logic unit _______________________________________________________
+#alu
+  +stretch(36%, auto, auto, 150px)
+  width: 350px
+  height: 400px
+  svg
+    fill: white
+    stroke: #aaa
+    stroke-width: 1
+    width: 400px
+    height: 400px
+  label
+    +stretch(35px, auto, auto, 150px)
+  input
+    width: 100px
+    background: none
+    border: none
+    &#e1
+      +stretch(55px, auto, auto, 40px)
+    &#e2
+      +stretch(55px, 50px, auto, auto)
+    &#op
+      width: 40px
+      +stretch(120px, 160px, auto, auto)
+
+// accumulator _________________________________________________________________
+#acc
+  +stretch(48%, auto, auto, 205px)
+  z-index: 100
+  label
+    top: 205px
+    left: 10px
+  input
+    top: 195px
+    left: 60px
+    width: 120px
+    padding: 7px 10px
+
+// instructions register _______________________________________________________
+#ir
+  +stretch(5%, auto, auto, 30px)
+  label
+    top: 10px
+    left: 100px
+  input
+    &#cmd
+      top: 35px
+      left: 0
+      width: 120px
+      border-right: none
+    &#loc
+      top: 35px
+      left: 120px
+      width: 120px
+      border-left: none
+
+// other sim labels ____________________________________________________________
+label#busL
+  top: 20px
+  left: 430px
+  font-size: 18px
+
+label#addressesBusL
+  top: 15%
+  left: 430px
+  padding-top: 20px
+  font-size: 18px
+
+label#ramL
+  top: 8%
+  right: 5px
+  p
+    +rotate(-90deg)
+
+label#decoder
+  top: 23%
+  left: 55px
+  background: white
+  padding: 3px 20px
+  border: 1px solid #aaa
+  font-size: 18px
+
+// log console _________________________________________________________________
+textarea#log
+  +stretch(auto,auto,20px,55%)
+  width: 320px
+  height: 220px
+  background: none
+  padding: 10px
+  border: 2px dotted #aaa
+  font-size: 15px
+  line-height: 1.5
+  resize: none
+
+// elements focus ______________________________________________________________
+.focus
+  background: $focusClr !important

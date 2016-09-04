@@ -1,0 +1,19 @@
+aside
+  section
+    #title(translate="MEMORY")
+    article
+      textarea#editor
+  section
+    #title(translate="VARIABLES")
+    article
+      table
+        tr(ng-repeat='(key, val) in sim.variables track by key | orderBy: key')
+          td(ng-bind='key')
+          td(ng-class='{focus: sim.focus.var == key}')
+            input(
+              type='number', placeholder='0',
+              ng-model='sim.variables[key]'
+            )
+        tr
+          td(colspan="2", ng-click="addTvar()")
+            i.fa.fa-plus

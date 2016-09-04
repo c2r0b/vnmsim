@@ -1,0 +1,59 @@
+{
+  "PROJECT": "Progetto",
+  "OPEN": "Apri da file",
+  "SAVE": "Salva progetto",
+  "NEW": "Vuoto in nuovo tab",
+
+  "INFO": "Info",
+  "GUIDE": "Guida",
+  "CHANGELOG": "Changelog",
+  "ISSUES": "Segnalazioni",
+  "FILE_DROP": "Rilascia il file in un punto qualsiasi della pagina per aprirlo",
+
+  "MADE_BY": "Creato da",
+
+  "LANGUAGE": "Lingua",
+  "COOKIES": "Questo sito web utilizza cookies per salvare le preferenze di navigazione",
+
+  "MEMORY": "Celle di memoria",
+  "VARIABLES": "Variabili",
+
+  "ZANICHELLI": "per la versione di Zanichelli Editore",
+  "HERE": "Fai click qui",
+
+  "RUN": "Avvia loop",
+  "STEP": "Singolo ciclo",
+  "PAUSE": "Pausa",
+  "STOP": "Termina",
+
+  "DATA_BUS": "Bus data/istruzioni",
+  "ADDRESSES_BUS": "Bus indirizzi",
+  "DECODER": "Decoder",
+  "IR": "Registro istruzioni",
+  "ALU": "Unità logica aritmetica",
+  "ACC": "Accumulatore",
+  "PC": "Contatore di programma",
+  "RAM": "Memoria ad accesso casuale",
+
+  "LOG_SAVED": "Progetto salvato",
+  "LOG_OPENED": "File aperto",
+  "LOG_RUNNING": "Simulazione in corso",
+  "LOG_PAUSED": "Simulazione in pausa",
+  "LOG_STOPPED": "Simulazione terminata",
+  "LOG_RESET": "Reset della macchina",
+  "LOG_COMPILATION_FAILED": "Compilazione fallita",
+  "LOG_SYNTAX_ERROR": "Errore di sintassi alla linea",
+  "LOG_OPENING_FAILURE": "Impossibile caricare il file selezionato",
+
+  "GUIDE_INTRODUCTION_H": "Introduzione",
+  "GUIDE_INTRODUCTION_P1": "Questo simulatore è stato ideato come soluzione per studenti ed insegnanti per studiare il funzionamento della macchina di Von Neumann.",
+  "GUIDE_INTRODUCTION_P2": "Sviluppato originariamente nel 2015 in puro HTML, CSS e JS, è stato ricreato da zero e reso disponibile come oper-source su Github nel 2016 utilizzando principalmente Pug, Sass, AngularJS e CodeMirror.",
+  "GUIDE_SYNTAX_H": "Sintassi",
+  "GUIDE_SYNTAX_P": "Questo simulatore è compatibile con i più comuni comandi per la macchina di Von Neumann. E' in grado di caricare dati (LOD), salvarli (STO), calcolare addizioni (ADD), sottrazioni (SUB), moltiplicazioni (MUL), divisioni (DIV) ed effettuare salti (JMZ/JMP). È possibile creare righe di commento utilizzando la sintassi '//qualcosa'.",
+  "GUIDE_IO_H": "Funzionalità di I/O",
+  "GUIDE_IO_P": "Nella parte superiore della pagina puoi trovare il menu con le opzioni di I/O, puoi salvarre quello su cui stai lavorando come file sul tuo computer. IL salvataggio include lo stato corrente della macchina e del simulatore insieme alle istruzioni e le variabili contenute nelle celle di memoria. E' presente il supporto per l'apertura dei file trascinandoli in una parte qualsiasi della pagina.",
+  "GUIDE_COMPATIBILITY_H": "Retrocompatibilità",
+  "GUIDE_COMPATIBILITY_P": "Puoi continuare ad aprire progetti creati con versioni precedenti di questo simulatore e con l'edizione di Zanichelli Editore, ma i progetti salvati con questa release non sono retrocompatibili.",
+  "GUIDE_SAMPLES_H": "Esempi scaricabili",
+  "GUIDE_SAMPLES_P": "per vedere alcuni esempi che sono disponibili nella cartella 'samples' del repository Github."
+}

@@ -1,0 +1,58 @@
+{
+  "PROJECT": "Project",
+  "OPEN": "Open from file",
+  "SAVE": "Save project",
+  "NEW": "Blank in new tab",
+
+  "INFO": "Info",
+  "GUIDE": "Guide",
+  "CHANGELOG": "Changelog",
+  "ISSUES": "Issues",
+  "FILE_DROP": "Drop the file anywhere on the page to open it",
+
+  "LANGUAGE": "Language",
+  "COOKIES": "This website uses cookies to save your navigation preferences",
+
+  "MEMORY": "Memory cells",
+  "VARIABLES": "Variables",
+
+  "MADE_BY": "Made by",
+  "ZANICHELLI": "for the Zanichelli Editore version",
+  "HERE": "Click here",
+
+  "RUN": "Run loop",
+  "STEP": "Single cicle",
+  "PAUSE": "Pause",
+  "STOP": "Stop",
+
+  "DATA_BUS": "Data/instructions bus",
+  "ADDRESSES_BUS": "Addresses bus",
+  "DECODER": "Decoder",
+  "IR": "Instructions register",
+  "ALU": "Arithmetic logic unit",
+  "ACC": "Accumulator",
+  "PC": "Program counter",
+  "RAM": "Random-access memory",
+
+  "LOG_SAVED": "Project saved",
+  "LOG_OPENED": "File opened",
+  "LOG_RUNNING": "Running simulation",
+  "LOG_PAUSED": "Simulation paused",
+  "LOG_STOPPED": "Simulation stopped",
+  "LOG_RESET": "Machine reset",
+  "LOG_COMPILATION_FAILED": "Compilation failed",
+  "LOG_SYNTAX_ERROR": "Syntax error at line",
+  "LOG_OPENING_FAILURE": "Unable to load the selected file",
+
+  "GUIDE_INTRODUCTION_H": "Introduction",
+  "GUIDE_INTRODUCTION_P1": "This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.",
+  "GUIDE_INTRODUCTION_P2": "Originally made in 2015 with pure HTML, CSS and JS, it has been rebuilt from the ground up and open-sourced on Github in 2016 using mainly Pug, Sass, AngularJS and CodeMirror.",
+  "GUIDE_SYNTAX_H": "Syntax",
+  "GUIDE_SYNTAX_P": "This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP). You can create comment lines using '//something' syntax.",
+  "GUIDE_IO_H": "I/O features",
+  "GUIDE_IO_P": "At the top of the page you can find the menu with the I/O options, you can save your work as a file on your computer. The saving includes the current machine and simulator status with the instructions and variables contained in the memory cells. It supports files opening by drag and drop.",
+  "GUIDE_COMPATIBILITY_H": "Backward compatibility",
+  "GUIDE_COMPATIBILITY_P": "You can still open projects made with older versions of this simulator and with the Zanichelli edition, but projects saved with this release are not backward compatible at all.",
+  "GUIDE_SAMPLES_H": "Downloadable samples",
+  "GUIDE_SAMPLES_P": "to show some examples that are available in the 'samples' directory of the Github repository."
+}

@@ -1,0 +1,84 @@
+header
+  #logo
+  #controls(ng-controller='controlsCtrl')
+    ul
+      li.tooltip(
+          ng-click='(!sim.status || sim.status == 3) && run(1)',
+          ng-class="{ 'disabled': sim.status == 2, 'active': sim.status == 1 }"
+        )
+        span.tooltiptext(translate="RUN")
+        svg
+          polygon(points='0 0,15 7.5,0 15')
+      li.tooltip(
+          ng-click='(!sim.status || sim.status == 3) && run(2)',
+          ng-class="{ 'disabled': sim.status == 1, 'active': sim.status == 2 }"
+        )
+        span.tooltiptext(translate="STEP")
+        svg
+          polygon(points='0 0,14 7.5,14 0,15 0,15 15,14 15,14 7.5,0 15')
+      li.tooltip(
+          ng-click='(sim.status == 1 || sim.status == 2) && pause()',
+          ng-class="{ 'disabled': !sim.status, 'active': sim.status == 3 }"
+        )
+        span.tooltiptext(translate="PAUSE")
+        svg
+          polygon(points='0 0,6 0,6 15,0 15')
+          polygon(points='9 0,15 0,15 15,9 15')
+      li.tooltip(
+          ng-click='sim.status && stop()',
+          ng-class="{ 'disabled': !sim.status }"
+        )
+        span.tooltiptext(translate="STOP")
+        svg
+          polygon(points='0 0,15 0,15 15,0 15')
+    #right
+      input(
+        type='range', min='0', max='2000', step='50',
+        ng-model='delay', ng-change='delayChanged()')
+      #delayContainer
+        span(ng-bind='delay')
+        |  ms
+  nav
+    ul
+      li(ng-controller='ioCtrl')
+        i.fa.fa-file-text
+        span(translate="PROJECT")
+        ul
+          li(ng-click='open()')
+            i.fa.fa-folder-open
+            span(translate="OPEN")
+            span ...
+          
+          li(ng-click='save()')
+            i.fa.fa-download
+            span(translate="SAVE")
+          
+          a(href='#')
+            li
+              i.fa.fa-file
+              span(translate="NEW")
+      li
+        i.fa.fa-info-circle
+        span(translate="INFO")
+        ul
+          li(ng-click="panel='guide'")
+            i.fa.fa-book
+            span(translate="GUIDE")
+          a(href='http://github.com/lorenzoganni/vnmsim/issues')
+            li
+              i.fa.fa-exclamation-triangle
+              span(translate="ISSUES")
+          a(href='http://github.com/lorenzoganni/vnmsim#changelog')
+            li
+              i.fa.fa-list-alt
+              span(translate="CHANGELOG")
+      li(ng-controller='langCtrl')
+        i.fa.fa-globe
+        span(translate="LANGUAGE")
+        ul
+          li(
+              ng-repeat="l in lang.languages track by $index",
+              ng-click="lang.use(l.id)",
+              ng-bind="l.text"
+            )
+          p(translate="COOKIES")
