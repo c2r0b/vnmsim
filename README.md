@@ -42,7 +42,7 @@ gulp --production
 
 Please feel free to create an issue or a pull request.
 
-If you'd like to add a new language to the simulator or improve the translations, you can find the languages files in `src/locale/` and the available languages array in `src/js/locales.js`.
+If you'd like to add a new language or improve the translations, you can do that from the official Transifex project of this simulator available [here](https://www.transifex.com/lorenzo-ganni/von-neumann-machine-simulator/).
 
 ## Zanichelli version
 
