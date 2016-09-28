@@ -33,11 +33,12 @@
       ng-model='sim.pc.val',
       ng-class="{focus: fEl('pc') || fSt(4)}"
     )
-    select(ng-model='sim.pc.step')
-      option(value='1', ng-selected='sim.pc.step == 1')
-        | +1
-      option(value='2', ng-selected='sim.pc.step == 2')
-        | +2
+    #increment(ng-class="{focus: fEl('pc') || fSt(4)}")
+      span +
+      input(
+        type='number',
+        ng-model='sim.pc.step'
+      )
   // accumulator and alu-acc bus
   #acc
     svg.dataBus(ng-class="'status' + sim.status")

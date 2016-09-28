@@ -33,6 +33,12 @@ module.exports = ['$interval', 'codeMirror', 'sim', 'log',
               ? 'NOP'
               : line
             );
+            // stop the simulator if the PC has a negative value
+            if (sim.pc.val < 0) {
+              sim.pc.val = 0;
+              sim.step = lastStep;
+              sim.status = 2;
+            }
             break;
           case 2:
             // get instruction inside IR first part
