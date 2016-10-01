@@ -6,14 +6,44 @@
   z-index: 9000
 
 .panel
-  +stretch(0,0,0,35%)
+  +stretch(10%, 20%, 10%, 20%)
   position: fixed
   background: white
   z-index: 9999
-  overflow-y: auto
+  +border-radius(20px)
+
+  .close
+    +stretch(25px, 35px, auto, auto)
+    width: 50px
+    height: 50px
+    background: white
+
+    padding: 22px 15px 0
+    +border-radius(100px)
+
+    cursor: pointer
+    z-index: 9999
+    +box-shadow(0 0 10px 0 #999)
+
+    &:before, &:after
+      content: ''
+
+      width: 100%
+      height: 2px
+      background: black
+
+      display: block
+
+    &:before
+      +rotate(45deg)
+
+    &:after
+      +rotate(-45deg)
 
   article
+    +stretch()
     padding: 10px 35px
+    overflow-y: auto
     p
       line-height: 1.5
       text-align: justify

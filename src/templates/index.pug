@@ -40,6 +40,7 @@ html(lang='en')
     #overlayer(ng-show="panel", ng-click="panel = ''")
 
     .panel(ng-show="panel == 'guide'")
+      .close(ng-click="panel = ''")
       article
         include ./guide.pug
 
