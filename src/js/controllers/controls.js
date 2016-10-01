@@ -20,7 +20,8 @@ module.exports = ['$scope', 'sim', 'run', 'log', 'codeMirror',
       // update status and startup the simulation
       sim.status = status;
       run.begin($scope.delay);
-      log('LOG_RUNNING');
+      console.log(status);
+      log('LOG_RUNNING', ((status == 1) ? 'success' : 'step'));
     };
 
     // 'pause' button pressed

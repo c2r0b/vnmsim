@@ -35,7 +35,7 @@ html(lang='en')
     main(ng-controller='simulatorCtrl')
       include ./simulator.pug
       include ./memory.pug
-      textarea#log(readonly, disabled)
+      #log(readonly, disabled)
 
     #overlayer(ng-show="panel", ng-click="panel = ''")
 

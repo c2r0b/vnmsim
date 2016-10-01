@@ -1,27 +1,37 @@
 'use strict';
 
-module.exports = ['$filter', function($filter) {
-  var logTextarea = document.getElementById('log');
+module.exports = ['$rootScope', function($rootScope) {
+  var log = document.getElementById('log');
 
   return function (toTranslate,  mode) {
     // special modes management
-    var before = '', after = '';
+    var before = '', after = '', style = '';
     switch(mode) {
       case 'error':
         before = '[!] ';
         after = ' [!]';
+        style = 'error';
+        break;
+      case 'success':
+        style = 'success';
+        break;
+      case 'step':
+        style = 'step';
         break;
       case 'separator':
-        before = '-----------------------------------------';
+        before = '--------------------------------';
         break;
       case undefined:
         break;
       default:
         after = ' ' + mode;
     }
-    // update textarea from scope
-    logTextarea.value += before + $filter('translate')(toTranslate) + after + '\n';
-    // scroll to the bottom of the textarea
-    logTextarea.scrollTop = logTextarea.scrollHeight;
+    // update log from scope
+    log.innerHTML +=
+      '<span class="' + style + '">' + before +
+      ($rootScope.translations[$rootScope.selectedLang].text[toTranslate] || '')
+      + after + '</span>';
+    // scroll to the bottom of the log area
+    log.scrollTop = log.scrollHeight;
   };
 }];

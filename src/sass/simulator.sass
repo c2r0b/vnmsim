@@ -153,16 +153,27 @@ label#decoder
   font-size: 18px
 
 // log console _________________________________________________________________
-textarea#log
+#log
   +stretch(auto,auto,20px,55%)
   width: 320px
   height: 220px
   background: none
   padding: 10px
   border: 2px dotted #aaa
-  font-size: 15px
+  font:
+    family: 'Share Tech Mono', monospace
+    size: 15px
   line-height: 1.5
   resize: none
+  overflow-y: auto
+  span
+    display: block
+    &.error
+      color: nth($addressesBusClr, 4)
+    &.success
+      color: nth($addressesBusClr, 2)
+    &.step
+      color: nth($addressesBusClr, 3)
 
 // elements focus ______________________________________________________________
 .focus
