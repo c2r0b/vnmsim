@@ -10,10 +10,8 @@
   "license": "MIT",
   "devDependencies": {
     "compass-importer": "^0.4.1",
-    "del": "^2.2.1",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
-    "gulp-angular-translate": "^0.1.4",
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
     "gulp-express": "^0.3.5",
@@ -31,7 +29,6 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-cookies": "^1.5.8",
-    "angular-translate": "^2.11.1",
     "codemirror": "^5.18.2",
     "font-awesome": "^4.6.3"
   }

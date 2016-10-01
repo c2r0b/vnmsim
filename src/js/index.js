@@ -2,17 +2,14 @@
 
 var angular = require('angular');
 
-// angular and components
-require('angular-translate');
-
 // angular app init
-var app = angular.module(
-  'vnmsim',
-  [
-    'pascalprecht.translate',
-    require('angular-cookies')
-  ]
-);
+var app = angular.module('vnmsim', [ require('angular-cookies') ]);
+
+// languages
+app.run(['$rootScope', function($rootScope) {
+  $rootScope.translations = require('./locales');
+  $rootScope.selectedLang = 'en';
+}]);
 
 // services
 app.factory('codeMirror', require('./services/editor'));
@@ -26,8 +23,8 @@ app.controller('langCtrl', require('./controllers/lang'));
 app.controller('controlsCtrl', require('./controllers/controls'));
 app.controller('simulatorCtrl', require('./controllers/simulator'));
 
-// translations
-require('../temp/translations');
+// directives
+app.directive('translate', require('./directives/translate'));
 
 // fullpage input files drop zone
 require('./dropzone');

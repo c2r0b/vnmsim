@@ -12,9 +12,7 @@ var gulp = require('gulp'),
     uglifycss = require('gulp-uglifycss'),
     concat = require('gulp-concat'),
     server = require('gulp-express'),
-    browserify = require('gulp-browserify'),
-    angularTranslate = require('gulp-angular-translate'),
-    del = require('del');
+    browserify = require('gulp-browserify');
 
 // use 'dist' folder for production output, dest otherwise
 var dest = argv.production ? 'dist' : 'build';
@@ -54,22 +52,8 @@ gulp.task('fonts', function() {
     .pipe(gulp.dest(dest + '/fonts'));
 });
 
-// generate translations angular module
-gulp.task('translations', function() {
-  return gulp.src('src/locale/*.json')
-    .pipe(angularTranslate(
-      {
-        module: 'vnmsim',
-        standalone: false
-      }
-    ))
-    .pipe(gulpif(argv.production, uglify()))
-    .pipe(gulp.dest('src/temp'));
-});
-
 // produce uglified app js code
-gulp.task('scripts', ['translations'], function() {
-
+gulp.task('scripts', function() {
   return gulp.src('src/js/index.js')
     .pipe(browserify(
       {
@@ -106,8 +90,6 @@ if (argv.production) tasks.pop();
 
 // default task
 gulp.task('default', tasks, function() {
-  // delete temp files
-  del(['src/temp/']);
   // end message
   console.log('Build ended');
 });

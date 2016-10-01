@@ -48,11 +48,11 @@ header
             i.fa.fa-folder-open
             span(translate="OPEN")
             span ...
-          
+
           li(ng-click='save()')
             i.fa.fa-download
             span(translate="SAVE")
-          
+
           a(href='#')
             li
               i.fa.fa-file
@@ -77,8 +77,8 @@ header
         span(translate="LANGUAGE")
         ul
           li(
-              ng-repeat="l in lang.languages track by $index",
-              ng-click="lang.use(l.id)",
-              ng-bind="l.text"
+              ng-repeat="(key, prop) in $root.translations track by key",
+              ng-click="useLang(key)",
+              ng-bind="prop.name"
             )
           p(translate="COOKIES")
