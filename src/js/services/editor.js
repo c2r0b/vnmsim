@@ -11,13 +11,13 @@ codeMirror.defineMode('vnm', function() {
     token: function(stream, state) {
       if (stream.match(/^(lod|add|sub|mul|div|sto|jmp|jmz|nop|hlt)/i))
         return 'cmd';
-      else if (stream.match(/\s#-?\d+(\s*)$/))
+      if (stream.match(/\s#-?\d+(\s*)$/))
         return 'num';
-      else if (stream.match(/\s[1-9]\d*(\s*)$/))
+      if (stream.match(/\s[1-9]\d*(\s*)$/))
         return 'cell';
-      else if (stream.match(/\s(x|y|z|w|(t[1-9]\d*))(\s*)$/i))
+      if (stream.match(/\s(x|y|z|w|(t[1-9]\d*))(\s*)$/i))
         return 'val';
-      else if (stream.match(/^\/\/[\s\S]*$/))
+      if (stream.match(/^\/\/[\s\S]*$/))
         return 'comment';
       stream.next();
       return null;
@@ -93,7 +93,7 @@ module.exports = function() {
       editor.clearGutter('gutter');
       // fetch code for errors
       var code = this.doc.getValue().split('\n'), lines = [];
-      for (var i in code){
+      for (var i in code) {
         if (!this.validate(code[i])) {
           // generate an error marker
           var marker = document.createElement('div');
