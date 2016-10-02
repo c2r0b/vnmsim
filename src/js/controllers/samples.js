@@ -11,7 +11,8 @@ module.exports = ['$rootScope', '$scope', '$http', 'codeMirror', 'log', 'sim',
 
     // read content of selected sample
     $scope.open = function(name) {
-      $http.get('samples/' + name + '.json').then(function(obj) {
+      $http.get('samples/' + name + '.json').then(function(response) {
+        var obj = response.data;
         // set memory cells code and then destroy that property
         codeMirror.doc.setValue(obj.code);
         delete obj.code;
