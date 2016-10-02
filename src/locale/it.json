@@ -1,13 +1,15 @@
 {
   "PROJECT": "Progetto",
-  "OPEN": "Apri da file",
-  "SAVE": "Salva progetto",
-  "NEW": "Vuoto in nuovo tab",
+  "PROJECT_OPEN": "Apri da file",
+  "PROJECT_SAVE": "Salva progetto",
+  "PROJECT_NEW": "Vuoto in nuovo tab",
 
   "INFO": "Info",
   "GUIDE": "Guida",
+  "SAMPLES": "Esempi",
   "CHANGELOG": "Changelog",
   "ISSUES": "Segnalazioni",
+
   "FILE_DROP": "Rilascia il file in un punto qualsiasi della pagina per aprirlo",
 
   "MADE_BY": "Creato da",
@@ -54,6 +56,7 @@
   "GUIDE_IO_P": "Nella parte superiore della pagina puoi trovare il menu con le opzioni di I/O, puoi salvarre quello su cui stai lavorando come file sul tuo computer. IL salvataggio include lo stato corrente della macchina e del simulatore insieme alle istruzioni e le variabili contenute nelle celle di memoria. E' presente il supporto per l'apertura dei file trascinandoli in una parte qualsiasi della pagina.",
   "GUIDE_COMPATIBILITY_H": "Retrocompatibilità",
   "GUIDE_COMPATIBILITY_P": "Puoi continuare ad aprire progetti creati con versioni precedenti di questo simulatore e con l'edizione di Zanichelli Editore, ma i progetti salvati con questa release non sono retrocompatibili.",
-  "GUIDE_SAMPLES_H": "Esempi scaricabili",
-  "GUIDE_SAMPLES_P": "per vedere alcuni esempi che sono disponibili nella cartella 'samples' del repository Github."
+
+  "SAMPLES_DOWNLOAD": "Scarica",
+  "SAMPLES_OPEN": "Apri"
 }

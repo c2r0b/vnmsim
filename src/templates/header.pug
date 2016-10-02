@@ -46,22 +46,22 @@ header
         ul
           li(ng-click='open()')
             i.fa.fa-folder-open
-            span(translate="OPEN")
+            span(translate="PROJECT_OPEN")
             span ...
 
           li(ng-click='save()')
             i.fa.fa-download
-            span(translate="SAVE")
+            span(translate="PROJECT_SAVE")
 
           a(href='#')
             li
               i.fa.fa-file
-              span(translate="NEW")
+              span(translate="PROJECT_NEW")
       li
         i.fa.fa-info-circle
         span(translate="INFO")
         ul
-          li(ng-click="panel='guide'")
+          li(ng-click="panel = 'guide'")
             i.fa.fa-book
             span(translate="GUIDE")
           a(href='http://github.com/lorenzoganni/vnmsim/issues')
@@ -72,6 +72,11 @@ header
             li
               i.fa.fa-list-alt
               span(translate="CHANGELOG")
+      
+      li(ng-click="panel = 'samples'")
+        i.fa.fa-sitemap
+        span(translate="SAMPLES")
+
       li(ng-controller='langCtrl')
         i.fa.fa-globe
         span(translate="LANGUAGE")

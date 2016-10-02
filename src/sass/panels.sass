@@ -13,7 +13,7 @@
   +border-radius(20px)
 
   .close
-    +stretch(25px, 35px, auto, auto)
+    +stretch(20px, 35px, auto, auto)
     width: 50px
     height: 50px
     background: white
@@ -24,6 +24,9 @@
     cursor: pointer
     z-index: 9999
     +box-shadow(0 0 10px 0 #999)
+
+    &:hover
+      background: $greyClr
 
     &:before, &:after
       content: ''
@@ -53,3 +56,19 @@
       tr td
         padding: 10px
         border: 1px solid #ddd
+      &#samples
+        tr:hover td
+          background: $greyClr
+        tr td:not(:first-child)
+          width: 150px
+          cursor: pointer
+          text-align: center
+          &, & a
+            color: #666
+            text-decoration: none
+          .fa
+            margin-right: 15px
+          &:hover
+            background: $greyBorderClr
+            &, & a
+              color: black

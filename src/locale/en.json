@@ -1,13 +1,15 @@
 {
   "PROJECT": "Project",
-  "OPEN": "Open from file",
-  "SAVE": "Save project",
-  "NEW": "Blank in new tab",
+  "PROJECT_OPEN": "Open from file",
+  "PROJECT_SAVE": "Save project",
+  "PROJECT_NEW": "Blank in new tab",
 
   "INFO": "Info",
   "GUIDE": "Guide",
+  "SAMPLES": "Samples",
   "CHANGELOG": "Changelog",
   "ISSUES": "Issues",
+
   "FILE_DROP": "Drop the file anywhere on the page to open it",
 
   "LANGUAGE": "Language",
@@ -53,6 +55,7 @@
   "GUIDE_IO_P": "At the top of the page you can find the menu with the I/O options, you can save your work as a file on your computer. The saving includes the current machine and simulator status with the instructions and variables contained in the memory cells. It supports files opening by drag and drop.",
   "GUIDE_COMPATIBILITY_H": "Backward compatibility",
   "GUIDE_COMPATIBILITY_P": "You can still open projects made with older versions of this simulator and with the Zanichelli edition, but projects saved with this release are not backward compatible at all.",
-  "GUIDE_SAMPLES_H": "Downloadable samples",
-  "GUIDE_SAMPLES_P": "to show some examples that are available in the 'samples' directory of the Github repository."
+
+  "SAMPLES_DOWNLOAD": "Download",
+  "SAMPLES_OPEN": "Open"
 }

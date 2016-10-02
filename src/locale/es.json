@@ -1,13 +1,15 @@
 {
   "PROJECT": "Proyecto",
-  "OPEN": "Abrir desde archivo",
-  "SAVE": "Guardar proyecto",
-  "NEW": "Nueva pestaña",
+  "PROJECT_OPEN": "Abrir desde archivo",
+  "PROJECT_SAVE": "Guardar proyecto",
+  "PROJECT_NEW": "Nueva pestaña",
 
   "INFO": "Info",
   "GUIDE": "Guía",
+  "SAMPLES": "Muestras",
   "CHANGELOG": "Cambios",
   "ISSUES": "Problemas",
+
   "FILE_DROP": "Suelte el archivo en cualquier lugar de la página para abrirla",
 
   "LANGUAGE": "Idioma",
@@ -53,6 +55,7 @@
   "GUIDE_IO_P": "En la parte superior de la página encontrará el menú con las opciones de I/O, se puede guardar su trabajo como un archivo en su ordenador. El ahorro incluye el estado de la máquina y el simulador de corriente con las instrucciones y variables contenidas en las celdas de memoria. Es compatible con la apertura de archivos de arrastrar y soltar.",
   "GUIDE_COMPATIBILITY_H": "Compatible con versiones anteriores",
   "GUIDE_COMPATIBILITY_P": "Todavía puede abrir proyectos realizados con versiones anteriores de este simulador y con la edición Zanichelli, pero los proyectos guardados con este comunicado no son compatibles en absoluto.",
-  "GUIDE_SAMPLES_H": "Muestras descargables",
-  "GUIDE_SAMPLES_P": "para mostrar algunos ejemplos que están disponibles en el directorio 'samples' del repositorio Github."
+
+  "SAMPLES_DOWNLOAD": "Descargar",
+  "SAMPLES_OPEN": "	Abrir"
 }

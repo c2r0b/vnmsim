@@ -44,6 +44,11 @@ html(lang='en')
       article
         include ./guide.pug
 
+    .panel(ng-show="panel == 'samples'")
+      .close(ng-click="panel = ''")
+      article(ng-controller="samplesCtrl")
+        include ./samples.pug
+
     footer
       include ./footer.pug
 

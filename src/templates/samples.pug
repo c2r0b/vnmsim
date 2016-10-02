@@ -1,0 +1,11 @@
+h2(translate="SAMPLES")
+table#samples
+  tr(ng-repeat="sample in samples")
+    td(ng-bind="sample")
+    td
+      a(href="samples/{{ sample }}.json", download)
+        i.fa.fa-download
+        b(translate='SAMPLES_DOWNLOAD')
+    td(ng-click="open(sample)")
+      i.fa.fa-folder-open
+      b(translate='SAMPLES_OPEN')

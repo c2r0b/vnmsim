@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     uglifycss = require('gulp-uglifycss'),
     concat = require('gulp-concat'),
+    concatFilenames = require('gulp-concat-filenames'),
     server = require('gulp-express'),
     browserify = require('gulp-browserify');
 
@@ -65,6 +66,25 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest(dest));
 });
 
+// create list of samples file names
+function fileNameFormatter(filename) {
+   return filename.split('.')[0];
+}
+gulp.task('samplesList', function () {
+  return gulp.src('samples/*.json')
+    .pipe(concatFilenames('list.txt', {
+      root: 'samples/',
+      template: fileNameFormatter
+    }))
+    .pipe(gulp.dest(dest + '/samples'));
+});
+
+// copy samples folder
+gulp.task('samplesFolder', function () {
+  return gulp.src('samples/**/*')
+    .pipe(gulp.dest(dest + '/samples'));
+});
+
 // server and watchers
 gulp.task('server', function () {
   server.run(['app.js']);
@@ -74,6 +94,7 @@ gulp.task('server', function () {
   gulp.watch('src/locale/*.json', ['scripts']);
   gulp.watch('src/img/**/*', ['styles']);
   gulp.watch('src/sass/**/*.sass', ['styles']);
+  gulp.watch('samples/*.json', ['samplesList', 'samplesFolder']);
   gulp.watch('build/**/*', server.notify);
 });
 
@@ -81,6 +102,8 @@ gulp.task('server', function () {
 var tasks = [
   'styles',
   'scripts',
+  'samplesList',
+  'samplesFolder',
   'templates',
   'fonts',
   'server'
