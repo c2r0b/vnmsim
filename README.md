@@ -1,6 +1,6 @@
 # Von Neumann machine simulator
 
-A simulator of the Von Neumann machine written in Javascript. It is built mainly using Pug (previously Jade), Sass, AngularJS (with Angular Translate) and CodeMirror.
+A simulator of the Von Neumann machine written in Javascript. It is built mainly using Pug (previously Jade), Sass, AngularJS and CodeMirror.
 
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
@@ -54,6 +54,13 @@ If you were looking for that simulator (available only in italian), you can down
 
 This changelog refers to the online version of the simulator.
 
+### v2016.10.02
++ Editable PC increment value (can be negative)
++ Angular Translate removed (unnecessary)
++ Colors in the log console
++ Samples panel (with new "basic_operations" sample)
++ Improved panels layout
+
 ### v2016.09.04
 + Simulator rebuilt from the ground up with AngularJS
 + Major UI improvements
@@ -67,7 +74,7 @@ This changelog refers to the online version of the simulator.
 + Source code available on Github
 
 ### v2015.10.20
-+ Added new languages 
++ Added new languages
 + JMP and JMZ commands bug fixed
 
 ### v2015.10.15
