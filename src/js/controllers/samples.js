@@ -5,7 +5,7 @@ module.exports = ['$rootScope', '$scope', '$http', 'codeMirror', 'log', 'sim',
 
     // get samples file names
     $http.get('samples/list.txt').then(function(response) {
-      $scope.samples = response.split('\n');
+      $scope.samples = response.data.split('\n');
       $scope.samples.pop();
     });
 
