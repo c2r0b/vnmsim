@@ -1,9 +1,10 @@
 'use strict';
 
-module.exports = ['$interval', 'codeMirror', 'sim', 'log',
-  function($interval, codeMirror, sim, log) {
+module.exports = ['$rootScope', '$interval', 'codeMirror', 'sim', 'log',
+  function($rootScope, $interval, codeMirror, sim, log) {
     // last simulator step ID
     const lastStep = 9;
+
     return {
       // promise for running loop
       runLoop: '',
@@ -23,8 +24,12 @@ module.exports = ['$interval', 'codeMirror', 'sim', 'log',
       },
       // step executor
       execute: function() {
+        // statistics object shortcut
+        var stats = $rootScope.stats;
+        // execute code related to the current simulator step
         switch(sim.step) {
           case 1:
+            stats.executed_steps++;
             // focus and get next line from codeMirror
             codeMirror.cell.focus(sim.pc.val);
             var line = codeMirror.doc.getLine(sim.pc.val);
@@ -67,6 +72,7 @@ module.exports = ['$interval', 'codeMirror', 'sim', 'log',
                 sim.focus.el = 'pc';
                 sim.pc.val = +sim.ir.loc;
                 sim.step = lastStep;
+                stats.performed_jmp++;
                 break;
               case 'JMZ':
                 sim.focus.el = 'acc';
@@ -83,6 +89,7 @@ module.exports = ['$interval', 'codeMirror', 'sim', 'log',
               if (sim.acc == 0) {
                 sim.focus.el = 'pc';
                 sim.pc.val = +sim.ir.loc;
+                stats.performed_jmz++;
               }
               else {
                 sim.focus.el = '';
@@ -104,10 +111,12 @@ module.exports = ['$interval', 'codeMirror', 'sim', 'log',
             else if (sim.ir.loc.match(/T|X|Y|Z|W/)) { // variable
               sim.focus.var = sim.ir.loc;
               sim.alu.e2 = parseInt(sim.variables[sim.ir.loc]) || 0;
+              stats.variables_accesses++;
             }
             else { // memory cell
               codeMirror.cell.focus(sim.ir.loc);
               sim.alu.e2 = parseInt(codeMirror.doc.getLine(sim.ir.loc)) || 0;
+              stats.cells_accesses++;
             }
             sim.focus.el = 'aluE2';
             break;
@@ -119,6 +128,7 @@ module.exports = ['$interval', 'codeMirror', 'sim', 'log',
                   sim.acc = parseInt(sim.alu.e2) || 0;
                   break;
                 default:
+                  stats.alu_calculations++;
                   sim.acc = parseInt(
                     eval("sim.acc" + sim.alu.op + "parseInt(sim.alu.e2)")
                   );
@@ -131,8 +141,10 @@ module.exports = ['$interval', 'codeMirror', 'sim', 'log',
               if (sim.ir.loc.match(/T|X|Y|Z|W/)) { // variable
                 sim.focus.var = sim.ir.loc;
                 sim.variables[sim.ir.loc] = sim.acc;
+                stats.variables_accesses++;
               }
               else { // memory cell
+                stats.cells_accesses++;
                 // focus that cell
                 codeMirror.cell.focus(sim.ir.loc);
                 // append to cell content

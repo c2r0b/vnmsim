@@ -35,7 +35,6 @@ html(lang='en')
     main(ng-controller='simulatorCtrl')
       include ./simulator.pug
       include ./memory.pug
-      #log(readonly, disabled)
 
     #overlayer(ng-show="panel", ng-click="panel = ''")
 
@@ -60,7 +59,6 @@ html(lang='en')
       article(ng-controller="settingsCtrl")
         include ./panels/settings.pug
 
-    footer
-      include ./footer.pug
+    include ./footer.pug
 
     script(src='app.js')

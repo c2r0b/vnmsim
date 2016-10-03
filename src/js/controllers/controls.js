@@ -1,12 +1,18 @@
 'use strict';
 
-module.exports = ['$scope', 'sim', 'run', 'log', 'codeMirror',
-  function($scope, sim, run, log, codeMirror) {
+var stats = require('../stats');
+
+module.exports = ['$rootScope', '$scope', 'sim', 'run', 'log', 'codeMirror',
+  function($rootScope, $scope, sim, run, log, codeMirror) {
     // init delay at 500ms
     $scope.delay = 500;
-
+    // statistics
+    angular.copy(stats, ($rootScope.stats = {}));
     // run button pressed (play / step)
     $scope.run = function(status) {
+      // reset statistics on new startup
+      if (!sim.status && stats != $rootScope.stats)
+        angular.copy(stats, $rootScope.stats);
       // check for input errors
       var lines;
       if (lines = codeMirror.hasErrors()) {

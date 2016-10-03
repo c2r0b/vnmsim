@@ -6,7 +6,6 @@ module.exports = ['$rootScope', '$scope', '$cookies',
     // function to call to change the language in use
     $scope.useLang = function(l) {
       $cookies.put('lang', ($scope.lang = $rootScope.selectedLang = l));
-      console.log('a');
     };
 
     // startup with cookie language or browser lang or default lang

@@ -1,9 +1,8 @@
 #simulator
-  +stretch(5px)
+  +stretch(5px, 0, 10px)
   width: 100%
   height: 100%
   max-height: 700px
-  min-height: 500px
 
   input
     position: absolute
@@ -44,7 +43,7 @@
 // program counter _____________________________________________________________
 #pc
   position: relative
-  top: 15%
+  top: 15.3%
   left: 75%
   width: 125px
   height: 200px
@@ -90,7 +89,7 @@
 
 // arithmetic logic unit _______________________________________________________
 #alu
-  +stretch(36%, auto, auto, 150px)
+  +stretch(33%, auto, auto, 150px)
   width: 350px
   height: 400px
   svg
@@ -115,7 +114,7 @@
 
 // accumulator _________________________________________________________________
 #acc
-  +stretch(48%, auto, auto, 205px)
+  +stretch(35%, auto, auto, 205px)
   z-index: 100
   label
     top: 205px
@@ -128,7 +127,7 @@
 
 // instructions register _______________________________________________________
 #ir
-  +stretch(5%, auto, auto, 30px)
+  +stretch(3%, auto, auto, 30px)
   label
     top: 10px
     left: 100px
@@ -173,29 +172,6 @@ label#decoder
   +border-radius(5px)
   font-size: 18px
   text-transform: uppercase
-
-// log console _________________________________________________________________
-#log
-  +stretch(auto,auto,20px,55%)
-  width: 320px
-  height: 220px
-  background: none
-  padding: 10px
-  border: 2px dotted #aaa
-  font:
-    family: 'Share Tech Mono', monospace
-    size: 15px
-  line-height: 1.5
-  resize: none
-  overflow-y: auto
-  span
-    display: block
-    &.error
-      color: nth($addressesBusClr, 4)
-    &.success
-      color: nth($addressesBusClr, 2)
-    &.step
-      color: nth($addressesBusClr, 3)
 
 // elements focus ______________________________________________________________
 .focus

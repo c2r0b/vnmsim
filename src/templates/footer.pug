@@ -1,10 +1,31 @@
-p
-  b(translate="MADE_BY")
-  | 
-  a(href="http://lorenzoganni.com")
-    b Lorenzo Ganni
-  | &nbsp;&nbsp;|&nbsp;&nbsp;
-  a(href="http://goo.gl/hSwG4m")
-    b(translate="HERE")
-  | 
-  span(translate="ZANICHELLI")
+#credits
+  p
+    b(translate="MADE_BY")
+    | &nbsp;
+    a(href="http://lorenzoganni.com")
+      b Lorenzo Ganni
+
+footer
+  #log
+    #title(translate="LOG")
+  #stats
+    #title(translate="STATS")
+    table
+      tr
+        td(translate="STATS_EXECUTED_STEPS")
+        td(ng-bind="stats.executed_steps")
+      tr
+        td(translate="STATS_ALU_CALCULATIONS")
+        td(ng-bind="stats.alu_calculations")
+      tr
+        td(translate="STATS_PERFORMED_JMP")
+        td(ng-bind="stats.performed_jmp")
+      tr
+        td(translate="STATS_PERFORMED_JMZ")
+        td(ng-bind="stats.performed_jmz")
+      tr
+        td(translate="STATS_VARIABLES_ACCESSES")
+        td(ng-bind="stats.variables_accesses")
+      tr
+        td(translate="STATS_CELLS_ACCESSES")
+        td(ng-bind="stats.cells_accesses")

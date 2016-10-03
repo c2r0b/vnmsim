@@ -11,9 +11,17 @@
   "CHANGELOG": "Changelog",
   "ISSUES": "Segnalazioni",
 
-  "FILE_DROP": "Rilascia il file in un punto qualsiasi della pagina per aprirlo",
+  "LOG": "Log",
 
-  "MADE_BY": "Creato da",
+  "STATS": "Statistiche",
+  "STATS_EXECUTED_STEPS": "Passi eseguiti",
+  "STATS_ALU_CALCULATIONS": "Calcoli eseguiti dalla ALU",
+  "STATS_PERFORMED_JMP": "Salti eseguiti",
+  "STATS_PERFORMED_JMZ": "Salti condizionati eseguiti",
+  "STATS_VARIABLES_ACCESSES": "Accessi alle variabili",
+  "STATS_CELLS_ACCESSES": "Accessi alle celle",
+
+  "FILE_DROP": "Rilascia il file in un punto qualsiasi della pagina per aprirlo",
 
   "SETTINGS": "Impostazioni",
   "SETTINGS_APPLY": "Applica",
@@ -23,8 +31,7 @@
   "MEMORY": "Celle di memoria",
   "VARIABLES": "Variabili",
 
-  "ZANICHELLI": "per la versione di Zanichelli Editore",
-  "HERE": "Fai click qui",
+  "MADE_BY": "Creato da",
 
   "RUN": "Avvia loop",
   "STEP": "Singolo ciclo",

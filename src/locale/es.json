@@ -11,6 +11,16 @@
   "CHANGELOG": "Cambios",
   "ISSUES": "Problemas",
 
+  "LOG": "Log",
+
+  "STATS": "Estadística",
+  "STATS_EXECUTED_STEPS": "Pasos ejecutados",
+  "STATS_ALU_CALCULATIONS": "Cálculos ALU",
+  "STATS_PERFORMED_JMP": "Saltos realizados",
+  "STATS_PERFORMED_JMZ": "Saltos acondicionado realizados",
+  "STATS_VARIABLES_ACCESSES": "Variables accesos",
+  "STATS_CELLS_ACCESSES": "Células accesos",
+
   "FILE_DROP": "Suelte el archivo en cualquier lugar de la página para abrirla",
 
   "SETTINGS": "Ajustes",
@@ -22,8 +32,6 @@
   "VARIABLES": "Variables",
 
   "MADE_BY": "Realizado por",
-  "ZANICHELLI": "para la versión Zanichelli Editore",
-  "HERE": "Haga clic aquí",
 
   "RUN": "Ejecutar",
   "STEP": "Individual",

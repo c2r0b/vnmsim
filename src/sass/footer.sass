@@ -1,8 +1,66 @@
 footer
-  +stretch(auto,0,0,0)
+  +stretch(auto, $asideWidth, 0, 0)
+  position: fixed
   height: $footerHeight
+  background: white
+  +box-shadow(-4px -1px 10px 0 #ccc)
+  z-index: 330
+
+  #log, #stats
+    position: relative
+    float: left
+    width: 50%
+    height: 100%
+    border-right: 1px solid $greyBorderClr
+    font:
+      family: 'Share Tech Mono', monospace
+      size: 15px
+    #title
+      +stretch(0, 0, auto, 0)
+      height: $titlesHeight
+      background-color: #eee
+      padding: 12px 0
+      text-align: center
+      font-size: 16px
+
+  // log console _______________________________________________________________
+  #log
+    padding: ($titlesHeight + 10) 0 0
+    line-height: 1.5
+    resize: none
+    overflow-y: auto
+    span
+      padding: 0 10px
+      display: block
+      &.error
+        color: nth($addressesBusClr, 4)
+      &.success
+        color: nth($addressesBusClr, 2)
+      &.step
+        color: nth($addressesBusClr, 3)
+
+  // statistics ________________________________________________________________
+  #stats
+    padding: ($titlesHeight + 10) 10px 0
+    table
+      width: 100%
+      border-collapse: collapse
+      tr
+        td
+          padding: 5px
+          border: 1px solid $greyBorderClr
+          &:last-child
+            text-align: center
+
+// credits ___________________________________________________________________
+#credits
+  +stretch(auto, $asideWidth, $footerHeight + 5, auto)
+  position: fixed
+  height: 45px
   padding: 10px 15px
   font-size: 14px
   z-index: 200
   p
     margin: 5px 0
+    &, & a
+      color: #999
