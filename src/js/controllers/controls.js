@@ -13,7 +13,7 @@ module.exports = ['$scope', 'sim', 'run', 'log', 'codeMirror',
         log('','separator');
         log('LOG_COMPILATION_FAILED', 'error');
         // log problematic lines numbers
-        for(var i in lines) log('LOG_SYNTAX_ERROR', (+lines[i] + 1));
+        for(var i in lines) log('LOG_SYNTAX_ERROR', (+lines[i]));
         log('','separator');
         return;
       }
