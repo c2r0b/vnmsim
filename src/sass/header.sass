@@ -1,8 +1,7 @@
 header
   +stretch(0, 0, auto, 0)
   height: $headerHeight
-  background: linear-gradient(to bottom, $themeClr, $themeClrDark)
-
+  background: $themeClrDark
   padding: 0
 
   overflow: visible
@@ -10,9 +9,10 @@ header
 
   #logo
     float: left
-    width: 170px
+    width: 175px
     height: 100%
     background:
+      color: $themeClr
       image: url(inline-image('src/img/logo.png'))
       position: left 15px top 13px
       repeat: no-repeat
@@ -24,7 +24,7 @@ header
     float: right
     width: $asideWidth + 10
     height: $headerHeight
-    background: linear-gradient(to bottom, #333, black)
+    background: black
     padding: 2px 50px 2px 10px
     color: white
     ul
@@ -73,11 +73,7 @@ header
     input[type="range"]
       width: 150px
       margin: 19px 5px 20px 10px
-
   nav
-    float: left
-    height: $headerHeight
-    z-index: 200
     ul
       list-style: none
       padding: 0
@@ -87,12 +83,12 @@ header
         float: left
         height: $headerHeight
         padding: 20px 15px
-        border-right: 2px solid $themeClrDark
         color: white
         font-size: 14px
         cursor: pointer
+        +transition
         &:hover
-          background: $themeClrDark
+          background: $themeClr
           ul
             visibility: visible
         &:last-child ul
@@ -101,15 +97,19 @@ header
             float: left
             width: 50%
         i.fa
-          margin-right: 10px
+          margin-left: 7px
+          &:first-child
+            margin:
+              left: 0
+              right: 10px
         ul
           +stretch($headerHeight, auto, auto, -2px)
           width: 190px
-          background: $themeClrDark
+          background: $themeClr
           visibility: hidden
           z-index: 200
           p
-            background: $themeClr
+            background: $themeClrDark
             padding: 15px
             margin: 0
             text-align: center
@@ -122,6 +122,6 @@ header
             text-transform: none
             padding: 15px
             &:hover
-              background: $themeClr
+              background: $themeClrDark
           a:hover
             text-decoration: none

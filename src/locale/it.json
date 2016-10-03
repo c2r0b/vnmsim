@@ -4,9 +4,10 @@
   "PROJECT_SAVE": "Salva progetto",
   "PROJECT_NEW": "Vuoto in nuovo tab",
 
-  "INFO": "Info",
   "GUIDE": "Guida",
   "SAMPLES": "Esempi",
+
+  "INFO": "Info",
   "CHANGELOG": "Changelog",
   "ISSUES": "Segnalazioni",
 
@@ -14,8 +15,10 @@
 
   "MADE_BY": "Creato da",
 
-  "LANGUAGE": "Lingua",
-  "COOKIES": "Questo sito web utilizza cookies per salvare le preferenze di navigazione",
+  "SETTINGS": "Impostazioni",
+  "SETTINGS_APPLY": "Applica",
+  "SETTINGS_LANGUAGE": "Lingua",
+  "SETTINGS_COOKIES": "Questo sito web utilizza cookies per salvare le preferenze di navigazione",
 
   "MEMORY": "Celle di memoria",
   "VARIABLES": "Variabili",

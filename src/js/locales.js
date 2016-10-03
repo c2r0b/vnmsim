@@ -1,13 +1,13 @@
 module.exports = {
-  'en': {
+  en: {
     name: 'English',
     text: require('../locale/en.json')
   },
-  'it': {
+  it: {
     name: 'Italiano',
     text: require('../locale/it.json')
   },
-  'es': {
+  es: {
     name: 'Español',
     text: require('../locale/es.json')
   }

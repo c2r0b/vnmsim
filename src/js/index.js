@@ -19,7 +19,7 @@ app.factory('run', require('./services/run'));
 
 // controllers
 app.controller('ioCtrl', require('./controllers/io'));
-app.controller('langCtrl', require('./controllers/lang'));
+app.controller('settingsCtrl', require('./controllers/settings'));
 app.controller('controlsCtrl', require('./controllers/controls'));
 app.controller('simulatorCtrl', require('./controllers/simulator'));
 app.controller('samplesCtrl', require('./controllers/samples'));

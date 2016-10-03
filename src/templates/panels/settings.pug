@@ -1,0 +1,10 @@
+p
+  b(translate="SETTINGS_LANGUAGE")
+  select(
+    ng-options="k as v.name for (k, v) in $root.translations",
+    ng-model="lang"
+  )
+.clear
+button(ng-click="useLang(lang); $root.panel = ''", translate="SETTINGS_APPLY")
+p
+  i(translate="SETTINGS_COOKIES")

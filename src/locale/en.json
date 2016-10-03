@@ -4,16 +4,19 @@
   "PROJECT_SAVE": "Save project",
   "PROJECT_NEW": "Blank in new tab",
 
-  "INFO": "Info",
   "GUIDE": "Guide",
   "SAMPLES": "Samples",
+
+  "INFO": "Info",
   "CHANGELOG": "Changelog",
   "ISSUES": "Issues",
 
   "FILE_DROP": "Drop the file anywhere on the page to open it",
 
-  "LANGUAGE": "Language",
-  "COOKIES": "This website uses cookies to save your navigation preferences",
+  "SETTINGS": "Settings",
+  "SETTINGS_APPLY": "Apply",
+  "SETTINGS_LANGUAGE": "Language",
+  "SETTINGS_COOKIES": "This website uses cookies to save your navigation preferences",
 
   "MEMORY": "Memory cells",
   "VARIABLES": "Variables",

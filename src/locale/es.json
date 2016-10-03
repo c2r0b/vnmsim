@@ -4,16 +4,19 @@
   "PROJECT_SAVE": "Guardar proyecto",
   "PROJECT_NEW": "Nueva pestaña",
 
-  "INFO": "Info",
   "GUIDE": "Guía",
   "SAMPLES": "Muestras",
+
+  "INFO": "Info",
   "CHANGELOG": "Cambios",
   "ISSUES": "Problemas",
 
   "FILE_DROP": "Suelte el archivo en cualquier lugar de la página para abrirla",
 
-  "LANGUAGE": "Idioma",
-  "COOKIES": "Esta página web utiliza cookies para guardar sus preferencias",
+  "SETTINGS": "Ajustes",
+  "SETTINGS_APPLY": "Aplicar",
+  "SETTINGS_LANGUAGE": "Idioma",
+  "SETTINGS_COOKIES": "Esta página web utiliza cookies para guardar sus preferencias",
 
   "MEMORY": "Células de memoria",
   "VARIABLES": "Variables",

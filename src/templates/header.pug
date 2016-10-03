@@ -41,29 +41,32 @@ header
   nav
     ul
       li(ng-controller='ioCtrl')
-        i.fa.fa-file-text
-        span(translate="PROJECT")
-        ul
-          li(ng-click='open()')
-            i.fa.fa-folder-open
-            span(translate="PROJECT_OPEN")
-            span ...
+          i.fa.fa-file-text
+          span(translate="PROJECT")
+          i.fa.fa-caret-down
+          ul
+            li(ng-click='open()')
+              i.fa.fa-folder-open
+              span(translate="PROJECT_OPEN")
 
-          li(ng-click='save()')
-            i.fa.fa-download
-            span(translate="PROJECT_SAVE")
+            li(ng-click='save()')
+              i.fa.fa-download
+              span(translate="PROJECT_SAVE")
 
-          a(href='#')
-            li
-              i.fa.fa-file
-              span(translate="PROJECT_NEW")
+            a(href='#')
+              li
+                i.fa.fa-file
+                span(translate="PROJECT_NEW")
+
+      li(ng-click="panel = 'guide'")
+        i.fa.fa-question-circle
+        span(translate="GUIDE")
+
       li
         i.fa.fa-info-circle
         span(translate="INFO")
+        i.fa.fa-caret-down
         ul
-          li(ng-click="panel = 'guide'")
-            i.fa.fa-book
-            span(translate="GUIDE")
           a(href='http://github.com/lorenzoganni/vnmsim/issues')
             li
               i.fa.fa-exclamation-triangle
@@ -72,18 +75,11 @@ header
             li
               i.fa.fa-list-alt
               span(translate="CHANGELOG")
-      
+
       li(ng-click="panel = 'samples'")
         i.fa.fa-sitemap
         span(translate="SAMPLES")
 
-      li(ng-controller='langCtrl')
-        i.fa.fa-globe
-        span(translate="LANGUAGE")
-        ul
-          li(
-              ng-repeat="(key, prop) in $root.translations track by key",
-              ng-click="useLang(key)",
-              ng-bind="prop.name"
-            )
-          p(translate="COOKIES")
+      li(ng-click="panel = 'settings'")
+        i.fa.fa-cogs
+        span(translate="SETTINGS")

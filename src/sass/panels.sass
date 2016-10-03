@@ -2,7 +2,7 @@
   +stretch()
   position: fixed
   background: black
-  opacity: 0.6
+  opacity: 0.5
   z-index: 9000
 
 .panel
@@ -10,46 +10,77 @@
   position: fixed
   background: white
   z-index: 9999
-  +border-radius(20px)
 
-  .close
-    +stretch(20px, 35px, auto, auto)
-    width: 50px
-    height: 50px
-    background: white
-
-    padding: 22px 15px 0
-    +border-radius(100px)
-
+  .title
+    +stretch(0, 0, auto, 0)
+    height: 60px
+    background: $greyClr
+    padding: 0 35px
     cursor: pointer
-    z-index: 9999
-    +box-shadow(0 0 10px 0 #999)
 
-    &:hover
-      background: $greyClr
+    h2
+      font:
+        family: 'Lato', sans-serif
+        weight: 400
+        size: 22px
 
-    &:before, &:after
-      content: ''
+    .close
+      float: right
+      width: 30px
+      height: 30px
+      margin: 28px 0
+      z-index: 9999
 
-      width: 100%
-      height: 2px
-      background: black
+      &:before, &:after
+        content: ''
 
-      display: block
+        width: 100%
+        height: 2px
+        background: black
 
-    &:before
-      +rotate(45deg)
+        display: block
 
-    &:after
-      +rotate(-45deg)
+      &:before
+        +rotate(45deg)
+
+      &:after
+        +rotate(-45deg)
 
   article
     +stretch()
     padding: 10px 35px
+    margin-top: 60px
     overflow-y: auto
     p
       line-height: 1.5
       text-align: justify
+    h3
+      font:
+        family: 'Lato', sans-serif
+        weight: 400
+        size: 18px
+    select
+      -webkit-appearance: none
+      background:
+        color: white
+        image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>")
+        repeat: no-repeat
+        position: top 10px right 10px
+        size: 10px auto
+      padding: 7px 25px 7px 15px
+      border: 1px solid $greyBorderClr
+      margin: 0 15px
+      font-size: 13px
+      +border-radius(0)
+      cursor: pointer
+    button
+      background: $greyClr
+      border: 1px solid $greyBorderClr
+      padding: 10px 20px
+      text-transform: uppercase
+      cursor: pointer
+      &:hover
+        background: $greyBorderClr
     table
       width: 100%
       border-collapse: collapse
@@ -57,6 +88,7 @@
         padding: 10px
         border: 1px solid #ddd
       &#samples
+        margin-top: 20px
         tr:hover td
           background: $greyClr
         tr td:not(:first-child)

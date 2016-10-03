@@ -40,14 +40,25 @@ html(lang='en')
     #overlayer(ng-show="panel", ng-click="panel = ''")
 
     .panel(ng-show="panel == 'guide'")
-      .close(ng-click="panel = ''")
+      .title(ng-click="panel = ''")
+        .close
+        h2(translate="GUIDE")
       article
-        include ./guide.pug
+        include ./panels/guide.pug
 
     .panel(ng-show="panel == 'samples'")
-      .close(ng-click="panel = ''")
+      .title(ng-click="panel = ''")
+        .close
+        h2(translate="SAMPLES")
       article(ng-controller="samplesCtrl")
-        include ./samples.pug
+        include ./panels/samples.pug
+
+    .panel(ng-show="panel == 'settings'")
+      .title(ng-click="panel = ''")
+        .close
+        h2(translate="SETTINGS")
+      article(ng-controller="settingsCtrl")
+        include ./panels/settings.pug
 
     footer
       include ./footer.pug
