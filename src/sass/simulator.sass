@@ -1,5 +1,5 @@
 #simulator
-  +stretch()
+  +stretch(5px)
   width: 100%
   height: 100%
   max-height: 700px
@@ -9,8 +9,8 @@
     position: absolute
     background: white
     padding: 5px 12px
-    border: 1px solid #aaa
-    +border-radius(0)
+    border: 1px solid $greyBorderClr
+    +border-radius(5px)
     font-size: 23px
     text-align: center
 
@@ -55,12 +55,14 @@
     width: 100%
     height: 41px
     background: white
-    border: 1px solid #aaa
+    border: 1px solid $greyBorderClr
+    +border-radius(5px)
     button
       width: 30%
       background: $greyClr
       padding: 13px 0
       border: none
+      +border-radius(5px 0 0 5px)
       cursor: pointer
       &:hover
         background: $greyBorderClr
@@ -69,14 +71,15 @@
       background: none
       border: none
       padding: 7px 12px
+      +border-radius(0 5px 5px 0)
   #increment
     +stretch(80px, auto, auto, 80px)
     background: white
     width: 60px
 
     padding: 5px 10px
-    border: 1px solid #aaa
-    +border-radius(100px)
+    border: 1px solid $greyBorderClr
+    +border-radius(5px)
     font-size: 18px
     input
       width: 40px
@@ -92,20 +95,20 @@
   height: 400px
   svg
     fill: white
-    stroke: #aaa
+    stroke: $greyBorderClr
     stroke-width: 1
     width: 400px
     height: 400px
   label
     +stretch(35px, auto, auto, 150px)
   input
-    width: 100px
+    width: 80px
     background: none
     border: none
     &#e1
-      +stretch(55px, auto, auto, 40px)
+      +stretch(55px, auto, auto, 45px)
     &#e2
-      +stretch(55px, 50px, auto, auto)
+      +stretch(55px, 55px, auto, auto)
     &#op
       width: 40px
       +stretch(120px, 160px, auto, auto)
@@ -135,11 +138,13 @@
       left: 0
       width: 120px
       border-right: none
+      +border-radius(5px 0 0 5px)
     &#loc
       top: 35px
       left: 120px
       width: 120px
       border-left: none
+      +border-radius(0 5px 5px 0)
 
 // other sim labels ____________________________________________________________
 label#busL
@@ -155,7 +160,7 @@ label#addressesBusL
 
 label#ramL
   top: 8%
-  right: 5px
+  right: 0
   p
     +rotate(-90deg)
 
@@ -163,9 +168,11 @@ label#decoder
   top: 23%
   left: 55px
   background: white
-  padding: 3px 20px
-  border: 1px solid #aaa
+  padding: 5px 20px
+  border: 1px solid $greyBorderClr
+  +border-radius(5px)
   font-size: 18px
+  text-transform: uppercase
 
 // log console _________________________________________________________________
 #log

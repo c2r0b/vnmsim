@@ -1,9 +1,10 @@
 aside
-  +stretch($headerHeight + 10 , 10px, $footerHeight + 20, auto)
+  +stretch($headerHeight, 0, 0, auto)
   position: fixed
   width: $asideWidth
   background-color: white
-  border: 2px dotted #aaa
+  +box-shadow(1px 1px 10px 0 #aaa)
+  z-index: 300
 
   section
     position: relative
@@ -16,8 +17,7 @@ aside
     #title
       height: $ramTitlesHeight
       background-color: #eee
-      padding: 10px 0
-      border-bottom: 1px solid $greyBorderClr
+      padding: 12px 0
       text-align: center
       font:
         family: 'Share Tech Mono', monospace
@@ -55,7 +55,7 @@ aside
         border-collapse: collapse
         tr
           margin: 0
-          border-bottom: 1px solid $greyBorderClr
+          border-bottom: 1px solid $greyClr
           &:last-child td
             cursor: pointer
             color: #444
@@ -66,7 +66,7 @@ aside
             padding: 0
             &:first-child
               width: 40px
-              background: $greyClr
+              background: #F7F7F7
               padding: 5px 0
               border: none
               margin: 0

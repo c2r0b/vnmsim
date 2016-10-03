@@ -5,14 +5,15 @@ header
   padding: 0
 
   overflow: visible
-  z-index: 100
+  z-index: 310
+  +box-shadow(1px 1px 10px 0 #aaa)
 
   #logo
     float: left
     width: 175px
     height: 100%
     background:
-      color: $themeClr
+      color: $themeClrDark
       image: url(inline-image('src/img/logo.png'))
       position: left 15px top 13px
       repeat: no-repeat
@@ -22,7 +23,7 @@ header
 
   #controls
     float: right
-    width: $asideWidth + 10
+    width: $asideWidth
     height: $headerHeight
     background: black
     padding: 2px 50px 2px 10px
@@ -74,6 +75,7 @@ header
       width: 150px
       margin: 19px 5px 20px 10px
   nav
+    float: right
     ul
       list-style: none
       padding: 0
