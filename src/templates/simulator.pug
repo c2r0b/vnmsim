@@ -27,12 +27,15 @@
     label.tooltip
       | PC
       span.tooltiptext(translate="PC")
-    input(
-      type='number',
-      min='0',
-      ng-model='sim.pc.val',
-      ng-class="{focus: fEl('pc') || fSt(4)}"
-    )
+    #val
+      button(ng-click="sim.pc.val = 0")
+        i.fa.fa-refresh
+      input(
+        type='number',
+        min='0',
+        ng-model='sim.pc.val',
+        ng-class="{focus: fEl('pc') || fSt(4)}"
+      )
     #increment(ng-class="{focus: fEl('pc') || fSt(4)}")
       span +
       input(
