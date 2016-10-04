@@ -3,7 +3,7 @@
 module.exports = ['$rootScope', function($rootScope) {
   var log = document.getElementById('log');
 
-  return function (toTranslate,  mode) {
+  return function (text,  mode, mustTranslate = true) {
     // special modes management
     var before = '', after = '', style = '';
     switch(mode) {
@@ -19,7 +19,7 @@ module.exports = ['$rootScope', function($rootScope) {
         style = 'step';
         break;
       case 'separator':
-        before = '--------------------------------';
+        before = '<hr />';
         break;
       case undefined:
         break;
@@ -29,7 +29,11 @@ module.exports = ['$rootScope', function($rootScope) {
     // update log from scope
     log.innerHTML +=
       '<span class="' + style + '">' + before +
-      ($rootScope.translations[$rootScope.selectedLang].text[toTranslate] || '')
+      (
+        (mustTranslate)
+        ? ($rootScope.translations[$rootScope.selectedLang].text[text] || '')
+        : text
+      )
       + after + '</span>';
     // scroll to the bottom of the log area
     log.scrollTop = log.scrollHeight;
