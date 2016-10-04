@@ -6,7 +6,7 @@ footer
   +box-shadow(-4px -1px 10px 0 #ccc)
   z-index: 330
 
-  #log, #stats
+  #console, #stats
     position: relative
     float: left
     width: 50%
@@ -24,20 +24,22 @@ footer
       font-size: 16px
 
   // log console _______________________________________________________________
-  #log
-    padding: ($titlesHeight + 10) 0 0
+  #console
+    position: relative
     line-height: 1.5
-    resize: none
-    overflow-y: auto
-    span
-      padding: 0 10px
-      display: block
-      &.error
-        color: nth($addressesBusClr, 4)
-      &.success
-        color: nth($addressesBusClr, 2)
-      &.step
-        color: nth($addressesBusClr, 3)
+    #log
+      +stretch($titlesHeight, 0, 0, 0)
+      padding: 10px 0
+      overflow-y: auto
+      span
+        padding: 0 10px
+        display: block
+        &.error
+          color: nth($addressesBusClr, 4)
+        &.success
+          color: nth($addressesBusClr, 2)
+        &.step
+          color: nth($addressesBusClr, 3)
 
   // statistics ________________________________________________________________
   #stats

@@ -105,11 +105,12 @@ header
               left: 0
               right: 10px
         ul
-          +stretch($headerHeight, auto, auto, -2px)
+          +stretch($headerHeight, auto, auto, 0)
           width: 190px
           background: $themeClr
           visibility: hidden
           z-index: 200
+          +box-shadow(1px 3px 3px 0 #ccc)
           p
             background: $themeClrDark
             padding: 15px
