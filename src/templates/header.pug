@@ -3,6 +3,12 @@ header
   #controls(ng-controller='controlsCtrl')
     ul
       li.tooltip(
+          ng-click='(!sim.status || sim.status == 3) && compile()',
+          ng-class="{ 'disabled': sim.status == 1 || sim.status == 2 }"
+        )
+        span.tooltiptext(translate="COMPILE")
+        i.fa.fa-terminal
+      li.tooltip(
           ng-click='(!sim.status || sim.status == 3) && run(1)',
           ng-class="{ 'disabled': sim.status == 2, 'active': sim.status == 1 }"
         )

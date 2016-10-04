@@ -33,6 +33,7 @@
 
   "MADE_BY": "Made by",
 
+  "COMPILE": "Compile",
   "RUN": "Run loop",
   "STEP": "Single cicle",
   "PAUSE": "Pause",
@@ -54,6 +55,7 @@
   "LOG_STOPPED": "Simulation stopped",
   "LOG_RESET": "Machine reset",
   "LOG_COMPILATION_FAILED": "Compilation failed",
+  "LOG_COMPILATION_SUCCEEDED": "Compilation succeeded",
   "LOG_SYNTAX_ERROR": "Syntax error at line",
   "LOG_OPENING_FAILURE": "Unable to load the selected file",
 

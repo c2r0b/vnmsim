@@ -8,12 +8,8 @@ module.exports = ['$rootScope', '$scope', 'sim', 'run', 'log', 'codeMirror',
     $scope.delay = 500;
     // statistics
     angular.copy(stats, ($rootScope.stats = {}));
-    // run button pressed (play / step)
-    $scope.run = function(status) {
-      // reset statistics on new startup
-      if (!sim.status && stats != $rootScope.stats)
-        angular.copy(stats, $rootScope.stats);
-      // check for input errors
+    // code compilation
+    function compile() {
       var lines;
       if (lines = codeMirror.hasErrors()) {
         log('','separator');
@@ -21,12 +17,24 @@ module.exports = ['$rootScope', '$scope', 'sim', 'run', 'log', 'codeMirror',
         // log problematic lines numbers
         for(var i in lines) log('LOG_SYNTAX_ERROR', (+lines[i]));
         log('','separator');
-        return;
+        return false;
       }
-      // update status and startup the simulation
-      sim.status = status;
-      run.begin($scope.delay);
-      log('LOG_RUNNING', ((status == 1) ? 'success' : 'step'));
+      log('LOG_COMPILATION_SUCCEEDED', 'success');
+      return true;
+    }
+    $scope.compile = compile;
+    // run button pressed (play / step)
+    $scope.run = function(status) {
+      // reset statistics on new startup
+      if (!sim.status && stats != $rootScope.stats)
+        angular.copy(stats, $rootScope.stats);
+      // check for input errors
+      if (compile()) {
+        // update status and startup the simulation
+        sim.status = status;
+        run.begin($scope.delay);
+        log('LOG_RUNNING', ((status == 1) ? 'success' : 'step'));
+      }
     };
 
     // 'pause' button pressed

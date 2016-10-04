@@ -33,6 +33,7 @@
 
   "MADE_BY": "Realizado por",
 
+  "COMPILE": "Compilar",
   "RUN": "Ejecutar",
   "STEP": "Individual",
   "PAUSE": "Pausa",
@@ -54,6 +55,7 @@
   "LOG_STOPPED": "Simulación detuvo",
   "LOG_RESET": "Reinicio de la máquina",
   "LOG_COMPILATION_FAILED": "Compilación falló",
+  "LOG_COMPILATION_SUCCEEDED": "Compilación tuvo éxito",
   "LOG_SYNTAX_ERROR": "Error de sintaxis en la línea",
   "LOG_OPENING_FAILURE": "No puede cargar el archivo",
 
