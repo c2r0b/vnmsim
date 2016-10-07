@@ -18,11 +18,18 @@
     padding: 0 35px
     cursor: pointer
 
+    h2, h3
+      float: left
+      font-family: 'Lato', sans-serif
     h2
       font:
-        family: 'Lato', sans-serif
         weight: 400
         size: 22px
+    h3
+      font:
+        weight: 300
+        size: 15px
+      padding: 9px 5px
 
     .close
       float: right
@@ -51,6 +58,9 @@
     padding: 10px 35px
     margin-top: 60px
     overflow-y: auto
+    .fifty
+      float: left
+      width: 50%
     p
       line-height: 1.5
       text-align: justify
@@ -59,20 +69,27 @@
         family: 'Lato', sans-serif
         weight: 400
         size: 18px
-    select
-      -webkit-appearance: none
-      background:
-        color: white
-        image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>")
-        repeat: no-repeat
-        position: top 10px right 10px
-        size: 10px auto
-      padding: 7px 25px 7px 15px
+
+    select, input
+      background-color: white
+      padding: 5px
       border: 1px solid $greyBorderClr
       margin: 0 15px
       font-size: 13px
-      +border-radius(0)
+      +border-radius(4px)
       cursor: pointer
+      &[type=number]
+        width: 40px
+
+    select
+      -webkit-appearance: none
+      background:
+        image: url("data:image/svg+xmlutf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>")
+        repeat: no-repeat
+        position: top 10px right 10px
+        size: 10px auto
+      padding-right: 25px
+
     button
       background: $greyClr
       border: 1px solid $greyBorderClr
@@ -81,6 +98,44 @@
       cursor: pointer
       &:hover
         background: $greyBorderClr
+
+    input[type=checkbox]
+      &:not(:checked), &:checked
+        position: absolute
+        left: -9999px
+        & + label
+          position: relative
+          padding-left: 60px
+          cursor: pointer
+          &:before, &:after
+            content: ''
+            position: absolute
+            +transition
+          &:before
+            left: 0
+            top: -3px
+            width: 45px
+            height: 25px
+            background: white
+            border-radius: 4px
+            border: 1px solid $greyBorderClr
+          &:after
+            width: 17px
+            height: 17px
+            border-radius: 4px
+            background: $greyBorderClr
+            top: 2px
+            left: 5px
+      &:checked
+        & + label
+          &:before
+            background: $themeClr
+          &:after
+            background: white
+            left: 22px
+      &:focus + label:before
+        box-sizing: border-box
+
     table
       width: 100%
       border-collapse: collapse

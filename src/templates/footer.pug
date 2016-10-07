@@ -1,11 +1,11 @@
-#credits
+#credits(ng-class="{ 'full': !logStats}")
   p
     b(translate="MADE_BY")
     | &nbsp;
     a(href="http://lorenzoganni.com")
       b Lorenzo Ganni
 
-footer
+footer(ng-show="logStats")
   #console
     #title(translate="LOG")
     #log

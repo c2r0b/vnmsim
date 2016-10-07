@@ -26,6 +26,11 @@
   "SETTINGS": "Impostazioni",
   "SETTINGS_APPLY": "Applica",
   "SETTINGS_LANGUAGE": "Lingua",
+  "SETTINGS_DEFAULT_PC_STEP": "Incremento del PC predefinito",
+  "SETTINGS_TVARS_INIT": "Quantità di variabili T all'avvio",
+  "SETTINGS_TOGGLE_LOG_STATS": "Mostra log e statistiche",
+  "SETTINGS_TOGGLE_SIM_LABELS": "Mostra etichette componenti simulatore",
+  "SETTINGS_TOGGLE_WELCOME_MSG": "Visualizza messaggio di benvenuto",
   "SETTINGS_COOKIES": "Questo sito web utilizza cookies per salvare le preferenze di navigazione",
 
   "MEMORY": "Celle di memoria",

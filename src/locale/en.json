@@ -26,6 +26,11 @@
   "SETTINGS": "Settings",
   "SETTINGS_APPLY": "Apply",
   "SETTINGS_LANGUAGE": "Language",
+  "SETTINGS_DEFAULT_PC_STEP": "Default PC step value",
+  "SETTINGS_TVARS_INIT": "Quantity of T variables at startup",
+  "SETTINGS_TOGGLE_LOG_STATS": "Display log and statistics panels",
+  "SETTINGS_TOGGLE_SIM_LABELS": "Show labels on the simulator",
+  "SETTINGS_TOGGLE_WELCOME_MSG": "Log the welcome message",
   "SETTINGS_COOKIES": "This website uses cookies to save your navigation preferences",
 
   "MEMORY": "Memory cells",

@@ -26,6 +26,11 @@
   "SETTINGS": "Ajustes",
   "SETTINGS_APPLY": "Aplicar",
   "SETTINGS_LANGUAGE": "Idioma",
+  "SETTINGS_DEFAULT_PC_STEP": "Aumento de la PC por defecto",
+  "SETTINGS_TVARS_INIT": "Cantidad de variables T en el inicio",
+  "SETTINGS_TOGGLE_LOG_STATS": "Mostrar registros y estadísticas",
+  "SETTINGS_TOGGLE_SIM_LABELS": "Mostrar las etiquetas de los componentes",
+  "SETTINGS_TOGGLE_WELCOME_MSG": "Mostrar mensaje de bienvenida",
   "SETTINGS_COOKIES": "Esta página web utiliza cookies para guardar sus preferencias",
 
   "MEMORY": "Células de memoria",

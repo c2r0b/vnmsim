@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ['$rootScope', function($rootScope) {
+module.exports = ['$rootScope', '$cookies', function($rootScope, $cookies) {
   return $rootScope.sim = {
     status: 0, // 0 = stop, 1 = play, 2 = step, 3 = pause
     step: 0,
@@ -12,7 +12,7 @@ module.exports = ['$rootScope', function($rootScope) {
     acc: 0,
     pc: {
       val: 0,
-      step: 1,
+      step: (+$cookies.get('pc_step') || 1),
     },
     ir: {
       cmd: '',
@@ -25,7 +25,7 @@ module.exports = ['$rootScope', function($rootScope) {
       Z: '',
       W: ''
     },
-    tVarCount: 0,
+    tVarCount: (+$cookies.get('tVarCount') || 0),
     focus: {
       el: '',
       var: ''
