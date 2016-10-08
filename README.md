@@ -54,6 +54,16 @@ If you were looking for that simulator (available only in italian), you can down
 
 This changelog refers to the online version of the simulator.
 
+### v2016.10.09
++ Statistics section
++ Settings panel
++ Reset button for the PC field
++ Compilation button
++ Improved UI
++ 5 new samples
++ Log startup message
++ Warning message on page leave and on file change
+
 ### v2016.10.02
 + Editable PC increment value (can be negative)
 + Angular Translate removed (unnecessary)
