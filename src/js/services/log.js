@@ -30,7 +30,7 @@ module.exports = ['$rootScope', function($rootScope) {
     log.innerHTML +=
       '<span class="' + style + '">' + before +
       (
-        (mustTranslate)
+        (mustTranslate === undefined || mustTranslate)
         ? ($rootScope.translate(text) || '')
         : text
       )
