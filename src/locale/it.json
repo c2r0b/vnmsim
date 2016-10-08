@@ -33,6 +33,8 @@
   "SETTINGS_TOGGLE_WELCOME_MSG": "Visualizza messaggio di benvenuto",
   "SETTINGS_COOKIES": "Questo sito web utilizza cookies per salvare le preferenze di navigazione",
 
+  "WARNING_UNSAVED": "Verranno perse le modifiche non salvate. Proseguire?",
+
   "MEMORY": "Celle di memoria",
   "VARIABLES": "Variabili",
 

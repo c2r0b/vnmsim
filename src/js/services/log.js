@@ -31,7 +31,7 @@ module.exports = ['$rootScope', function($rootScope) {
       '<span class="' + style + '">' + before +
       (
         (mustTranslate)
-        ? ($rootScope.translations[$rootScope.selectedLang].text[text] || '')
+        ? ($rootScope.translate(text) || '')
         : text
       )
       + after + '</span>';

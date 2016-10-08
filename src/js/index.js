@@ -9,6 +9,10 @@ var app = angular.module('vnmsim', [ require('angular-cookies') ]);
 app.run(['$rootScope', function($rootScope) {
   $rootScope.translations = require('./locales');
   $rootScope.selectedLang = 'en';
+  // function to translate a string
+  $rootScope.translate = function(t) {
+    return $rootScope.translations[$rootScope.selectedLang].text[t];
+  };
 }]);
 
 // services
