@@ -9,15 +9,15 @@ module.exports = ['$rootScope', '$scope', '$cookies', 'sim',
     }
 
     // apply global settings
-    $rootScope.simLables = (($cookies.get('simLables') || 1) === 'true')
-    $rootScope.logStats = (($cookies.get('logStats') || 1) === 'true')
+    $rootScope.simLables = (($cookies.get('simLables') || 'true') === 'true')
+    $rootScope.logStats = (($cookies.get('logStats') || 'true') === 'true')
 
     // get settings values
     $scope.pc_step = sim.pc.step;
     $scope.tVarCount = sim.tVarCount;
     $scope.simLables = $rootScope.simLables;
     $scope.logStats = $rootScope.logStats;
-    $scope.welcomeMsg = (($cookies.get('welcomeMsg') || 1) === 'true');
+    $scope.welcomeMsg = (($cookies.get('welcomeMsg') || 'true') === 'true');
 
     // startup with cookie language or browser lang or default lang
     $scope.lang = $cookies.get('lang')
