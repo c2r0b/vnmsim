@@ -61,7 +61,12 @@ gulp.task('scripts', function() {
         debug: !argv.production
       }
     ).on('error', console.error.bind(console)))
-    .pipe(gulpif(argv.production, uglify()))
+    .pipe(
+      gulpif(
+        argv.production,
+        uglify().on('error', console.error.bind(console))
+      )
+    )
     .pipe(rename('app.js'))
     .pipe(gulp.dest(dest));
 });

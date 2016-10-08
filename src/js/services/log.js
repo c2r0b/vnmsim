@@ -3,7 +3,7 @@
 module.exports = ['$rootScope', function($rootScope) {
   var log = document.getElementById('log');
 
-  return function (text,  mode, mustTranslate = true) {
+  return function (text,  mode, mustTranslate) {
     // special modes management
     var before = '', after = '', style = '';
     switch(mode) {

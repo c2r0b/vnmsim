@@ -12,7 +12,7 @@ app.run(['$rootScope', function($rootScope) {
   // function to translate a string
   function translate(t) {
     return $rootScope.translations[$rootScope.selectedLang].text[t];
-  };
+  }
   $rootScope.translate = translate;
 
   // warning on page leave

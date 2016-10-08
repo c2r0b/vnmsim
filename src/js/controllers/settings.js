@@ -33,8 +33,8 @@ module.exports = ['$rootScope', '$scope', '$cookies', 'sim',
       $cookies.put('pc_step', $scope.pc_step);
       $cookies.put('tVarCount', $scope.tVarCount);
       $cookies.put('welcomeMsg', $scope.welcomeMsg);
-      $cookies.put('simLables', $rootScope.simLables = $scope.simLables);
-      $cookies.put('logStats', $rootScope.logStats = $scope.logStats);
+      $cookies.put('simLables', ($rootScope.simLables = $scope.simLables));
+      $cookies.put('logStats', ($rootScope.logStats = $scope.logStats));
       // close settings panel
       $rootScope.panel = '';
     };
