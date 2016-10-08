@@ -5,14 +5,20 @@ var angular = require('angular');
 // angular app init
 var app = angular.module('vnmsim', [ require('angular-cookies') ]);
 
-// languages
 app.run(['$rootScope', function($rootScope) {
+  // languages
   $rootScope.translations = require('./locales');
   $rootScope.selectedLang = 'en';
   // function to translate a string
-  $rootScope.translate = function(t) {
+  function translate(t) {
     return $rootScope.translations[$rootScope.selectedLang].text[t];
   };
+  $rootScope.translate = translate;
+
+  // warning on page leave
+  window.addEventListener('beforeunload', function (e) {
+    return (e || window.event).returnValue = translate('WARNING_UNSAVED');
+  });
 }]);
 
 // services
