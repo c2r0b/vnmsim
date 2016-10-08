@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     fontAwesome = require('node-font-awesome'),
     merge = require('merge-stream'),
     rename = require("gulp-rename"),
+    zip = require('gulp-zip'),
     uglify = require('gulp-uglify'),
     uglifycss = require('gulp-uglifycss'),
     concat = require('gulp-concat'),
@@ -90,6 +91,13 @@ gulp.task('samplesFolder', function () {
     .pipe(gulp.dest(dest + '/samples'));
 });
 
+// generate samples ZIP
+gulp.task('samplesZip', () => {
+    return gulp.src('samples/*')
+      .pipe(zip('samples.zip'))
+      .pipe(gulp.dest(dest));
+});
+
 // server and watchers
 gulp.task('server', function () {
   server.run(['app.js']);
@@ -99,7 +107,7 @@ gulp.task('server', function () {
   gulp.watch('src/locale/*.json', ['scripts']);
   gulp.watch('src/img/**/*', ['styles']);
   gulp.watch('src/sass/**/*.sass', ['styles']);
-  gulp.watch('samples/*.json', ['samplesList', 'samplesFolder']);
+  gulp.watch('samples/*.json', ['samplesList', 'samplesFolder', 'samplesZip']);
   gulp.watch('build/**/*', server.notify);
 });
 
@@ -109,6 +117,7 @@ var tasks = [
   'scripts',
   'samplesList',
   'samplesFolder',
+  'samplesZip',
   'templates',
   'fonts',
   'server'

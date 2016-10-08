@@ -77,5 +77,6 @@
   "GUIDE_COMPATIBILITY_P": "Puoi continuare ad aprire progetti creati con versioni precedenti di questo simulatore e con l'edizione di Zanichelli Editore, ma i progetti salvati con questa release non sono retrocompatibili.",
 
   "SAMPLES_DOWNLOAD": "Scarica",
-  "SAMPLES_OPEN": "Apri"
+  "SAMPLES_OPEN": "Apri",
+  "SAMPLES_DOWNLOAD_ALL": "Scarica tutti"
 }

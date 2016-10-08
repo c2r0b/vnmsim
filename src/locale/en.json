@@ -77,5 +77,6 @@
   "GUIDE_COMPATIBILITY_P": "You can still open projects made with older versions of this simulator and with the Zanichelli edition, but projects saved with this release are not backward compatible at all.",
 
   "SAMPLES_DOWNLOAD": "Download",
-  "SAMPLES_OPEN": "Open"
+  "SAMPLES_OPEN": "Open",
+  "SAMPLES_DOWNLOAD_ALL": "Download all samples"
 }

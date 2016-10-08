@@ -148,6 +148,8 @@
         color: white
         cursor: pointer
         +transition
+        i.fa
+          margin-right: 10px
         &:hover
           background: $themeClrDark
 
@@ -156,24 +158,31 @@
       border-collapse: collapse
       tr td
         padding: 10px
-        border: 1px solid #ddd
+        border: 1px solid $greyClr
       &#samples
         margin-top: 20px
         tr
+          border: 1px solid $greyClr
+          +transition
+          &:hover
+            background-color: $greyClr
           td
-            +transition
-          &:hover td
-            background: $greyClr
-          td:not(:first-child)
-            width: 150px
-            cursor: pointer
-            text-align: center
-            &, & a
-              color: #666
-              text-decoration: none
-            .fa
-              margin-right: 15px
-            &:hover
-              background: $themeClr
-              &, & a
-                color: white
+            border: none
+            &:first-child
+              text-transform: uppercase
+              font-size: 15px
+            &:not(:first-child)
+              width: 150px
+              cursor: pointer
+              text-align: center
+              border-left: 3px solid transparent
+              +transition
+              &, a
+                color: #666
+                text-decoration: none
+              .fa
+                margin-right: 15px
+              &:hover
+                border-left-color: $themeClr
+                &, a
+                  color: $themeClr
