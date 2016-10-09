@@ -12,14 +12,14 @@ module.exports = ['$rootScope', '$scope', 'sim', 'run', 'log', 'codeMirror',
     function compile() {
       var lines;
       if (lines = codeMirror.hasErrors()) {
-        log('','separator');
-        log('LOG_COMPILATION_FAILED', 'error');
+        log.write('','separator');
+        log.write('LOG_COMPILATION_FAILED', 'error');
         // log problematic lines numbers
-        for(var i in lines) log('LOG_SYNTAX_ERROR', (+lines[i]));
-        log('','separator');
+        for(var i in lines) log.write('LOG_SYNTAX_ERROR', (+lines[i]));
+        log.write('','separator');
         return false;
       }
-      log('LOG_COMPILATION_SUCCEEDED', 'success');
+      log.write('LOG_COMPILATION_SUCCEEDED', 'success');
       return true;
     }
     $scope.compile = compile;
@@ -33,7 +33,7 @@ module.exports = ['$rootScope', '$scope', 'sim', 'run', 'log', 'codeMirror',
         // update status and startup the simulation
         sim.status = status;
         run.begin($scope.delay);
-        log('LOG_RUNNING', ((status == 1) ? 'success' : 'step'));
+        log.write('LOG_RUNNING', ((status == 1) ? 'success' : 'step'));
       }
     };
 
@@ -41,16 +41,16 @@ module.exports = ['$rootScope', '$scope', 'sim', 'run', 'log', 'codeMirror',
     $scope.pause = function() {
       sim.status = 3;
       run.stop();
-      log('LOG_PAUSED');
+      log.write('LOG_PAUSED');
     };
 
     // 'stop' button pressed
     $scope.stop = function() {
       run.stop();
-      log('LOG_STOPPED');
+      log.write('LOG_STOPPED');
       run.clear();
       sim.status = sim.step = sim.pc.val = 0;
-      log('LOG_RESET');
+      log.write('LOG_RESET');
     };
 
     // watch for delay changes

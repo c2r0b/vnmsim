@@ -19,7 +19,7 @@ module.exports = ['$rootScope', '$scope', '$http', 'codeMirror', 'log', 'sim',
           delete obj.code;
           // set simulator status object
           if (sim != obj) angular.copy(obj, sim);
-          log('LOG_OPENED');
+          log.write('LOG_OPENED');
           // close panel
           $rootScope.panel = '';
         }

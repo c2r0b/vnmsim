@@ -7,7 +7,11 @@
 
 footer(ng-show="logStats")
   #console
-    #title(translate="LOG")
+    #title
+      span(translate="LOG")
+      button.tooltip(ng-click="clearLog()")
+        i.fa.fa-trash-o
+        span.tooltiptext(translate="LOG_CLEAR")
     #log
   #stats
     #title(translate="STATS")

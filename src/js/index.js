@@ -28,6 +28,7 @@ app.factory('sim', require('./services/sim'));
 app.factory('run', require('./services/run'));
 
 // controllers
+app.controller('mainCtrl', require('./controllers/main'));
 app.controller('ioCtrl', require('./controllers/io'));
 app.controller('settingsCtrl', require('./controllers/settings'));
 app.controller('controlsCtrl', require('./controllers/controls'));

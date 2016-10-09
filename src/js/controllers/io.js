@@ -17,7 +17,7 @@ module.exports = ['$rootScope', '$scope', 'codeMirror', 'log', 'sim',
 
       // on reader error
       function errorCallBack() {
-        log('LOG_OPENING_FAILURE', 'error');
+        log.write('LOG_OPENING_FAILURE', 'error');
       }
 
       // read the file
@@ -68,7 +68,7 @@ module.exports = ['$rootScope', '$scope', 'codeMirror', 'log', 'sim',
           }
           // force sim values update
           $rootScope.$apply();
-          log('LOG_OPENED');
+          log.write('LOG_OPENED');
         }
       }
       // invalid file
@@ -91,7 +91,7 @@ module.exports = ['$rootScope', '$scope', 'codeMirror', 'log', 'sim',
       dlProj.setAttribute("href", data);
       dlProj.setAttribute("download", Date().split(' ').join('_') + ".json");
       dlProj.click();
-      log('LOG_SAVED');
+      log.write('LOG_SAVED');
     };
 
   }

@@ -177,7 +177,7 @@ module.exports = ['$rootScope', '$interval', 'codeMirror', 'sim', 'log',
               if (sim.status == 2) {
                 parent.stop();
                 sim.status = 0;
-                log("Simulation stopped");
+                log.write("Simulation stopped");
                 return;
               }
             }

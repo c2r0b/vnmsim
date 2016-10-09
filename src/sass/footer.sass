@@ -19,9 +19,26 @@ body > footer
       +stretch(0, 0, auto, 0)
       height: $titlesHeight
       background-color: #eee
-      padding: 12px 0
+      padding: 11px 15px
       text-align: center
       font-size: 16px
+      button
+        +stretch(7px, 7px, auto, auto)
+        cursor: pointer
+        font-size: 17px
+        background: none
+        padding: 5px 10px
+        border: none
+        +border-radius(50px)
+        span.tooltiptext
+          width: 80px
+          left: 100%
+        i.fa
+          color: #666
+        &:hover
+          i.fa
+            color: black
+          background: $greyBorderClr
 
   // log console _______________________________________________________________
   #console
