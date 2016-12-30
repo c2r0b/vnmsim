@@ -9,12 +9,12 @@ var gulp = require('gulp'),
     merge = require('merge-stream'),
     rename = require("gulp-rename"),
     zip = require('gulp-zip'),
-    uglify = require('gulp-uglify'),
     uglifycss = require('gulp-uglifycss'),
     concat = require('gulp-concat'),
     concatFilenames = require('gulp-concat-filenames'),
     server = require('gulp-express'),
-    browserify = require('gulp-browserify');
+    bro = require('gulp-bro'),
+    uglifyify = require('uglifyify');
 
 // use 'dist' folder for production output, dest otherwise
 var dest = argv.production ? 'dist' : 'build';
@@ -57,16 +57,12 @@ gulp.task('fonts', function() {
 // produce uglified app js code
 gulp.task('scripts', function() {
   return gulp.src('src/js/index.js')
-    .pipe(browserify(
-      {
-        debug: !argv.production
-      }
-    ).on('error', console.error.bind(console)))
     .pipe(
-      gulpif(
-        argv.production,
-        uglify().on('error', console.error.bind(console))
-      )
+      bro({
+        transform: [
+          argv.production ? [ 'uglifyify', { global: true } ] : ''
+        ]
+      })
     )
     .pipe(rename('app.js'))
     .pipe(gulp.dest(dest));
