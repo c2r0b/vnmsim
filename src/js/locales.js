@@ -10,5 +10,9 @@ module.exports = {
   es: {
     name: 'Español',
     text: require('../locale/es.json')
+  },
+  de: {
+    name: 'Deutsche',
+    text: require('../locale/de.json')
   }
 };
