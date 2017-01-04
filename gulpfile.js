@@ -45,7 +45,7 @@ gulp.task('styles', function() {
     .pipe(concat('app.css'))
     .pipe(rename('style.min.css'))
     .pipe(gulpif(argv.production, uglifycss({ 'uglyComments': true })))
-    .pipe(gulp.dest(dest));
+    .pipe(gulp.dest(dest + '/src'));
 });
 
 // font awesome
@@ -65,7 +65,7 @@ gulp.task('scripts', function() {
       })
     )
     .pipe(rename('app.js'))
-    .pipe(gulp.dest(dest));
+    .pipe(gulp.dest(dest + '/src'));
 });
 
 // create list of samples file names
