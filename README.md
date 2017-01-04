@@ -54,6 +54,11 @@ If you were looking for that simulator (available only in italian), you can down
 
 This changelog refers to the online version of the simulator.
 
+### v2017.01.04
++ All samples download button
++ Clear log button
++ German language support
+
 ### v2016.10.09
 + Statistics section
 + Settings panel
