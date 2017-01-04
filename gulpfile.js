@@ -94,19 +94,6 @@ gulp.task('samplesZip', () => {
       .pipe(gulp.dest(dest));
 });
 
-// server and watchers
-gulp.task('server', function () {
-  server.run(['app.js']);
-
-  gulp.watch('src/templates/**/*', ['templates']);
-  gulp.watch('src/js/**/*.js', ['scripts']);
-  gulp.watch('src/locale/*.json', ['scripts']);
-  gulp.watch('src/img/**/*', ['styles']);
-  gulp.watch('src/sass/**/*.sass', ['styles']);
-  gulp.watch('samples/*.json', ['samplesList', 'samplesFolder', 'samplesZip']);
-  gulp.watch('build/**/*', server.notify);
-});
-
 // tasks to be executed during build
 var tasks = [
   'styles',
@@ -115,14 +102,23 @@ var tasks = [
   'samplesFolder',
   'samplesZip',
   'templates',
-  'fonts',
-  'server'
+  'fonts'
 ];
-// remove server task in production mode
-if (argv.production) tasks.pop();
 
 // default task
 gulp.task('default', tasks, function() {
-  // end message
-  console.log('Build ended');
+
+  // in development start server and watchers
+  if (!argv.production) {
+    server.run(['app.js']);
+
+    gulp.watch('src/templates/**/*', ['templates']);
+    gulp.watch('src/js/**/*.js', ['scripts']);
+    gulp.watch('src/locale/*.json', ['scripts']);
+    gulp.watch('src/img/**/*', ['styles']);
+    gulp.watch('src/sass/**/*.sass', ['styles']);
+    gulp.watch('samples/*.json', ['samplesList', 'samplesFolder', 'samplesZip']);
+    gulp.watch('build/**/*', server.notify);
+
+  }
 });

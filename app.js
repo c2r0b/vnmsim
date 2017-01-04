@@ -4,5 +4,5 @@ var express = require('express'),
 
 app.use(express.static(__dirname + '/build'));
 
-app.listen(3000);
-console.log('Listening on port 3000');
+var listener = app.listen(0);
+console.log('Express server listening on port ' + listener.address().port);

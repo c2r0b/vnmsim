@@ -26,13 +26,13 @@ You'll need NodeJS, use this command to access the main branch and install the d
 cd vnmsim && npm install
 ```
 
-You'll need Gulp and Express to compile it. For debugging mode (it will start a web server on `localhost:3000` and you'll find the compiled simulator source in `build`) just run:
+You'll need Gulp and Express to compile it. For debugging mode (it will start a web server on `localhost`, the port will be displayed as soon as the compilation ends and you'll find the compiled simulator source in `build`) just run:
 
 ```
 gulp
 ```
 
-To compile it for production (it will take a little more time to uglify the source code, it won't start the server and the output will be located in `dist`):
+To compile it for production (it won't start the server and the output will be located in `dist`):
 
 ```
 gulp --production
