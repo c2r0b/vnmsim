@@ -1,101 +1,27 @@
-var gulp = require('gulp'),
-    argv = require('yargs').argv,
-    gulpif = require('gulp-if'),
-    pug = require('gulp-pug'),
-    sass = require('gulp-sass'),
-    compass = require('compass-importer'),
-    sassInlineImage = require('sass-inline-image'),
-    fontAwesome = require('node-font-awesome'),
-    merge = require('merge-stream'),
-    rename = require("gulp-rename"),
-    zip = require('gulp-zip'),
-    uglifycss = require('gulp-uglifycss'),
-    concat = require('gulp-concat'),
-    concatFilenames = require('gulp-concat-filenames'),
-    server = require('gulp-express'),
-    bro = require('gulp-bro'),
-    uglifyify = require('uglifyify');
+import gulp from 'gulp';
+import argv from 'yargs';
+import gulpif from 'gulp-if';
+import pug from 'gulp-pug';
+import sass from 'gulp-sass';
+import compass from 'compass-importer';
+import sassInlineImage from 'sass-inline-image';
+import fontAwesome from 'node-font-awesome';
+import merge from 'merge-stream';
+import rename from 'gulp-rename';
+import zip from 'gulp-zip';
+import uglifycss from 'gulp-uglifycss';
+import concat from 'gulp-concat';
+import concatFilenames from 'gulp-concat-filenames';
+import server from 'gulp-express';
+import bro from 'gulp-bro';
+import babelify from 'babelify';
+import uglifyify from 'uglifyify';
 
 // use 'dist' folder for production output, dest otherwise
-var dest = argv.production ? 'dist' : 'build';
-
-// pug templates
-gulp.task('templates', function() {
-  return gulp.src('src/templates/index.pug')
-    .pipe(pug().on('error', console.error.bind(console)))
-    .pipe(gulp.dest(dest));
-});
-
-// compile sass using compass
-gulp.task('styles', function() {
-  var sassStream = gulp.src('src/sass/main.sass')
-    .pipe(sass(
-      {
-        importer: compass,
-        outputStyle: argv.production ? 'compressed' : 'nested',
-        functions: sassInlineImage({}),
-        includePaths: [fontAwesome.scssPath]
-      }
-    ).on('error', sass.logError));
-
-  var codeMirror = gulp.src('node_modules/codemirror/lib/codemirror.css');
-  var codeMirrorLint = gulp.src('node_modules/codemirror/addon/lint/lint.css');
-
-  return merge(sassStream, codeMirrorLint, codeMirror)
-    .pipe(concat('app.css'))
-    .pipe(rename('style.min.css'))
-    .pipe(gulpif(argv.production, uglifycss({ 'uglyComments': true })))
-    .pipe(gulp.dest(dest + '/src'));
-});
-
-// font awesome
-gulp.task('fonts', function() {
-  return gulp.src(fontAwesome.fonts)
-    .pipe(gulp.dest(dest + '/fonts'));
-});
-
-// produce uglified app js code
-gulp.task('scripts', function() {
-  return gulp.src('src/js/index.js')
-    .pipe(
-      bro({
-        transform: [
-          argv.production ? [ 'uglifyify', { global: true } ] : ''
-        ]
-      })
-    )
-    .pipe(rename('app.js'))
-    .pipe(gulp.dest(dest + '/src'));
-});
-
-// create list of samples file names
-function fileNameFormatter(filename) {
-   return filename.split('.')[0];
-}
-gulp.task('samplesList', function () {
-  return gulp.src('samples/*.json')
-    .pipe(concatFilenames('list.txt', {
-      root: 'samples/',
-      template: fileNameFormatter
-    }))
-    .pipe(gulp.dest(dest + '/samples'));
-});
-
-// copy samples folder
-gulp.task('samplesFolder', function () {
-  return gulp.src('samples/**/*')
-    .pipe(gulp.dest(dest + '/samples'));
-});
-
-// generate samples ZIP
-gulp.task('samplesZip', () => {
-    return gulp.src('samples/*')
-      .pipe(zip('samples.zip'))
-      .pipe(gulp.dest(dest));
-});
+const dest = argv.production ? 'dist' : 'build';
 
 // tasks to be executed during build
-var tasks = [
+const tasks = [
   'styles',
   'scripts',
   'samplesList',
@@ -105,8 +31,83 @@ var tasks = [
   'fonts'
 ];
 
+// pug templates
+gulp.task('templates', () => {
+  gulp.src('src/templates/index.pug')
+    .pipe(pug().on('error', console.error.bind(console)))
+    .pipe(gulp.dest(dest));
+});
+
+// compile sass using compass
+gulp.task('styles', () => {
+  let sassStream = gulp.src('src/sass/main.sass')
+    .pipe(sass(
+      {
+        importer: compass,
+        outputStyle: argv.production ? 'compressed' : 'nested',
+        functions: sassInlineImage({}),
+        includePaths: [fontAwesome.scssPath]
+      }
+    ).on('error', sass.logError));
+
+  let codeMirror = gulp.src('node_modules/codemirror/lib/codemirror.css');
+  let codeMirrorLint = gulp.src('node_modules/codemirror/addon/lint/lint.css');
+
+  merge(sassStream, codeMirrorLint, codeMirror)
+    .pipe(concat('app.css'))
+    .pipe(rename('style.min.css'))
+    .pipe(gulpif(argv.production, uglifycss({ 'uglyComments': true })))
+    .pipe(gulp.dest(dest + '/src'));
+});
+
+// font awesome
+gulp.task('fonts', () => {
+  gulp.src(fontAwesome.fonts)
+    .pipe(gulp.dest(dest + '/fonts'));
+});
+
+// produce uglified app js code
+gulp.task('scripts', () => {
+  gulp.src('src/js/index.js')
+    .pipe(
+      bro({
+        transform: [
+          babelify.configure( { presets: ['es2015'] } ),
+          argv.production ? [ 'uglifyify', { global: true } ] : ''
+        ]
+      })
+    )
+    .pipe(rename('app.js'))
+    .pipe(gulp.dest(dest + '/src'));
+});
+
+// create list of samples file names
+let fileNameFormatter = filename => filename.split('.')[0];
+
+gulp.task('samplesList', () => {
+  gulp.src('samples/*.json')
+    .pipe(concatFilenames('list.txt', {
+      root: 'samples/',
+      template: fileNameFormatter
+    }))
+    .pipe(gulp.dest(dest + '/samples'));
+});
+
+// copy samples folder
+gulp.task('samplesFolder', () => {
+  gulp.src('samples/**/*')
+    .pipe(gulp.dest(dest + '/samples'));
+});
+
+// generate samples ZIP
+gulp.task('samplesZip', () => {
+  gulp.src('samples/*')
+    .pipe(zip('samples.zip'))
+    .pipe(gulp.dest(dest));
+});
+
 // default task
-gulp.task('default', tasks, function() {
+gulp.task('default', tasks, () => {
 
   // in development start server and watchers
   if (!argv.production) {
