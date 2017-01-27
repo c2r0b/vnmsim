@@ -150,7 +150,7 @@ module.exports = ['$rootScope', '$interval', 'codeMirror', 'sim', 'log',
                 // append to cell content
                 var line = sim.ir.loc,
                     start = { line: line, ch: 0 },
-                    end = { line: line, ch: sim.line.length };
+                    end = { line: line, ch: codeMirror.doc.getLine(sim.ir.loc).length };
                 codeMirror.doc.replaceRange(sim.acc.toString(), start, end);
               }
             }
