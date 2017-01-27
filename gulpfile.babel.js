@@ -17,8 +17,11 @@ import bro from 'gulp-bro';
 import babelify from 'babelify';
 import uglifyify from 'uglifyify';
 
+// production mode indicator
+const production = argv.argv.production;
+
 // use 'dist' folder for production output, dest otherwise
-const dest = argv.production ? 'dist' : 'build';
+const dest = production ? 'dist' : 'build';
 
 // tasks to be executed during build
 const tasks = [
@@ -44,7 +47,7 @@ gulp.task('styles', () => {
     .pipe(sass(
       {
         importer: compass,
-        outputStyle: argv.production ? 'compressed' : 'nested',
+        outputStyle: production ? 'compressed' : 'nested',
         functions: sassInlineImage({}),
         includePaths: [fontAwesome.scssPath]
       }
@@ -56,7 +59,7 @@ gulp.task('styles', () => {
   merge(sassStream, codeMirrorLint, codeMirror)
     .pipe(concat('app.css'))
     .pipe(rename('style.min.css'))
-    .pipe(gulpif(argv.production, uglifycss({ 'uglyComments': true })))
+    .pipe(gulpif(production, uglifycss({ 'uglyComments': true })))
     .pipe(gulp.dest(dest + '/src'));
 });
 
@@ -73,7 +76,7 @@ gulp.task('scripts', () => {
       bro({
         transform: [
           babelify.configure( { presets: ['es2015'] } ),
-          argv.production ? [ 'uglifyify', { global: true } ] : ''
+          production ? [ 'uglifyify', { global: true } ] : ''
         ]
       })
     )
@@ -110,7 +113,7 @@ gulp.task('samplesZip', () => {
 gulp.task('default', tasks, () => {
 
   // in development start server and watchers
-  if (!argv.production) {
+  if (!production) {
     server.run(['app.js']);
 
     gulp.watch('src/templates/**/*', ['templates']);
