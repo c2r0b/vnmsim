@@ -10,7 +10,7 @@ A guide to the simulator is available from the information menu at the top of th
 
 ## Online version
 
-You can try out the simulator on [vnsimulator.altervista.org](http://vnsimulator.altervista.org/)
+You can try out the simulator on [vnmsim.lorenzoganni.com](http://vnmsim.lorenzoganni.com/)
 
 ## How to compile
 
@@ -53,6 +53,11 @@ If you were looking for that simulator (available only in italian), you can down
 ## Changelog
 
 This changelog refers to the online version of the simulator.
+
+### v2018.05.16
++ Major refactoring
++ AngularJS ES6 Way
++ Solve issue #2
 
 ### v2017.01.27
 + Bug fix: storing large values in memory cells resulted in misplaced digits
