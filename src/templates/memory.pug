@@ -7,13 +7,13 @@ aside
     #title(translate="VARIABLES")
     article
       table
-        tr(ng-repeat='(key, val) in sim.variables track by key | orderBy: key')
+        tr(ng-repeat='(key, val) in ctrl.sim.variables track by key | orderBy: key')
           td(ng-bind='key')
-          td(ng-class='{focus: sim.focus.var == key}')
+          td(ng-class='{focus: ctrl.sim.focus.var == key}')
             input(
               type='number', placeholder='0',
-              ng-model='sim.variables[key]'
+              ng-model='ctrl.sim.variables[key]'
             )
         tr
-          td(colspan="2", ng-click="addTvar()")
+          td(colspan="2", ng-click="ctrl.addTvar()")
             i.fa.fa-plus

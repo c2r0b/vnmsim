@@ -1,61 +1,61 @@
 #simulator
-  svg.dataBus(ng-class="'status' + sim.status")
+  svg.dataBus(ng-class="'status' + ctrl.sim.status")
     rect(x='0', y='0', width='4', height='95%')
     rect(x='0', y='0', width='100%', height='4')
     rect(x='0', y='95%', width='306', height='4')
     rect(x='306', y='54%', width='4', height='41.6%')
     rect(x='160', y='0', width='4', height='11%')
     rect(x='400', y='0', width='4', height='48%')
-    // alu.e1 bus
+    //- alu.e1 bus
     rect(x='0', y='34%', width='210', height='4')
     rect(x='210', y='34%', width='4', height='12%')
-    // ir-alu.op bus
+    //- ir-alu.op bus
     rect(x='100', y='11%', width='4', height='43%')
     rect(x='100', y='53.5%', width='200', height='4')
-  // ir-ram addresses bus
+  //- ir-ram addresses bus
   svg.addressBus(
     style='top:13%;left:220px',
-    ng-class="'status' + sim.status"
+    ng-class="'status' + ctrl.sim.status"
   )
     rect(x='0', y='0', width='4', height='60')
     rect(x='0', y='60', width='100%', height='4')
-  // program counter and pc incrementer
+  //- program counter and pc incrementer
   #pc
-    svg.addressBus(ng-class="'status' + sim.status")
+    svg.addressBus(ng-class="'status' + ctrl.sim.status")
       rect(x='0', y='40', width='4', height='140')
       rect(x='100', y='40', width='4', height='140')
-    label.tooltip(ng-if="simLables")
+    label.tooltip(ng-if="simLabels")
       | PC
       span.tooltiptext(translate="PC")
     #val
-      button(ng-click="sim.pc.val = 0")
+      button(ng-click="ctrl.sim.pc.val = 0")
         i.fa.fa-refresh
       input(
         type='number',
         min='0',
-        ng-model='sim.pc.val',
-        ng-class="{focus: fEl('pc') || fSt(4)}"
+        ng-model='ctrl.sim.pc.val',
+        ng-class="{focus: ctrl.fEl('pc') || ctrl.fSt(4)}"
       )
-    #increment(ng-class="{focus: fEl('pc') || fSt(4)}")
+    #increment(ng-class="{focus: ctrl.fEl('pc') || ctrl.fSt(4)}")
       span +
       input(
         type='number',
-        ng-model='sim.pc.step'
+        ng-model='ctrl.sim.pc.step'
       )
-  // accumulator and alu-acc bus
+  //- accumulator and alu-acc bus
   #acc
-    svg.dataBus(ng-class="'status' + sim.status")
+    svg.dataBus(ng-class="'status' + ctrl.sim.status")
       rect(x='120', y='0', width='170', height='4')
       rect(x='290', y='0', width='4', height='203')
       rect(x='120', y='200', width='174', height='4')
-    label.tooltip(ng-if="simLables")
+    label.tooltip(ng-if="simLabels")
       | ACC
       span.tooltiptext(translate="ACC")
     input(
       type='number',
-      ng-model='sim.acc', ng-class="{focus: fEl('acc')}"
+      ng-model='ctrl.sim.acc', ng-class="{focus: ctrl.fEl('acc')}"
     )
-  // arithmetic logic unit
+  //- arithmetic logic unit
   #alu
     svg
       polygon(points='\
@@ -67,38 +67,38 @@
       240 180,\
       100 180\
       ')
-    label.tooltip(ng-if="simLables")
+    label.tooltip(ng-if="simLabels")
       | ALU
       span.tooltiptext(translate="ALU")
     input#e1(
       type='text', readonly,
-      ng-model='sim.alu.e1', ng-class="{focus: fEl('aluE1')}"
+      ng-model='ctrl.sim.alu.e1', ng-class="{focus: ctrl.fEl('aluE1')}"
     )
     input#e2(
       type='text', readonly,
-      ng-model='sim.alu.e2', ng-class="{focus: fEl('aluE2')}"
+      ng-model='ctrl.sim.alu.e2', ng-class="{focus: ctrl.fEl('aluE2')}"
     )
     input#op(
       type='text', readonly,
-      ng-model='sim.alu.op', ng-class="{focus: fEl('aluOp')}"
+      ng-model='ctrl.sim.alu.op', ng-class="{focus: ctrl.fEl('aluOp')}"
     )
-  // instructions register
+  //- instructions register
   #ir
-    label.tooltip(ng-if="simLables")
+    label.tooltip(ng-if="simLabels")
       | IR
       span.tooltiptext(translate="IR")
     input#cmd(
       type='text', readonly,
-      ng-model='sim.ir.cmd', ng-class='{focus: fSt(2)}'
+      ng-model='ctrl.sim.ir.cmd', ng-class='{focus: ctrl.fSt(2)}'
     )
     input#loc(
       type='text', readonly,
-      ng-model='sim.ir.loc', ng-class='{focus: fSt(3)}'
+      ng-model='ctrl.sim.ir.loc', ng-class='{focus: ctrl.fSt(3)}'
     )
-  // other components labels
+  //- other components labels
   label#decoder(ng-class='{focus: fSt(5)}', translate="DECODER")
-  label#busL(translate="DATA_BUS", ng-if="simLables")
-  label#addressesBusL(translate="ADDRESSES_BUS", ng-if="simLables")
-  label#ramL.tooltip(ng-if="simLables")
+  label#busL(translate="DATA_BUS", ng-if="simLabels")
+  label#addressesBusL(translate="ADDRESSES_BUS", ng-if="simLabels")
+  label#ramL.tooltip(ng-if="simLabels")
     p RAM
     span.tooltiptext(translate="RAM")

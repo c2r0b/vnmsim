@@ -43,7 +43,7 @@
 
   "COMPILE": "Compile",
   "RUN": "Run loop",
-  "STEP": "Single cicle",
+  "STEP": "Single step",
   "PAUSE": "Pause",
   "STOP": "Stop",
 

@@ -1,51 +1,52 @@
-p
-  b(translate="SETTINGS_LANGUAGE")
-  select(
-    ng-options="k as v.name for (k, v) in $root.translations",
-    ng-model="lang"
-  )
-hr
-p
-  b(translate="SETTINGS_DEFAULT_PC_STEP")
-  input(
-    type="number",
-    ng-model="pc_step"
-  )
-p
-  b(translate="SETTINGS_TVARS_INIT")
-  input(
-    type="number",
-    min="0",
-    ng-model="tVarCount"
-  )
-hr
-p
-  input(
-    type="checkbox",
-    ng-model="logStats"
-    id="logStats"
-  )
-  label(for="logStats")
-    b(translate="SETTINGS_TOGGLE_LOG_STATS")
-p
-  input(
-    type="checkbox",
-    ng-model="simLables"
-    id="simLables"
-  )
-  label(for="simLables")
-    b(translate="SETTINGS_TOGGLE_SIM_LABELS")
-p
-  input(
-    type="checkbox",
-    ng-model="welcomeMsg"
-    id="welcomeMsg"
-  )
-  label(for="welcomeMsg")
-    b(translate="SETTINGS_TOGGLE_WELCOME_MSG")
-hr
-footer
-  h3(translate="SETTINGS_COOKIES")
-  button(ng-click="save()")
-    i.fa.fa-check
-    span(translate="SETTINGS_APPLY")
+article(ng-controller="SettingsController as ctrl")
+  p
+    b(translate="SETTINGS_LANGUAGE")
+    select(
+      ng-options="k as v.name for (k, v) in $root.translations",
+      ng-model="ctrl.lang"
+    )
+  hr
+  p
+    b(translate="SETTINGS_DEFAULT_PC_STEP")
+    input(
+      type="number",
+      ng-model="ctrl.pc_step"
+    )
+  p
+    b(translate="SETTINGS_TVARS_INIT")
+    input(
+      type="number",
+      min="0",
+      ng-model="ctrl.tVarCount"
+    )
+  hr
+  p
+    input(
+      type="checkbox",
+      ng-model="ctrl.logStats"
+      id="logStats"
+    )
+    label(for="logStats")
+      b(translate="SETTINGS_TOGGLE_LOG_STATS")
+  p
+    input(
+      type="checkbox",
+      ng-model="ctrl.simLabels"
+      id="simLabels"
+    )
+    label(for="simLabels")
+      b(translate="SETTINGS_TOGGLE_SIM_LABELS")
+  p
+    input(
+      type="checkbox",
+      ng-model="ctrl.welcomeMsg"
+      id="welcomeMsg"
+    )
+    label(for="welcomeMsg")
+      b(translate="SETTINGS_TOGGLE_WELCOME_MSG")
+  hr
+  footer
+    h3(translate="SETTINGS_COOKIES")
+    button(ng-click="ctrl.save()")
+      i.fa.fa-check
+      span(translate="SETTINGS_APPLY")

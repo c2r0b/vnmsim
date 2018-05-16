@@ -13,12 +13,18 @@ import uglifycss from 'gulp-uglifycss';
 import concat from 'gulp-concat';
 import concatFilenames from 'gulp-concat-filenames';
 import server from 'gulp-express';
-import bro from 'gulp-bro';
+import vinylSourceStream from 'vinyl-source-stream';
+import vinylBuffer from 'vinyl-buffer';
+import browserify from 'browserify';
 import babelify from 'babelify';
-import uglifyify from 'uglifyify';
+import uglify from 'gulp-uglify';
+import ngAnnotate from 'gulp-ng-annotate';
+
+// production mode indicator
+const production = argv.argv.production
 
 // use 'dist' folder for production output, dest otherwise
-const dest = argv.production ? 'dist' : 'build';
+const dest = production ? 'dist' : 'build';
 
 // tasks to be executed during build
 const tasks = [
@@ -33,14 +39,14 @@ const tasks = [
 
 // pug templates
 gulp.task('templates', () => {
-  gulp.src('src/templates/index.pug')
+  gulp.src('./src/templates/index.pug')
     .pipe(pug().on('error', console.error.bind(console)))
     .pipe(gulp.dest(dest));
 });
 
 // compile sass using compass
 gulp.task('styles', () => {
-  let sassStream = gulp.src('src/sass/main.sass')
+  let sassStream = gulp.src('./src/sass/main.sass')
     .pipe(sass(
       {
         importer: compass,
@@ -68,15 +74,17 @@ gulp.task('fonts', () => {
 
 // produce uglified app js code
 gulp.task('scripts', () => {
-  gulp.src('src/js/index.js')
-    .pipe(
-      bro({
-        transform: [
-          babelify.configure( { presets: ['es2015'] } ),
-          argv.production ? [ 'uglifyify', { global: true } ] : ''
-        ]
-      })
-    )
+  var sources = browserify({
+    entries: 'src/js/index.js',
+    debug: true
+  })
+  .transform(babelify.configure());
+
+  return sources.bundle()
+    .pipe(vinylSourceStream('app.min.js'))
+    .pipe(vinylBuffer())
+    .pipe(ngAnnotate())
+    .pipe(gulpif(argv.production, uglify()))
     .pipe(rename('app.js'))
     .pipe(gulp.dest(dest + '/src'));
 });
@@ -85,7 +93,7 @@ gulp.task('scripts', () => {
 let fileNameFormatter = filename => filename.split('.')[0];
 
 gulp.task('samplesList', () => {
-  gulp.src('samples/*.json')
+  gulp.src('./samples/*.json')
     .pipe(concatFilenames('list.txt', {
       root: 'samples/',
       template: fileNameFormatter
@@ -101,7 +109,7 @@ gulp.task('samplesFolder', () => {
 
 // generate samples ZIP
 gulp.task('samplesZip', () => {
-  gulp.src('samples/*')
+  gulp.src('./samples/*')
     .pipe(zip('samples.zip'))
     .pipe(gulp.dest(dest));
 });
@@ -110,7 +118,7 @@ gulp.task('samplesZip', () => {
 gulp.task('default', tasks, () => {
 
   // in development start server and watchers
-  if (!argv.production) {
+  if (!production) {
     server.run(['app.js']);
 
     gulp.watch('src/templates/**/*', ['templates']);

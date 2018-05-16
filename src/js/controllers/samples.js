@@ -1,29 +1,35 @@
-'use strict';
+import { default as samples } from '../samples';
 
-module.exports = ['$rootScope', '$scope', '$http', 'codeMirror', 'log', 'sim',
-  function($rootScope, $scope, $http, codeMirror, log, sim) {
+export default class SamplesController {
+  /*@ngInject*/
 
-    // get samples file names
-    $http.get('samples/list.txt').then(function(response) {
-      $scope.samples = response.data.split('\n');
-      $scope.samples.pop();
-    });
-
-    // read content of selected sample
-    $scope.open = function(name) {
-      $http.get('samples/' + name + '.json').then(function(response) {
-        if (confirm($rootScope.translate('WARNING_UNSAVED'))) {
-          var obj = response.data;
-          // set memory cells code and then destroy that property
-          codeMirror.doc.setValue(obj.code);
-          delete obj.code;
-          // set simulator status object
-          if (sim != obj) angular.copy(obj, sim);
-          log.write('LOG_OPENED');
-          // close panel
-          $rootScope.panel = '';
-        }
-      });
-    };
+  constructor($rootScope, $http, editor, log, sim) {
+    this.samples = samples();
+    this.$http = $http;
+    this.editor = editor;
+    this.log = log;
+    this.sim = sim;
+    this.$rootScope = $rootScope;
   }
-];
+
+  // read content of selected sample
+  open(name) {
+    this.$http.get('samples/' + name + '.json').then(response => {
+
+      if (confirm(this.$rootScope.translate('WARNING_UNSAVED'))) {
+        var obj = response.data;
+
+        // set memory cells code and then destroy that property
+        this.editor.doc.setValue(obj.code);
+        delete obj.code;
+
+        // set simulator status object
+        if (this.sim != obj) angular.copy(obj, this.sim);
+        this.log.write('LOG_OPENED');
+
+        // close panel
+        this.$rootScope.panel = '';
+      }
+    });
+  }
+}

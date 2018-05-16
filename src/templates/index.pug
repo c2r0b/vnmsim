@@ -1,5 +1,5 @@
 doctype html
-html(lang='en')
+html(lang='en', ng-app='vnmsim', ng-cloak)
   head
     title Von Neumann Machine Simulator
     meta(charset='UTF-8')
@@ -11,7 +11,7 @@ html(lang='en')
     link(rel='stylesheet', href='src/style.min.css')
 
   base(target='_blank')
-  body(ng-app='vnmsim', ng-cloak, ng-controller='mainCtrl')
+  body(ng-cloak, ng-controller='MainController as main')
 
     #dropZone
       h1(translate='FILE_DROP')
@@ -27,12 +27,11 @@ html(lang='en')
     input(type='file',
       id="openProject",
       accept='application/json,.vnsp',
-      ng-controller="ioCtrl",
-      onchange="angular.element(this).scope().read(this.files)")
+      ng-controller='IoController as io',)
 
     a(id="downloadProject")
 
-    main(ng-controller='simulatorCtrl', ng-class="{ 'full': !logStats }")
+    main(ng-controller='SimulatorController as ctrl', ng-class="{ 'full': !ctrl.logStats }")
       include ./simulator.pug
       include ./memory.pug
 
@@ -49,15 +48,13 @@ html(lang='en')
       .title(ng-click="panel = ''")
         .close
         h2(translate="SAMPLES")
-      article(ng-controller="samplesCtrl")
-        include ./panels/samples.pug
+      include ./panels/samples.pug
 
     .panel(ng-show="panel == 'settings'")
       .title(ng-click="panel = ''")
         .close
         h2(translate="SETTINGS")
-      article(ng-controller="settingsCtrl")
-        include ./panels/settings.pug
+      include ./panels/settings.pug
 
     include ./footer.pug
 

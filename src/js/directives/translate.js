@@ -1,9 +1,7 @@
-'use strict';
-
-module.exports = function() {
+export default function TranslateDirective() {
   return {
     template: function(elem, attr) {
-      return '{{ $root.translate("' + attr.translate + '") }}';
+      return '{{ $root.translate("' + attr.translate + '") }}'
     }
-  };
-};
+  }
+}

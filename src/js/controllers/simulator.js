@@ -1,20 +1,25 @@
-'use strict';
+export default class SimulatorController {
+  /*@ngInject*/
 
-module.exports = ['$scope', '$cookies', 'sim', 'log',
-  function($scope, $cookies, sim, log) {
-    // function to add t variables
-    $scope.addTvar = function(i) {
-      sim.variables['T'+(i || ++sim.tVarCount)] = '';
-    };
+  constructor($rootScope, $cookies, sim, log) {
     // init default tVars
-    for (var i = 1; i < +sim.tVarCount + 1; i++) $scope.addTvar(i);
+    for (var i = 1; i < +sim.tVarCount + 1; i++)
+      this.addTvar(i);
 
-    // functions for elements highlighting
-    $scope.fEl = function(e) {
-      return sim.focus.el == e;
-    };
-    $scope.fSt = function(n) {
-      return sim.step == n;
-    };
+    // link simulator status
+    this.sim = sim;
   }
-];
+
+  // function to add t variables
+  addTvar(i) {
+    this.sim.variables['T'+(i || ++this.sim.tVarCount)] = '';
+  }
+
+  // functions for elements highlighting
+  fEl(e) {
+    return this.sim.focus.el == e;
+  }
+  fSt(n) {
+    return this.sim.step == n;
+  }
+}

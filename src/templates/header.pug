@@ -1,38 +1,38 @@
 header
   #logo
-  #controls(ng-controller='controlsCtrl')
+  #controls(ng-controller='ControlsController as ctrl')
     ul
       li.tooltip(
-          ng-click='(!sim.status || sim.status == 3) && compile()',
-          ng-class="{ 'disabled': sim.status == 1 || sim.status == 2 }"
+          ng-click='(!ctrl.sim.status || ctrl.sim.status == 3) && ctrl.compile()',
+          ng-class="{ 'disabled': ctrl.sim.status == 1 || ctrl.sim.status == 2 }"
         )
         span.tooltiptext(translate="COMPILE")
         i.fa.fa-terminal
       li.tooltip(
-          ng-click='(!sim.status || sim.status == 3) && run(1)',
-          ng-class="{ 'disabled': sim.status == 2, 'active': sim.status == 1 }"
+          ng-click='(!ctrl.sim.status || ctrl.sim.status == 3) && ctrl.start(1)',
+          ng-class="{ 'disabled': ctrl.sim.status == 2, 'active': ctrl.sim.status == 1 }"
         )
         span.tooltiptext(translate="RUN")
         svg
           polygon(points='0 0,15 7.5,0 15')
       li.tooltip(
-          ng-click='(!sim.status || sim.status == 3) && run(2)',
-          ng-class="{ 'disabled': sim.status == 1, 'active': sim.status == 2 }"
+          ng-click='(!ctrl.sim.status || ctrl.sim.status == 3) && ctrl.start(2)',
+          ng-class="{ 'disabled': ctrl.sim.status == 1, 'active': ctrl.sim.status == 2 }"
         )
         span.tooltiptext(translate="STEP")
         svg
           polygon(points='0 0,14 7.5,14 0,15 0,15 15,14 15,14 7.5,0 15')
       li.tooltip(
-          ng-click='(sim.status == 1 || sim.status == 2) && pause()',
-          ng-class="{ 'disabled': !sim.status, 'active': sim.status == 3 }"
+          ng-click='(ctrl.sim.status == 1 || ctrl.sim.status == 2) && ctrl.pause()',
+          ng-class="{ 'disabled': !ctrl.sim.status, 'active': ctrl.sim.status == 3 }"
         )
         span.tooltiptext(translate="PAUSE")
         svg
           polygon(points='0 0,6 0,6 15,0 15')
           polygon(points='9 0,15 0,15 15,9 15')
       li.tooltip(
-          ng-click='sim.status && stop()',
-          ng-class="{ 'disabled': !sim.status }"
+          ng-click='ctrl.sim.status && ctrl.stop()',
+          ng-class="{ 'disabled': !ctrl.sim.status }"
         )
         span.tooltiptext(translate="STOP")
         svg
@@ -40,22 +40,22 @@ header
     #right
       input(
         type='range', min='0', max='2000', step='50',
-        ng-model='delay', ng-change='delayChanged()')
+        ng-model='ctrl.delay', ng-change='ctrl.delayChanged()')
       #delayContainer
-        span(ng-bind='delay')
+        span(ng-bind='ctrl.delay')
         |  ms
   nav
     ul
-      li(ng-controller='ioCtrl')
+      li(ng-controller='IoController as io')
           i.fa.fa-file-text
           span(translate="PROJECT")
           i.fa.fa-caret-down
           ul
-            li(ng-click='open()')
+            li(ng-click='io.open()')
               i.fa.fa-folder-open
               span(translate="PROJECT_OPEN")
 
-            li(ng-click='save()')
+            li(ng-click='io.save()')
               i.fa.fa-download
               span(translate="PROJECT_SAVE")
 

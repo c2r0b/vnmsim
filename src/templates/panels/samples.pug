@@ -1,15 +1,16 @@
-table#samples
-  tr(ng-repeat="sample in samples")
-    td(ng-bind="sample")
-    td
-      a(href="samples/{{ sample }}.json", download)
+article(ng-controller="SamplesController as ctrl")
+  table#samples
+    tr(ng-repeat="sample in ctrl.samples track by $index")
+      td(ng-bind="sample")
+      td
+        a(href="samples/{{ sample }}.json", download)
+          i.fa.fa-download
+          b(translate='SAMPLES_DOWNLOAD')
+      td(ng-click="ctrl.open(sample)")
+        i.fa.fa-folder-open
+        b(translate='SAMPLES_OPEN')
+  footer
+    a(href="samples.zip", download)
+      button
         i.fa.fa-download
-        b(translate='SAMPLES_DOWNLOAD')
-    td(ng-click="open(sample)")
-      i.fa.fa-folder-open
-      b(translate='SAMPLES_OPEN')
-footer
-  a(href="samples.zip", download)
-    button
-      i.fa.fa-download
-      span(translate="SAMPLES_DOWNLOAD_ALL")
+        span(translate="SAMPLES_DOWNLOAD_ALL")

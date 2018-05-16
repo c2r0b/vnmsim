@@ -11,5 +11,6 @@ node_modules/
 ._*
 .Spotlight-V100
 .Trashes
+.dbignore
 ehthumbs.db
 Thumbs.db

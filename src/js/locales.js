@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   en: {
     name: 'English',
     text: require('../locale/en.json')
@@ -15,4 +15,4 @@ module.exports = {
     name: 'Deutsche',
     text: require('../locale/de.json')
   }
-};
+}

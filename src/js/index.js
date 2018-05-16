@@ -1,42 +1,42 @@
-'use strict';
-
 var angular = require('angular');
-
-// angular app init
-var app = angular.module('vnmsim', [ require('angular-cookies') ]);
-
-app.run(['$rootScope', function($rootScope) {
-  // languages
-  $rootScope.translations = require('./locales');
-  $rootScope.selectedLang = 'en';
-  // function to translate a string
-  function translate(t) {
-    return $rootScope.translations[$rootScope.selectedLang].text[t];
-  }
-  $rootScope.translate = translate;
-
-  // warning on page leave
-  window.addEventListener('beforeunload', function (e) {
-    return (e || window.event).returnValue = translate('WARNING_UNSAVED');
-  });
-}]);
-
-// services
-app.factory('codeMirror', require('./services/editor'));
-app.factory('log', require('./services/log'));
-app.factory('sim', require('./services/sim'));
-app.factory('run', require('./services/run'));
+var ngCookies = require('angular-cookies');
 
 // controllers
-app.controller('mainCtrl', require('./controllers/main'));
-app.controller('ioCtrl', require('./controllers/io'));
-app.controller('settingsCtrl', require('./controllers/settings'));
-app.controller('controlsCtrl', require('./controllers/controls'));
-app.controller('simulatorCtrl', require('./controllers/simulator'));
-app.controller('samplesCtrl', require('./controllers/samples'));
+import MainController from './controllers/main';
+import IoController from './controllers/io';
+import SettingsController from './controllers/settings';
+import ControlsController from './controllers/controls';
+import SimulatorController from './controllers/simulator';
+import SamplesController from './controllers/samples';
+
+// services
+import EditorService from './services/editor';
+import LogService from './services/log';
+import SimService from './services/sim';
+import RunService from './services/run';
 
 // directives
-app.directive('translate', require('./directives/translate'));
+import TranslateDirective from './directives/translate';
 
-// fullpage input files drop zone
-require('./dropzone');
+import { default as Run } from './run';
+
+// app init
+angular.module('vnmsim', [ 'ngCookies' ])
+
+  .controller('MainController', MainController)
+  .controller('IoController', IoController)
+  .controller('SettingsController', SettingsController)
+  .controller('ControlsController', ControlsController)
+  .controller('SimulatorController', SimulatorController)
+  .controller('SamplesController', SamplesController)
+
+  .service('editor', EditorService)
+  .service('log', LogService)
+  .service('sim', SimService)
+  .service('run', RunService)
+
+  .directive('translate', TranslateDirective)
+  .run(Run);
+
+// drag & drop
+require('./dropzone.js');
