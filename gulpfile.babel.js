@@ -23,6 +23,9 @@ import ngAnnotate from 'gulp-ng-annotate';
 // production mode indicator
 const production = argv.argv.production
 
+// production mode indicator
+const production = argv.argv.production;
+
 // use 'dist' folder for production output, dest otherwise
 const dest = production ? 'dist' : 'build';
 
@@ -50,7 +53,7 @@ gulp.task('styles', () => {
     .pipe(sass(
       {
         importer: compass,
-        outputStyle: argv.production ? 'compressed' : 'nested',
+        outputStyle: production ? 'compressed' : 'nested',
         functions: sassInlineImage({}),
         includePaths: [fontAwesome.scssPath]
       }
@@ -62,7 +65,7 @@ gulp.task('styles', () => {
   merge(sassStream, codeMirrorLint, codeMirror)
     .pipe(concat('app.css'))
     .pipe(rename('style.min.css'))
-    .pipe(gulpif(argv.production, uglifycss({ 'uglyComments': true })))
+    .pipe(gulpif(production, uglifycss({ 'uglyComments': true })))
     .pipe(gulp.dest(dest + '/src'));
 });
 
@@ -74,6 +77,7 @@ gulp.task('fonts', () => {
 
 // produce uglified app js code
 gulp.task('scripts', () => {
+<<<<<<< HEAD
   var sources = browserify({
     entries: 'src/js/index.js',
     debug: true
@@ -85,6 +89,17 @@ gulp.task('scripts', () => {
     .pipe(vinylBuffer())
     .pipe(ngAnnotate())
     .pipe(gulpif(argv.production, uglify()))
+=======
+  gulp.src('src/js/index.js')
+    .pipe(
+      bro({
+        transform: [
+          babelify.configure( { presets: ['es2015'] } ),
+          production ? [ 'uglifyify', { global: true } ] : ''
+        ]
+      })
+    )
+>>>>>>> a75b7157a2d2315d8858fb213886a5ca9c2da1df
     .pipe(rename('app.js'))
     .pipe(gulp.dest(dest + '/src'));
 });

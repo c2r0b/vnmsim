@@ -54,6 +54,9 @@ If you were looking for that simulator (available only in italian), you can down
 
 This changelog refers to the online version of the simulator.
 
+### v2017.01.27
++ Bug fix: storing large values in memory cells resulted in misplaced digits
+
 ### v2017.01.04
 + All samples download button
 + Clear log button

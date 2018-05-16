@@ -151,8 +151,65 @@ export default class RunService {
                 eval("this.sim.acc" + this.sim.alu.op + "parseInt(this.sim.alu.e2)")
               );
               break;
+<<<<<<< HEAD
           }
           this.sim.focus.el = 'acc';
+=======
+            }
+            // aything but LOD instruction behaviour
+            if (sim.ir.cmd != 'LOD') sim.alu.e1 = sim.acc;
+            // parse data portion (instruction register loc)
+            if (sim.ir.loc.indexOf('#') != -1) { // #n
+              sim.alu.e2 = sim.ir.loc.replace('#','');
+            }
+            else if (sim.ir.loc.match(/T|X|Y|Z|W/)) { // variable
+              sim.focus.var = sim.ir.loc;
+              sim.alu.e2 = parseInt(sim.variables[sim.ir.loc]) || 0;
+              stats.variables_accesses++;
+            }
+            else { // memory cell
+              codeMirror.cell.focus(sim.ir.loc);
+              sim.alu.e2 = parseInt(codeMirror.doc.getLine(sim.ir.loc)) || 0;
+              stats.cells_accesses++;
+            }
+            sim.focus.el = 'aluE2';
+            break;
+          case 8:
+            if (sim.ir.cmd != 'STO') {
+              // execute operation
+              switch (sim.alu.op) {
+                case '=':
+                  sim.acc = parseInt(sim.alu.e2) || 0;
+                  break;
+                default:
+                  stats.alu_calculations++;
+                  sim.acc = parseInt(
+                    eval("sim.acc" + sim.alu.op + "parseInt(sim.alu.e2)")
+                  );
+                  break;
+              }
+              sim.focus.el = 'acc';
+            }
+            // STO instruction -> edit cell / variable
+            else {
+              if (sim.ir.loc.match(/T|X|Y|Z|W/)) { // variable
+                sim.focus.var = sim.ir.loc;
+                sim.variables[sim.ir.loc] = sim.acc;
+                stats.variables_accesses++;
+              }
+              else { // memory cell
+                stats.cells_accesses++;
+                // focus that cell
+                codeMirror.cell.focus(sim.ir.loc);
+                // append to cell content
+                var line = sim.ir.loc,
+                    start = { line: line, ch: 0 },
+                    end = { line: line, ch: codeMirror.doc.getLine(sim.ir.loc).length };
+                codeMirror.doc.replaceRange(sim.acc.toString(), start, end);
+              }
+            }
+            break;
+>>>>>>> a75b7157a2d2315d8858fb213886a5ca9c2da1df
         }
         // STO instruction -> edit cell / variable
         else {
