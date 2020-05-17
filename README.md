@@ -10,7 +10,7 @@ A guide to the simulator is available from the information menu at the top of th
 
 ## Online version
 
-You can try out the simulator on [vnmsim.lorenzoganni.com](http://vnmsim.lorenzoganni.com/)
+You can try out the simulator on [vnsimulator.altervista.org](http://vnsimulator.altervista.org/)
 
 ## How to compile
 
