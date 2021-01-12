@@ -4,6 +4,8 @@ A simulator of the Von Neumann machine written in Javascript. It is built mainly
 
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
+As of January 2021 work for a newer version built as a standalone app using Electron has been moved to the "dev" branch.
+
 ## How to use
 
 A guide to the simulator is available from the information menu at the top of the page of the simulator itself.
