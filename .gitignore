@@ -3,6 +3,7 @@
 dist/
 build/
 node_modules/
+_old_version/
 
 # OS generated files #
 ######################
