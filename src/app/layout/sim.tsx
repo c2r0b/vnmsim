@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField } from '@fluentui/react';
 
 import * as InputStyles from "./sim.inputs.styles";
-import execute from "./execute";
+import execute from "../utility/execute";
 
 interface Props {
   status: number;

@@ -1,3 +1,4 @@
 export default {
-  darkMode: false
+  darkMode: false,
+  hasErrors: 0
 };

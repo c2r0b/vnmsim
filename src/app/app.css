@@ -12,14 +12,14 @@ html, body {
   padding-top: 7px;
 }
 
-.editor {
+.ram {
   position: fixed;
   top: 61px;
   right: 0;
   bottom: 50px;
   width: 350px;
   background-color: white;
-  z-index: 9999;
+  z-index: 9990;
 }
 
 .footer {
@@ -31,4 +31,5 @@ html, body {
   background-color: white;
   padding-top: 5px;
   padding-left: 10px;
+  z-index: 9999;
 }

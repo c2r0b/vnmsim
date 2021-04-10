@@ -39,6 +39,18 @@ class Dispatcher {
   updateStats(stats) {
     this.stats = stats;
   }
+
+  hasErrors() {
+    return this.status.hasErrors;
+  }
+
+  fireError(count) {
+    this.status.hasErrors = count;
+  }
+
+  clearErrors() {
+    this.status.hasErrors = 0;
+  }
 };
 
 const observableStore = new Dispatcher();

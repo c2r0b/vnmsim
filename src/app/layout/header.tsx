@@ -11,6 +11,9 @@ const speedFormat = (value: number) => `${value} ms`;
 const Header = (props) => {
   const darkMode = props.store.getDarkMode();
 
+  // does not rerender !!
+  const hasErrors = props.store.hasErrors();
+
   const _menuItems: ICommandBarItemProps[] = [
     {
       key: 'open',
@@ -48,18 +51,11 @@ const Header = (props) => {
 
   const _controls: ICommandBarItemProps[] = [
     {
-      key: 'compile',
-      text: 'Compile',
-      ariaLabel: 'Compile',
-      iconOnly: true,
-      iconProps: { iconName: 'Compile' },
-      onClick: () => props.setStatus(5),
-    },
-    {
       key: 'play',
       text: 'Play',
       ariaLabel: 'Play',
       iconOnly: true,
+      disabled: hasErrors,
       iconProps: { iconName: 'Play' },
       onClick: () => props.setStatus(1),
     },
@@ -68,6 +64,7 @@ const Header = (props) => {
       text: 'Single step',
       ariaLabel: 'Single step',
       iconOnly: true,
+      disabled: hasErrors,
       iconProps: { iconName: 'Step' },
       onClick: () => props.setStatus(2),
     },
@@ -76,6 +73,7 @@ const Header = (props) => {
       text: 'Single iteration',
       ariaLabel: 'Single iteration',
       iconOnly: true,
+      disabled: hasErrors,
       iconProps: { iconName: 'Circle' },
       onClick: () => props.setStatus(3),
     },
@@ -84,6 +82,7 @@ const Header = (props) => {
       text: 'Pause',
       ariaLabel: 'Pause',
       iconOnly: true,
+      disabled: hasErrors,
       iconProps: { iconName: 'Pause' },
       onClick: () => props.setStatus(4),
     },
@@ -92,6 +91,7 @@ const Header = (props) => {
       text: 'Stop',
       ariaLabel: 'Stop',
       iconOnly: true,
+      disabled: hasErrors,
       iconProps: { iconName: 'Stop' },
       onClick: () => props.setStatus(0),
     },
