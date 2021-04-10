@@ -1,17 +1,21 @@
-import React from 'react';
-import { CommandBar, ICommandBarItemProps } from '@fluentui/react';
+import React from "react";
 
-interface Props {
-  status: number;
-  setStatus: Function;
-};
+import {
+  Stack, Text, CommandBar, Slider, ICommandBarItemProps
+} from"@fluentui/react";
 
-const Header = (props:Props) => {
-  const _items: ICommandBarItemProps[] = [
+import * as Styles from "./header.styles";
+
+const speedFormat = (value: number) => `${value} ms`;
+
+const Header = (props) => {
+  const darkMode = props.store.getDarkMode();
+
+  const _menuItems: ICommandBarItemProps[] = [
     {
       key: 'open',
       text: 'Open',
-      iconProps: { iconName: 'OpenFolderHorizontal' },
+      iconProps: { iconName: 'Open' },
       onClick: () => {
 
       }
@@ -25,30 +29,30 @@ const Header = (props:Props) => {
       }
     },
     {
+      key: 'samples',
+      text: 'Samples',
+      iconProps: { iconName: 'Sample' },
+      onClick: () => {
+
+      }
+    },
+    {
       key: 'help',
       text: 'Help',
       iconProps: { iconName: 'Help' },
       onClick: () => {
 
       }
-    },
-    {
-      key: 'settings',
-      text: 'Settings',
-      iconProps: { iconName: 'Settings' },
-      onClick: () => {
-
-      }
-    },
+    }
   ];
 
-  const _farItems: ICommandBarItemProps[] = [
+  const _controls: ICommandBarItemProps[] = [
     {
       key: 'compile',
       text: 'Compile',
       ariaLabel: 'Compile',
       iconOnly: true,
-      iconProps: { iconName: 'FileCode' },
+      iconProps: { iconName: 'Compile' },
       onClick: () => props.setStatus(5),
     },
     {
@@ -64,15 +68,15 @@ const Header = (props:Props) => {
       text: 'Single step',
       ariaLabel: 'Single step',
       iconOnly: true,
-      iconProps: { iconName: 'Rerun' },
+      iconProps: { iconName: 'Step' },
       onClick: () => props.setStatus(2),
     },
     {
-      key: 'nextAction',
-      text: 'Next action',
-      ariaLabel: 'Next action',
+      key: 'doCircle',
+      text: 'Single iteration',
+      ariaLabel: 'Single iteration',
       iconOnly: true,
-      iconProps: { iconName: 'ReceiptForward' },
+      iconProps: { iconName: 'Circle' },
       onClick: () => props.setStatus(3),
     },
     {
@@ -95,11 +99,36 @@ const Header = (props:Props) => {
 
   return (
     <div className="header">
-      <CommandBar
-        items={_items}
-        farItems={_farItems}
-        ariaLabel="Use left and right arrow keys to navigate between commands"
-      />
+      <Stack horizontal horizontalAlign="space-between">
+        <Stack horizontal>
+          <Text
+            styles={ Styles.logo }
+            variant={ "xLarge" }
+          >
+            vnmsim
+          </Text>
+          <CommandBar
+            styles={ Styles.menu }
+            items={ _menuItems }
+          />
+        </Stack>
+        <Stack horizontal tokens={{ childrenGap: 10 }}>
+          <CommandBar
+            styles={ Styles.controls }
+            items={ _controls }
+          />
+          <Slider
+            styles={ Styles.speed }
+            valueFormat={ speedFormat }
+            min={ 0 }
+            max={ 2000 }
+            step={ 50 }
+            defaultValue={ 500 }
+            showValue
+            snapToStep
+          />
+        </Stack>
+      </Stack>
     </div>
   );
 }

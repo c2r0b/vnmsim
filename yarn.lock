@@ -152,6 +152,39 @@
     "@fluentui/set-version" "^8.0.2"
     tslib "^1.10.0"
 
+"@fortawesome/fontawesome-common-types@^0.2.35":
+  version "0.2.35"
+  resolved "http://192.168.2.61:4873/@fortawesome%2ffontawesome-common-types/-/fontawesome-common-types-0.2.35.tgz#01dd3d054da07a00b764d78748df20daf2b317e9"
+  integrity sha512-IHUfxSEDS9dDGqYwIW7wTN6tn/O8E0n5PcAHz9cAaBoZw6UpG20IG/YM3NNLaGPwPqgjBAFjIURzqoQs3rrtuw==
+
+"@fortawesome/fontawesome-svg-core@^1.2.35":
+  version "1.2.35"
+  resolved "http://192.168.2.61:4873/@fortawesome%2ffontawesome-svg-core/-/fontawesome-svg-core-1.2.35.tgz#85aea8c25645fcec88d35f2eb1045c38d3e65cff"
+  integrity sha512-uLEXifXIL7hnh2sNZQrIJWNol7cTVIzwI+4qcBIq9QWaZqUblm0IDrtSqbNg+3SQf8SMGHkiSigD++rHmCHjBg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.35"
+
+"@fortawesome/free-brands-svg-icons@^5.15.3":
+  version "5.15.3"
+  resolved "http://192.168.2.61:4873/@fortawesome%2ffree-brands-svg-icons/-/free-brands-svg-icons-5.15.3.tgz#bec2821d23b9c667be1d192a6c5bfb2667e588eb"
+  integrity sha512-1hirPcbjj72ZJtFvdnXGPbAbpn3Ox6mH3g5STbANFp3vGSiE5u5ingAKV06mK6ZVqNYxUPlh4DlTnaIvLtF2kw==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.35"
+
+"@fortawesome/free-solid-svg-icons@^5.15.3":
+  version "5.15.3"
+  resolved "http://192.168.2.61:4873/@fortawesome%2ffree-solid-svg-icons/-/free-solid-svg-icons-5.15.3.tgz#52eebe354f60dc77e0bde934ffc5c75ffd04f9d8"
+  integrity sha512-XPeeu1IlGYqz4VWGRAT5ukNMd4VHUEEJ7ysZ7pSSgaEtNvSo+FLurybGJVmiqkQdK50OkSja2bfZXOeyMGRD8Q==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.35"
+
+"@fortawesome/react-fontawesome@^0.1.14":
+  version "0.1.14"
+  resolved "http://192.168.2.61:4873/@fortawesome%2freact-fontawesome/-/react-fontawesome-0.1.14.tgz#bf28875c3935b69ce2dc620e1060b217a47f64ca"
+  integrity sha512-4wqNb0gRLVaBm/h+lGe8UfPPivcbuJ6ecI4hIgW0LjI7kzpYB9FkN0L9apbVzg+lsBdcTf0AlBtODjcSX5mmKA==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@microsoft/load-themed-styles@^1.10.26":
   version "1.10.159"
   resolved "http://192.168.2.61:4873/@microsoft%2fload-themed-styles/-/load-themed-styles-1.10.159.tgz#2198707bfeede5fd6b24760832abeb8c5274aef2"
@@ -507,6 +540,11 @@ extend-shallow@^2.0.1:
   dependencies:
     is-extendable "^0.1.0"
 
+fast-deep-equal@^3.1.3:
+  version "3.1.3"
+  resolved "http://192.168.2.61:4873/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
+  integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
+
 fill-range@^7.0.1:
   version "7.0.1"
   resolved "http://192.168.2.61:4873/fill-range/-/fill-range-7.0.1.tgz#1919a6a7c75fe38b2c7c77e5198535da9acdda40"
@@ -837,6 +875,11 @@ loose-envify@^1.1.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lottie-web@^5.7.6:
+  version "5.7.8"
+  resolved "http://192.168.2.61:4873/lottie-web/-/lottie-web-5.7.8.tgz#c7a2e42983bcb42093590a03ccdde8741d3f960e"
+  integrity sha512-VxKCZk33GwZac6mVHvT3grUFR/zrMsW85M7vxQPrgpJOP2IhcnjMbuD0h7muBkXgw84K9KmGulmcyzvhpzSMAg==
+
 lru-cache@^6.0.0:
   version "6.0.0"
   resolved "http://192.168.2.61:4873/lru-cache/-/lru-cache-6.0.0.tgz#6d6fe6570ebd96aaf90fcad1dafa3b2566db3a94"
@@ -971,6 +1014,11 @@ parse-passwd@^1.0.0:
   resolved "http://192.168.2.61:4873/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
   integrity sha1-bVuTSkVpk7I9N/QKOC1vFmao5cY=
 
+parse-unit@^1.0.1:
+  version "1.0.1"
+  resolved "http://192.168.2.61:4873/parse-unit/-/parse-unit-1.0.1.tgz#7e1bb6d5bef3874c28e392526a2541170291eecf"
+  integrity sha1-fhu21b7zh0wo45JSaiVBFwKR7s8=
+
 path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "http://192.168.2.61:4873/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
@@ -1069,7 +1117,7 @@ process-nextick-args@~2.0.0:
   resolved "http://192.168.2.61:4873/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-prop-types@^15.5.4:
+prop-types@^15.5.4, prop-types@^15.7.2:
   version "15.7.2"
   resolved "http://192.168.2.61:4873/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -1095,6 +1143,14 @@ react-codemirror@^1.0.0:
     lodash.isequal "^4.5.0"
     prop-types "^15.5.4"
 
+react-dark-mode-toggle@^0.2.0:
+  version "0.2.0"
+  resolved "http://192.168.2.61:4873/react-dark-mode-toggle/-/react-dark-mode-toggle-0.2.0.tgz#73172805b0ea6a5f2db89c1e05a4365ac93735d1"
+  integrity sha512-YGN6EKU54TaEIQ2G5veB+XVRXSsbyrW9+rop/1Ap06A0z1j6QBVuMIZjhQpwYLKVhSPIxoe7zsWj0cZaEf7cQA==
+  dependencies:
+    parse-unit "^1.0.1"
+    react-lottie-player "^1.1.1"
+
 react-dom@^17.0.1:
   version "17.0.2"
   resolved "http://192.168.2.61:4873/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
@@ -1108,6 +1164,14 @@ react-is@^16.8.1:
   version "16.13.1"
   resolved "http://192.168.2.61:4873/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-lottie-player@^1.1.1:
+  version "1.3.1"
+  resolved "http://192.168.2.61:4873/react-lottie-player/-/react-lottie-player-1.3.1.tgz#5be263cf56fc7ed99af11c8e11fa4356baaac6aa"
+  integrity sha512-mYygNOb9y2vTwtWGTfvC/zTTv6Uh5DUrnAPZ3pH3PCa+yFva2h3Kx9cCuwKhrs3lA4rndPpqH5CQ4jst9+VDEg==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    lottie-web "^5.7.6"
 
 react@^17.0.1:
   version "17.0.2"

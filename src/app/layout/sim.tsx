@@ -23,7 +23,7 @@ const commands = {
 
 const Sim = (props:Props) => {
   const sim = props.store.getSim();
-  
+
   useEffect(() => {
     const result = execute({
       sim: props.store.getSim(),
@@ -59,14 +59,29 @@ const Sim = (props:Props) => {
           <rect x="100" y="40" width="3" height="140"></rect>
         </svg>
         <label className="tooltip">PC</label>
-        <TextField styles={ InputStyles.incrementStyles } value={ sim.pc.step.toString() } type="number" />
-        <TextField styles={ InputStyles.PCStyles } value={ sim.pc.val.toString() } />
+        <TextField
+          styles={ InputStyles.incrementStyles }
+          value={ sim.pc.step.toString() }
+          type="number" />
+        <TextField
+          styles={ InputStyles.PCStyles }
+          value={ sim.pc.val.toString() } />
       </div>
       <div id="alu">
         <svg>
           <polygon points="0 35, 120 35, 170 90, 220 35, 340 35, 240 180, 100 180"></polygon>
         </svg>
         <label className="tooltip">ALU</label>
+        <TextField
+          styles={ InputStyles.ALUP1Styles }
+          value={ sim.alu.e1.toString() } />
+        <TextField
+          styles={ InputStyles.ALUP2Styles }
+          value={ sim.alu.e2.toString() } />
+        <TextField
+          styles={ InputStyles.ALUOPStyles }
+          value={ sim.alu.op }
+          readOnly />
       </div>
       <div id="acc">
         <svg className="dataBus">
@@ -79,20 +94,19 @@ const Sim = (props:Props) => {
       </div>
       <div id="ir">
         <label className="tooltip">IR</label>
-        <TextField styles={ InputStyles.IRStyles } value={ sim.ir.cmd + " " + sim.ir.loc } />
-        <TextField styles={ InputStyles.DecoderStyles } defaultValue="DECODER" readOnly />
+        <TextField
+          styles={ InputStyles.IRStyles }
+          value={ sim.ir.cmd + " " + sim.ir.loc } />
+        <TextField
+          styles={ InputStyles.DecoderStyles }
+          defaultValue="DECODER"
+          readOnly />
       </div>
       <label id="busL">Data/instructions bus</label>
       <label id="addressesBusL">Addresses bus</label>
       <label className="tooltip" id="ramL">
         <p>RAM</p>
       </label>
-
-      <div className="alu">
-        <TextField styles={ InputStyles.ALUP1Styles } value={ sim.alu.e1.toString() } />
-        <TextField styles={ InputStyles.ALUP2Styles } value={ sim.alu.e2.toString() } />
-        <TextField styles={ InputStyles.ALUOPStyles } value={ sim.alu.op } readOnly />
-      </div>
     </div>
   );
 }

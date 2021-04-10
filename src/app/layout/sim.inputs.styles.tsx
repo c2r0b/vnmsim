@@ -1,6 +1,6 @@
 export const fieldStyles = {
   fontSize: "18px",
-  textAlign: "center",
+  textAlign: "center"
 };
 
 export const IRStyles = {
@@ -15,7 +15,7 @@ export const IRStyles = {
 
 export const PCStyles = {
   root: {
-    width: 50,
+    width: 130,
     margin: "0px 0px",
   },
   field: {
@@ -25,8 +25,8 @@ export const PCStyles = {
 
 export const incrementStyles = {
   root: {
-    width: 100,
-    margin: "80px 60px",
+    width: 50,
+    margin: "80px 90px",
   },
   field: {
     ...fieldStyles,
