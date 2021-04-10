@@ -22,19 +22,17 @@ const commands = {
 };
 
 const Sim = (props:Props) => {
-  const [ sim, setSim ] = useState({});
-
-  const [ stats, setStats ] = useState({});
-
+  const sim = props.store.getSim();
+  
   useEffect(() => {
     const result = execute({
-      sim,
-      stats,
+      sim: props.store.getSim(),
+      stats: props.store.getStats(),
       status: props.status,
       line: "LOD #2"
     });
-    setStats(result.stats);
-    setSim(result.sim);
+    props.store.updateSim(result.sim);
+    props.store.updateStats(result.stats);
   }, [props.status]);
 
   return (

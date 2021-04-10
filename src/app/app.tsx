@@ -57,12 +57,12 @@ loadTheme({
   },
 });*/
 
-const App = () => {
+const App = (props) => {
   const [ status, setStatus ] = useState(0);
 
   return (
     <div className="app">
-      <Header {...{ status, setStatus }} />
+      <Header {...{ status, setStatus }} store={ props.store } />
       <div className="editor">
         <CodeMirror
           value='// X + Y = Z
@@ -78,7 +78,7 @@ HLT
           }}
         />
       </div>
-      <Sim {...{ status, setStatus }} />
+      <Sim {...{ status, setStatus }} store={ props.store } />
     </div>
   );
 }
