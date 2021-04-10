@@ -1,9 +1,7 @@
-import './simulator.scss';
+import './simulator.css';
 
 import React, { useState, useEffect } from 'react';
-import {
-  TextField
-} from '@fluentui/react';
+import { TextField } from '@fluentui/react';
 
 import * as InputStyles from "./sim.inputs.styles";
 import execute from "./execute";
@@ -24,36 +22,9 @@ const commands = {
 };
 
 const Sim = (props:Props) => {
-  const [ sim, setSim ] = useState({
-    codeLine: 0,
-    step: 0,
-    alu: {
-      e1: '',
-      e2: '',
-      op: ''
-    },
-    acc: 0,
-    pc: {
-      val: 0,
-      step: 1,
-    },
-    ir: {
-      cmd: '',
-      loc: ''
-    },
-    focus: {
-      el: "ir"
-    }
-  });
+  const [ sim, setSim ] = useState({});
 
-  const [ stats, setStats ] = useState({
-    executed_steps: 0,
-    alu_calculations: 0,
-    variables_accesses: 0,
-    cells_accesses: 0,
-    performed_jmp: 0,
-    performed_jmz: 0
-  });
+  const [ stats, setStats ] = useState({});
 
   useEffect(() => {
     const result = execute({

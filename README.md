@@ -3,8 +3,6 @@
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
-Built with Electron, Typescript and React.
-
 ## Downloads
 
 TO DO

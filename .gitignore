@@ -1,9 +1,12 @@
 # Compiled source #
 ###################
-dist/
-build/
+/app/
+prod/
 node_modules/
 _old_version/
+yarn.lock
+yarn-error.log
+package-lock.json
 
 # OS generated files #
 ######################

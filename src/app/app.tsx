@@ -1,16 +1,16 @@
-import './app.scss';
+import './app.css';
+import '../../node_modules/codemirror/lib/codemirror.css';
+import '../../node_modules/codemirror/theme/material-darker.css';
 
 import React, { useState } from 'react';
 import CodeMirror from 'react-codemirror';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material-darker.css';
 
-import Header from '@/app/layout/header';
-import Sim from '@/app/layout/sim';
+import Header from './layout/header';
+import Sim from './layout/sim';
 
-import { loadTheme } from '@fluentui/react';
-import { initializeIcons } from '@uifabric/icons';
-initializeIcons();
+const code = 'const a = 0;';
+
+/*import { loadTheme } from "@fluentui/react";
 
 loadTheme({
   palette: {
@@ -55,9 +55,7 @@ loadTheme({
       fontWeight: 'semibold',
     },
   },
-});
-
-const code = 'const a = 0;';
+});*/
 
 const App = () => {
   const [ status, setStatus ] = useState(0);

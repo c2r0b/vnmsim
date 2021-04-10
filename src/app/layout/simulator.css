@@ -38,7 +38,7 @@
 .addressBus {
 }
 
-// program counter _____________________________________________________________
+/* program counter */
 #pc {
   position: relative;
   top: 15%;
@@ -64,7 +64,7 @@
   }
 }
 
-// arithmetic logic unit _______________________________________________________
+/* arithmetic logic unit */
 #alu {
   position: absolute;
   top: 33%;
@@ -85,7 +85,7 @@
   }
 }
 
-// accumulator _________________________________________________________________
+/* accumulator */
 #acc {
   position: absolute;
   top: 35%;
@@ -97,7 +97,7 @@
   }
 }
 
-// instructions register _______________________________________________________
+/* instructions register */
 #ir {
   position: absolute;
   top: 3%;
@@ -109,7 +109,7 @@
   }
 }
 
-// other sim labels ____________________________________________________________
+/* other sim labels */
 label#busL {
   top: 20px;
   left: 430px;
