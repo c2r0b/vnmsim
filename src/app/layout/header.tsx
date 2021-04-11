@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Stack, Text, CommandBar, Slider, ICommandBarItemProps
 } from"@fluentui/react";
+
+import Help from "../modals/help";
 
 import * as Styles from "./header.styles";
 
 const speedFormat = (value: number) => `${value} ms`;
 
 const Header = (props) => {
+  const [ selPanel, setSelPanel ] = useState("");
+
   const darkMode = props.store.getDarkMode();
 
   // does not rerender !!
@@ -43,9 +47,7 @@ const Header = (props) => {
       key: 'help',
       text: 'Help',
       iconProps: { iconName: 'Help' },
-      onClick: () => {
-
-      }
+      onClick: () => setSelPanel("help")
     }
   ];
 
@@ -98,38 +100,41 @@ const Header = (props) => {
   ];
 
   return (
-    <div className="header">
-      <Stack horizontal horizontalAlign="space-between">
-        <Stack horizontal>
-          <Text
-            styles={ Styles.logo }
-            variant={ "xLarge" }
-          >
-            vnmsim
-          </Text>
-          <CommandBar
-            styles={ Styles.menu }
-            items={ _menuItems }
-          />
+    <>
+      <Help show={ selPanel == "help" } onDismiss={ () => setSelPanel("") } />
+      <div className="header">
+        <Stack horizontal horizontalAlign="space-between">
+          <Stack horizontal>
+            <Text
+              styles={ Styles.logo }
+              variant={ "xLarge" }
+            >
+              vnmsim
+            </Text>
+            <CommandBar
+              styles={ Styles.menu }
+              items={ _menuItems }
+            />
+          </Stack>
+          <Stack horizontal tokens={{ childrenGap: 10 }}>
+            <CommandBar
+              styles={ Styles.controls }
+              items={ _controls }
+            />
+            <Slider
+              styles={ Styles.speed }
+              valueFormat={ speedFormat }
+              min={ 0 }
+              max={ 2000 }
+              step={ 50 }
+              defaultValue={ 500 }
+              showValue
+              snapToStep
+            />
+          </Stack>
         </Stack>
-        <Stack horizontal tokens={{ childrenGap: 10 }}>
-          <CommandBar
-            styles={ Styles.controls }
-            items={ _controls }
-          />
-          <Slider
-            styles={ Styles.speed }
-            valueFormat={ speedFormat }
-            min={ 0 }
-            max={ 2000 }
-            step={ 50 }
-            defaultValue={ 500 }
-            showValue
-            snapToStep
-          />
-        </Stack>
-      </Stack>
-    </div>
+      </div>
+    </>
   );
 }
 

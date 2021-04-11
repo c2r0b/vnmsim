@@ -7,13 +7,14 @@ import store from "./store/dispatcher";
 import { registerIcons } from "@fluentui/react/lib/Styling";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFolder, faCloudDownloadAlt, faLifeRing, faVial, faCogs, faPlay, faPause,
-  faCircleNotch, faStepForward, faStop, faGlobeEurope
+  faTimes, faFolder, faCloudDownloadAlt, faLifeRing, faVial, faCogs, faPlay,
+  faPause, faCircleNotch, faStepForward, faStop, faGlobeEurope
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 registerIcons({
   icons: {
+    Close: <FontAwesomeIcon icon={ faTimes } />,
     Open: <FontAwesomeIcon icon={ faFolder } />,
     Save: <FontAwesomeIcon icon={ faCloudDownloadAlt } />,
     Help: <FontAwesomeIcon icon={ faLifeRing } />,
