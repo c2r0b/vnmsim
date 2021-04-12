@@ -12,14 +12,6 @@ const Footer = (props:Props) => {
 
   const _items: ICommandBarItemProps[] = [
     {
-      key: 'language',
-      text: 'Language',
-      iconProps: { iconName: 'Language' },
-      onClick: () => {
-
-      }
-    },
-    {
       key: 'github',
       text: 'GitHub',
       iconProps: { iconName: 'Github' },
@@ -43,11 +35,11 @@ const Footer = (props:Props) => {
             items={ _items }
           />
           <Stack.Item styles={ Styles.lightDarkToggle }>
-            <DarkModeToggle
+            {null/*<DarkModeToggle
               onChange={ () => props.store.toggleDarkMode() }
               checked={ darkMode }
               size={ 50 }
-            />
+            />*/}
           </Stack.Item>
         </Stack>
       </Stack>

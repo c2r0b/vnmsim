@@ -5,28 +5,25 @@ import App from "./app/app";
 import store from "./store/dispatcher";
 
 import { registerIcons } from "@fluentui/react/lib/Styling";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTimes, faFolder, faCloudDownloadAlt, faLifeRing, faVial, faCogs, faPlay,
-  faPause, faCircleNotch, faStepForward, faStop, faGlobeEurope
-} from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+  FolderHorizontalIcon, DownloadIcon, LifesaverIcon, TestBeakerSolidIcon,
+  SettingsIcon, PlayIcon, PauseIcon, ThreeQuarterCircleIcon, NextIcon, StopIcon,
+  CancelIcon
+} from "@fluentui/react-icons-mdl2";
 
 registerIcons({
   icons: {
-    Close: <FontAwesomeIcon icon={ faTimes } />,
-    Open: <FontAwesomeIcon icon={ faFolder } />,
-    Save: <FontAwesomeIcon icon={ faCloudDownloadAlt } />,
-    Help: <FontAwesomeIcon icon={ faLifeRing } />,
-    Sample: <FontAwesomeIcon icon={ faVial } />,
-    Settings: <FontAwesomeIcon icon={ faCogs } />,
-    Play: <FontAwesomeIcon icon={ faPlay } />,
-    Pause: <FontAwesomeIcon icon={ faPause } />,
-    Circle: <FontAwesomeIcon icon={ faCircleNotch } />,
-    Step: <FontAwesomeIcon icon={ faStepForward } />,
-    Stop: <FontAwesomeIcon icon={ faStop } />,
-    Language: <FontAwesomeIcon icon={ faGlobeEurope } />,
-    GitHub: <FontAwesomeIcon icon={ faGithub } />
+    Open: <FolderHorizontalIcon />,
+    Save: <DownloadIcon />,
+    Sample: <TestBeakerSolidIcon />,
+    Help: <LifesaverIcon />,
+    Settings: <SettingsIcon />,
+    Play: <PlayIcon />,
+    Pause: <PauseIcon />,
+    Circle: <ThreeQuarterCircleIcon />,
+    Step: <NextIcon />,
+    Stop: <StopIcon />,
+    Cancel: <CancelIcon />,
   }
 });
 

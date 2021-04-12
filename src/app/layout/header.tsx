@@ -44,6 +44,14 @@ const Header = (props) => {
       }
     },
     {
+      key: 'settings',
+      text: 'Settings',
+      iconProps: { iconName: 'Settings' },
+      onClick: () => {
+
+      }
+    },
+    {
       key: 'help',
       text: 'Help',
       iconProps: { iconName: 'Help' },
