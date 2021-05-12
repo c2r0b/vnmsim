@@ -37,7 +37,7 @@
   "dependencies": {
     "angular": "^1.6.1",
     "angular-cookies": "^1.6.1",
-    "codemirror": "^5.22.0",
+    "codemirror": "^5.58.2",
     "font-awesome": "^4.7.0",
     "gulp-concat": "^2.6.1",
     "gulp-concat-filenames": "^1.2.0",
