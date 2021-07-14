@@ -1,9 +1,7 @@
-import './simulator.css';
-
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@fluentui/react';
 
-import * as InputStyles from "./sim.inputs.styles";
+import * as Styles from "./sim.styles";
 import execute from "../utility/execute";
 
 interface Props {
@@ -36,8 +34,8 @@ const Sim = (props:Props) => {
   }, [props.status]);
 
   return (
-    <div className="sim">
-      <svg className="dataBus">
+    <div style={ Styles.container }>
+      <svg style={ Styles.dataBus }>
         <rect x="0" y="0" width="3" height="95%"></rect>
         <rect x="0" y="0" width="100%" height="3"></rect>
         <rect x="0" y="95%" width="306" height="3"></rect>
@@ -49,63 +47,73 @@ const Sim = (props:Props) => {
         <rect x="100" y="11%" width="3" height="43%"></rect>
         <rect x="100" y="53.5%" width="200" height="3"></rect>
       </svg>
-      <svg className="addressBus" style={{ top: "13%", left: "220px" }}>
+      <svg style={{ ...Styles.addressBus, top: "13%", left: "220px" }}>
         <rect x="0" y="0" width="3" height="60"></rect>
         <rect x="0" y="60" width="100%" height="3"></rect>
       </svg>
-      <div id="pc">
-        <svg className="addressBus">
+      <div style={ Styles.pc.container }>
+        <svg style={ Styles.addressBus }>
           <rect x="0" y="40" width="3" height="140"></rect>
           <rect x="100" y="40" width="3" height="140"></rect>
         </svg>
-        <label className="tooltip">PC</label>
+        <label style={ Styles.pc.label }>PC</label>
         <TextField
-          styles={ InputStyles.incrementStyles }
+          type="number"
+          styles={ Styles.pc.increment }
           value={ sim.pc.step.toString() }
-          type="number" />
+        />
         <TextField
-          styles={ InputStyles.PCStyles }
-          value={ sim.pc.val.toString() } />
+          styles={ Styles.pc.input }
+          value={ sim.pc.val.toString() }
+        />
       </div>
-      <div id="alu">
-        <svg>
-          <polygon points="0 35, 120 35, 170 90, 220 35, 340 35, 240 180, 100 180"></polygon>
+      <div style={ Styles.alu.container }>
+        <svg styles={ Styles.alu.svg }>
+          <polygon
+            points="0 35, 120 35, 170 90, 220 35, 340 35, 240 180, 100 180"
+          >
+          </polygon>
         </svg>
-        <label className="tooltip">ALU</label>
+        <label style={ Styles.alu.label }>ALU</label>
         <TextField
-          styles={ InputStyles.ALUP1Styles }
-          value={ sim.alu.e1.toString() } />
+          styles={ Styles.alu.p1 }
+          value={ sim.alu.e1.toString() }
+        />
         <TextField
-          styles={ InputStyles.ALUP2Styles }
-          value={ sim.alu.e2.toString() } />
+          styles={ Styles.alu.p2 }
+          value={ sim.alu.e2.toString() }
+        />
         <TextField
-          styles={ InputStyles.ALUOPStyles }
+          styles={ Styles.alu.op }
           value={ sim.alu.op }
-          readOnly />
+          readOnly
+        />
       </div>
-      <div id="acc">
-        <svg className="dataBus">
+      <div style={ Styles.acc.container }>
+        <svg style={ Styles.dataBus }>
           <rect x="120" y="0" width="170" height="3"></rect>
           <rect x="290" y="0" width="3" height="203"></rect>
           <rect x="120" y="200" width="174" height="3"></rect>
         </svg>
-        <label className="tooltip">ACC</label>
+        <label style={ Styles.acc.label }>ACC</label>
         <TextField label="ACC" value={ sim.acc.toString() } />
       </div>
-      <div id="ir">
-        <label className="tooltip">IR</label>
+      <div style={ Styles.ir.container }>
+        <label style={ Styles.ir.label }>IR</label>
         <TextField
-          styles={ InputStyles.IRStyles }
-          value={ sim.ir.cmd + " " + sim.ir.loc } />
+          style={ Styles.ir.input }
+          value={ sim.ir.cmd + " " + sim.ir.loc }
+        />
         <TextField
-          styles={ InputStyles.DecoderStyles }
+          style={ Styles.ir.decoder }
           defaultValue="DECODER"
-          readOnly />
+          readOnly
+        />
       </div>
-      <label id="busL">Data/instructions bus</label>
-      <label id="addressesBusL">Addresses bus</label>
-      <label className="tooltip" id="ramL">
-        <p>RAM</p>
+      <label style={ Styles.labels.bus }>Data/instructions bus</label>
+      <label style={ Styles.labels.addressesBus }>Addresses bus</label>
+      <label style={ Styles.labels.ram.main }>
+        <p style={ Styles.labels.ram.p }>RAM</p>
       </label>
     </div>
   );

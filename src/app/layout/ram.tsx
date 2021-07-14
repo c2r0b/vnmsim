@@ -13,11 +13,13 @@ require('codemirror/addon/lint/lint.js');
 import { linter } from "../utility/linter";
 import { Stack } from '@fluentui/react';
 
+import * as Styles from "./ram.styles.tsx";
+
 const Ram = (props:Props) => {
   const editorRef = useRef(null);
 
   return (
-    <div className="ram">
+    <div style={ Styles.container }>
       <Stack horizontal>
         <CodeMirror
           ref={ editorRef }

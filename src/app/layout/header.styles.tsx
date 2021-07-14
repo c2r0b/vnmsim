@@ -1,13 +1,21 @@
+export const container = {
+  height: 60,
+  backgroundColor: "white",
+  borderBottom: "1px solid #e0e3e7",
+  paddingTop: 7
+};
+
 export const logo = {
   root: {
     paddingLeft: 15,
-    paddingTop: 5,
+    paddingTop: 6.5,
     fontWeight: 700
   }
 };
 
 export const menu = {
   root: {
+    width: 400,
     paddingLeft: 12
   }
 };

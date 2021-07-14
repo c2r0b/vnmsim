@@ -1,4 +1,3 @@
-import './app.css';
 import '../../node_modules/codemirror/lib/codemirror.css';
 import '../../node_modules/codemirror/theme/material-darker.css';
 

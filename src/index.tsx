@@ -8,7 +8,7 @@ import { registerIcons } from "@fluentui/react/lib/Styling";
 import {
   FolderHorizontalIcon, DownloadIcon, LifesaverIcon, TestBeakerSolidIcon,
   SettingsIcon, PlayIcon, PauseIcon, ThreeQuarterCircleIcon, NextIcon, StopIcon,
-  CancelIcon
+  CancelIcon, MoreIcon, DownloadDocumentIcon
 } from "@fluentui/react-icons-mdl2";
 
 registerIcons({
@@ -24,6 +24,8 @@ registerIcons({
     Step: <NextIcon />,
     Stop: <StopIcon />,
     Cancel: <CancelIcon />,
+    More: <MoreIcon />,
+    DownloadDocument: <DownloadDocumentIcon />
   }
 });
 

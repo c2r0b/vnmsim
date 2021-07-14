@@ -1,3 +1,16 @@
+export const container = {
+  position: "fixed",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: 40,
+  backgroundColor: "#f4f5f6",
+  borderTop: "1px solid #e0e3e7",
+  paddingTop: 5,
+  paddingLeft: 10,
+  zIndex: 9999
+};
+
 export const status = {
   root: {
     width: 100,

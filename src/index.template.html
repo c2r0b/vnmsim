@@ -6,9 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
       http-equiv="Content-Security-Policy"
-      content="style-src 'self' 'unsafe-inline'; connect-src self * 'unsafe-inline' blob: data: gap:;">
+      content="style-src 'self' 'unsafe-inline'; connect-src self * 'unsafe-inline' blob: data: gap:;"
+    >
     <link rel="stylesheet" href="index.css" />
     <style>
+      ::selection {
+        color: white;
+        background: #e67e22;
+      }
+      
       html, body {
         width: 100%;
         height: 100% !important;
@@ -27,6 +33,7 @@
         margin: 0;
         font-family: Verdana, Geneva, sans-serif;
         letter-spacing: .5px;
+        background-color: #f4f5f6;
       }
     </style>
   </head>

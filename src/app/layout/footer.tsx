@@ -22,7 +22,7 @@ const Footer = (props:Props) => {
   ];
 
   return (
-    <div className="footer">
+    <div style={ Styles.container }>
       <Stack horizontal horizontalAlign="space-between">
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           <Stack.Item styles={ Styles.status }>
