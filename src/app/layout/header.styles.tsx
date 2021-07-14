@@ -35,3 +35,7 @@ export const speed = {
     paddingRight: 10
   }
 };
+
+export const openInput = {
+  display: "none"
+};

@@ -117,6 +117,6 @@ const Sim = (props:Props) => {
       </label>
     </div>
   );
-}
+};
 
 export default Sim;

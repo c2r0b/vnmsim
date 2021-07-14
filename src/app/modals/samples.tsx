@@ -1,10 +1,13 @@
 import * as Styles from "./samples.styles";
+import { observer } from "mobx-react-lite";
 
 import React from "react";
 import {
   Panel, PanelType, Stack, DocumentCard, DocumentCardType, DocumentCardDetails,
   DocumentCardTitle, DocumentCardLocation, DocumentCardActions
 } from "@fluentui/react";
+
+import * as SAMPLES from "../samples";
 
 const samples = [
   {
@@ -59,7 +62,7 @@ const samples = [
   },
 ];
 
-const Samples = (props) => {
+const Samples = observer((props) => {
   return (
     <Panel
       headerText="Samples"
@@ -98,7 +101,22 @@ const Samples = (props) => {
                   actions={ [
                     {
                       iconProps: { iconName: "DownloadDocument" },
-                      onClick: () => {},
+                      onClick: () => {
+                        const obj = SAMPLES[s.key];
+
+                        // save first ?
+                        // ---
+
+                        // set code
+                        props.store.setCode(obj.code);
+                        delete obj.code;
+
+                        // copy state
+                        //---
+
+                        // close panel
+                        // ---
+                      },
                       ariaLabel: "Load"
                     }
                   ] }
@@ -110,6 +128,6 @@ const Samples = (props) => {
       </Stack>
     </Panel>
   );
-};
+});
 
 export default Samples;

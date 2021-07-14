@@ -1,0 +1,32 @@
+production ready:
+- samples open file (no external files)
+- simulator svg
+- split pane
+- variables
+- play
+- pause
+- step
+- cicle
+- stop
+- open
+- file drag & drop
+- footer
+- stats (?)
+- console (?)
+- setting (?)
+- dark mode
+- export
+- speed slider working
+- mobile usable
+- PWA ready
+- lighthouse 100%
+- all github issues resolved
+- live version - vnmsim.io (?)
+- move to master
+
+future proposal:
+- open/save from cloud services
+- use by list
+- tutorial interactive tour
+- challenges
+- test mode

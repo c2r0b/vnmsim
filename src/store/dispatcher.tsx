@@ -51,6 +51,14 @@ class Dispatcher {
   clearErrors() {
     this.status.hasErrors = 0;
   }
+
+  getCode() {
+    return this.status.code;
+  }
+
+  setCode(code) {
+    this.status.code = code;
+  }
 };
 
 const observableStore = new Dispatcher();

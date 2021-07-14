@@ -45,6 +45,6 @@ const Footer = (props:Props) => {
       </Stack>
     </div>
   );
-}
+};
 
 export default Footer;

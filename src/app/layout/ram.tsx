@@ -3,6 +3,7 @@ import '../../../node_modules/codemirror/lib/codemirror.css';
 import '../../../node_modules/codemirror/addon/lint/lint.css';
 
 import React, { useRef } from 'react';
+import { observer } from "mobx-react-lite";
 
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 
@@ -15,7 +16,7 @@ import { Stack } from '@fluentui/react';
 
 import * as Styles from "./ram.styles.tsx";
 
-const Ram = (props:Props) => {
+const Ram = observer((props:Props) => {
   const editorRef = useRef(null);
 
   return (
@@ -23,12 +24,7 @@ const Ram = (props:Props) => {
       <Stack horizontal>
         <CodeMirror
           ref={ editorRef }
-          value='// X + Y = Z
-LOD X
-ADD Y
-STO Z
-HLT
-'
+          value={ props.store.getCode() }
           options={{
             mode: "vnm",
             styleActiveLine: true,
@@ -76,6 +72,6 @@ HLT
       </Stack>
     </div>
   );
-}
+});
 
 export default Ram;

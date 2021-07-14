@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
 
 import {
   Stack, Text, CommandBar, Slider, ICommandBarItemProps
@@ -11,7 +12,7 @@ import * as Styles from "./header.styles";
 
 const speedFormat = (value: number) => `${value} ms`;
 
-const Header = (props) => {
+const Header = observer((props) => {
   const [ selPanel, setSelPanel ] = useState("");
 
   //const darkMode = props.store.getDarkMode();
@@ -25,7 +26,7 @@ const Header = (props) => {
       text: "Open",
       iconProps: { iconName: "Open" },
       onClick: () => {
-
+        document.getElementById('openProject').click();
       }
     },
     {
@@ -98,6 +99,75 @@ const Header = (props) => {
     },
   ];
 
+  const readFile = (event) => {
+    const input = event.target.files[0];
+
+    // file reader init
+    var reader = new FileReader();
+    reader.readAsText(input, "UTF-8");
+
+    // on reader error
+    var errorCallBack = () => {
+      //---
+      //---
+      console.log("ERROR");
+    };
+
+    // read the file
+    reader.onload = evt => {
+      var file = evt.target.result,
+          obj = JSON.parse(file);
+
+
+      // prevent data loss
+      //if (confirm(this.$rootScope.translate('WARNING_UNSAVED'))) {
+        // if this is a json file from VNMSIM v >= 2016.09.04
+        if (input.type == "application/json") {
+          // set memory cells code and then destroy that property
+          props.store.setCode(obj.code);
+          delete obj.code;
+          
+          // set simulator status object
+          /*if (this.sim != obj)
+            angular.copy(obj, this.sim);*/
+        }
+        // retrocompatibility for older versions / Zanichelli edition
+        else if (input[0].name.split('.').slice(-1)[0] == 'vnsp') {
+          // split input file lines
+          file = file.split(/\n+/);
+
+          // code for memory cells (removing NOP used as placeholders)
+          const nop_cmds = new RegExp('NOP','g');
+          const code = file[5].split(',').join('\n').replace(nop_cmds,'');
+          props.store.setCode(code);
+
+          // X-Y-Z-W variables
+          var val = file[8].split(',');
+          /*this.sim.variables = {
+            X: parseInt(val[0]),
+            Y: parseInt(val[1]),
+            Z: parseInt(val[2]),
+            W: parseInt(val[3])
+          };
+
+          // T1-40 variables
+          val = file[11].split(',');
+          val.pop();
+          for (var v in val)
+            this.sim.variables['T' + (parseInt(v) + 1)] = parseInt(val[v]);*/
+        }
+        // unreadable file type
+        else {
+          errorCallBack();
+          return;
+        }
+        //this.log.write('LOG_OPENED');
+      //}
+    }
+    // invalid file
+    reader.onerror = evt => errorCallBack();
+  };
+
   return (
     <>
       <Help
@@ -105,8 +175,17 @@ const Header = (props) => {
         onDismiss={ () => setSelPanel("") }
       />
       <Samples
+        store={ props.store }
         show={ selPanel == "samples" }
         onDismiss={ () => setSelPanel("") }
+      />
+
+      <input
+        type="file"
+        id="openProject"
+        accept="application/json,.vnsp"
+        style={  Styles.openInput }
+        onChange={ readFile }
       />
 
       <div style={ Styles.container }>
@@ -151,6 +230,6 @@ const Header = (props) => {
       </div>
     </>
   );
-}
+});
 
 export default Header;
