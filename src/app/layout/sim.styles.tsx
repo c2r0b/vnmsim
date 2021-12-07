@@ -18,22 +18,20 @@ export const dataBus = {
   left: 15,
   float: "center",
   margin: "0 auto",
-  width: "100%",
-  height: "100% !important",
-  fill: "#ddd",
+  width: 800,
+  height: 550,
+  fill: "#bbb",
   overflowY: "hidden"
 };
 
 export const addressBus = {
   ...dataBus,
-  fill: "#999"
+  fill: "#000"
 };
 
 const label = {
   position: "absolute",
-  fontFamily: "'Share Tech Mono', monospace",
-  fontSize: 18,
-  color: "#aaa"
+  fontSize: 17
 };
 
 const fieldStyles = {
@@ -51,9 +49,11 @@ export const pc = {
     height: 200
   },
   label: {
-    ...label,
-    bottom: 45,
-    left: 50
+    root: {
+      ...label,
+      bottom: 45,
+      left: 50
+    }
   },
   input: {
     root: {
@@ -80,10 +80,11 @@ export const pc = {
 export const alu = {
   container: {
     position: "absolute",
-    top: "33%",
+    top: 190,
     left: 150,
     width: 350,
-    height: 400
+    height: 400,
+    zIndex: 1
   },
   svg: {
     fill: "white",
@@ -93,35 +94,54 @@ export const alu = {
     height: 400
   },
   label: {
-    ...label,
-    top: 35,
-    left: 150
+    root: {
+      ...label,
+      top: 37,
+      left: 155
+    }
   },
   p1: {
     root: {
+      position: "absolute",
+      top: 65,
+      left: 60,
       width: 70,
-      margin: "50px 205px",
+    },
+    fieldGroup: {
+      border: "none"
     },
     field: {
       ...fieldStyles,
+      border: "none"
     }
   },
   p2: {
     root: {
+      position: "absolute",
+      top: 65,
+      left: 210,
       width: 70,
-      margin: "-85px 370px",
+    },
+    fieldGroup: {
+      border: "none"
     },
     field: {
       ...fieldStyles,
+      border: "none"
     }
   },
   op: {
     root: {
+      position: "absolute",
+      top: 120,
+      left: 143,
       width: 50,
-      margin: "120px 295px",
+    },
+    fieldGroup: {
+      border: "none"
     },
     field: {
-      ...fieldStyles,
+      ...fieldStyles
     }
   }
 };
@@ -131,13 +151,15 @@ export const alu = {
 export const ir = {
   container: {
     position: "absolute",
-    top: "3%",
+    top: 20,
     bottom: 30
   },
   label: {
-    ...label,
-    top: 12,
-    left: 40
+    root: {
+      ...label,
+      top: 12,
+      left: 40
+    }
   },
   input: {
     root: {
@@ -150,12 +172,21 @@ export const ir = {
   },
   decoder: {
     root: {
+      position: "absolute",
+      top: 100,
+      left: 0,
       width: 100,
       margin: "0 60px",
+      cursor: "pointer"
+    },
+    fieldGroup: {
+      borderColor: "#ccc"
     },
     field: {
       ...fieldStyles,
-      fontSize: "15px"
+      fontSize: "15px",
+      fontWeight: 600,
+      cursor: "pointer"
     }
   }
 };
@@ -164,13 +195,14 @@ export const ir = {
 export const acc = {
   container: {
     position: "absolute",
-    top: "35%",
+    top: 250,
     left: 205
   },
-  label: {
-    ...label,
-    top: 205,
-    left: 10
+  field: {
+    root: {
+      top: 175,
+      left: 35
+    }
   }
 };
 
@@ -178,23 +210,29 @@ export const acc = {
 /* other sim labels */
 export const labels = {
   bus: {
-    ...label,
-    top: 20,
-    left: 430,
-    fontSize: 18
+    root: {
+      ...label,
+      top: 25,
+      left: 430,
+      fontSize: 16
+    }
   },
   addressesBus: {
-    ...label,
-    top: "15%",
-    left: 430,
-    paddingTop: 20,
-    fontSize: 18
+    root: {
+      ...label,
+      top: 100,
+      left: 430,
+      paddingTop: 20,
+      fontSize: 16
+    }
   },
   ram: {
     main: {
-      ...label,
-      top: "8%",
-      right: 0
+      root: {
+        ...label,
+        top: "8%",
+        right: 0
+      }
     },
     p: {
       transform: "rotate(-90deg)"

@@ -1,7 +1,6 @@
 production ready:
 - samples open file (no external files)
 - simulator svg
-- split pane
 - variables
 - play
 - pause
@@ -11,9 +10,7 @@ production ready:
 - open
 - file drag & drop
 - footer
-- stats (?)
-- console (?)
-- setting (?)
+- stats (under memory cells)
 - dark mode
 - export
 - speed slider working
@@ -24,6 +21,7 @@ production ready:
 - live version - vnmsim.io
 - move to master
 - inline comments
+- a stoplight for current status (?)
 
 future proposal:
 - open/save from local storage

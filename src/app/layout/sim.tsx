@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TextField } from '@fluentui/react';
+
+import { TextField, Text } from '@fluentui/react';
 import { PanZoom } from "react-easy-panzoom";
 
 import * as Styles from "./sim.styles";
@@ -62,7 +63,7 @@ const Sim = (props:Props) => {
             <rect x="0" y="40" width="3" height="140"></rect>
             <rect x="100" y="40" width="3" height="140"></rect>
           </svg>
-          <label style={ Styles.pc.label }>PC</label>
+          <Text styles={ Styles.pc.label }>PC</Text>
           <TextField
             type="number"
             styles={ Styles.pc.increment }
@@ -74,13 +75,13 @@ const Sim = (props:Props) => {
           />
         </div>
         <div style={ Styles.alu.container }>
-          <svg styles={ Styles.alu.svg }>
+          <svg style={ Styles.alu.svg }>
             <polygon
               points="0 35, 120 35, 170 90, 220 35, 340 35, 240 180, 100 180"
             >
             </polygon>
           </svg>
-          <label style={ Styles.alu.label }>ALU</label>
+          <Text styles={ Styles.alu.label }>ALU</Text>
           <TextField
             styles={ Styles.alu.p1 }
             value={ sim.alu.e1.toString() }
@@ -101,26 +102,25 @@ const Sim = (props:Props) => {
             <rect x="290" y="0" width="3" height="203"></rect>
             <rect x="120" y="200" width="174" height="3"></rect>
           </svg>
-          <label style={ Styles.acc.label }>ACC</label>
-          <TextField label="ACC" value={ sim.acc.toString() } />
+          <TextField label="ACC"  styles={ Styles.acc.field } value={ sim.acc.toString() } />
         </div>
         <div style={ Styles.ir.container }>
-          <label style={ Styles.ir.label }>IR</label>
+          <Text styles={ Styles.ir.label }>IR</Text>
           <TextField
-            style={ Styles.ir.input }
+            styles={ Styles.ir.input }
             value={ sim.ir.cmd + " " + sim.ir.loc }
           />
           <TextField
-            style={ Styles.ir.decoder }
+            styles={ Styles.ir.decoder }
             defaultValue="DECODER"
             readOnly
           />
         </div>
-        <label style={ Styles.labels.bus }>Data/instructions bus</label>
-        <label style={ Styles.labels.addressesBus }>Addresses bus</label>
-        <label style={ Styles.labels.ram.main }>
+        <Text styles={ Styles.labels.bus }>Data/instructions bus</Text>
+        <Text styles={ Styles.labels.addressesBus }>Addresses bus</Text>
+        <Text styles={ Styles.labels.ram.main }>
           <p style={ Styles.labels.ram.p }>RAM</p>
-        </label>
+        </Text>
       </div>
     </PanZoom>
   );
