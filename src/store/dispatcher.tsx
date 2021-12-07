@@ -24,6 +24,34 @@ class Dispatcher {
     this.status.darkMode = !this.status.darkMode;
   }
 
+  getTitle() {
+    return this.status.title;
+  }
+
+  setTitle(newTitle) {
+    this.status.title = newTitle;
+  }
+
+  getError() {
+    return this.status.error;
+  }
+
+  setError(newErrorMessage) {
+    this.status.error = newErrorMessage;
+  }
+
+  dismissError() {
+    this.status.error = undefined;
+  }
+
+  getOpenDate() {
+    return this.status.openDate;
+  }
+
+  setOpenDate(newDate) {
+    this.status.openDate = newDate;
+  }
+
   getSim() {
     return this.sim;
   }

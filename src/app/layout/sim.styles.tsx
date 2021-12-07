@@ -4,8 +4,10 @@ export const container = {
   left: 0,
   right: 250,
   bottom: 10,
-  height: "100%",
-  maxHeight: 700
+  width: 800,
+  height: 800,
+  maxHeight: 700,
+  marginLeft: 90
 };
 
 export const dataBus = {

@@ -1,6 +1,5 @@
 export const container = {
-  width: 350,
-  height: "100%",
-  backgroundColor: "white",
-  zIndex: 9990
+  main: {
+    width: "480px !important"
+  }
 };

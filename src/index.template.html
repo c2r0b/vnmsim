@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VNM Simulator</title>
+    <title>Von Neumann machine simulator</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
@@ -12,7 +12,7 @@
     <style>
       ::selection {
         color: white;
-        background: #e67e22;
+        background: black;
       }
 
       html, body {
@@ -33,59 +33,13 @@
         margin: 0;
         font-family: Verdana, Geneva, sans-serif;
         letter-spacing: .5px;
-        background-color: #f4f5f6;
-      }
-      
-      .Resizer {
-        background: #bbb;
-        z-index: 100;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        -moz-background-clip: padding;
-        -webkit-background-clip: padding;
-        background-clip: padding-box;
+        background-color: #f3f2f1;
+        background-image: linear-gradient(#e4e3e3 .1em, transparent .1em), linear-gradient(90deg, #e4e3e3 .1em, transparent .1em);
+        background-size: .5em .5em;
       }
 
-      .Resizer.horizontal {
-        height: 11px;
-        margin: -5px 0;
-        border-top: 5px solid rgba(255, 255, 255, 0);
-        border-bottom: 5px solid rgba(255, 255, 255, 0);
-        cursor: row-resize;
-        width: 100%;
-      }
-
-      .Resizer.horizontal:hover {
-        border-top: 5px solid rgba(0, 0, 0, 0.5);
-        border-bottom: 5px solid rgba(0, 0, 0, 0.5);
-      }
-
-      .Resizer.vertical {
-        position: relative;
-        width: 20px;
-        margin: 0 -12px 0 0;
-        border-left: 5px solid #f3f5f6;
-        border-right: 5px solid #f3f5f6;
-        cursor: col-resize;
-      }
-
-      .Resizer.vertical:before {
-        position: absolute;
-        top: 40%;
-        width: 15px;
-        height: 50px;
-        left: 5px;
-      }
-
-      .Resizer.vertical:hover {
-        background: #999;
-      }
-      .Resizer.disabled {
-        cursor: not-allowed;
-      }
-      .Resizer.disabled:hover {
-        border-color: transparent;
+      pre {
+        margin: 0;
       }
     </style>
   </head>

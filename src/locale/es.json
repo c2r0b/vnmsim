@@ -69,7 +69,7 @@
 
   "GUIDE_INTRODUCTION_H": "Introducción",
   "GUIDE_INTRODUCTION_P1": "TEste simulador está destinado a ser una solución para los estudiantes y profesores para estudiar cómo funciona una máquina de Von Neumann.",
-  "GUIDE_INTRODUCTION_P2": "Originalmente creado en 2015 con el HTML puro, CSS y JS, ha sido reconstruido a partir de cero y de código abierto en Github en 2016 utilizando principalmente Pug, Sass, AngularJS y CodeMirror.",
+  "GUIDE_INTRODUCTION_P2": "Originalmente creado en 2015 con el HTML puro, CSS y JS, ha sido reconstruido a partir de cero y de código abierto en GitHub en 2016 utilizando principalmente Pug, Sass, AngularJS y CodeMirror.",
   "GUIDE_SYNTAX_H": "Sintaxis",
   "GUIDE_SYNTAX_P": "Este simulador es totalmente compatible con los comandos más comunes para la máquina de Von Neumann Es capaz de cargar datos (LOD), almacenarlo (STO), hacer adiciones (ADD), sustracciones (SUB), multiplicaciones (. MUL), divisiones (DIV) y realizar saltos (JMZ / JMP). Se pueden crear líneas de comentarios usando la sintaxis '//algo'.",
   "GUIDE_IO_H": "I/O características",

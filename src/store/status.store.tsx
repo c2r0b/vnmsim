@@ -1,5 +1,9 @@
+
 export default {
   darkMode: false,
   hasErrors: 0,
-  code: '// X + Y = Z'
+  title: 'Untitled',
+  openDate: new Date().toISOString().slice(0, 10),
+  error: "test",
+  code: '// START'
 };

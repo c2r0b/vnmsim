@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
 import {
-  Stack, Text, CommandBar, Slider, ICommandBarItemProps
+  Panel, Stack, IconButton, TooltipHost
 } from"@fluentui/react";
 
 import Help from "../modals/help";
@@ -10,93 +10,36 @@ import Samples from "../modals/samples";
 
 import * as Styles from "./header.styles";
 
-const speedFormat = (value: number) => `${value} ms`;
-
 const Header = observer((props) => {
   const [ selPanel, setSelPanel ] = useState("");
 
   //const darkMode = props.store.getDarkMode();
 
-  // does not rerender !!
-  const hasErrors = props.store.hasErrors();
-
-  const _menuItems: ICommandBarItemProps[] = [
+  const _menuItems = [
     {
-      key: "open",
-      text: "Open",
+      ariaLabel: "Open",
       iconProps: { iconName: "Open" },
       onClick: () => {
         document.getElementById('openProject').click();
       }
     },
     {
-      key: "export",
-      text: "Export",
+      ariaLabel: "Save to disk",
       iconProps: { iconName: "Save" },
       onClick: () => {
 
       }
     },
     {
-      key: "samples",
-      text: "Samples",
+      ariaLabel: "Samples",
       iconProps: { iconName: "Sample" },
       onClick: () => setSelPanel("samples")
     },
     {
-      key: "help",
-      text: "Help",
+      ariaLabel: "Help",
       iconProps: { iconName: "Help" },
       onClick: () => setSelPanel("help")
     }
-  ];
-
-  const _controls: ICommandBarItemProps[] = [
-    {
-      key: "play",
-      text: "Play",
-      ariaLabel: "Play",
-      iconOnly: true,
-      disabled: hasErrors,
-      iconProps: { iconName: "Play" },
-      onClick: () => props.setStatus(1),
-    },
-    {
-      key: "singleStep",
-      text: "Single step",
-      ariaLabel: "Single step",
-      iconOnly: true,
-      disabled: hasErrors,
-      iconProps: { iconName: "Step" },
-      onClick: () => props.setStatus(2),
-    },
-    {
-      key: "doCircle",
-      text: "Single iteration",
-      ariaLabel: "Single iteration",
-      iconOnly: true,
-      disabled: hasErrors,
-      iconProps: { iconName: "Circle" },
-      onClick: () => props.setStatus(3),
-    },
-    {
-      key: "pause",
-      text: "Pause",
-      ariaLabel: "Pause",
-      iconOnly: true,
-      disabled: hasErrors,
-      iconProps: { iconName: "Pause" },
-      onClick: () => props.setStatus(4),
-    },
-    {
-      key: "stop",
-      text: "Stop",
-      ariaLabel: "Stop",
-      iconOnly: true,
-      disabled: hasErrors,
-      iconProps: { iconName: "Stop" },
-      onClick: () => props.setStatus(0),
-    },
   ];
 
   const readFile = (event) => {
@@ -108,16 +51,13 @@ const Header = observer((props) => {
 
     // on reader error
     var errorCallBack = () => {
-      //---
-      //---
-      console.log("ERROR");
+      props.store.setError("Unable to read the selected file")
     };
 
     // read the file
     reader.onload = evt => {
-      var file = evt.target.result,
-          obj = JSON.parse(file);
-
+      let file = evt.target.result;
+      let obj = JSON.parse(file);
 
       // prevent data loss
       //if (confirm(this.$rootScope.translate('WARNING_UNSAVED'))) {
@@ -126,7 +66,7 @@ const Header = observer((props) => {
           // set memory cells code and then destroy that property
           props.store.setCode(obj.code);
           delete obj.code;
-          
+
           // set simulator status object
           /*if (this.sim != obj)
             angular.copy(obj, this.sim);*/
@@ -168,6 +108,31 @@ const Header = observer((props) => {
     reader.onerror = evt => errorCallBack();
   };
 
+  const isInDarkMode = props.store.getDarkMode();
+
+  const onRenderFooterContent = () => (
+    <Stack tokens={{ childrenGap: 20 }}>
+      <TooltipHost
+        content={ isInDarkMode ? "Switch to light mode" : "Switch to dark mode" }
+        calloutProps={{ gapSpace: 0 }}
+      >
+        <IconButton
+          iconProps={{ iconName: isInDarkMode ? "Light" : "Dark" }}
+          onClick={ () => props.store.toggleDarkMode() }
+        />
+      </TooltipHost>
+      <TooltipHost
+        content={ "View on GitHub" }
+        calloutProps={{ gapSpace: 0 }}
+      >
+        <IconButton
+          iconProps={{ imageProps: { width: 16, src: Styles.github.img }}}
+          onClick={ () => window.open("https://github.com/c2r0b/vnmsim", "_blank") }
+        />
+      </TooltipHost>
+    </Stack>
+  );
+
   return (
     <>
       <Help
@@ -188,46 +153,38 @@ const Header = observer((props) => {
         onChange={ readFile }
       />
 
-      <div style={ Styles.container }>
-        <Stack horizontal horizontalAlign="space-between">
-          <Stack horizontal>
-            <Text
-              styles={ Styles.logo }
-              variant={ "xLarge" }
-            >
-              <Text
-                styles={{ root: { ...Styles.logo.root, color: "#e67e22" }}}
-                variant={ "xLarge" }
-              >
-                vnm
-              </Text>
-              sim
-            </Text>
-            <CommandBar
-              styles={ Styles.menu }
-              items={ _menuItems }
-              shiftOnReduce={ false }
-            />
-          </Stack>
-          <Stack horizontal tokens={{ childrenGap: 10 }}>
-            <CommandBar
-              styles={ Styles.controls }
-              items={ _controls }
-              shiftOnReduce={ false }
-            />
-            <Slider
-              styles={ Styles.speed }
-              valueFormat={ speedFormat }
-              min={ 0 }
-              max={ 2000 }
-              step={ 50 }
-              defaultValue={ 500 }
-              showValue
-              snapToStep
-            />
+      <Panel
+        isBlocking={ false }
+        isOpen={ true }
+        hasCloseButton={ false }
+        styles={ Styles.container }
+        isFooterAtBottom={ true }
+        onRenderFooterContent={ onRenderFooterContent }
+      >
+        <Stack>
+          <Stack>
+            <div style={ Styles.logo.container }>
+              <div style={ Styles.logo.cube } />
+              <div style={ Styles.logo.cube } />
+              <br />
+              <div style={ Styles.logo.cube } />
+              <div style={ Styles.logo.cube } />
+            </div>
+            <Stack tokens={{ childrenGap: 20 }}>
+              {
+                _menuItems.map(props => (
+                  <TooltipHost
+                    content={ props.ariaLabel }
+                    calloutProps={{ gapSpace: 0 }}
+                  >
+                    <IconButton {...props} />
+                  </TooltipHost>
+                ))
+              }
+            </Stack>
           </Stack>
         </Stack>
-      </div>
+      </Panel>
     </>
   );
 });

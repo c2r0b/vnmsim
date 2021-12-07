@@ -4,7 +4,8 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import {
   Panel, PanelType, Stack, DocumentCard, DocumentCardType, DocumentCardDetails,
-  DocumentCardTitle, DocumentCardLocation, DocumentCardActions
+  DocumentCardTitle, DocumentCardLocation, DocumentCardActions,
+  MessageBar
 } from "@fluentui/react";
 
 import * as SAMPLES from "../samples";
@@ -69,12 +70,17 @@ const Samples = observer((props) => {
       isOpen={ props.show }
       isLightDismiss={ true }
       type={ PanelType.custom }
-      customWidth={ 500 }
+      styles={{ main: { width: 480 }}}
       onDismiss={ props.onDismiss }
       closeButtonAriaLabel="Close"
     >
-      <p><b>Disclaimer &#128679;:</b> the following list of samples is meant for educational purposes as a way to introduce to and practice with the main commands of this simulator. The code used is not meant to be "the right way" to approach the described problem since there is not a single way to write them.</p>
-      <p>We would like to encourage you to write your own solutions in order to really learn the basics and then move on to much more complicated problems. &#127808;</p>
+      <MessageBar
+        isMultiline={ true }
+        styles={ Styles.infoBar }
+      >
+        The following list of samples is meant as a way to introduce to and practice with the main commands of this simulator. 
+        These samples are not meant to be "the right way" to approach the described problem since there is not a single solution to them.
+      </MessageBar>
       <Stack
         horizontal
         wrap
@@ -85,6 +91,7 @@ const Samples = observer((props) => {
           samples.map(s => {
             return (
               <DocumentCard
+                key={ s.key }
                 type={ DocumentCardType.compact }
                 styles={ Styles.card }
               >

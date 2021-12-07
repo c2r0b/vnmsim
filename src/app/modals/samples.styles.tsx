@@ -6,7 +6,13 @@ export const stack = {
 
 export const card = {
   root: {
-    width: 215,
-    height: 70
+    width: 200,
+    height: 70,
+  }
+};
+
+export const infoBar = {
+  root: {
+    marginTop: 15
   }
 };

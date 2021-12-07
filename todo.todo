@@ -21,12 +21,11 @@ production ready:
 - PWA ready
 - lighthouse 100%
 - all github issues resolved
-- live version - vnmsim.io (?)
+- live version - vnmsim.io
 - move to master
+- inline comments
 
 future proposal:
-- open/save from cloud services
-- use by list
+- open/save from local storage
 - tutorial interactive tour
-- challenges
-- test mode
+- binary mode
