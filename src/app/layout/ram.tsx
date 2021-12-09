@@ -15,67 +15,55 @@ import { editorMode } from "../utility/mode";
 import { linter } from "../utility/linter";
 
 import {
-  Stack, DetailsList, DetailsListLayoutMode, IColumn, SelectionMode,
-  TooltipHost, IconButton, Slider, Panel
+  Stack, SpinButton, TooltipHost, IconButton, 
+  Slider, Panel
 } from '@fluentui/react';
 
 import * as Styles from "./ram.styles";
 
 const speedFormat = (value: number) => `${value} ms`;
 
-const columns: IColumn[] = [
-  {
-    key: "name",
-    name: "Name"
-  },
-  {
-    key: "value",
-    name: "Value"
-  }
-];
+const variables = ["X", "Y", "Z", "W"];
 
 const Ram = observer((props:Props) => {
-  const [items, setItems] = useState(["x", "y", "z", "w"].map(v => ({
-    key: v,
-    name: v,
-    value: v
-  })));
-
-  // does not rerender !!
+  const [lastTvariable, setLastTvariable] = useState(10);
+  
   const hasErrors = props.store.hasErrors();
 
   const editorRef = useRef(null);
 
+  const simStatus = props.store.getSimStatus();
+
   const _controls = [
     {
       ariaLabel: "Play",
-      disabled: hasErrors,
+      disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Play" },
-      onClick: () => props.setStatus(1),
+      onClick: () => props.store.setSimStatus(1),
     },
     {
       ariaLabel: "Single step",
-      disabled: hasErrors,
+      disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Step" },
-      onClick: () => props.setStatus(2),
+      onClick: () => props.store.setSimStatus(2),
     },
     {
       ariaLabel: "Single iteration",
-      disabled: hasErrors,
+      disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Circle" },
-      onClick: () => props.setStatus(3),
+      onClick: () => props.store.setSimStatus(3),
     },
     {
       ariaLabel: "Pause",
-      disabled: hasErrors,
+      disabled: hasErrors || [0,4].includes(simStatus),
       iconProps: { iconName: "Pause" },
-      onClick: () => props.setStatus(4),
+      onClick: () => props.store.setSimStatus(4),
     },
     {
       ariaLabel: "Stop",
-      disabled: hasErrors,
+      disabled: hasErrors || simStatus === 0,
       iconProps: { iconName: "Stop" },
-      onClick: () => props.setStatus(0),
+      onClick: () => props.store.setSimStatus(0),
     },
   ];
   
@@ -116,6 +104,23 @@ const Ram = observer((props:Props) => {
     </Stack>
   );
 
+  // generate T variables
+  const allVariables = [
+    ...variables, 
+    ...Array.from(
+      Array(lastTvariable).keys()
+    ).map(i => "T" + ++i)
+  ];
+
+  const onVariableChange = (key, newValue) => {
+    props.store.setVariable(key, newValue);
+  };
+
+  const addVariable = () => {
+    props.store.setVariable(lastTvariable + 1, 0);
+    setLastTvariable(lastTvariable + 1);
+  };
+
   return (
     <Panel
       isBlocking={ false }
@@ -126,6 +131,7 @@ const Ram = observer((props:Props) => {
       onRenderFooterContent={ onRenderFooterContent }
     >
       <Stack horizontal>
+        <Stack.Item styles={ Styles.ramPart }>
         <CodeMirror
           ref={ editorRef }
           value={ props.store.getCode() }
@@ -135,13 +141,39 @@ const Ram = observer((props:Props) => {
 
           }}
         />
-        <DetailsList
-          items={ items }
-          columns={ columns }
-          layoutMode={ DetailsListLayoutMode.justified }
-          isHeaderVisible={ false }
-          selectionMode={ SelectionMode.none }
-        />
+        </Stack.Item>
+        <Stack.Item styles={ Styles.ramPart }>
+          <Stack
+            tokens={{ childrenGap: 10 }} 
+            styles={ Styles.variablesContainer }
+          >
+            {
+              allVariables.map(key => {
+                return (
+                  <SpinButton
+                    label={ key }
+                    step={ 1 }
+                    value={ props.store.getVariable(key) }
+                    onChange={ (e, v) => onVariableChange(key, v) }
+                  />
+                );
+              })
+            }
+            <Stack horizontal horizontalAlign="space-between">
+              <p/>
+              <TooltipHost
+                content="Add next T variable"
+              >
+                <IconButton
+                  iconProps={{ iconName: "Add" }}
+                  ariaLabel="Add next T variable"
+                  onClick={ addVariable }
+                />
+              </TooltipHost>
+              <p/>
+            </Stack>
+          </Stack>
+        </Stack.Item>
       </Stack>
     </Panel>
   );

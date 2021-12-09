@@ -44,7 +44,7 @@ export const pc = {
   container: {
     position: "absolute",
     top: "14%",
-    left: "65%",
+    left: 530,
     width: 125,
     height: 200
   },
@@ -57,8 +57,10 @@ export const pc = {
   },
   input: {
     root: {
-      width: 130,
-      margin: "0px 0px",
+      position: "absolute",
+      top: 140,
+      left: 10,
+      width: 130
     },
     field: {
       ...fieldStyles
@@ -80,7 +82,7 @@ export const pc = {
 export const alu = {
   container: {
     position: "absolute",
-    top: 190,
+    top: 187,
     left: 150,
     width: 350,
     height: 400,
@@ -184,7 +186,7 @@ export const ir = {
     },
     field: {
       ...fieldStyles,
-      fontSize: "15px",
+      fontSize: 14,
       fontWeight: 600,
       cursor: "pointer"
     }
@@ -195,13 +197,13 @@ export const ir = {
 export const acc = {
   container: {
     position: "absolute",
-    top: 250,
+    top: 247,
     left: 205
   },
   field: {
     root: {
-      top: 175,
-      left: 35
+      top: 173,
+      left: 34
     }
   }
 };

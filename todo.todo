@@ -22,6 +22,7 @@ production ready:
 - move to master
 - inline comments
 - a stoplight for current status (?)
+- controls keyboard shortcuts
 
 future proposal:
 - open/save from local storage

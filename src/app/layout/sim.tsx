@@ -8,7 +8,6 @@ import execute from "../utility/execute";
 
 interface Props {
   status: number;
-  setStatus: Function;
   code?: Array<string>;
 };
 
@@ -28,12 +27,12 @@ const Sim = (props:Props) => {
     const result = execute({
       sim: props.store.getSim(),
       stats: props.store.getStats(),
-      status: props.status,
+      status: props.store.getSimStatus(),
       line: "LOD #2"
     });
     props.store.updateSim(result.sim);
     props.store.updateStats(result.stats);
-  }, [props.status]);
+  }, [props.store.getSimStatus()]);
 
   return (
     <PanZoom
@@ -43,33 +42,33 @@ const Sim = (props:Props) => {
     >
       <div style={ Styles.container }>
         <svg style={ Styles.dataBus }>
-          <rect x="0" y="0" width="3" height="95%"></rect>
-          <rect x="0" y="0" width="100%" height="3"></rect>
-          <rect x="0" y="95%" width="306" height="3"></rect>
-          <rect x="306" y="54%" width="3" height="41.6%"></rect>
-          <rect x="160" y="0" width="3" height="11%"></rect>
-          <rect x="400" y="0" width="3" height="48%"></rect>
-          <rect x="0" y="34%" width="210" height="3"></rect>
-          <rect x="210" y="34%" width="3" height="12%"></rect>
-          <rect x="100" y="11%" width="3" height="43%"></rect>
-          <rect x="100" y="53.5%" width="200" height="3"></rect>
+          <rect x="0" y="0" width="2" height="520"></rect>
+          <rect x="0" y="0" width="100%" height="2"></rect>
+          <rect x="0" y="520" width="306" height="2"></rect>
+          <rect x="306" y="352" width="2" height="170"></rect>
+          <rect x="160" y="0" width="2" height="11%"></rect>
+          <rect x="400" y="0" width="2" height="48%"></rect>
+          <rect x="0" y="190" width="207" height="2"></rect>
+          <rect x="207" y="190" width="2" height="20"></rect>
+          <rect x="102" y="70" width="2" height="240"></rect>
+          <rect x="102" y="310" width="150" height="2"></rect>
         </svg>
         <svg style={{ ...Styles.addressBus, top: "13%", left: "220px" }}>
-          <rect x="0" y="0" width="3" height="60"></rect>
-          <rect x="0" y="60" width="100%" height="3"></rect>
+          <rect x="0" y="0" width="2" height="60"></rect>
+          <rect x="0" y="60" width="100%" height="2"></rect>
         </svg>
         <div style={ Styles.pc.container }>
           <svg style={ Styles.addressBus }>
-            <rect x="0" y="40" width="3" height="140"></rect>
-            <rect x="100" y="40" width="3" height="140"></rect>
+            <rect x="30" y="40" width="2" height="140"></rect>
+            <rect x="102" y="40" width="2" height="140"></rect>
           </svg>
-          <Text styles={ Styles.pc.label }>PC</Text>
           <TextField
             type="number"
             styles={ Styles.pc.increment }
             value={ sim.pc.step.toString() }
           />
           <TextField
+            label="PC"
             styles={ Styles.pc.input }
             value={ sim.pc.val.toString() }
           />
@@ -98,9 +97,9 @@ const Sim = (props:Props) => {
         </div>
         <div style={ Styles.acc.container }>
           <svg style={ Styles.dataBus }>
-            <rect x="120" y="0" width="170" height="3"></rect>
-            <rect x="290" y="0" width="3" height="203"></rect>
-            <rect x="120" y="200" width="174" height="3"></rect>
+            <rect x="120" y="0" width="160" height="2"></rect>
+            <rect x="280" y="0" width="2" height="202"></rect>
+            <rect x="120" y="200" width="162" height="2"></rect>
           </svg>
           <TextField label="ACC"  styles={ Styles.acc.field } value={ sim.acc.toString() } />
         </div>

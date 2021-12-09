@@ -13,18 +13,20 @@ import * as Styles from "./header.styles";
 const Header = observer((props) => {
   const [ selPanel, setSelPanel ] = useState("");
 
-  //const darkMode = props.store.getDarkMode();
+  const isSimRunning = [1,2,3].includes(props.store.getSimStatus());
 
   const _menuItems = [
     {
       ariaLabel: "Open",
       iconProps: { iconName: "Open" },
+      disabled: isSimRunning,
       onClick: () => {
         document.getElementById('openProject').click();
       }
     },
     {
       ariaLabel: "Save to disk",
+      disabled: isSimRunning,
       iconProps: { iconName: "Save" },
       onClick: () => {
 

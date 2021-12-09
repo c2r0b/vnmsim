@@ -28,15 +28,23 @@ class Dispatcher {
     return this.status.title;
   }
 
-  setTitle(newTitle) {
+  setTitle(newTitle: string) {
     this.status.title = newTitle;
+  }
+
+  getSimStatus() {
+    return this.status.simStatus;
+  }
+
+  setSimStatus(newStatus: number) {
+    this.status.simStatus = newStatus;
   }
 
   getError() {
     return this.status.error;
   }
 
-  setError(newErrorMessage) {
+  setError(newErrorMessage: string) {
     this.status.error = newErrorMessage;
   }
 
@@ -48,12 +56,24 @@ class Dispatcher {
     return this.status.openDate;
   }
 
-  setOpenDate(newDate) {
+  setOpenDate(newDate: string) {
     this.status.openDate = newDate;
   }
 
   getSim() {
     return this.sim;
+  }
+
+  getVariables() {
+    return this.status.variables;
+  }
+
+  getVariable(key: string) {
+    return this.status.variables[key];
+  }
+
+  setVariable(key: string, value: number) {
+    this.status.variables[key] = value;
   }
 
   getStats() {
@@ -72,7 +92,7 @@ class Dispatcher {
     return this.status.hasErrors;
   }
 
-  fireError(count) {
+  fireError(count: number) {
     this.status.hasErrors = count;
   }
 
@@ -84,7 +104,7 @@ class Dispatcher {
     return this.status.code;
   }
 
-  setCode(code) {
+  setCode(code: string) {
     this.status.code = code;
   }
 };

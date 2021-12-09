@@ -11,7 +11,8 @@ import {
   PlayIcon, PauseIcon, ThreeQuarterCircleIcon, 
   NextIcon, StopIcon, CancelIcon, MoreIcon, 
   DownloadDocumentIcon, InfoIcon, SunnyIcon, 
-  ClearNightIcon, ClearIcon
+  ClearNightIcon, ClearIcon, ChevronUpSmallIcon,
+  ChevronDownSmallIcon, AddIcon
 } from "@fluentui/react-icons-mdl2";
 
 registerIcons({
@@ -34,6 +35,9 @@ registerIcons({
     Dark: <ClearNightIcon />,
     ErrorBadge: <ErrorBadgeIcon />,
     Clear: <ClearIcon />,
+    ChevronUpSmall: <ChevronUpSmallIcon />,
+    ChevronDownSmall: <ChevronDownSmallIcon />,
+    Add: <AddIcon />,
   }
 });
 

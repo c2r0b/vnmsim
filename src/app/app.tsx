@@ -10,13 +10,11 @@ import WorkTitle from "./layout/workTitle";
 import Notification from "./layout/notification";
 
 const App = (props) => {
-  const [ status, setStatus ] = useState(0);
-
   return (
     <div className="app">
-      <Header {...{ status, setStatus }} store={ props.store } />
+      <Header store={ props.store } />
 
-      <Sim {...{ status, setStatus }} store={ props.store } />
+      <Sim store={ props.store } />
       
       <Ram store={ props.store } />
 
