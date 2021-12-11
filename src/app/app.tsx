@@ -1,7 +1,7 @@
 import "../../node_modules/codemirror/lib/codemirror.css";
 import "../../node_modules/codemirror/theme/material-darker.css";
 
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 import Header from "./layout/header";
 import Ram from "./layout/ram";
@@ -10,11 +10,13 @@ import WorkTitle from "./layout/workTitle";
 import Notification from "./layout/notification";
 
 const App = (props) => {
+  const editorRef = useRef(null);
+
   return (
     <div className="app">
-      <Header store={ props.store } />
+      <Header ref={ editorRef } store={ props.store } />
 
-      <Sim store={ props.store } />
+      <Sim ref={ editorRef } store={ props.store } />
       
       <Ram store={ props.store } />
 

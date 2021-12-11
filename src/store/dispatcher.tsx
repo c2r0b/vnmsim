@@ -1,8 +1,12 @@
-import { makeAutoObservable } from "mobx";
+import { configure, makeAutoObservable } from "mobx";
 
 import status from "./status.store";
 import sim from "./sim.store";
 import stats from "./stats.store";
+
+configure({
+  enforceActions: "never",
+});
 
 class Dispatcher {
   status
@@ -40,6 +44,14 @@ class Dispatcher {
     this.status.simStatus = newStatus;
   }
 
+  getEditor() {
+    return this.status.editor;
+  }
+
+  setEditor(newEditor: any) {
+    this.status.editor = newEditor;
+  }
+
   getError() {
     return this.status.error;
   }
@@ -65,19 +77,27 @@ class Dispatcher {
   }
 
   getVariables() {
-    return this.status.variables;
+    return this.sim.variables;
   }
 
   getVariable(key: string) {
-    return this.status.variables[key];
+    return this.sim.variables[key];
   }
 
   setVariable(key: string, value: number) {
-    this.status.variables[key] = value;
+    this.sim.variables[key] = value;
   }
 
   getStats() {
     return this.stats;
+  }
+
+  getInterval() {
+    return this.status.interval;
+  }
+
+  setInterval(newInterval: number) {
+    this.status.interval = newInterval;
   }
 
   updateSim(sim) {

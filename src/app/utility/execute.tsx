@@ -1,9 +1,22 @@
-export default ({ sim, stats, status, line }) => {
+const lastStep = 8;
+
+const commands = {
+  LOD: '=',
+  STO: '=',
+  ADD: '+',
+  SUB: '-',
+  MUL: '*',
+  DIV: '/'
+};
+
+export default ({ sim, stats, status, line, editor }) => {
   // execute code related to the current simulator step
-  switch(status) {
+  switch(sim.step) {
     case 1:
+      sim.focus.var = -1;
       stats.executed_steps++;
 
+      // get line, interpret comments as NOP operations
       sim.line = (
         (!line || line.match(/^((\d+)|(\/\/[\s\S]*))$/i))
         ? 'NOP'
@@ -14,18 +27,25 @@ export default ({ sim, stats, status, line }) => {
       if (sim.pc.val < 0) {
         sim.pc.val = 0;
         sim.step = lastStep;
-        sim.status = 2;
+        status = 4;
       }
       break;
     case 2:
-      // get instruction inside IR first part
+      sim.focus.cell = 1;
+      sim.focus.el = 'ir.input';
       sim.ir.cmd = sim.line.substr(0, 3).toUpperCase();
       break;
     case 3:
-      // get value inside IR second part
+      sim.focus.cell = 1;
+      sim.focus.el = 'ir.input';
       sim.ir.loc = sim.line.substr(4).toUpperCase();
       break;
     case 4:
+      sim.focus.el = 'pc.increment';
+      break;
+    case 5:
+      sim.focus.cell = -1;
+      sim.focus.el = 'pc.input';
       // increment program counter
       sim.pc.val = +sim.pc.val + sim.pc.step;
       break;
@@ -38,20 +58,23 @@ export default ({ sim, stats, status, line }) => {
           break;
         case 'HLT':
           sim.step = lastStep;
-          sim.status = 2;
+          sim.pc.val = 0;
+          sim.codeLine = -1;
+          status = 0;
           break;
         case 'JMP':
-          sim.focus.el = 'pc';
+          sim.focus.el = 'pc.input';
           sim.pc.val = +sim.ir.loc;
           sim.step = lastStep;
+          sim.codeLine = +sim.ir.loc - 1;
           stats.performed_jmp++;
           break;
         case 'JMZ':
-          sim.focus.el = 'acc';
+          sim.focus.el = 'acc.field';
           break;
         default:
-          sim.focus.el = 'aluOp';
-          sim.alu.op = cmds[sim.ir.cmd];
+          sim.focus.el = 'alu.op';
+          sim.alu.op = commands[sim.ir.cmd];
           break;
       }
       break;
@@ -59,8 +82,9 @@ export default ({ sim, stats, status, line }) => {
       // JMZ instruction behaviour
       if (sim.ir.cmd == 'JMZ') {
         if (sim.acc == 0) {
-          sim.focus.el = 'pc';
+          sim.focus.el = 'pc.input';
           sim.pc.val = +sim.ir.loc;
+          sim.codeLine = +sim.ir.loc - 1;
           stats.performed_jmz++;
         }
         else {
@@ -72,32 +96,36 @@ export default ({ sim, stats, status, line }) => {
 
       // STO instruction behaviour
       if (sim.ir.cmd == 'STO') {
-        sim.focus.el = 'acc';
+        sim.focus.el = 'acc.field';
         break;
       }
 
       // aything but LOD instruction behaviour
-      if (sim.ir.cmd != 'LOD') sim.alu.e1 = sim.acc;
+      if (sim.ir.cmd != 'LOD') {
+        sim.alu.e1 = sim.acc
+      };
 
       // parse data portion (instruction register loc)
-      if (sim.ir.loc.indexOf('#') != -1) { // #n
+      // #n
+      if (sim.ir.loc.indexOf('#') != -1) {
         sim.alu.e2 = sim.ir.loc.replace('#','');
       }
-      else if (sim.ir.loc.match(/T|X|Y|Z|W/)) { // variable
+      // variable
+      else if (sim.ir.loc.match(/T|X|Y|Z|W/)) {
         sim.focus.var = sim.ir.loc;
         sim.alu.e2 = parseInt(sim.variables[sim.ir.loc]) || 0;
         stats.variables_accesses++;
       }
-      else { // memory cell
-        editor.focusCell(sim.ir.loc);
+      // memory cell
+      else {
+        sim.focus.cell = sim.ir.loc;
         sim.alu.e2 = parseInt(editor.doc.getLine(sim.ir.loc)) || 0;
         stats.cells_accesses++;
       }
-      sim.focus.el = 'aluE2';
+      sim.focus.el = 'alu.p2';
       break;
     case 8:
       if (sim.ir.cmd != 'STO') {
-
         // execute operation
         switch (sim.alu.op) {
           case '=':
@@ -106,7 +134,7 @@ export default ({ sim, stats, status, line }) => {
           default:
             stats.alu_calculations++;
             sim.acc = parseInt(
-              //eval("sim.acc" + sim.alu.op + "parseInt(sim.alu.e2)")
+              eval("sim.acc" + sim.alu.op + "parseInt(sim.alu.e2)")
             );
             break;
         }
@@ -122,7 +150,7 @@ export default ({ sim, stats, status, line }) => {
           stats.cells_accesses++;
 
           // focus that cell
-          editor.focusCell(sim.ir.loc);
+          focusCell(editor, sim.ir.loc);
 
           // append to cell content
           var line = sim.ir.loc,
@@ -133,5 +161,6 @@ export default ({ sim, stats, status, line }) => {
       }
       break;
   }
-  return { sim, stats };
+  
+  return { sim, stats, status };
 };

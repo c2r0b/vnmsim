@@ -2,7 +2,7 @@ import './ram.css';
 import '../../../node_modules/codemirror/lib/codemirror.css';
 import '../../../node_modules/codemirror/addon/lint/lint.css';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { observer } from "mobx-react-lite";
 
 import { UnControlled as CodeMirror } from 'react-codemirror2';
@@ -27,12 +27,62 @@ const variables = ["X", "Y", "Z", "W"];
 
 const Ram = observer((props:Props) => {
   const [lastTvariable, setLastTvariable] = useState(10);
+  const [focusedVar, setFocusedVar] = useState("");
+  const [currentMark, setCurrentMark] = useState({ clear: () => {}});
   
   const hasErrors = props.store.hasErrors();
 
+  const simStatus = props.store.getSimStatus();
+  const interval = props.store.getInterval();
+
   const editorRef = useRef(null);
 
-  const simStatus = props.store.getSimStatus();
+  const focusCell = (line: number, start: number, end: number) => {
+    currentMark.clear();
+    setCurrentMark(editorRef.current.editor.markText(
+      { line, ch: start },
+      { line, ch: end },
+      { css: "background-color: #f9c55b" }
+    ));
+  };
+
+  useEffect(() => {
+    if (interval === 0) {
+      return;
+    }
+    
+    const sim = props.store.getSim();
+    if (!editorRef?.current) {
+      return;
+    }
+
+    if (sim.focus.cell < 0) {
+      currentMark.clear();
+    }
+    else {
+      switch (sim.step) {
+        case 2: // IR command
+          focusCell(sim.codeLine, 0, sim.ir.cmd.length);
+          break;
+        case 3: // IR location
+          const positionZero = sim.ir.cmd.length + 1;
+          focusCell(sim.codeLine, positionZero, positionZero + sim.ir.loc.length);
+          break;
+        case 7: // number store in cell
+          focusCell(sim.focus.cell, 0, 10);
+          break;
+        default:
+          currentMark.clear();
+      }
+    }
+
+    if (sim.focus.var < 0) {
+      setFocusedVar("");
+    }
+    else if (sim.step >= 7) {
+      setFocusedVar(sim.focus.var);
+    }
+  }, [props.store.getSim().step]);
 
   const _controls = [
     {
@@ -70,6 +120,7 @@ const Ram = observer((props:Props) => {
   const codeMirrorOptions = {
     mode: "vnm",
     styleActiveLine: true,
+    styleSelectedText: true,
     autoRefresh: true,
     firstLineNumber: 0,
     cursorBlinkRate: 800,
@@ -79,8 +130,23 @@ const Ram = observer((props:Props) => {
     lint: (doc, opt, editor) => linter(doc, opt, editor, props.store)
   };
 
+  const onIntervalChange = (value) => {
+    // if running restore interval
+    if ([1,2,3].includes(simStatus)) {
+      const oldStatus = simStatus;
+      props.store.setSimStatus(0);
+      setTimeout(() => {
+        props.store.setSimStatus(oldStatus);
+      });
+    }
+    props.store.setInterval(value);
+  };
+
   const onRenderFooterContent = () => (
-    <Stack horizontal tokens={{ childrenGap: 10 }}>
+    <Stack
+      horizontal
+      tokens={{ childrenGap: 10 }}
+    >
       {
         _controls.map(props => (
           <TooltipHost
@@ -98,6 +164,7 @@ const Ram = observer((props:Props) => {
         max={ 2000 }
         step={ 50 }
         defaultValue={ 500 }
+        onChange={ onIntervalChange }
         showValue
         snapToStep
       />
@@ -113,6 +180,7 @@ const Ram = observer((props:Props) => {
   ];
 
   const onVariableChange = (key, newValue) => {
+    if (newValue === undefined) return;
     props.store.setVariable(key, newValue);
   };
 
@@ -137,8 +205,11 @@ const Ram = observer((props:Props) => {
           value={ props.store.getCode() }
           defineMode={ editorMode }
           options={ codeMirrorOptions }
+          editorDidMount={(editor) => {
+            props.store.setEditor(editor);
+          }}
           onChange={ (editor, data, value) => {
-
+            props.store.setEditor(editor);
           }}
         />
         </Stack.Item>
@@ -155,6 +226,7 @@ const Ram = observer((props:Props) => {
                     step={ 1 }
                     value={ props.store.getVariable(key) }
                     onChange={ (e, v) => onVariableChange(key, v) }
+                    styles={ focusedVar === key ? Styles.focusedVar : {} }
                   />
                 );
               })

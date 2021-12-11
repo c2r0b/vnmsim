@@ -7,6 +7,7 @@ import {
 
 import Help from "../modals/help";
 import Samples from "../modals/samples";
+import Settings from "../modals/settings";
 
 import * as Styles from "./header.styles";
 
@@ -41,6 +42,11 @@ const Header = observer((props) => {
       ariaLabel: "Help",
       iconProps: { iconName: "Help" },
       onClick: () => setSelPanel("help")
+    },
+    {
+      ariaLabel: "Settings",
+      iconProps: { iconName: "Settings" },
+      onClick: () => setSelPanel("settings")
     }
   ];
 
@@ -144,6 +150,11 @@ const Header = observer((props) => {
       <Samples
         store={ props.store }
         show={ selPanel == "samples" }
+        onDismiss={ () => setSelPanel("") }
+      />
+      <Settings
+        store={ props.store }
+        show={ selPanel == "settings" }
         onDismiss={ () => setSelPanel("") }
       />
 

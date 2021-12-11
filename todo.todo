@@ -23,8 +23,14 @@ production ready:
 - inline comments
 - a stoplight for current status (?)
 - controls keyboard shortcuts
+- circle C/I
+- settings
+  - jump comments
+  - jump empty cells
 
 future proposal:
 - open/save from local storage
 - tutorial interactive tour
 - binary mode
+- codemirror6
+- webassembly for faster sim execution

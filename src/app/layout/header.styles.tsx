@@ -1,7 +1,8 @@
 export const container = {
   main: {
     width: "80px !important",
-    inset: "0px auto 0px 0px"
+    inset: "0px auto 0px 0px",
+    boxShadow: "none"
   }
 };
 
@@ -21,15 +22,6 @@ export const logo = {
     marginRight: 1,
     border: "3px solid black",
     borderRadius: 5
-  }
-};
-
-export const speed = {
-  root: {
-    width: 50,
-    paddingTop: 8.5,
-    paddingLeft: 0,
-    paddingRight: 10
   }
 };
 

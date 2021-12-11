@@ -44,7 +44,7 @@ export const pc = {
   container: {
     position: "absolute",
     top: "14%",
-    left: 530,
+    left: 480,
     width: 125,
     height: 200
   },
@@ -83,7 +83,7 @@ export const alu = {
   container: {
     position: "absolute",
     top: 187,
-    left: 150,
+    left: 100,
     width: 350,
     height: 400,
     zIndex: 1
@@ -169,14 +169,14 @@ export const ir = {
       margin: 40
     },
     field: {
-      ...fieldStyles,
+      ...fieldStyles
     }
   },
   decoder: {
     root: {
       position: "absolute",
       top: 100,
-      left: 0,
+      left: -20,
       width: 100,
       margin: "0 60px",
       cursor: "pointer"
@@ -198,11 +198,11 @@ export const acc = {
   container: {
     position: "absolute",
     top: 247,
-    left: 205
+    left: 155
   },
   field: {
     root: {
-      top: 173,
+      top: 135,
       left: 34
     }
   }
@@ -215,29 +215,41 @@ export const labels = {
     root: {
       ...label,
       top: 25,
-      left: 430,
-      fontSize: 16
+      left: 380,
+      fontSize: 14
     }
   },
   addressesBus: {
     root: {
       ...label,
       top: 100,
-      left: 430,
+      left: 380,
       paddingTop: 20,
-      fontSize: 16
-    }
-  },
-  ram: {
-    main: {
-      root: {
-        ...label,
-        top: "8%",
-        right: 0
-      }
-    },
-    p: {
-      transform: "rotate(-90deg)"
+      fontSize: 14
     }
   }
 };
+
+export const ram = {
+  container: {
+    position: "absolute",
+    top: 30,
+    left: 570,
+    zIndex: 1
+  },
+  svg: {
+    fill: "white",
+    stroke: "#ccc",
+    strokeWidth: 1,
+    width: 50,
+    height: 100
+  },
+  text: {
+    root: {
+      ...label,
+      top: 38,
+      left: 8,
+      transform: "rotate(90deg)"
+    }
+  }
+}
