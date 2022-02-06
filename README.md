@@ -1,4 +1,4 @@
-# Von Neumann Machine Simulator (vnmsim) [under development]
+# Von Neumann Machine Simulator (vnmsim)
 
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
@@ -9,11 +9,11 @@ Online version: `coming soon`
 
 This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP).
 
-A guide to the simulator is also available from the `Help` section accessible from the menu at the top of the page of the simulator itself.
+A guide to the simulator is also available from the `Help` section accessible from the menu of the simulator itself.
 
 ## Specifications
 
-The simulator is developed as a PWA written with React in ES6 (and partially in Typescript).
+The simulator is developed as a PWA written with React and ES6 (and partially in Typescript).
 The code editor uses CodeMirror2, while most of the simulator UI is done using SVG elements.
 The chosen design framework is FluentUI by Microsoft.
 
@@ -25,7 +25,7 @@ Building settings for `ESBuild` are available in `./build.js`.
 ## Contribute
 
 Please feel free to create an issue or a pull request.
-This new version is only available in English, therefore Transifex contributions are no longer required.
+This new version is currently only available in English, therefore Transifex contributions are no longer required.
 
 ## Zanichelli version
 
