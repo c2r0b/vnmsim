@@ -2,16 +2,38 @@ export const container = {
   main: {
     width: "480px !important",
     overflow: "hidden",
-    boxShadow: "none"
+    boxShadow: "none",
+    marginTop: 50
   },
   footer: {
     borderTop: "1px solid #eee"
   }
 };
 
+export const title = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: "white",
+  borderBottom: "1px solid #eee",
+  height: 40,
+  zIndex: 100
+};
+
+export const titleText = {
+  root: {
+    width: "50%",
+    textAlign: "center",
+    lineHeight: 38,
+    fontWeight: 600
+  }
+}
+
 export const ramPart = {
   root: {
-    width: 240
+    width: 240,
+    marginTop: 40
   }
 };
 

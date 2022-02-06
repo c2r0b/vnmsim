@@ -16,7 +16,7 @@ import { linter } from "../utility/linter";
 
 import {
   Stack, SpinButton, TooltipHost, IconButton, 
-  Slider, Panel
+  Slider, Panel, Text
 } from '@fluentui/react';
 
 import * as Styles from "./ram.styles";
@@ -198,20 +198,30 @@ const Ram = observer((props:Props) => {
       isFooterAtBottom={ true }
       onRenderFooterContent={ onRenderFooterContent }
     >
+      <div style={ Styles.title }>
+        <Stack horizontal>
+          <Text styles={ Styles.titleText }>
+            Memory cells
+          </Text>
+          <Text styles={ Styles.titleText }>
+            Variables
+          </Text>
+        </Stack>
+      </div>
       <Stack horizontal>
         <Stack.Item styles={ Styles.ramPart }>
-        <CodeMirror
-          ref={ editorRef }
-          value={ props.store.getCode() }
-          defineMode={ editorMode }
-          options={ codeMirrorOptions }
-          editorDidMount={(editor) => {
-            props.store.setEditor(editor);
-          }}
-          onChange={ (editor, data, value) => {
-            props.store.setEditor(editor);
-          }}
-        />
+          <CodeMirror
+            ref={ editorRef }
+            value={ props.store.getCode() }
+            defineMode={ editorMode }
+            options={ codeMirrorOptions }
+            editorDidMount={(editor) => {
+              props.store.setEditor(editor);
+            }}
+            onChange={ (editor, data, value) => {
+              props.store.setEditor(editor);
+            }}
+          />
         </Stack.Item>
         <Stack.Item styles={ Styles.ramPart }>
           <Stack

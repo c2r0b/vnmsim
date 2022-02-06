@@ -2,21 +2,14 @@ production ready:
 - samples open file (no external files)
 - simulator svg
 - variables
-- play
-- pause
 - step
 - cicle
-- stop
 - open
 - file drag & drop
 - footer
 - stats (under memory cells)
-- dark mode
 - export
-- speed slider working
-- mobile usable
 - PWA ready
-- lighthouse 100%
 - all github issues resolved
 - live version - vnmsim.io
 - move to master
@@ -29,6 +22,9 @@ production ready:
   - jump empty cells
 
 future proposal:
+- dark mode
+- mobile usable
+- lighthouse 100%
 - open/save from local storage
 - tutorial interactive tour
 - binary mode

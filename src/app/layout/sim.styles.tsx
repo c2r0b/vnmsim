@@ -1,6 +1,19 @@
+export const infoMsg = {
+  root: {
+    position: "fixed",
+    bottom: 20,
+    left: 105,
+    width: "auto",
+    background: "white"
+  },
+  text: {
+    paddingTop: 3
+  }
+};
+
 export const container = {
   position: "absolute",
-  top: 60,
+  top: 100,
   left: 0,
   right: 250,
   bottom: 10,
@@ -31,7 +44,9 @@ export const addressBus = {
 
 const label = {
   position: "absolute",
-  fontSize: 17
+  fontSize: 17,
+  zIndex: 100,
+  cursor: "help"
 };
 
 const fieldStyles = {
@@ -51,14 +66,14 @@ export const pc = {
   label: {
     root: {
       ...label,
-      bottom: 45,
-      left: 50
+      top: 140,
+      left: 10
     }
   },
   input: {
     root: {
       position: "absolute",
-      top: 140,
+      top: 170,
       left: 10,
       width: 130
     },
@@ -202,7 +217,14 @@ export const acc = {
   },
   field: {
     root: {
-      top: 135,
+      top: 160,
+      left: 34
+    }
+  },
+  label: {
+    root: {
+      ...label,
+      top: 133,
       left: 34
     }
   }
@@ -252,4 +274,4 @@ export const ram = {
       transform: "rotate(90deg)"
     }
   }
-}
+};

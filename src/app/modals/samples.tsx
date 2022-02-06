@@ -122,7 +122,7 @@ const Samples = observer((props) => {
                         //---
 
                         // close panel
-                        // ---
+                        props.onDismiss();
                       },
                       ariaLabel: "Load"
                     }

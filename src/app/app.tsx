@@ -4,6 +4,7 @@ import "../../node_modules/codemirror/theme/material-darker.css";
 import React, { useRef } from "react";
 
 import Header from "./layout/header";
+import Nav from "./layout/nav";
 import Ram from "./layout/ram";
 import Sim from "./layout/sim";
 import WorkTitle from "./layout/workTitle";
@@ -14,7 +15,9 @@ const App = (props) => {
 
   return (
     <div className="app">
-      <Header ref={ editorRef } store={ props.store } />
+      <Header store={ props.store } />
+
+      <Nav ref={ editorRef } store={ props.store } />
 
       <Sim ref={ editorRef } store={ props.store } />
       
