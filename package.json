@@ -44,6 +44,6 @@
     "gulp-if": "^2.0.2",
     "gulp-pug": "^3.2.0",
     "merge-stream": "^1.0.1",
-    "node-sass": "^4.9.0"
+    "node-sass": "^7.0.0"
   }
 }
