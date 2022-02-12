@@ -1,4 +1,6 @@
 export default {
+  title: 'vnms',
+  created: new Date().toISOString().slice(0, 10),
   codeLine: 0,
   step: 0,
   status: 0,

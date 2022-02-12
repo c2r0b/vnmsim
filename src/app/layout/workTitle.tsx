@@ -1,15 +1,21 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from "react";
+
+import { SimulatorContext } from "src/store/dispatcher";
+import { observer } from "mobx-react-lite";
 
 import { Text, Stack } from '@fluentui/react';
 import ContentEditable from "react-contenteditable";
 
 import * as Styles from "./workTitle.styles";
 
-const WorkTitle = (props:Props) => {
+
+const WorkTitle = observer(() => {
+  const Sim = useContext(SimulatorContext);
+
   const workTitleRef = useRef();
 
   const onTitleChange = (ev) => {
-    props.store.setTitle(ev.target.value);
+    Sim.setTitle(ev.target.value);
   };
 
   return (
@@ -21,16 +27,16 @@ const WorkTitle = (props:Props) => {
           <ContentEditable
             tagName="pre"
             innerRef={ workTitleRef }
-            html={ props.store.getTitle() }
+            html={ Sim.getTitle() }
             onChange={ onTitleChange }
           />
         </Text>
         <Text styles={ Styles.date }>
-          Created on { props.store.getOpenDate() }
+          Created on { Sim.getOpenDate() }
         </Text>
       </Stack>
     </div>
   );
-};
+});
 
 export default WorkTitle;

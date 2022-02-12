@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./app/app";
-import store from "./store/dispatcher";
+import { SimulatorContext, SimulatorStore } from "./store/dispatcher";
 
 import { registerIcons } from "@fluentui/react/lib/Styling";
 import {
@@ -87,6 +87,8 @@ loadTheme({
 });
 
 ReactDOM.render(
-  <App store={ store } />,
+  <SimulatorContext.Provider value={ new SimulatorStore() }>
+    <App />
+  </SimulatorContext.Provider>,
   document.getElementById("app")
 );

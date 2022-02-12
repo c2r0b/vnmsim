@@ -1,7 +1,10 @@
 import * as Styles from "./samples.styles";
+
+import React, { useContext } from "react";
+
+import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
 
-import React from "react";
 import {
   Panel, PanelType, Stack, DocumentCard, DocumentCardType, DocumentCardDetails,
   DocumentCardTitle, DocumentCardLocation, DocumentCardActions,
@@ -64,6 +67,7 @@ const samples = [
 ];
 
 const Samples = observer((props) => {
+  const Sim = useContext(SimulatorContext);
   return (
     <Panel
       headerText="Samples"
@@ -115,7 +119,7 @@ const Samples = observer((props) => {
                         // ---
 
                         // set code
-                        props.store.setCode(obj.code);
+                        Sim.setCode(obj.code);
                         delete obj.code;
 
                         // copy state

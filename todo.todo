@@ -1,27 +1,22 @@
 production ready:
-- samples open file (no external files)
-- simulator svg
-- variables
+- simulator highlighting
 - step
 - cicle
-- open
 - file drag & drop
-- footer
 - stats (under memory cells)
-- export
 - PWA ready
 - all github issues resolved
 - live version - vnmsim.io
 - move to master
-- inline comments
 - a stoplight for current status (?)
+
+future proposal:
 - controls keyboard shortcuts
-- circle C/I
 - settings
   - jump comments
   - jump empty cells
-
-future proposal:
+- inline comments
+- welcome splash screen/page
 - dark mode
 - mobile usable
 - lighthouse 100%
@@ -29,4 +24,5 @@ future proposal:
 - tutorial interactive tour
 - binary mode
 - codemirror6
-- webassembly for faster sim execution
+- webassembly version
+- circle C/I

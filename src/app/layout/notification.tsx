@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { SimulatorContext } from "src/store/dispatcher";
+import { observer } from "mobx-react-lite";
 
 import { MessageBar, MessageBarType, Text } from '@fluentui/react';
 
 import * as Styles from "./notification.styles";
 
-const Notification = (props) => {
-  const errorMessage = props.store.getError();
+const Notification = observer(() => {
+  const Sim = useContext(SimulatorContext);
+  const errorMessage = Sim.getError();
 
   if (errorMessage === undefined) {
     return null;
@@ -17,7 +21,7 @@ const Notification = (props) => {
         styles={ Styles.message }
         messageBarType={ MessageBarType.error }
         isMultiline={ false }
-        onDismiss={ () => props.store.dismissError() }
+        onDismiss={ () => Sim.dismissError() }
         dismissButtonAriaLabel="Close"
       >
         <Text styles={ Styles.text }>
@@ -26,6 +30,6 @@ const Notification = (props) => {
       </MessageBar>
     </div>
   );
-};
+});
 
 export default Notification;

@@ -1,31 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
 
-import {
-  TextField, Text, TooltipHost, DirectionalHint,
-  MessageBar
-} from "@fluentui/react";
+import { TextField, Text, MessageBar } from "@fluentui/react";
 import { PanZoom } from "react-easy-panzoom";
 
 import * as Styles from "./sim.styles";
 import execute from "../utility/execute";
 
-interface Props {
-  status: number;
-  editor: any;
-};
-
 const lastStep = 8;
 
-const Sim = observer((props:Props) => {
+const Sim = observer(() => {
+  const Sim = useContext(SimulatorContext);
+
   const [msg, setMsg] = useState("");
   const [intervalId, setIntervalId] = useState({});
   const [styles, setStyles] = useState({ ...Styles });
 
-  const sim = props.store.getSim();
-  const status = props.store.getSimStatus();
-  const editor = props.store.getEditor();
-  const interval = props.store.getInterval();
+  const sim = Sim.getSim();
+  const status = Sim.getSimStatus();
+  const editor = Sim.getEditor();
+  const interval = Sim.getInterval();
 
   useEffect(() => {
     if (interval === 0) {
@@ -44,7 +40,7 @@ const Sim = observer((props:Props) => {
   }, [sim.focus.el]);
 
   const runSimulator = () => {
-    let sim = { ...props.store.getSim() };
+    let sim = { ...Sim.getSim() };
     sim.step++;
     if (sim.step > lastStep) {
       sim.step = 1;
@@ -52,22 +48,22 @@ const Sim = observer((props:Props) => {
 
       if (status === 3) {
         clearInterval(intervalId);
-        props.store.setSimStatus(0);
+        Sim.setSimStatus(0);
         return;
       }
     }
     
     const result = execute({
       sim,
-      stats: {...props.store.getStats()},
+      stats: {...Sim.getStats()},
       status,
       line: editor?.getLine(sim.codeLine),
       editor
     });
 
-    props.store.updateSim(result.sim);
-    props.store.updateStats(result.stats);
-    props.store.setSimStatus(result.status);
+    Sim.updateSim(result.sim);
+    Sim.updateStats(result.stats);
+    Sim.setSimStatus(result.status);
   };
 
   useEffect(() => {
@@ -82,12 +78,12 @@ const Sim = observer((props:Props) => {
         break;
       case 2: // single step
         runSimulator();
-        props.store.setSimStatus(0);
+        Sim.setSimStatus(0);
         break;
       case 1: // play
       case 3: // single iteration
         if (interval === 0) {
-          while (props.store.getSimStatus()) {
+          while (Sim.getSimStatus()) {
             runSimulator();
           }
         }

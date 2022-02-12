@@ -2,7 +2,9 @@ import './ram.css';
 import '../../../node_modules/codemirror/lib/codemirror.css';
 import '../../../node_modules/codemirror/addon/lint/lint.css';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from "react";
+
+import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
 
 import { UnControlled as CodeMirror } from 'react-codemirror2';
@@ -25,15 +27,17 @@ const speedFormat = (value: number) => `${value} ms`;
 
 const variables = ["X", "Y", "Z", "W"];
 
-const Ram = observer((props:Props) => {
+const Ram = observer(() => {
+  const Sim = useContext(SimulatorContext);
+
   const [lastTvariable, setLastTvariable] = useState(10);
   const [focusedVar, setFocusedVar] = useState("");
   const [currentMark, setCurrentMark] = useState({ clear: () => {}});
   
-  const hasErrors = props.store.hasErrors();
+  const hasErrors = Sim.hasErrors();
 
-  const simStatus = props.store.getSimStatus();
-  const interval = props.store.getInterval();
+  const simStatus = Sim.getSimStatus();
+  const interval = Sim.getInterval();
 
   const editorRef = useRef(null);
 
@@ -51,7 +55,7 @@ const Ram = observer((props:Props) => {
       return;
     }
     
-    const sim = props.store.getSim();
+    const sim = Sim.getSim();
     if (!editorRef?.current) {
       return;
     }
@@ -82,38 +86,38 @@ const Ram = observer((props:Props) => {
     else if (sim.step >= 7) {
       setFocusedVar(sim.focus.var);
     }
-  }, [props.store.getSim().step]);
+  }, [Sim.getSim().step]);
 
   const _controls = [
     {
       ariaLabel: "Play",
       disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Play" },
-      onClick: () => props.store.setSimStatus(1),
+      onClick: () => Sim.setSimStatus(1),
     },
     {
       ariaLabel: "Single step",
       disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Step" },
-      onClick: () => props.store.setSimStatus(2),
+      onClick: () => Sim.setSimStatus(2),
     },
     {
       ariaLabel: "Single iteration",
       disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Circle" },
-      onClick: () => props.store.setSimStatus(3),
+      onClick: () => Sim.setSimStatus(3),
     },
     {
       ariaLabel: "Pause",
       disabled: hasErrors || [0,4].includes(simStatus),
       iconProps: { iconName: "Pause" },
-      onClick: () => props.store.setSimStatus(4),
+      onClick: () => Sim.setSimStatus(4),
     },
     {
       ariaLabel: "Stop",
       disabled: hasErrors || simStatus === 0,
       iconProps: { iconName: "Stop" },
-      onClick: () => props.store.setSimStatus(0),
+      onClick: () => Sim.setSimStatus(0),
     },
   ];
   
@@ -124,22 +128,22 @@ const Ram = observer((props:Props) => {
     autoRefresh: true,
     firstLineNumber: 0,
     cursorBlinkRate: 800,
-    theme: props.store.getDarkMode() ? "material-darker" : "default",
+    theme: Sim.getDarkMode() ? "material-darker" : "default",
     gutters: ["CodeMirror-linenumbers", "CodeMirror-lint-markers"],
     lineNumbers: true,
-    lint: (doc, opt, editor) => linter(doc, opt, editor, props.store)
+    lint: (doc, opt, editor) => linter(doc, opt, editor, Sim)
   };
 
   const onIntervalChange = (value) => {
     // if running restore interval
     if ([1,2,3].includes(simStatus)) {
       const oldStatus = simStatus;
-      props.store.setSimStatus(0);
+      Sim.setSimStatus(0);
       setTimeout(() => {
-        props.store.setSimStatus(oldStatus);
+        Sim.setSimStatus(oldStatus);
       });
     }
-    props.store.setInterval(value);
+    Sim.setInterval(value);
   };
 
   const onRenderFooterContent = () => (
@@ -181,11 +185,11 @@ const Ram = observer((props:Props) => {
 
   const onVariableChange = (key, newValue) => {
     if (newValue === undefined) return;
-    props.store.setVariable(key, newValue);
+    Sim.setVariable(key, newValue);
   };
 
   const addVariable = () => {
-    props.store.setVariable(lastTvariable + 1, 0);
+    Sim.setVariable(lastTvariable + 1, 0);
     setLastTvariable(lastTvariable + 1);
   };
 
@@ -212,14 +216,14 @@ const Ram = observer((props:Props) => {
         <Stack.Item styles={ Styles.ramPart }>
           <CodeMirror
             ref={ editorRef }
-            value={ props.store.getCode() }
+            value={ Sim.getCode() }
             defineMode={ editorMode }
             options={ codeMirrorOptions }
             editorDidMount={(editor) => {
-              props.store.setEditor(editor);
+              Sim.setEditor(editor);
             }}
             onChange={ (editor, data, value) => {
-              props.store.setEditor(editor);
+              Sim.setEditor(editor);
             }}
           />
         </Stack.Item>
@@ -234,7 +238,7 @@ const Ram = observer((props:Props) => {
                   <SpinButton
                     label={ key }
                     step={ 1 }
-                    value={ props.store.getVariable(key) }
+                    value={ Sim.getVariable(key) }
                     onChange={ (e, v) => onVariableChange(key, v) }
                     styles={ focusedVar === key ? Styles.focusedVar : {} }
                   />

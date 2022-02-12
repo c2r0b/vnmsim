@@ -1,11 +1,10 @@
 import React from "react";
-import { observer } from "mobx-react-lite";
 
 import { Stack } from "@fluentui/react";
 
 import * as Styles from "./header.styles";
 
-const Header = observer((props) => {
+const Header = () => {
   return (
     <>
       <div style={ Styles.container }>
@@ -20,6 +19,6 @@ const Header = observer((props) => {
       </div>
     </>
   );
-});
+};
 
 export default Header;

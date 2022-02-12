@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import { configure, makeAutoObservable } from "mobx";
 
 import status from "./status.store";
@@ -8,7 +9,7 @@ configure({
   enforceActions: "never",
 });
 
-class Dispatcher {
+export class SimulatorStore {
   status
   sim
   stats
@@ -29,11 +30,11 @@ class Dispatcher {
   }
 
   getTitle() {
-    return this.status.title;
+    return this.sim.title;
   }
 
   setTitle(newTitle: string) {
-    this.status.title = newTitle;
+    this.sim.title = newTitle;
   }
 
   getSimStatus() {
@@ -65,11 +66,11 @@ class Dispatcher {
   }
 
   getOpenDate() {
-    return this.status.openDate;
+    return this.sim.created;
   }
 
   setOpenDate(newDate: string) {
-    this.status.openDate = newDate;
+    this.sim.created = newDate;
   }
 
   getSim() {
@@ -129,5 +130,4 @@ class Dispatcher {
   }
 };
 
-const observableStore = new Dispatcher();
-export default observableStore;
+export const SimulatorContext = createContext<SimulatorStore>(null);

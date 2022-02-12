@@ -1,6 +1,6 @@
 // syntax validator
-export const validator = (t, lastIndex, getLine) => {
-  let line;
+export const validator = (t, lastIndex: number, getLine: Function) => {
+  let line: number;
   return (
     // cmds with cell number parameter
     (

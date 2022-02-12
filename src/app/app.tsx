@@ -10,22 +10,22 @@ import Sim from "./layout/sim";
 import WorkTitle from "./layout/workTitle";
 import Notification from "./layout/notification";
 
-const App = (props) => {
+const App = () => {
   const editorRef = useRef(null);
 
   return (
     <div className="app">
-      <Header store={ props.store } />
+      <Header />
 
-      <Nav ref={ editorRef } store={ props.store } />
+      <Nav ref={ editorRef }/>
 
-      <Sim ref={ editorRef } store={ props.store } />
+      <Sim ref={ editorRef }/>
       
-      <Ram store={ props.store } />
+      <Ram/>
 
-      <WorkTitle store={ props.store } />
+      <WorkTitle/>
 
-      <Notification store={ props.store } />
+      <Notification/>
     </div>
   );
 }
