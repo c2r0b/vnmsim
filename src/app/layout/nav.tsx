@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
@@ -7,6 +7,8 @@ import {
   Panel, Stack, IconButton, TooltipHost
 } from"@fluentui/react";
 
+import Dropzone from "react-dropzone";
+
 import Help from "../modals/help";
 import Samples from "../modals/samples";
 import Settings from "../modals/settings";
@@ -14,6 +16,18 @@ import Settings from "../modals/settings";
 import { readFile, save } from "../utility/io";
 
 import * as Styles from "./nav.styles";
+
+const githubIconProps = {
+  imageProps: {
+    width: 16,
+    height: 16,
+    src: Styles.github.img
+  }
+};
+
+const onGithubClick = () => {
+  window.open("https://github.com/c2r0b/vnmsim", "_blank");
+};
 
 const Nav = observer(() => {
   const Sim = useContext(SimulatorContext);
@@ -97,8 +111,8 @@ const Nav = observer(() => {
         calloutProps={{ gapSpace: 0 }}
       >
         <IconButton
-          iconProps={{ imageProps: { width: 16, src: Styles.github.img }}}
-          onClick={ () => window.open("https://github.com/c2r0b/vnmsim", "_blank") }
+          iconProps={ githubIconProps }
+          onClick={ onGithubClick }
           styles={ Styles.menuButton }
         />
       </TooltipHost>
@@ -141,6 +155,20 @@ const Nav = observer(() => {
         style={  Styles.openInput }
         onChange={ onOpen }
       />
+
+      <Dropzone
+        disableClick
+        onDrop={files => console.log('on drop')}
+        onDragEnter={ () => { }}
+        onDragLeave={() => {}}
+        multiple={false}
+      >
+        {({ getRootProps, getInputProps }) => (
+          <div {...getRootProps()} style={{ position: "absolute", top: 0,left:0,right:0,bottom:0}}>
+            <input {...getInputProps()} hidden />
+          </div>
+        )}
+      </Dropzone>
 
       <Panel
         isBlocking={ false }

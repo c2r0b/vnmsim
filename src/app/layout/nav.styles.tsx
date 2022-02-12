@@ -4,7 +4,8 @@ export const container = {
     inset: "0px auto 0px 0px",
     boxShadow: "none",
     marginTop: 50,
-    padding: 0
+    padding: 0,
+    animation: "none"
   }
 };
 

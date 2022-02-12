@@ -1,14 +1,11 @@
 production ready:
-- simulator highlighting
-- step
-- cicle
 - file drag & drop
 - stats (under memory cells)
+- settings
 - PWA ready
 - all github issues resolved
 - live version - vnmsim.io
 - move to master
-- a stoplight for current status (?)
 
 future proposal:
 - controls keyboard shortcuts

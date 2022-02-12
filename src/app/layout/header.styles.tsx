@@ -23,7 +23,23 @@ export const logo = {
     height: 10,
     marginBottom: 1,
     marginRight: 1,
-    border: "3px solid white",
+    border: "2.5px solid white",
     borderRadius: 2.5
+  }
+};
+
+export const status = {
+  root: {
+    marginTop: -12,
+    marginRight: 15,
+    color: "white"
+  },
+  label: {
+    color: "white",
+    fontSize: 14,
+    marginTop: -2
+  },
+  circle: {
+    color: "white"
   }
 };

@@ -3,7 +3,8 @@ export const container = {
     width: "480px !important",
     overflow: "hidden",
     boxShadow: "none",
-    marginTop: 50
+    marginTop: 50,
+    animation: "none"
   },
   footer: {
     borderTop: "1px solid #eee"
@@ -12,9 +13,9 @@ export const container = {
 
 export const title = {
   position: "fixed",
-  top: 0,
-  left: 0,
+  top: 50,
   right: 0,
+  width: 480,
   backgroundColor: "white",
   borderBottom: "1px solid #eee",
   height: 40,

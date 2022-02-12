@@ -26,7 +26,7 @@ export const readFile = (event, onSuccess, onError) => {
   // read the file
   reader.onload = evt => {
     const file = evt.target.result;
-    let obj = JSON.parse(file);
+    let obj:any;
 
     // retrocompatibility
     if (input[0]?.name?.split(".")?.slice(-1)[0] == "vnsp") {
@@ -34,7 +34,11 @@ export const readFile = (event, onSuccess, onError) => {
     }
 
     // check correct file type
-    if (input.type != "application/json") {
+    if (input.type == "application/json") {
+      obj = JSON.parse(file.toString());
+      obj.focus.el = stylesRetrocompatibility(obj.focus.el);
+    }
+    else {
       onError();
       return;
     }
@@ -49,6 +53,28 @@ export const readFile = (event, onSuccess, onError) => {
   }
 };
 
+// styling retrocompatibility of currently highlighted field
+export const stylesRetrocompatibility = (el) => {
+  switch (el) {
+    case "ir":
+      el = "ir.input.field";
+      break;
+    case "pc":
+      el = "pc.input.field";
+      break;
+    case "acc":
+      el = "acc.field.field";
+      break;
+    case "aluOp":
+      el = "alu.op.field";
+      break;
+    case "aluE2":
+      el = "alu.p2.field";
+      break;
+  }
+  return el;
+};
+
 // retrocompatibility with versions that used .vnsp files
 export const vnspToJson = (file) => {
   // split input file lines
@@ -56,7 +82,7 @@ export const vnspToJson = (file) => {
 
   // code for memory cells (removing NOP used as placeholders)
   const nop_cmds = new RegExp("NOP", "g");
-  const code = file[5].split(",").join("\n").replace(nop_cmds, "");
+  const code = file[5].split(",").join("\fieldn").replace(nop_cmds, "");
 
   // X-Y-Z-W variables
   const variables = file[8].split(',');

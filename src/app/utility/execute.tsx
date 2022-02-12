@@ -32,20 +32,20 @@ export default ({ sim, stats, status, line, editor }) => {
       break;
     case 2:
       sim.focus.cell = 1;
-      sim.focus.el = 'ir.input';
+      sim.focus.el = 'ir.input.field';
       sim.ir.cmd = sim.line.substr(0, 3).toUpperCase();
       break;
     case 3:
       sim.focus.cell = 1;
-      sim.focus.el = 'ir.input';
+      sim.focus.el = 'ir.input.field';
       sim.ir.loc = sim.line.substr(4).toUpperCase();
       break;
     case 4:
-      sim.focus.el = 'pc.increment';
+      sim.focus.el = 'pc.increment.field';
       break;
     case 5:
       sim.focus.cell = -1;
-      sim.focus.el = 'pc.input';
+      sim.focus.el = 'pc.input.field';
       // increment program counter
       sim.pc.val = +sim.pc.val + sim.pc.step;
       break;
@@ -59,21 +59,24 @@ export default ({ sim, stats, status, line, editor }) => {
         case 'HLT':
           sim.step = lastStep;
           sim.pc.val = 0;
+          sim.focus.el = "";
+          sim.focus.var = -1;
+          sim.focus.cell = -1;
           sim.codeLine = -1;
           status = 0;
           break;
         case 'JMP':
-          sim.focus.el = 'pc.input';
+          sim.focus.el = 'pc.input.field';
           sim.pc.val = +sim.ir.loc;
           sim.step = lastStep;
           sim.codeLine = +sim.ir.loc - 1;
           stats.performed_jmp++;
           break;
         case 'JMZ':
-          sim.focus.el = 'acc.field';
+          sim.focus.el = 'acc.field.field';
           break;
         default:
-          sim.focus.el = 'alu.op';
+          sim.focus.el = 'alu.op.field';
           sim.alu.op = commands[sim.ir.cmd];
           break;
       }
@@ -82,7 +85,7 @@ export default ({ sim, stats, status, line, editor }) => {
       // JMZ instruction behaviour
       if (sim.ir.cmd == 'JMZ') {
         if (sim.acc == 0) {
-          sim.focus.el = 'pc.input';
+          sim.focus.el = 'pc.input.field';
           sim.pc.val = +sim.ir.loc;
           sim.codeLine = +sim.ir.loc - 1;
           stats.performed_jmz++;
@@ -96,7 +99,7 @@ export default ({ sim, stats, status, line, editor }) => {
 
       // STO instruction behaviour
       if (sim.ir.cmd == 'STO') {
-        sim.focus.el = 'acc.field';
+        sim.focus.el = 'acc.field.field';
         break;
       }
 
@@ -122,17 +125,19 @@ export default ({ sim, stats, status, line, editor }) => {
         sim.alu.e2 = parseInt(editor.doc.getLine(sim.ir.loc)) || 0;
         stats.cells_accesses++;
       }
-      sim.focus.el = 'alu.p2';
+      sim.focus.el = 'alu.p2.field';
       break;
     case 8:
       if (sim.ir.cmd != 'STO') {
         // execute operation
         switch (sim.alu.op) {
           case '=':
+            sim.focus.el = 'acc.field';
             sim.acc = parseInt(sim.alu.e2) || 0;
             break;
           default:
             stats.alu_calculations++;
+            sim.focus.el = 'acc.field.field';
             sim.acc = parseInt(
               eval("sim.acc" + sim.alu.op + "parseInt(sim.alu.e2)")
             );
@@ -140,24 +145,10 @@ export default ({ sim, stats, status, line, editor }) => {
         }
       }
       // STO instruction -> edit cell / variable
-      else {
-        if (sim.ir.loc.match(/T|X|Y|Z|W/)) { // variable
-          sim.focus.var = sim.ir.loc;
-          sim.variables[sim.ir.loc] = sim.acc;
-          stats.variables_accesses++;
-        }
-        else { // memory cell
-          stats.cells_accesses++;
-
-          // focus that cell
-          focusCell(editor, sim.ir.loc);
-
-          // append to cell content
-          var line = sim.ir.loc,
-              start = { line: line, ch: 0 },
-              end = { line: line, ch: codeMirror.doc.getLine(sim.ir.loc).length };
-          editor.doc.replaceRange(sim.acc.toString(), start, end);
-        }
+      else if (sim.ir.loc.match(/T|X|Y|Z|W/)) {
+        sim.focus.var = sim.ir.loc;
+        sim.variables[sim.ir.loc] = sim.acc;
+        stats.variables_accesses++;
       }
       break;
   }

@@ -45,6 +45,14 @@ export class SimulatorStore {
     this.status.simStatus = newStatus;
   }
 
+  loseFocus() {
+    this.sim.focus = {
+      el: "",
+      cell: -1,
+      var: -1
+    };
+  }
+
   getEditor() {
     return this.status.editor;
   }

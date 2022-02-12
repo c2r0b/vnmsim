@@ -4,7 +4,8 @@ export const infoMsg = {
     bottom: 20,
     left: 105,
     width: "auto",
-    background: "white"
+    background: "white",
+    zIndex: 9999
   },
   text: {
     paddingTop: 3
@@ -274,4 +275,8 @@ export const ram = {
       transform: "rotate(90deg)"
     }
   }
+};
+
+export const focus = {
+  backgroundColor: "#f9c55b"
 };

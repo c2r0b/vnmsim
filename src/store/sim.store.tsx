@@ -19,7 +19,7 @@ export default {
     loc: ''
   },
   focus: {
-    el: "ir",
+    el: "",
     cell: -1,
     var: -1
   },

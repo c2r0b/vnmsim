@@ -8,6 +8,7 @@ import { PanZoom } from "react-easy-panzoom";
 
 import * as Styles from "./sim.styles";
 import execute from "../utility/execute";
+import { strToObj, mergeDeep } from "../utility/objects";
 
 const lastStep = 8;
 
@@ -23,20 +24,17 @@ const Sim = observer(() => {
   const editor = Sim.getEditor();
   const interval = Sim.getInterval();
 
-  useEffect(() => {
-    if (interval === 0) {
-      return;
-    }
+  // highlight requested element by creating a new focus style object
+  // with the requested property cascade and merging it into the default
+  // Styles object
+  const updateStyles = () => {
+    const newStyles = strToObj(sim.focus.el, Styles.focus);
+    setStyles(mergeDeep({}, Styles, newStyles));
+  };
 
-    const path = sim.focus.el.split(".");
-    let currentElementStyles = path.reduce((value, index) => {
-      return value[index];
-    }, Styles);
-  
-    if (sim.focus.el && currentElementStyles?.field) {
-      currentElementStyles.field.backgroundColor = "#f9c55b";
-    }
-    setStyles({ ...Styles, currentElementStyles });
+  useEffect(() => {
+    if (interval === 0) return;
+    updateStyles();
   }, [sim.focus.el]);
 
   const runSimulator = () => {
@@ -48,6 +46,7 @@ const Sim = observer(() => {
 
       if (status === 3) {
         clearInterval(intervalId);
+        Sim.updateSim(sim);
         Sim.setSimStatus(0);
         return;
       }
@@ -73,12 +72,15 @@ const Sim = observer(() => {
 
     switch (status) {
       case 0: // stop
+        Sim.loseFocus();
+        clearInterval(intervalId);
+        break;
       case 4: // pause
         clearInterval(intervalId);
         break;
       case 2: // single step
         runSimulator();
-        Sim.setSimStatus(0);
+        Sim.setSimStatus(4);
         break;
       case 1: // play
       case 3: // single iteration
