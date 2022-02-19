@@ -8,6 +8,16 @@ export const container = {
   zIndex: 100
 };
 
+const cube = {
+  float: "left",
+  width: 10,
+  height: 10,
+  marginBottom: 1,
+  marginRight: 1,
+  border: "2.5px solid white",
+  borderRadius: 2.5
+};
+
 export const logo = {
   container: {
     marginTop: 15,
@@ -18,13 +28,11 @@ export const logo = {
     transform: "rotate(45deg)"
   },
   cube: {
-    float: "left",
-    width: 10,
-    height: 10,
-    marginBottom: 1,
-    marginRight: 1,
-    border: "2.5px solid white",
-    borderRadius: 2.5
+    standard: cube,
+    colored: {
+      ...cube,
+      borderColor: "#f9c55b"
+    }
   }
 };
 

@@ -3,12 +3,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
 
-import { TextField, Text, MessageBar } from "@fluentui/react";
+import { TextField, SpinButton, Text, MessageBar } from "@fluentui/react";
 import { PanZoom } from "react-easy-panzoom";
 
 import * as Styles from "./sim.styles";
-import execute from "../utility/execute";
-import { strToObj, mergeDeep } from "../utility/objects";
+import execute from "../../utility/execute";
+import { strToObj, mergeDeep } from "../../utility/objects";
 
 const lastStep = 8;
 
@@ -45,8 +45,8 @@ const Sim = observer(() => {
       sim.codeLine++;
 
       if (status === 3) {
-        clearInterval(intervalId);
         Sim.updateSim(sim);
+        Sim.loseFocus();
         Sim.setSimStatus(0);
         return;
       }
@@ -129,17 +129,18 @@ const Sim = observer(() => {
           <svg style={{ ...styles.addressBus, top: "13%", left: "220px" }}>
             <rect x="0" y="0" width="2" height="60"></rect>
             <rect x="0" y="60" width="377" height="2"></rect>
-            <rect x="377" y="0" width="2" height="200"></rect>
+            <rect x="377" y="0" width="2" height="150"></rect>
           </svg>
           <div style={ styles.pc.container }>
             <svg style={ styles.addressBus }>
-              <rect x="30" y="40" width="2" height="140"></rect>
-              <rect x="102" y="40" width="2" height="140"></rect>
+              <rect x="30" y="40" width="2" height="115"></rect>
+              <rect x="102" y="40" width="2" height="115"></rect>
             </svg>
-            <TextField
-              type="number"
+            <SpinButton
+              min={ 1 }
               styles={ styles.pc.increment }
               value={ sim.pc.step.toString() }
+              onChange={ (ev, val) => Sim.setPcIncrement(val) }
             />
             <Text
               styles={ styles.pc.label }
@@ -148,9 +149,12 @@ const Sim = observer(() => {
             >
               PC
             </Text>
-            <TextField
+            <SpinButton
+              min={ 0 }
+              step={ sim.pc.step }
               styles={ styles.pc.input }
               value={ sim.pc.val.toString() }
+              onChange={ (ev, val) => Sim.setProgramCounter(val) }
             />
           </div>
           <div style={ styles.alu.container }>

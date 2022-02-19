@@ -28,10 +28,10 @@ const Header = observer(() => {
       <div style={ Styles.container }>
         <Stack horizontal horizontalAlign="space-between">
           <div style={ Styles.logo.container }>
-            <div style={ Styles.logo.cube } />
-            <div style={ Styles.logo.cube } />
-            <div style={ Styles.logo.cube } />
-            <div style={ Styles.logo.cube } />
+            <div style={ Styles.logo.cube.standard } />
+            <div style={ Styles.logo.cube.colored } />
+            <div style={ Styles.logo.cube.standard } />
+            <div style={ Styles.logo.cube.standard } />
           </div>
           { runningSpinner }
         </Stack>

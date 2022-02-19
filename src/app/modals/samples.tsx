@@ -66,7 +66,12 @@ const samples = [
   },
 ];
 
-const Samples = observer((props) => {
+interface IProps {
+  show: boolean;
+  onDismiss: Function;
+}
+
+const Samples = observer((props:IProps) => {
   const Sim = useContext(SimulatorContext);
   return (
     <Panel
@@ -75,7 +80,7 @@ const Samples = observer((props) => {
       isLightDismiss={ true }
       type={ PanelType.custom }
       styles={{ main: { width: 480 }}}
-      onDismiss={ props.onDismiss }
+      onDismiss={ () => props.onDismiss() }
       closeButtonAriaLabel="Close"
     >
       <MessageBar

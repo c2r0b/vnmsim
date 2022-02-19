@@ -16,15 +16,13 @@ export const save = ({ sim, code, title, date }) => {
   dlProj.click();
 };
 
-export const readFile = (event, onSuccess, onError) => {
-  const input = event.target.files[0];
-
+export const readFile = (input, onSuccess, onError) => {
   // file reader init
   var reader = new FileReader();
   reader.readAsText(input, "UTF-8");
 
   // read the file
-  reader.onload = evt => {
+  reader.onload = (evt) => {
     const file = evt.target.result;
     let obj:any;
 
@@ -60,7 +58,7 @@ export const stylesRetrocompatibility = (el) => {
       el = "ir.input.field";
       break;
     case "pc":
-      el = "pc.input.field";
+      el = "pc.input.input";
       break;
     case "acc":
       el = "acc.field.field";

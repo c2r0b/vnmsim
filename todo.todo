@@ -1,11 +1,12 @@
 production ready:
-- file drag & drop
+- solve single iteration not loading IR
 - stats (under memory cells)
 - settings
 - PWA ready
 - all github issues resolved
 - live version - vnmsim.io
 - move to master
+- jest tests
 
 future proposal:
 - controls keyboard shortcuts
@@ -22,4 +23,5 @@ future proposal:
 - binary mode
 - codemirror6
 - webassembly version
-- circle C/I
+- autodeploy
+- app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)

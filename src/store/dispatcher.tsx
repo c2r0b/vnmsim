@@ -136,6 +136,14 @@ export class SimulatorStore {
   setCode(code: string) {
     this.status.code = code;
   }
+
+  setProgramCounter(pc: string|number) {
+    this.sim.pc.val = +pc;
+  }
+
+  setPcIncrement(step: string|number) {
+    this.sim.pc.step = +step;
+  }
 };
 
 export const SimulatorContext = createContext<SimulatorStore>(null);

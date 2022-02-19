@@ -1,5 +1,5 @@
 export const container = {
-  position: "absolute",
+  position: "fixed",
   top: 66,
   left: 105
 };

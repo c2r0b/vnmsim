@@ -13,7 +13,7 @@ export const infoMsg = {
 };
 
 export const container = {
-  position: "absolute",
+  position: "fixed",
   top: 100,
   left: 0,
   right: 250,
@@ -76,20 +76,21 @@ export const pc = {
       position: "absolute",
       top: 170,
       left: 10,
-      width: 130
+      width: 130,
+      zIndex: 10
     },
-    field: {
+    input: {
       ...fieldStyles
     }
   },
   increment: {
     root: {
-      width: 50,
-      margin: "80px 90px",
+      width: 30,
+      margin: "80px 70px",
     },
-    field: {
+    input: {
       ...fieldStyles,
-      fontSize: "15px"
+      width: 30
     }
   }
 };

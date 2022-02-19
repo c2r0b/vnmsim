@@ -1,6 +1,7 @@
 import './ram.css';
-import '../../../node_modules/codemirror/lib/codemirror.css';
-import '../../../node_modules/codemirror/addon/lint/lint.css';
+import '../../../../node_modules/codemirror/lib/codemirror.css';
+import '../../../../node_modules/codemirror/addon/lint/lint.css';
+import "../../../../node_modules/codemirror/theme/material-darker.css";
 
 import React, { useState, useRef, useEffect, useContext } from "react";
 
@@ -13,12 +14,12 @@ require('codemirror/addon/selection/active-line.js');
 require('codemirror/addon/display/autorefresh.js');
 require('codemirror/addon/lint/lint.js');
 
-import { editorMode } from "../utility/mode";
-import { linter } from "../utility/linter";
+import { editorMode } from "../../utility/mode";
+import { linter } from "../../utility/linter";
 
 import {
   Stack, SpinButton, TooltipHost, IconButton, 
-  Slider, Panel, Text
+  Slider, Text
 } from '@fluentui/react';
 
 import * as Styles from "./ram.styles";
@@ -146,35 +147,6 @@ const Ram = observer(() => {
     Sim.setInterval(value);
   };
 
-  const onRenderFooterContent = () => (
-    <Stack
-      horizontal
-      tokens={{ childrenGap: 10 }}
-    >
-      {
-        _controls.map(props => (
-          <TooltipHost
-            content={ props.ariaLabel }
-            calloutProps={{ gapSpace: 0 }}
-          >
-            <IconButton {...props} />
-          </TooltipHost>
-        ))
-      }
-      <Slider
-        styles={ Styles.speed }
-        valueFormat={ speedFormat }
-        min={ 0 }
-        max={ 2000 }
-        step={ 50 }
-        defaultValue={ 500 }
-        onChange={ onIntervalChange }
-        showValue
-        snapToStep
-      />
-    </Stack>
-  );
-
   // generate T variables
   const allVariables = [
     ...variables, 
@@ -194,14 +166,7 @@ const Ram = observer(() => {
   };
 
   return (
-    <Panel
-      isBlocking={ false }
-      isOpen={ true }
-      hasCloseButton={ false }
-      styles={ Styles.container }
-      isFooterAtBottom={ true }
-      onRenderFooterContent={ onRenderFooterContent }
-    >
+    <div style={ Styles.container }>
       <div style={ Styles.title }>
         <Stack horizontal>
           <Text styles={ Styles.titleText }>
@@ -213,7 +178,7 @@ const Ram = observer(() => {
         </Stack>
       </div>
       <Stack horizontal>
-        <Stack.Item styles={ Styles.ramPart }>
+        <Stack.Item styles={ Styles.codePart }>
           <CodeMirror
             ref={ editorRef }
             value={ Sim.getCode() }
@@ -227,41 +192,66 @@ const Ram = observer(() => {
             }}
           />
         </Stack.Item>
-        <Stack.Item styles={ Styles.ramPart }>
-          <Stack
-            tokens={{ childrenGap: 10 }} 
-            styles={ Styles.variablesContainer }
-          >
-            {
-              allVariables.map(key => {
-                return (
-                  <SpinButton
-                    label={ key }
-                    step={ 1 }
-                    value={ Sim.getVariable(key) }
-                    onChange={ (e, v) => onVariableChange(key, v) }
-                    styles={ focusedVar === key ? Styles.focusedVar : {} }
-                  />
-                );
-              })
-            }
-            <Stack horizontal horizontalAlign="space-between">
-              <p/>
-              <TooltipHost
-                content="Add next T variable"
-              >
-                <IconButton
-                  iconProps={{ iconName: "Add" }}
-                  ariaLabel="Add next T variable"
-                  onClick={ addVariable }
+        <Stack
+          tokens={{ childrenGap: 10 }} 
+          styles={ Styles.variablesPart }
+        >
+          {
+            allVariables.map(key => {
+              return (
+                <SpinButton
+                  label={ key }
+                  step={ 1 }
+                  value={ Sim.getVariable(key) }
+                  onChange={ (e, v) => onVariableChange(key, v) }
+                  styles={ focusedVar === key ? Styles.focusedVar : {} }
                 />
-              </TooltipHost>
-              <p/>
-            </Stack>
+              );
+            })
+          }
+          <Stack horizontal horizontalAlign="space-between">
+            <p/>
+            <TooltipHost
+              content="Add next T variable"
+            >
+              <IconButton
+                iconProps={{ iconName: "Add" }}
+                ariaLabel="Add next T variable"
+                onClick={ addVariable }
+              />
+            </TooltipHost>
+            <p/>
           </Stack>
-        </Stack.Item>
+        </Stack>
       </Stack>
-    </Panel>
+      <Stack
+        horizontal
+        tokens={{ childrenGap: 10 }}
+        styles={ Styles.footer }
+      >
+        {
+          _controls.map(props => (
+            <TooltipHost
+              content={ props.ariaLabel }
+              calloutProps={{ gapSpace: 0 }}
+            >
+              <IconButton {...props} />
+            </TooltipHost>
+          ))
+        }
+        <Slider
+          styles={ Styles.speed }
+          valueFormat={ speedFormat }
+          min={ 0 }
+          max={ 2000 }
+          step={ 50 }
+          defaultValue={ 500 }
+          onChange={ onIntervalChange }
+          showValue
+          snapToStep
+        />
+      </Stack>
+    </div>
   );
 });
 

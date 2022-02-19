@@ -1,19 +1,18 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
 
 import {
-  Panel, Stack, IconButton, TooltipHost
+  Stack, IconButton, TooltipHost
 } from"@fluentui/react";
 
-import Dropzone from "react-dropzone";
+import DropZone from "../dropZone/DropZone";
+import Help from "../../modals/help";
+import Samples from "../../modals/samples";
+import Settings from "../../modals/settings";
 
-import Help from "../modals/help";
-import Samples from "../modals/samples";
-import Settings from "../modals/settings";
-
-import { readFile, save } from "../utility/io";
+import { readFile, save } from "../../utility/io";
 
 import * as Styles from "./nav.styles";
 
@@ -29,6 +28,8 @@ const onGithubClick = () => {
   window.open("https://github.com/c2r0b/vnmsim", "_blank");
 };
 
+const acceptedFileTypes = "application/json,.vnsp";
+
 const Nav = observer(() => {
   const Sim = useContext(SimulatorContext);
 
@@ -36,7 +37,7 @@ const Nav = observer(() => {
 
   const isSimRunning = [1,2,3].includes(Sim.getSimStatus());
 
-  const onOpen = (event) => {
+  const onOpen = (input) => {
     const onError = () => {
       Sim.setError("Unable to read the selected file")
     };
@@ -50,7 +51,7 @@ const Nav = observer(() => {
       Sim.updateSim(obj);
     };
 
-    readFile(event, onSuccess, onError);
+    readFile(input, onSuccess, onError);
   };
 
   const onSave = () => save({
@@ -92,33 +93,6 @@ const Nav = observer(() => {
     }
   ];
 
-  const isInDarkMode = Sim.getDarkMode();
-
-  const onRenderFooterContent = () => (
-    <Stack tokens={{ childrenGap: 20 }}>
-      {/*<TooltipHost
-        content={ isInDarkMode ? "Switch to light mode" : "Switch to dark mode" }
-        calloutProps={{ gapSpace: 0 }}
-      >
-        <IconButton
-          iconProps={{ iconName: isInDarkMode ? "Light" : "Dark" }}
-          onClick={ () => Sim.toggleDarkMode() }
-          styles={ Styles.menuButton }
-        />
-      </TooltipHost>*/}
-      <TooltipHost
-        content={ "View on GitHub" }
-        calloutProps={{ gapSpace: 0 }}
-      >
-        <IconButton
-          iconProps={ githubIconProps }
-          onClick={ onGithubClick }
-          styles={ Styles.menuButton }
-        />
-      </TooltipHost>
-    </Stack>
-  );
-
   const menuItems = _menuItems.map(props => (
     <TooltipHost
       content={ props.ariaLabel }
@@ -138,50 +112,46 @@ const Nav = observer(() => {
         onDismiss={ () => setSelPanel("") }
       />
       <Samples
-        store={ Sim }
         show={ selPanel == "samples" }
         onDismiss={ () => setSelPanel("") }
       />
       <Settings
-        store={ Sim }
         show={ selPanel == "settings" }
         onDismiss={ () => setSelPanel("") }
+      />
+
+      <DropZone
+        onOpen={ onOpen }
       />
 
       <input
         type="file"
         id="openProject"
-        accept="application/json,.vnsp"
+        accept={ acceptedFileTypes }
         style={  Styles.openInput }
-        onChange={ onOpen }
+        onChange={ (e) => onOpen(e.target.files[0]) }
       />
 
-      <Dropzone
-        disableClick
-        onDrop={files => console.log('on drop')}
-        onDragEnter={ () => { }}
-        onDragLeave={() => {}}
-        multiple={false}
-      >
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()} style={{ position: "absolute", top: 0,left:0,right:0,bottom:0}}>
-            <input {...getInputProps()} hidden />
-          </div>
-        )}
-      </Dropzone>
-
-      <Panel
-        isBlocking={ false }
-        isOpen={ true }
-        hasCloseButton={ false }
+      <Stack
+        verticalAlign="space-between"
         styles={ Styles.container }
-        isFooterAtBottom={ true }
-        onRenderFooterContent={ onRenderFooterContent }
       >
         <Stack tokens={{ childrenGap: 20 }}>
           { menuItems }
         </Stack>
-      </Panel>
+        <Stack tokens={{ childrenGap: 20 }}>
+          <TooltipHost
+            content={ "View on GitHub" }
+            calloutProps={{ gapSpace: 0 }}
+          >
+            <IconButton
+              iconProps={ githubIconProps }
+              onClick={ onGithubClick }
+              styles={ Styles.menuButton }
+            />
+          </TooltipHost>
+        </Stack>
+      </Stack>
     </>
   );
 });

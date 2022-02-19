@@ -1,11 +1,12 @@
 export const container = {
-  main: {
-    width: "60px !important",
-    inset: "0px auto 0px 0px",
-    boxShadow: "none",
-    marginTop: 50,
-    padding: 0,
-    animation: "none"
+  root: {
+    position: "fixed",
+    top: 50,
+    left: 0,
+    bottom: 0,
+    width: 60,
+    padding: "20px 25px",
+    backgroundColor: "white"
   }
 };
 

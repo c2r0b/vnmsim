@@ -41,11 +41,11 @@ export default ({ sim, stats, status, line, editor }) => {
       sim.ir.loc = sim.line.substr(4).toUpperCase();
       break;
     case 4:
-      sim.focus.el = 'pc.increment.field';
+      sim.focus.el = 'pc.increment.input';
       break;
     case 5:
       sim.focus.cell = -1;
-      sim.focus.el = 'pc.input.field';
+      sim.focus.el = 'pc.input.input';
       // increment program counter
       sim.pc.val = +sim.pc.val + sim.pc.step;
       break;
@@ -66,7 +66,7 @@ export default ({ sim, stats, status, line, editor }) => {
           status = 0;
           break;
         case 'JMP':
-          sim.focus.el = 'pc.input.field';
+          sim.focus.el = 'pc.input.input';
           sim.pc.val = +sim.ir.loc;
           sim.step = lastStep;
           sim.codeLine = +sim.ir.loc - 1;
@@ -85,7 +85,7 @@ export default ({ sim, stats, status, line, editor }) => {
       // JMZ instruction behaviour
       if (sim.ir.cmd == 'JMZ') {
         if (sim.acc == 0) {
-          sim.focus.el = 'pc.input.field';
+          sim.focus.el = 'pc.input.input';
           sim.pc.val = +sim.ir.loc;
           sim.codeLine = +sim.ir.loc - 1;
           stats.performed_jmz++;

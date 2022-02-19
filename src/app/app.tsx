@@ -1,14 +1,11 @@
-import "../../node_modules/codemirror/lib/codemirror.css";
-import "../../node_modules/codemirror/theme/material-darker.css";
-
 import React from "react";
 
-import Header from "./layout/header";
-import Nav from "./layout/nav";
-import Ram from "./layout/ram";
-import Sim from "./layout/sim";
-import WorkTitle from "./layout/workTitle";
-import Notification from "./layout/notification";
+import Header from "./layout/header/Header";
+import Nav from "./layout/nav/Nav";
+import Ram from "./layout/ram/Ram";
+import Sim from "./layout/sim/Sim";
+import WorkTitle from "./layout/workTitle/WorkTitle";
+import Notification from "./layout/notification/Notification";
 
 const App = () => {
   return (
