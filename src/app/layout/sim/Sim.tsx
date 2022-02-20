@@ -7,10 +7,8 @@ import { TextField, SpinButton, Text, MessageBar } from "@fluentui/react";
 import { PanZoom } from "react-easy-panzoom";
 
 import * as Styles from "./sim.styles";
-import execute from "../../utility/execute";
+import { execute, lastStep } from "../../utility/execute";
 import { strToObj, mergeDeep } from "../../utility/objects";
-
-const lastStep = 8;
 
 const Sim = observer(() => {
   const Sim = useContext(SimulatorContext);

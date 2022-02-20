@@ -15,7 +15,7 @@ export const validator = (t, lastIndex: number, getLine: Function) => {
     // cmds with numeric value
     || t.match(/^(lod|add|sub|mul|div)\s#-?\d+\s*$/i)
     // NOP and HLT with no parameters
-    || t.match(/^nop|hlt$/i)
+    || t.match(/^(nop|hlt)$/i)
     // numeric value or none
     || t.match(/^\d*$/i)
     // comment lines

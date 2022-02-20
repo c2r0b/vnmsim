@@ -4,11 +4,14 @@ import '../../../../node_modules/codemirror/addon/lint/lint.css';
 import "../../../../node_modules/codemirror/theme/material-darker.css";
 
 import React, { useState, useRef, useEffect, useContext } from "react";
-
-import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
 
+import AutoSizer from "react-virtualized-auto-sizer";
+import { Resizable } from "re-resizable";
+import Split from "react-split";
 import { UnControlled as CodeMirror } from 'react-codemirror2';
+
+import { SimulatorContext } from "src/store/dispatcher";
 
 require('codemirror/addon/selection/active-line.js');
 require('codemirror/addon/display/autorefresh.js');
@@ -91,7 +94,7 @@ const Ram = observer(() => {
 
   const _controls = [
     {
-      ariaLabel: "Play",
+      ariaLabel: "Start",
       disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Play" },
       onClick: () => Sim.setSimStatus(1),
@@ -121,6 +124,17 @@ const Ram = observer(() => {
       onClick: () => Sim.setSimStatus(0),
     },
   ];
+
+  const lint = (doc) => {
+    const errors = linter(doc);
+    if (errors.length) {
+      Sim.fireError(errors.length);
+    }
+    else {
+      Sim.clearErrors();
+    }
+    return errors;
+  };
   
   const codeMirrorOptions = {
     mode: "vnm",
@@ -132,7 +146,7 @@ const Ram = observer(() => {
     theme: Sim.getDarkMode() ? "material-darker" : "default",
     gutters: ["CodeMirror-linenumbers", "CodeMirror-lint-markers"],
     lineNumbers: true,
-    lint: (doc, opt, editor) => linter(doc, opt, editor, Sim)
+    lint
   };
 
   const onIntervalChange = (value) => {
@@ -165,93 +179,126 @@ const Ram = observer(() => {
     setLastTvariable(lastTvariable + 1);
   };
 
+  const variablesList = allVariables.map(key => {
+    return (
+      <SpinButton
+        label={ key }
+        step={ 1 }
+        value={ Sim.getVariable(key) }
+        onChange={ (e, v) => onVariableChange(key, v) }
+        styles={ focusedVar === key ? Styles.focusedVar : {} }
+      />
+    );
+  });
+
   return (
-    <div style={ Styles.container }>
-      <div style={ Styles.title }>
-        <Stack horizontal>
-          <Text styles={ Styles.titleText }>
-            Memory cells
-          </Text>
-          <Text styles={ Styles.titleText }>
-            Variables
-          </Text>
-        </Stack>
-      </div>
-      <Stack horizontal>
-        <Stack.Item styles={ Styles.codePart }>
-          <CodeMirror
-            ref={ editorRef }
-            value={ Sim.getCode() }
-            defineMode={ editorMode }
-            options={ codeMirrorOptions }
-            editorDidMount={(editor) => {
-              Sim.setEditor(editor);
-            }}
-            onChange={ (editor, data, value) => {
-              Sim.setEditor(editor);
-            }}
-          />
-        </Stack.Item>
-        <Stack
-          tokens={{ childrenGap: 10 }} 
-          styles={ Styles.variablesPart }
+    <AutoSizer>
+      {({ width }) => (
+        <Resizable
+          style={ Styles.container }
+          minWidth={ 480 }
+          maxWidth={ width - 60 }
+          defaultSize={{
+            width: 480,
+            height: "100%",
+          }}
         >
-          {
-            allVariables.map(key => {
-              return (
-                <SpinButton
-                  label={ key }
-                  step={ 1 }
-                  value={ Sim.getVariable(key) }
-                  onChange={ (e, v) => onVariableChange(key, v) }
-                  styles={ focusedVar === key ? Styles.focusedVar : {} }
-                />
-              );
-            })
-          }
-          <Stack horizontal horizontalAlign="space-between">
-            <p/>
-            <TooltipHost
-              content="Add next T variable"
-            >
-              <IconButton
-                iconProps={{ iconName: "Add" }}
-                ariaLabel="Add next T variable"
-                onClick={ addVariable }
+          <Split
+            className="split"
+            sizes={[50, 50]}
+            minSize={ 0 }
+            gutterSize={ 20 }
+            direction="horizontal"
+          >
+            <div style={ Styles.ramHalf }>
+              <div style={ Styles.title }>
+                <Text styles={ Styles.titleText }>
+                  Memory cells
+                </Text>
+              </div>
+              <CodeMirror
+                ref={ editorRef }
+                value={ Sim.getCode() }
+                defineMode={ editorMode }
+                options={ codeMirrorOptions }
+                editorDidMount={(editor) => {
+                  Sim.setEditor(editor);
+                }}
+                onChange={ (editor, data, value) => {
+                  Sim.setEditor(editor);
+                }}
               />
-            </TooltipHost>
-            <p/>
-          </Stack>
-        </Stack>
-      </Stack>
-      <Stack
-        horizontal
-        tokens={{ childrenGap: 10 }}
-        styles={ Styles.footer }
-      >
-        {
-          _controls.map(props => (
-            <TooltipHost
-              content={ props.ariaLabel }
-              calloutProps={{ gapSpace: 0 }}
+            </div>
+            <Split
+              sizes={[70, 30]}
+              minSize={ 40 }
+              gutterSize={ 20 }
+              direction="vertical"
             >
-              <IconButton {...props} />
-            </TooltipHost>
-          ))
-        }
-        <Slider
-          styles={ Styles.speed }
-          valueFormat={ speedFormat }
-          min={ 0 }
-          max={ 2000 }
-          step={ 50 }
-          defaultValue={ 500 }
-          onChange={ onIntervalChange }
-          showValue
-          snapToStep
-        />
-      </Stack>
-    </div>
+              <div style={ Styles.verticalHalf }>
+                <div style={ Styles.title }>
+                  <Text styles={ Styles.titleText }>
+                    Variables
+                  </Text>
+                </div>
+                <Stack
+                  tokens={{ childrenGap: 10, padding: "10px 15px" }}
+                >
+                  { ...variablesList }
+                  <Stack horizontal horizontalAlign="space-between">
+                    <p/>
+                    <TooltipHost
+                      content="Add next T variable"
+                    >
+                      <IconButton
+                        iconProps={{ iconName: "Add" }}
+                        ariaLabel="Add next T variable"
+                        onClick={ addVariable }
+                      />
+                    </TooltipHost>
+                    <p/>
+                  </Stack>
+                </Stack>
+              </div>
+              <div style={ Styles.verticalHalf }>
+                <div style={ Styles.title }>
+                  <Text styles={ Styles.titleText }>
+                    Statistics
+                  </Text>
+                </div>
+              </div>
+            </Split>
+          </Split>
+          <Stack
+            horizontal
+            tokens={{ childrenGap: 10 }}
+            styles={ Styles.footer }
+          >
+            {
+              _controls.map(props => (
+                <TooltipHost
+                  content={ props.ariaLabel }
+                  calloutProps={{ gapSpace: 0 }}
+                >
+                  <IconButton {...props} />
+                </TooltipHost>
+              ))
+            }
+            <Slider
+              styles={ Styles.speed }
+              valueFormat={ speedFormat }
+              min={ 0 }
+              max={ 2000 }
+              step={ 50 }
+              defaultValue={ 500 }
+              onChange={ onIntervalChange }
+              showValue
+              snapToStep
+            />
+          </Stack>
+        </Resizable>
+      )}
+    </AutoSizer>
   );
 });
 

@@ -2,15 +2,16 @@ export const container = {
   position: "fixed",
   top: 50,
   right: 0,
-  bottom: 0,
-  width: 480,
+  bottom: 55,
   backgroundColor: "white",
-  overflow: "hidden"
+  borderLeft: "1px solid #eee",
+  overflow: "hidden",
+  zIndex: 100
 };
 
 export const footer = {
   root: {
-    position: "absolute",
+    position: "fixed",
     right: 0,
     bottom: 0,
     width: 480,
@@ -22,46 +23,33 @@ export const footer = {
 };
 
 export const title = {
-  position: "fixed",
-  top: 50,
+  position: "sticky",
+  top: 0,
+  left: 0,
   right: 0,
-  width: 480,
   backgroundColor: "white",
   borderBottom: "1px solid #eee",
+  textAlign: "center",
   height: 40,
-  zIndex: 100
+  zIndex: 100,
+  overflow: "hidden"
 };
 
 export const titleText = {
   root: {
-    width: "50%",
-    textAlign: "center",
     lineHeight: 38,
     fontWeight: 600
   }
-}
-
-export const codePart = {
-  root: {
-    position: "absolute",
-    top: 40,
-    bottom: 55,
-    right: 240,
-    width: 240,
-    overflowY: "scroll"
-  }
 };
 
-export const variablesPart = {
-  root: {
-    position: "absolute",
-    top: 40,
-    bottom: 55,
-    right: 0,
-    width: 240,
-    padding: "10px 15px",
-    overflowY: "scroll"
-  }
+export const ramHalf = {
+  overflowY: "scroll"
+};
+
+export const verticalHalf = {
+  position: "relative",
+  width: "100%",
+  overflowY: "scroll"
 };
 
 export const speed = {

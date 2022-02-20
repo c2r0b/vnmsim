@@ -118,17 +118,18 @@ const Samples = observer((props:IProps) => {
                     {
                       iconProps: { iconName: "DownloadDocument" },
                       onClick: () => {
-                        const obj = SAMPLES[s.key];
-
-                        // save first ?
-                        // ---
-
+                        const obj = SAMPLES[s.key].input;
+                        
                         // set code
                         Sim.setCode(obj.code);
                         delete obj.code;
 
-                        // copy state
-                        //---
+                        // set title and date
+                        obj.title = s.label;
+                        obj.created = new Date().toISOString().slice(0, 10);
+
+                        // set simulator status object
+                        Sim.updateSim(obj);
 
                         // close panel
                         props.onDismiss();

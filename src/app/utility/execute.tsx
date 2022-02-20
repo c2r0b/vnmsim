@@ -1,4 +1,4 @@
-const lastStep = 8;
+export const lastStep = 8;
 
 const commands = {
   LOD: '=',
@@ -9,7 +9,11 @@ const commands = {
   DIV: '/'
 };
 
-export default ({ sim, stats, status, line, editor }) => {
+export const execute = ({ sim, stats, status, line, editor }) => {
+  if (!sim.codeLine || sim.codeLine < 0) {
+    sim.codeLine = 0;
+  }
+
   // execute code related to the current simulator step
   switch(sim.step) {
     case 1:
@@ -62,7 +66,7 @@ export default ({ sim, stats, status, line, editor }) => {
           sim.focus.el = "";
           sim.focus.var = -1;
           sim.focus.cell = -1;
-          sim.codeLine = -1;
+          sim.codeLine = 0;
           status = 0;
           break;
         case 'JMP':
@@ -77,7 +81,7 @@ export default ({ sim, stats, status, line, editor }) => {
           break;
         default:
           sim.focus.el = 'alu.op.field';
-          sim.alu.op = commands[sim.ir.cmd];
+          sim.alu.op = commands[sim.ir.cmd] || "=";
           break;
       }
       break;

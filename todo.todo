@@ -1,12 +1,12 @@
 production ready:
-- solve single iteration not loading IR
+- jest tests
 - stats (under memory cells)
+- solve single iteration not loading IR
 - settings
 - PWA ready
 - all github issues resolved
 - live version - vnmsim.io
 - move to master
-- jest tests
 
 future proposal:
 - controls keyboard shortcuts
@@ -14,7 +14,7 @@ future proposal:
   - jump comments
   - jump empty cells
 - inline comments
-- welcome splash screen/page
+- welcome splash screen
 - dark mode
 - mobile usable
 - lighthouse 100%
@@ -25,3 +25,5 @@ future proposal:
 - webassembly version
 - autodeploy
 - app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)
+- documentation (docusaurus)
+- sponsors

@@ -2,6 +2,7 @@
 ###################
 /app/
 prod/
+coverage/
 node_modules/
 _old_version/
 yarn.lock

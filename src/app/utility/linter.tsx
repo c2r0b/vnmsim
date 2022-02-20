@@ -1,7 +1,7 @@
 import { validator } from "./validator";
 import CodeMirror from "codemirror";
 
-export const linter = (doc, options, editor, store) => {
+export const linter = (doc) => {
   const code = doc.split('\n'), errors = [];
 
   // utility function to get the line X on the validator
@@ -16,11 +16,6 @@ export const linter = (doc, options, editor, store) => {
       });
     }
   }
-  if (errors.length) {
-    store.fireError(errors.length);
-  }
-  else {
-    store.clearErrors();
-  }
+  
   return errors;
 };

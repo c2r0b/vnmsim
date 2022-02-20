@@ -1,5 +1,5 @@
 export const container = (isDragging:boolean) => ({
-  position: "absolute",
+  position: "fixed",
   top: 50,
   right: 0,
   bottom: 0,
