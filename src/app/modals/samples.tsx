@@ -79,7 +79,7 @@ const Samples = observer((props:IProps) => {
       isOpen={ props.show }
       isLightDismiss={ true }
       type={ PanelType.custom }
-      styles={{ main: { width: 480 }}}
+      styles={{ main: { width: 500 }}}
       onDismiss={ () => props.onDismiss() }
       closeButtonAriaLabel="Close"
     >

@@ -101,6 +101,12 @@ export class SimulatorStore {
     return this.stats;
   }
 
+  clearStats() {
+    Object.keys(this.stats).forEach(key => {
+      this.stats[key] = 0;
+    });
+  }
+
   getInterval() {
     return this.status.interval;
   }

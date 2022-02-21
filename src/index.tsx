@@ -4,6 +4,12 @@ import ReactDOM from "react-dom";
 import App from "./app/app";
 import { SimulatorContext, SimulatorStore } from "./store/dispatcher";
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js");
+  });
+}
+
 import { registerIcons } from "@fluentui/react/lib/Styling";
 import {
   FolderHorizontalIcon, SaveIcon, LifesaverIcon, 
@@ -12,7 +18,8 @@ import {
   NextIcon, StopIcon, CancelIcon, MoreIcon, 
   DownloadDocumentIcon, InfoIcon, SunnyIcon, 
   ClearNightIcon, ClearIcon, ChevronUpSmallIcon,
-  ChevronDownSmallIcon, AddIcon
+  ChevronDownSmallIcon, AddIcon,
+  Rotate90CounterClockwiseIcon
 } from "@fluentui/react-icons-mdl2";
 
 registerIcons({
@@ -38,6 +45,7 @@ registerIcons({
     ChevronUpSmall: <ChevronUpSmallIcon />,
     ChevronDownSmall: <ChevronDownSmallIcon />,
     Add: <AddIcon />,
+    ClearStats: <Rotate90CounterClockwiseIcon />,
   }
 });
 

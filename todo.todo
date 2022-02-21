@@ -1,8 +1,8 @@
 production ready:
 - jest tests
-- stats (under memory cells)
 - solve single iteration not loading IR
 - settings
+- dark mode
 - PWA ready
 - all github issues resolved
 - live version - vnmsim.io
@@ -10,12 +10,12 @@ production ready:
 
 future proposal:
 - controls keyboard shortcuts
+- svg move and zoom keyboard shortcuts
 - settings
   - jump comments
   - jump empty cells
 - inline comments
 - welcome splash screen
-- dark mode
 - mobile usable
 - lighthouse 100%
 - open/save from local storage

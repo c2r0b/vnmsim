@@ -25,16 +25,16 @@ import {
   Slider, Text
 } from '@fluentui/react';
 
+import { Variables } from "./variables/Variables";
+import { Statistics } from "./stats/Stats";
+
 import * as Styles from "./ram.styles";
 
 const speedFormat = (value: number) => `${value} ms`;
 
-const variables = ["X", "Y", "Z", "W"];
-
 const Ram = observer(() => {
   const Sim = useContext(SimulatorContext);
 
-  const [lastTvariable, setLastTvariable] = useState(10);
   const [focusedVar, setFocusedVar] = useState("");
   const [currentMark, setCurrentMark] = useState({ clear: () => {}});
   
@@ -161,45 +161,15 @@ const Ram = observer(() => {
     Sim.setInterval(value);
   };
 
-  // generate T variables
-  const allVariables = [
-    ...variables, 
-    ...Array.from(
-      Array(lastTvariable).keys()
-    ).map(i => "T" + ++i)
-  ];
-
-  const onVariableChange = (key, newValue) => {
-    if (newValue === undefined) return;
-    Sim.setVariable(key, newValue);
-  };
-
-  const addVariable = () => {
-    Sim.setVariable(lastTvariable + 1, 0);
-    setLastTvariable(lastTvariable + 1);
-  };
-
-  const variablesList = allVariables.map(key => {
-    return (
-      <SpinButton
-        label={ key }
-        step={ 1 }
-        value={ Sim.getVariable(key) }
-        onChange={ (e, v) => onVariableChange(key, v) }
-        styles={ focusedVar === key ? Styles.focusedVar : {} }
-      />
-    );
-  });
-
   return (
     <AutoSizer>
       {({ width }) => (
         <Resizable
           style={ Styles.container }
-          minWidth={ 480 }
+          minWidth={ 500 }
           maxWidth={ width - 60 }
           defaultSize={{
-            width: 480,
+            width: 500,
             height: "100%",
           }}
         >
@@ -208,6 +178,7 @@ const Ram = observer(() => {
             sizes={[50, 50]}
             minSize={ 0 }
             gutterSize={ 20 }
+            dragInterval={ 30 }
             direction="horizontal"
           >
             <div style={ Styles.ramHalf }>
@@ -230,43 +201,15 @@ const Ram = observer(() => {
               />
             </div>
             <Split
-              sizes={[70, 30]}
+              className="splitVertical"
+              sizes={[55, 45]}
               minSize={ 40 }
               gutterSize={ 20 }
+              dragInterval={ 30 }
               direction="vertical"
             >
-              <div style={ Styles.verticalHalf }>
-                <div style={ Styles.title }>
-                  <Text styles={ Styles.titleText }>
-                    Variables
-                  </Text>
-                </div>
-                <Stack
-                  tokens={{ childrenGap: 10, padding: "10px 15px" }}
-                >
-                  { ...variablesList }
-                  <Stack horizontal horizontalAlign="space-between">
-                    <p/>
-                    <TooltipHost
-                      content="Add next T variable"
-                    >
-                      <IconButton
-                        iconProps={{ iconName: "Add" }}
-                        ariaLabel="Add next T variable"
-                        onClick={ addVariable }
-                      />
-                    </TooltipHost>
-                    <p/>
-                  </Stack>
-                </Stack>
-              </div>
-              <div style={ Styles.verticalHalf }>
-                <div style={ Styles.title }>
-                  <Text styles={ Styles.titleText }>
-                    Statistics
-                  </Text>
-                </div>
-              </div>
+              <Variables focusedVar={ focusedVar } />
+              <Statistics />
             </Split>
           </Split>
           <Stack

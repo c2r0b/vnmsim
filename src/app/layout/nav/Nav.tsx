@@ -87,6 +87,11 @@ const Nav = observer(() => {
       onClick: () => setSelPanel("help")
     },
     {
+      ariaLabel: "View on GitHub",
+      iconProps: githubIconProps,
+      onClick: onGithubClick
+    },
+    {
       ariaLabel: "Settings",
       iconProps: { iconName: "Settings" },
       onClick: () => setSelPanel("settings")
@@ -133,24 +138,10 @@ const Nav = observer(() => {
       />
 
       <Stack
-        verticalAlign="space-between"
+        tokens={{ childrenGap: 20 }}
         styles={ Styles.container }
       >
-        <Stack tokens={{ childrenGap: 20 }}>
-          { menuItems }
-        </Stack>
-        <Stack tokens={{ childrenGap: 20 }}>
-          <TooltipHost
-            content={ "View on GitHub" }
-            calloutProps={{ gapSpace: 0 }}
-          >
-            <IconButton
-              iconProps={ githubIconProps }
-              onClick={ onGithubClick }
-              styles={ Styles.menuButton }
-            />
-          </TooltipHost>
-        </Stack>
+        { menuItems }
       </Stack>
     </>
   );

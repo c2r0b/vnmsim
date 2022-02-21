@@ -31,3 +31,24 @@ esbuild.serve(
     }
   }
 );
+
+const fs = require("fs");
+const version = require("./package.json").version;
+
+// copy service worker
+fs.readFile("src/sw.js", (error, data) => {
+  fs.writeFile(
+    (process.argv[2] ? "prod" : "app") + "/sw.js",
+    data.toString().replace(/\{\{version\}\}/g, version),
+    () => {}
+  );
+});
+
+// copy manifest
+fs.readFile("manifest.json", (error, data) => {
+  fs.writeFile(
+    (process.argv[2] ? "prod" : "app") + "/manifest.json",
+    data.toString(),
+    () => {}
+  );
+});

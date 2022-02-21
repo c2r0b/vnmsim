@@ -18,7 +18,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
   switch(sim.step) {
     case 1:
       sim.focus.var = -1;
-      stats.executed_steps++;
+      stats.executed_step++;
 
       // get line, interpret comments as NOP operations
       sim.line = (
@@ -121,13 +121,13 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       else if (sim.ir.loc.match(/T|X|Y|Z|W/)) {
         sim.focus.var = sim.ir.loc;
         sim.alu.e2 = parseInt(sim.variables[sim.ir.loc]) || 0;
-        stats.variables_accesses++;
+        stats.variable_access++;
       }
       // memory cell
       else {
         sim.focus.cell = sim.ir.loc;
         sim.alu.e2 = parseInt(editor.doc.getLine(sim.ir.loc)) || 0;
-        stats.cells_accesses++;
+        stats.cell_access++;
       }
       sim.focus.el = 'alu.p2.field';
       break;
@@ -140,11 +140,28 @@ export const execute = ({ sim, stats, status, line, editor }) => {
             sim.acc = parseInt(sim.alu.e2) || 0;
             break;
           default:
-            stats.alu_calculations++;
+            stats.alu_calculation++;
             sim.focus.el = 'acc.field.field';
-            sim.acc = parseInt(
-              eval("sim.acc" + sim.alu.op + "parseInt(sim.alu.e2)")
-            );
+
+            // execute requested operation
+            const data = parseInt(sim.alu.e2);
+            switch (sim.alu.op) {
+              case '=':
+                sim.acc = data;
+                break;
+              case '+':
+                sim.acc += data;
+                break;
+              case '-':
+                sim.acc -= data;
+                break;
+              case '*':
+                sim.acc *= data;
+                break;
+              case '/':
+                sim.acc /= data;
+                break;
+            }
             break;
         }
       }
@@ -152,7 +169,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       else if (sim.ir.loc.match(/T|X|Y|Z|W/)) {
         sim.focus.var = sim.ir.loc;
         sim.variables[sim.ir.loc] = sim.acc;
-        stats.variables_accesses++;
+        stats.variable_access++;
       }
       break;
   }

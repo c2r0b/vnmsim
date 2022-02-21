@@ -6,7 +6,8 @@ export const container = {
     bottom: 0,
     width: 60,
     padding: "20px 25px",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    zIndex: 100
   }
 };
 

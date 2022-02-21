@@ -13,14 +13,10 @@ export const infoMsg = {
 };
 
 export const container = {
-  position: "fixed",
-  top: 100,
-  left: 0,
-  right: 250,
-  bottom: 10,
   width: 800,
   height: 800,
   maxHeight: 700,
+  marginTop: 100,
   marginLeft: 90
 };
 
@@ -59,7 +55,7 @@ const fieldStyles = {
 export const pc = {
   container: {
     position: "absolute",
-    top: "14%",
+    top: 95,
     left: 480,
     width: 125,
     height: 200
@@ -220,7 +216,8 @@ export const acc = {
   field: {
     root: {
       top: 160,
-      left: 34
+      left: 34,
+      width: 163
     }
   },
   label: {
@@ -240,7 +237,8 @@ export const labels = {
       ...label,
       top: 25,
       left: 380,
-      fontSize: 14
+      fontSize: 14,
+      width: 100
     }
   },
   addressesBus: {
@@ -249,7 +247,8 @@ export const labels = {
       top: 100,
       left: 380,
       paddingTop: 20,
-      fontSize: 14
+      fontSize: 14,
+      width: 100
     }
   }
 };

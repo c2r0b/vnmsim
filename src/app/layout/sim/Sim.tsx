@@ -109,141 +109,140 @@ const Sim = observer(() => {
         zoomSpeed={ 0.5 }
         minZoom={ 0.5 }
         maxZoom={ 1.5 }
+        style={ styles.container }
       >
-        <div style={ styles.container }>
+        <svg style={ styles.dataBus }>
+          <rect x="0" y="0" width="2" height="480"></rect>
+          <rect x="0" y="0" width="580" height="2"></rect>
+          <rect x="580" y="0" width="2" height="20"></rect>
+          <rect x="0" y="480" width="256" height="2"></rect>
+          <rect x="256" y="352" width="2" height="130"></rect>
+          <rect x="160" y="0" width="2" height="11%"></rect>
+          <rect x="350" y="0" width="2" height="48%"></rect>
+          <rect x="0" y="170" width="150" height="2"></rect>
+          <rect x="150" y="170" width="2" height="40"></rect>
+          <rect x="65" y="70" width="2" height="240"></rect>
+          <rect x="65" y="310" width="150" height="2"></rect>
+        </svg>
+        <svg style={{ ...styles.addressBus, top: 90, left: 220 }}>
+          <rect x="0" y="0" width="2" height="60"></rect>
+          <rect x="0" y="60" width="377" height="2"></rect>
+          <rect x="377" y="0" width="2" height="150"></rect>
+        </svg>
+        <div style={ styles.pc.container }>
+          <svg style={ styles.addressBus }>
+            <rect x="30" y="40" width="2" height="115"></rect>
+            <rect x="102" y="40" width="2" height="115"></rect>
+          </svg>
+          <SpinButton
+            min={ 1 }
+            styles={ styles.pc.increment }
+            value={ sim.pc.step.toString() }
+            onChange={ (ev, val) => Sim.setPcIncrement(val) }
+          />
+          <Text
+            styles={ styles.pc.label }
+            onMouseEnter={ () => setMsg("Program counter") }
+            onMouseLeave={ () => setMsg("") }
+          >
+            PC
+          </Text>
+          <SpinButton
+            min={ 0 }
+            step={ sim.pc.step }
+            styles={ styles.pc.input }
+            value={ sim.pc.val.toString() }
+            onChange={ (ev, val) => Sim.setProgramCounter(val) }
+          />
+        </div>
+        <div style={ styles.alu.container }>
+          <svg style={ styles.alu.svg }>
+            <polygon
+              points="0 35, 120 35, 170 90, 220 35, 340 35, 240 180, 100 180"
+            >
+            </polygon>
+          </svg>
+          <Text
+            styles={ styles.alu.label }
+            onMouseEnter={ () => setMsg("Arithmetic logic unit") }
+            onMouseLeave={ () => setMsg("") }
+          >
+            ALU
+          </Text>
+          <TextField
+            styles={ styles.alu.p1 }
+            value={ sim.alu.e1.toString() }
+          />
+          <TextField
+            styles={ styles.alu.p2 }
+            value={ sim.alu.e2.toString() }
+          />
+          <TextField
+            styles={ styles.alu.op }
+            value={ sim.alu.op }
+            readOnly
+          />
+        </div>
+        <div style={ styles.acc.container }>
           <svg style={ styles.dataBus }>
-            <rect x="0" y="0" width="2" height="480"></rect>
-            <rect x="0" y="0" width="580" height="2"></rect>
-            <rect x="580" y="0" width="2" height="20"></rect>
-            <rect x="0" y="480" width="256" height="2"></rect>
-            <rect x="256" y="352" width="2" height="130"></rect>
-            <rect x="160" y="0" width="2" height="11%"></rect>
-            <rect x="350" y="0" width="2" height="48%"></rect>
-            <rect x="0" y="170" width="150" height="2"></rect>
-            <rect x="150" y="170" width="2" height="40"></rect>
-            <rect x="65" y="70" width="2" height="240"></rect>
-            <rect x="65" y="310" width="150" height="2"></rect>
+            <rect x="120" y="0" width="160" height="2"></rect>
+            <rect x="280" y="0" width="2" height="160"></rect>
+            <rect x="120" y="160" width="162" height="2"></rect>
           </svg>
-          <svg style={{ ...styles.addressBus, top: "13%", left: "220px" }}>
-            <rect x="0" y="0" width="2" height="60"></rect>
-            <rect x="0" y="60" width="377" height="2"></rect>
-            <rect x="377" y="0" width="2" height="150"></rect>
+          <Text
+            styles={ styles.acc.label }
+            onMouseEnter={ () => setMsg("Accumulator") }
+            onMouseLeave={ () => setMsg("") }
+          >
+            ACC
+          </Text>
+          <TextField
+            styles={ styles.acc.field }
+            value={ sim.acc.toString() }
+          />
+        </div>
+        <div style={ styles.ir.container }>
+          <Text
+            styles={ styles.ir.label }
+            onMouseEnter={ () => setMsg("Instructions register") }
+            onMouseLeave={ () => setMsg("") }
+          >
+            IR
+          </Text>
+          <TextField
+            styles={ styles.ir.input }
+            value={ sim.ir.cmd + " " + sim.ir.loc }
+          />
+          <TextField
+            styles={ styles.ir.decoder }
+            defaultValue="DECODER"
+            readOnly
+          />
+        </div>
+        <Text
+          styles={ styles.labels.bus }
+          onMouseEnter={ () => setMsg("Data/instructions bus") }
+          onMouseLeave={ () => setMsg("") }
+        >
+          Data bus
+        </Text>
+        <Text
+          styles={ styles.labels.addressesBus }
+          onMouseEnter={ () => setMsg("Addresses bus") }
+          onMouseLeave={ () => setMsg("") }
+        >
+          Add. bus
+        </Text>
+        
+        <div
+          style={ styles.ram.container }
+          onMouseEnter={ () => setMsg("Random-access memory") }
+          onMouseLeave={ () => setMsg("") }
+        >
+          <svg style={ styles.ram.svg }>
+            <rect width="50" height="100" />
           </svg>
-          <div style={ styles.pc.container }>
-            <svg style={ styles.addressBus }>
-              <rect x="30" y="40" width="2" height="115"></rect>
-              <rect x="102" y="40" width="2" height="115"></rect>
-            </svg>
-            <SpinButton
-              min={ 1 }
-              styles={ styles.pc.increment }
-              value={ sim.pc.step.toString() }
-              onChange={ (ev, val) => Sim.setPcIncrement(val) }
-            />
-            <Text
-              styles={ styles.pc.label }
-              onMouseEnter={ () => setMsg("Program counter") }
-              onMouseLeave={ () => setMsg("") }
-            >
-              PC
-            </Text>
-            <SpinButton
-              min={ 0 }
-              step={ sim.pc.step }
-              styles={ styles.pc.input }
-              value={ sim.pc.val.toString() }
-              onChange={ (ev, val) => Sim.setProgramCounter(val) }
-            />
-          </div>
-          <div style={ styles.alu.container }>
-            <svg style={ styles.alu.svg }>
-              <polygon
-                points="0 35, 120 35, 170 90, 220 35, 340 35, 240 180, 100 180"
-              >
-              </polygon>
-            </svg>
-            <Text
-              styles={ styles.alu.label }
-              onMouseEnter={ () => setMsg("Arithmetic logic unit") }
-              onMouseLeave={ () => setMsg("") }
-            >
-              ALU
-            </Text>
-            <TextField
-              styles={ styles.alu.p1 }
-              value={ sim.alu.e1.toString() }
-            />
-            <TextField
-              styles={ styles.alu.p2 }
-              value={ sim.alu.e2.toString() }
-            />
-            <TextField
-              styles={ styles.alu.op }
-              value={ sim.alu.op }
-              readOnly
-            />
-          </div>
-          <div style={ styles.acc.container }>
-            <svg style={ styles.dataBus }>
-              <rect x="120" y="0" width="160" height="2"></rect>
-              <rect x="280" y="0" width="2" height="160"></rect>
-              <rect x="120" y="160" width="162" height="2"></rect>
-            </svg>
-            <Text
-              styles={ styles.acc.label }
-              onMouseEnter={ () => setMsg("Accumulator") }
-              onMouseLeave={ () => setMsg("") }
-            >
-              ACC
-            </Text>
-            <TextField
-              styles={ styles.acc.field }
-              value={ sim.acc.toString() }
-            />
-          </div>
-          <div style={ styles.ir.container }>
-            <Text
-              styles={ styles.ir.label }
-              onMouseEnter={ () => setMsg("Instructions register") }
-              onMouseLeave={ () => setMsg("") }
-            >
-              IR
-            </Text>
-            <TextField
-              styles={ styles.ir.input }
-              value={ sim.ir.cmd + " " + sim.ir.loc }
-            />
-            <TextField
-              styles={ styles.ir.decoder }
-              defaultValue="DECODER"
-              readOnly
-            />
-          </div>
-          <Text
-            styles={ styles.labels.bus }
-            onMouseEnter={ () => setMsg("Data/instructions bus") }
-            onMouseLeave={ () => setMsg("") }
-          >
-            Data bus
-          </Text>
-          <Text
-            styles={ styles.labels.addressesBus }
-            onMouseEnter={ () => setMsg("Addresses bus") }
-            onMouseLeave={ () => setMsg("") }
-          >
-            Add. bus
-          </Text>
-          
-          <div
-            style={ styles.ram.container }
-            onMouseEnter={ () => setMsg("Random-access memory") }
-            onMouseLeave={ () => setMsg("") }
-          >
-            <svg style={ styles.ram.svg }>
-              <rect width="50" height="100" />
-            </svg>
-            <Text styles={ styles.ram.text }>RAM</Text>
-          </div>
+          <Text styles={ styles.ram.text }>RAM</Text>
         </div>
       </PanZoom>
     </>

@@ -14,8 +14,8 @@ export const footer = {
     position: "fixed",
     right: 0,
     bottom: 0,
-    width: 480,
-    padding: 11,
+    left: 0,
+    padding: "11px 15px",
     backgroundColor: "white",
     borderTop: "1px solid #eee",
     zIndex: 100
@@ -42,6 +42,16 @@ export const titleText = {
   }
 };
 
+export const titleButton = {
+  root: {
+    marginTop: 3,
+    marginRight: 3
+  },
+  icon: {
+    fontSize: 12
+  }
+};
+
 export const ramHalf = {
   overflowY: "scroll"
 };
@@ -49,18 +59,13 @@ export const ramHalf = {
 export const verticalHalf = {
   position: "relative",
   width: "100%",
-  overflowY: "scroll"
+  overflowY: "scroll",
+  overflowX: "auto"
 };
 
 export const speed = {
   root: {
     width: 290,
     paddingTop: 3
-  }
-};
-
-export const focusedVar = {
-  input: {
-    backgroundColor: "#f9c55b"
   }
 };
