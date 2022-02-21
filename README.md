@@ -1,7 +1,8 @@
-# Von Neumann Machine Simulator (vnmsim)
+# Von Neumann machine simulator (VNMS)
 
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
+This branch is home to the third generation of this project.
 
 Online version: `coming soon`
 
@@ -13,7 +14,7 @@ A guide to the simulator is also available from the `Help` section accessible fr
 
 ## Specifications
 
-The simulator is developed as a PWA written with React and ES6 (and partially in Typescript).
+The simulator is developed as an installable PWA written with React and ES6 (partially in Typescript).
 The code editor uses CodeMirror2, while most of the simulator UI is done using SVG elements.
 The chosen design framework is FluentUI by Microsoft.
 
@@ -22,10 +23,14 @@ The chosen design framework is FluentUI by Microsoft.
 After downloading the repository and installing the dependencies using `npm` or `yarn`, a simple `yarn run build` is enough to start a compiled and live updated version at `localhost:8000`.
 Building settings for `ESBuild` are available in `./build.js`.
 
+## Testing
+
+Testing is done using `Jest` and can be run using `yarn run test`.
+
 ## Contribute
 
 Please feel free to create an issue or a pull request.
-This new version is currently only available in English, therefore Transifex contributions are no longer required.
+If you'd like to add a new language or improve the translations, you can do that from the official Transifex project of this simulator available [here](https://www.transifex.com/lorenzo-ganni/von-neumann-machine-simulator/).
 
 ## Zanichelli version
 
