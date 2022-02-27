@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { observer } from "mobx-react-lite";
+
+import { LocaleContext } from "src/store/dispatcher";
+import { getTheme, setTheme } from "src/themes/utils";
 
 import {
   Panel, PanelType, Stack, ChoiceGroup,
@@ -35,32 +39,47 @@ const languageOptions: IDropdownOption[] = [
   { key: "de", text: "Deutsche" }
 ];
 
-const Settings = (props) => {
+const Settings = observer((props) => {
+  const Locale = useContext(LocaleContext);
+
+  const [selTheme, setSelTheme] = useState(getTheme());
+
+  const onChangeTheme = (ev, option) => {
+    setTheme(option.key);
+    setSelTheme(option.key);
+  };
+
+  const onChangeLanguage = (ev, option) => {
+    Locale.setLanguage(option.key);
+  };
+
   return (
     <Panel
-      headerText="Settings"
+      headerText={ Locale.get("SETTINGS") }
       isOpen={ props.show }
       isLightDismiss={ true }
       type={ PanelType.custom }
       styles={{ main: { width: 500 }}}
       onDismiss={ props.onDismiss }
-      closeButtonAriaLabel="Close"
+      closeButtonAriaLabel={ Locale.get("CLOSE") }
     >
       <Stack tokens={{ childrenGap: 20, padding: "15px 0" }}>
         <ChoiceGroup
-          label="Theme"
-          defaultSelectedKey="system"
+          label={ Locale.get("SETTINGS_THEME") }
+          selectedKey={ selTheme }
           options={ themeOptions }
+          onChange={ onChangeTheme }
         />
         <Dropdown
-          placeholder="Select a language..."
-          label="Language"
+          label={ Locale.get("SETTINGS_LANGUAGE") }
+          selectedKey={ Locale.getLanguage() }
           options={ languageOptions }
           styles={ dropdownStyles }
+          onChange={ onChangeLanguage }
         />
       </Stack>
     </Panel>
   );
-};
+});
 
 export default Settings;

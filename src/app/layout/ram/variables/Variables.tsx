@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { SimulatorContext } from "src/store/dispatcher";
+import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { Localize } from "src/locale/Localize";
 
 import {
   Stack, Text, TooltipHost, IconButton, DetailsList,
@@ -20,6 +21,7 @@ interface IProps {
 
 export const Variables = observer((props:IProps) => {
   const Sim = useContext(SimulatorContext);
+  const Locale = useContext(LocaleContext);
 
   const [lastTvariable, setLastTvariable] = useState(10);
 
@@ -84,14 +86,14 @@ export const Variables = observer((props:IProps) => {
           <Stack horizontal horizontalAlign="space-between">
             <p/>
             <Text styles={ RamStyles.titleText }>
-              Variables
+              <Localize label="VARIABLES"/>
             </Text>
             <TooltipHost
-              content={ "Add T variable" }
+              content={ Locale.get("ADD_VARIABLE") }
               calloutProps={{ gapSpace: 0 }}
             >
               <IconButton
-                ariaLabel="Add T variable"
+                ariaLabel={ Locale.get("ADD_VARIABLE") }
                 iconProps={{ iconName: "Add" }}
                 onClick={ addVariable }
                 styles={ RamStyles.titleButton }

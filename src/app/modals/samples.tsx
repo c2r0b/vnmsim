@@ -1,9 +1,8 @@
-import * as Styles from "./samples.styles";
-
 import React, { useContext } from "react";
-
-import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
+
+import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { Localize } from "src/locale/Localize";
 
 import {
   Panel, PanelType, Stack, DocumentCard, DocumentCardType, DocumentCardDetails,
@@ -11,60 +10,10 @@ import {
   MessageBar
 } from "@fluentui/react";
 
-import * as SAMPLES from "../samples";
+import { samples } from "./samples.list";
 
-const samples = [
-  {
-    key: "addition",
-    label: "Addition",
-    desc: "x + y = z"
-  },
-  {
-    key: "subtraction",
-    label: "Subtraction",
-    desc: "x - y = z"
-  },
-  {
-    key: "multiplication",
-    label: "Multiplication",
-    desc: "x * y = z"
-  },
-  {
-    key: "division",
-    label: "Division",
-    desc: "x / y = z"
-  },
-  {
-    key: "basics",
-    label: "Basics",
-    desc: "x (y = +,-,*,/) z = w"
-  },
-  {
-    key: "power",
-    label: "Power",
-    desc: "x ^ y"
-  },
-  {
-    key: "square_root",
-    label: "Square root",
-    desc: "sqrt(x)"
-  },
-  {
-    key: "modulo",
-    label: "Modulo",
-    desc: "x % y"
-  },
-  {
-    key: "even",
-    label: "Is even",
-    desc: "x % 2 == 0"
-  },
-  {
-    key: "greater_than",
-    label: "Is greater than",
-    desc: "x > y"
-  },
-];
+import * as Styles from "./samples.styles";
+import * as SAMPLES from "../samples";
 
 interface IProps {
   show: boolean;
@@ -73,22 +22,70 @@ interface IProps {
 
 const Samples = observer((props:IProps) => {
   const Sim = useContext(SimulatorContext);
+  const Locale = useContext(LocaleContext);
+
+  const samplesList = samples.map(s => {
+    const actions = [
+      {
+        iconProps: { iconName: "DownloadDocument" },
+        onClick: () => {
+          const obj = SAMPLES[s.key].input;
+          
+          // set code
+          Sim.setCode(obj.code);
+          delete obj.code;
+
+          // set title and date
+          obj.title = s.label;
+          obj.created = new Date().toISOString().slice(0, 10);
+
+          // set simulator status object
+          Sim.updateSim(obj);
+
+          // close panel
+          props.onDismiss();
+        },
+        ariaLabel: Locale.get("SAMPLES_OPEN")
+      }
+    ];
+
+    return (
+      <DocumentCard
+        key={ s.key }
+        type={ DocumentCardType.compact }
+        styles={ Styles.card }
+      >
+        <DocumentCardDetails>
+          <DocumentCardTitle
+            title={ s.label }
+            shouldTruncate
+          />
+          <DocumentCardLocation
+            location={ s.desc }
+          />
+        </DocumentCardDetails>
+        <DocumentCardActions
+          actions={ actions }
+        />
+      </DocumentCard>
+    );
+  });
+
   return (
     <Panel
-      headerText="Samples"
+      headerText={ Locale.get("SAMPLES") }
       isOpen={ props.show }
       isLightDismiss={ true }
       type={ PanelType.custom }
       styles={{ main: { width: 500 }}}
       onDismiss={ () => props.onDismiss() }
-      closeButtonAriaLabel="Close"
+      closeButtonAriaLabel={ Locale.get("CLOSE") }
     >
       <MessageBar
         isMultiline={ true }
         styles={ Styles.infoBar }
       >
-        The following list of samples is meant as a way to introduce to and practice with the main commands of this simulator. 
-        These samples are not meant to be "the right way" to approach the described problem since there is not a single solution to them.
+        <Localize label="SAMPLES_MSG"/>
       </MessageBar>
       <Stack
         horizontal
@@ -96,52 +93,7 @@ const Samples = observer((props:IProps) => {
         tokens={{ childrenGap: 20 }}
         styles={ Styles.stack }
       >
-        {
-          samples.map(s => {
-            return (
-              <DocumentCard
-                key={ s.key }
-                type={ DocumentCardType.compact }
-                styles={ Styles.card }
-              >
-                <DocumentCardDetails>
-                  <DocumentCardTitle
-                    title={ s.label }
-                    shouldTruncate
-                  />
-                  <DocumentCardLocation
-                    location={ s.desc }
-                  />
-                </DocumentCardDetails>
-                <DocumentCardActions
-                  actions={ [
-                    {
-                      iconProps: { iconName: "DownloadDocument" },
-                      onClick: () => {
-                        const obj = SAMPLES[s.key].input;
-                        
-                        // set code
-                        Sim.setCode(obj.code);
-                        delete obj.code;
-
-                        // set title and date
-                        obj.title = s.label;
-                        obj.created = new Date().toISOString().slice(0, 10);
-
-                        // set simulator status object
-                        Sim.updateSim(obj);
-
-                        // close panel
-                        props.onDismiss();
-                      },
-                      ariaLabel: "Load"
-                    }
-                  ] }
-                />
-              </DocumentCard>
-            );
-          })
-        }
+        { ...samplesList }
       </Stack>
     </Panel>
   );

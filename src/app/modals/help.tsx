@@ -1,12 +1,19 @@
-import * as Styles from "./help.styles";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-import React from "react";
+import { LocaleContext } from "src/store/dispatcher";
+import { Localize } from "src/locale/Localize";
+
 import { Panel, PanelType, Link } from "@fluentui/react";
 
-const Help = (props) => {
+import * as Styles from "./help.styles";
+
+const Help = observer((props) => {
+  const Locale = useContext(LocaleContext);
+
   return (
     <Panel
-      headerText="Help"
+      headerText={ Locale.get("HELP") }
       isOpen={ props.show }
       isLightDismiss={ true }
       type={ PanelType.custom }
@@ -14,12 +21,12 @@ const Help = (props) => {
       onDismiss={ props.onDismiss }
       closeButtonAriaLabel="Close"
     >
-      <h3>Introduction</h3>
-      <p>This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.</p>
-      <p>For information about the project and how to contribute please visit the GitHub repository here: <Link href="https://github.com/c2r0b/vnmsim">github.com/c2r0b/vnmsim</Link></p>
-      <p>Thank you all for using this simulator. &#129303;</p>
-      <h3>Syntax</h3>
-      <p>This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP). You can create comment lines using '//something' syntax.</p>
+      <h3><Localize label="GUIDE_INTRODUCTION_H"/></h3>
+      <p><Localize label="GUIDE_INTRODUCTION_P1"/></p>
+      <p><Localize label="GUIDE_INTRODUCTION_P2"/> <Link href="https://github.com/c2r0b/vnmsim">github.com/c2r0b/vnmsim</Link></p>
+      <p><Localize label="GUIDE_INTRODUCTION_P3"/> &#129303;</p>
+      <h3><Localize label="GUIDE_SYNTAX_H"/></h3>
+      <p><Localize label="GUIDE_SYNTAX_P1"/></p>
       <table style={ Styles.table }>
         <tbody>
           <tr>
@@ -45,18 +52,18 @@ const Help = (props) => {
           </tr>
         </tbody>
       </table>
-      <p>Check out the samples to learn the very basics of the operations that this machine is able to perform.</p>
-      <h3>I/O features</h3>
-      <p>At the top of the page you can find the menu with the I/O options, you can save your work as a file on your computer. The saving includes the current machine and simulator status with the instructions and variables contained in the memory cells. It supports files opening by drag and drop.</p>
-      <h3>Backward compatibility</h3>
-      <p>You can still open projects made with older versions of this simulator and with the Zanichelli edition, but projects saved with this release are not backward compatible at all.</p>
-      <p><b>Full disclosure &#128584;:</b> the Zanichelli edition is one of the very first versions of this simulator and it has been acquired by them in 2015 for educational purposes. This version has nothing in common with the Zanichelli edition (except for the backward compatibility) and is not supported by them in any way.</p>
-      <h3>Support</h3>
-      <p>There is no official way to financially show your appreciation for this project, a &#127775; on GitHub is more than enough.</p>
-      <h3>Found a bug? &#128030;</h3>
-      <p>Do you think this web app is not behaving as expected? Please file an issue on <Link href="https://github.com/c2r0b/vnmsim/issues">GitHub</Link>. If you are a developer, feel free to create a <Link href="https://github.com/c2r0b/vnmsim/pulls">pull request</Link>.</p>
+      <p><Localize label="GUIDE_SYNTAX_P2"/></p>
+      <h3><Localize label="GUIDE_IO_H"/></h3>
+      <p><Localize label="GUIDE_IO_P"/></p>
+      <h3><Localize label="GUIDE_COMPATIBILITY_H"/></h3>
+      <p><Localize label="GUIDE_COMPATIBILITY_P"/></p>
+      <p><b><Localize label="GUIDE_COMPATIBILITY_DISCLOSURE"/> &#128584;:</b> <Localize label="GUIDE_COMPATIBILITY_DISCLOSURE_P"/></p>
+      <h3><Localize label="GUIDE_SUPPORT_H"/></h3>
+      <p><Localize label="GUIDE_SUPPORT_P"/></p>
+      <h3><Localize label="GUIDE_BUG_H"/> &#128030;</h3>
+      <p><Localize label="GUIDE_BUG_P"/></p>
     </Panel>
   );
-};
+});
 
 export default Help;

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { SimulatorContext } from "src/store/dispatcher";
+import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { Localize } from "src/locale/Localize";
 
 import {
   Stack, Text, TooltipHost, IconButton, DetailsList,
@@ -31,6 +32,7 @@ const columns:IColumn[] = [
 
 export const Statistics = observer(() => {
   const Sim = useContext(SimulatorContext);
+  const Locale = useContext(LocaleContext);
 
   const stats = Sim.getStats();
 
@@ -47,14 +49,14 @@ export const Statistics = observer(() => {
           <Stack horizontal horizontalAlign="space-between">
             <p/>
             <Text styles={ Styles.titleText }>
-              Statistics
+              <Localize label="STATS"/>
             </Text>
             <TooltipHost
-              content={ "Clear statistics" }
+              content={ Locale.get("STATS_CLEAR") }
               calloutProps={{ gapSpace: 0 }}
             >
               <IconButton
-                ariaLabel="Clear statistics"
+                ariaLabel={ Locale.get("STATS_CLEAR") }
                 iconProps={{ iconName: "ClearStats" }}
                 onClick={ () => Sim.clearStats() }
                 styles={ Styles.titleButton }

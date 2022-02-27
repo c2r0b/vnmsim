@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { SimulatorContext } from "src/store/dispatcher";
+import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
 
 import {
@@ -32,6 +32,7 @@ const acceptedFileTypes = "application/json,.vnsp";
 
 const Nav = observer(() => {
   const Sim = useContext(SimulatorContext);
+  const Locale = useContext(LocaleContext);
 
   const [ selPanel, setSelPanel ] = useState("");
 
@@ -39,7 +40,7 @@ const Nav = observer(() => {
 
   const onOpen = (input) => {
     const onError = () => {
-      Sim.setError("Unable to read the selected file")
+      Sim.setError(Locale.get("LOG_OPENING_FAILURE"))
     };
 
     const onSuccess = (obj) => {
@@ -63,7 +64,7 @@ const Nav = observer(() => {
 
   const _menuItems = [
     {
-      ariaLabel: "Open",
+      ariaLabel: Locale.get("PROJECT_OPEN"),
       iconProps: { iconName: "Open" },
       disabled: isSimRunning,
       onClick: () => {
@@ -71,28 +72,28 @@ const Nav = observer(() => {
       }
     },
     {
-      ariaLabel: "Save to disk",
+      ariaLabel: Locale.get("PROJECT_SAVE"),
       disabled: isSimRunning,
       iconProps: { iconName: "Save" },
       onClick: onSave
     },
     {
-      ariaLabel: "Samples",
+      ariaLabel: Locale.get("SAMPLES"),
       iconProps: { iconName: "Sample" },
       onClick: () => setSelPanel("samples")
     },
     {
-      ariaLabel: "Help",
+      ariaLabel: Locale.get("HELP"),
       iconProps: { iconName: "Help" },
       onClick: () => setSelPanel("help")
     },
     {
-      ariaLabel: "View on GitHub",
+      ariaLabel: "GitHub",
       iconProps: githubIconProps,
       onClick: onGithubClick
     },
     {
-      ariaLabel: "Settings",
+      ariaLabel: Locale.get("SETTINGS"),
       iconProps: { iconName: "Settings" },
       onClick: () => setSelPanel("settings")
     }

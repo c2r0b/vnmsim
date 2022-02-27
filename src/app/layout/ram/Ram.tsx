@@ -12,6 +12,8 @@ import Split from "react-split";
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 
 import { SimulatorContext } from "src/store/dispatcher";
+import { Localize } from "src/locale/Localize";
+import { getTheme } from "src/themes/utils";
 
 require('codemirror/addon/selection/active-line.js');
 require('codemirror/addon/display/autorefresh.js');
@@ -20,17 +22,12 @@ require('codemirror/addon/lint/lint.js');
 import { editorMode } from "../../utility/mode";
 import { linter } from "../../utility/linter";
 
-import {
-  Stack, SpinButton, TooltipHost, IconButton, 
-  Slider, Text
-} from '@fluentui/react';
+import { Text } from '@fluentui/react';
 
 import { Variables } from "./variables/Variables";
 import { Statistics } from "./stats/Stats";
 
 import * as Styles from "./ram.styles";
-
-const speedFormat = (value: number) => `${value} ms`;
 
 const Ram = observer(() => {
   const Sim = useContext(SimulatorContext);
@@ -38,11 +35,7 @@ const Ram = observer(() => {
   const [focusedVar, setFocusedVar] = useState("");
   const [currentMark, setCurrentMark] = useState({ clear: () => {}});
   
-  const hasErrors = Sim.hasErrors();
-
-  const simStatus = Sim.getSimStatus();
   const interval = Sim.getInterval();
-
   const editorRef = useRef(null);
 
   const focusCell = (line: number, start: number, end: number) => {
@@ -92,39 +85,6 @@ const Ram = observer(() => {
     }
   }, [Sim.getSim().step]);
 
-  const _controls = [
-    {
-      ariaLabel: "Start",
-      disabled: hasErrors || [1,2,3].includes(simStatus),
-      iconProps: { iconName: "Play" },
-      onClick: () => Sim.setSimStatus(1),
-    },
-    {
-      ariaLabel: "Single step",
-      disabled: hasErrors || [1,2,3].includes(simStatus),
-      iconProps: { iconName: "Step" },
-      onClick: () => Sim.setSimStatus(2),
-    },
-    {
-      ariaLabel: "Single iteration",
-      disabled: hasErrors || [1,2,3].includes(simStatus),
-      iconProps: { iconName: "Circle" },
-      onClick: () => Sim.setSimStatus(3),
-    },
-    {
-      ariaLabel: "Pause",
-      disabled: hasErrors || [0,4].includes(simStatus),
-      iconProps: { iconName: "Pause" },
-      onClick: () => Sim.setSimStatus(4),
-    },
-    {
-      ariaLabel: "Stop",
-      disabled: hasErrors || simStatus === 0,
-      iconProps: { iconName: "Stop" },
-      onClick: () => Sim.setSimStatus(0),
-    },
-  ];
-
   const lint = (doc) => {
     const errors = linter(doc);
     if (errors.length) {
@@ -143,22 +103,10 @@ const Ram = observer(() => {
     autoRefresh: true,
     firstLineNumber: 0,
     cursorBlinkRate: 800,
-    theme: Sim.getDarkMode() ? "material-darker" : "default",
+    theme: (getTheme() === "dark") ? "material-darker" : "default",
     gutters: ["CodeMirror-linenumbers", "CodeMirror-lint-markers"],
     lineNumbers: true,
     lint
-  };
-
-  const onIntervalChange = (value) => {
-    // if running restore interval
-    if ([1,2,3].includes(simStatus)) {
-      const oldStatus = simStatus;
-      Sim.setSimStatus(0);
-      setTimeout(() => {
-        Sim.setSimStatus(oldStatus);
-      });
-    }
-    Sim.setInterval(value);
   };
 
   return (
@@ -184,7 +132,7 @@ const Ram = observer(() => {
             <div style={ Styles.ramHalf }>
               <div style={ Styles.title }>
                 <Text styles={ Styles.titleText }>
-                  Memory cells
+                  <Localize label="MEMORY"/>
                 </Text>
               </div>
               <CodeMirror
@@ -192,12 +140,8 @@ const Ram = observer(() => {
                 value={ Sim.getCode() }
                 defineMode={ editorMode }
                 options={ codeMirrorOptions }
-                editorDidMount={(editor) => {
-                  Sim.setEditor(editor);
-                }}
-                onChange={ (editor, data, value) => {
-                  Sim.setEditor(editor);
-                }}
+                editorDidMount={ (editor) => Sim.setEditor(editor) }
+                onChange={ (editor) => Sim.setEditor(editor) }
               />
             </div>
             <Split
@@ -212,33 +156,6 @@ const Ram = observer(() => {
               <Statistics />
             </Split>
           </Split>
-          <Stack
-            horizontal
-            tokens={{ childrenGap: 10 }}
-            styles={ Styles.footer }
-          >
-            {
-              _controls.map(props => (
-                <TooltipHost
-                  content={ props.ariaLabel }
-                  calloutProps={{ gapSpace: 0 }}
-                >
-                  <IconButton {...props} />
-                </TooltipHost>
-              ))
-            }
-            <Slider
-              styles={ Styles.speed }
-              valueFormat={ speedFormat }
-              min={ 0 }
-              max={ 2000 }
-              step={ 50 }
-              defaultValue={ 500 }
-              onChange={ onIntervalChange }
-              showValue
-              snapToStep
-            />
-          </Stack>
         </Resizable>
       )}
     </AutoSizer>

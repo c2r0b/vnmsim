@@ -1,8 +1,8 @@
 production ready:
-- jest tests
-- solve single iteration not loading IR
 - settings
 - dark mode
+- jest tests
+- solve single iteration not loading IR
 - PWA ready
 - all github issues resolved
 - live version - vnmsim.io

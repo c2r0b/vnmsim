@@ -9,19 +9,6 @@ export const container = {
   zIndex: 100
 };
 
-export const footer = {
-  root: {
-    position: "fixed",
-    right: 0,
-    bottom: 0,
-    left: 0,
-    padding: "11px 15px",
-    backgroundColor: "white",
-    borderTop: "1px solid #eee",
-    zIndex: 100
-  }
-};
-
 export const title = {
   position: "sticky",
   top: 0,
@@ -61,11 +48,4 @@ export const verticalHalf = {
   width: "100%",
   overflowY: "scroll",
   overflowX: "auto"
-};
-
-export const speed = {
-  root: {
-    width: 290,
-    paddingTop: 3
-  }
 };

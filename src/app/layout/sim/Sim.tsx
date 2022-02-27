@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-
-import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
+
+import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
 
 import { TextField, SpinButton, Text, MessageBar } from "@fluentui/react";
 import { PanZoom } from "react-easy-panzoom";
 
-import * as Styles from "./sim.styles";
 import { execute, lastStep } from "../../utility/execute";
 import { strToObj, mergeDeep } from "../../utility/objects";
 
+import * as Styles from "./sim.styles";
+
 const Sim = observer(() => {
   const Sim = useContext(SimulatorContext);
+  const Locale = useContext(LocaleContext);
 
   const [msg, setMsg] = useState("");
   const [intervalId, setIntervalId] = useState({});
@@ -142,7 +144,7 @@ const Sim = observer(() => {
           />
           <Text
             styles={ styles.pc.label }
-            onMouseEnter={ () => setMsg("Program counter") }
+            onMouseEnter={ () => setMsg(Locale.get("PC")) }
             onMouseLeave={ () => setMsg("") }
           >
             PC
@@ -164,7 +166,7 @@ const Sim = observer(() => {
           </svg>
           <Text
             styles={ styles.alu.label }
-            onMouseEnter={ () => setMsg("Arithmetic logic unit") }
+            onMouseEnter={ () => setMsg(Locale.get("ALU")) }
             onMouseLeave={ () => setMsg("") }
           >
             ALU
@@ -191,7 +193,7 @@ const Sim = observer(() => {
           </svg>
           <Text
             styles={ styles.acc.label }
-            onMouseEnter={ () => setMsg("Accumulator") }
+            onMouseEnter={ () => setMsg(Locale.get("ACC")) }
             onMouseLeave={ () => setMsg("") }
           >
             ACC
@@ -204,7 +206,7 @@ const Sim = observer(() => {
         <div style={ styles.ir.container }>
           <Text
             styles={ styles.ir.label }
-            onMouseEnter={ () => setMsg("Instructions register") }
+            onMouseEnter={ () => setMsg(Locale.get("IR")) }
             onMouseLeave={ () => setMsg("") }
           >
             IR
@@ -215,20 +217,20 @@ const Sim = observer(() => {
           />
           <TextField
             styles={ styles.ir.decoder }
-            defaultValue="DECODER"
+            defaultValue={ Locale.get("DECODER") }
             readOnly
           />
         </div>
         <Text
           styles={ styles.labels.bus }
-          onMouseEnter={ () => setMsg("Data/instructions bus") }
+          onMouseEnter={ () => setMsg(Locale.get("DATA_BUS")) }
           onMouseLeave={ () => setMsg("") }
         >
           Data bus
         </Text>
         <Text
           styles={ styles.labels.addressesBus }
-          onMouseEnter={ () => setMsg("Addresses bus") }
+          onMouseEnter={ () => setMsg(Locale.get("ADDRESSES_BUS")) }
           onMouseLeave={ () => setMsg("") }
         >
           Add. bus
@@ -236,7 +238,7 @@ const Sim = observer(() => {
         
         <div
           style={ styles.ram.container }
-          onMouseEnter={ () => setMsg("Random-access memory") }
+          onMouseEnter={ () => setMsg(Locale.get("RAM")) }
           onMouseLeave={ () => setMsg("") }
         >
           <svg style={ styles.ram.svg }>

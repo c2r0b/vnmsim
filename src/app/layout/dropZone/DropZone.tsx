@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
+
+import { Localize } from "src/locale/Localize";
 
 import * as Styles from "./dropZone.styles";
 
@@ -16,7 +18,7 @@ const DropZone = observer((props:IProps) => {
   };
 
   // files drop
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("dragenter", (e) => handleDrag(e, true));
     const el = document.getElementById("dropZone");
     el.addEventListener("dragenter", (e) => handleDrag(e, true));
@@ -36,7 +38,7 @@ const DropZone = observer((props:IProps) => {
       <div style={ Styles.opaqueBack } />
       <div style={ Styles.element }>
         <p style={ Styles.message }>
-          Drop your file here
+          <Localize label="FILE_DROP"/>
         </p>
       </div>
     </div>

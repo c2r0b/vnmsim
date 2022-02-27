@@ -1,7 +1,7 @@
 export const infoMsg = {
   root: {
     position: "fixed",
-    bottom: 20,
+    bottom: 70,
     left: 105,
     width: "auto",
     background: "white",
