@@ -1,21 +1,21 @@
-export const container = {
+export const container:React.CSSProperties = {
   position: "fixed",
   top: 50,
   right: 0,
   bottom: 55,
-  backgroundColor: "white",
-  borderLeft: "1px solid #eee",
+  backgroundColor: "var(--white)",
+  borderLeft: "1px solid var(--neutralLight)",
   overflow: "hidden",
   zIndex: 100
 };
 
-export const title = {
+export const title:React.CSSProperties = {
   position: "sticky",
   top: 0,
   left: 0,
   right: 0,
-  backgroundColor: "white",
-  borderBottom: "1px solid #eee",
+  backgroundColor: "var(--white)",
+  borderBottom: "1px solid var(--neutralLight)",
   textAlign: "center",
   height: 40,
   zIndex: 100,
@@ -39,11 +39,11 @@ export const titleButton = {
   }
 };
 
-export const ramHalf = {
+export const ramHalf:React.CSSProperties = {
   overflowY: "scroll"
 };
 
-export const verticalHalf = {
+export const verticalHalf:React.CSSProperties = {
   position: "relative",
   width: "100%",
   overflowY: "scroll",

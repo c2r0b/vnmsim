@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
-import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { SimulatorContext } from "src/store/dispatcher";
+import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
 
 import { MessageBar, MessageBarType, Text } from '@fluentui/react';

@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { SimulatorContext } from "src/store/dispatcher";
+import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
 import {
   Panel, PanelType, Stack, DocumentCard, DocumentCardType, DocumentCardDetails,
-  DocumentCardTitle, DocumentCardLocation, DocumentCardActions,
-  MessageBar
+  DocumentCardTitle, DocumentCardLocation, DocumentCardActions
 } from "@fluentui/react";
 
 import { samples } from "./samples.list";
@@ -81,12 +81,7 @@ const Samples = observer((props:IProps) => {
       onDismiss={ () => props.onDismiss() }
       closeButtonAriaLabel={ Locale.get("CLOSE") }
     >
-      <MessageBar
-        isMultiline={ true }
-        styles={ Styles.infoBar }
-      >
-        <Localize label="SAMPLES_MSG"/>
-      </MessageBar>
+      <p><Localize label="SAMPLES_MSG"/></p>
       <Stack
         horizontal
         wrap

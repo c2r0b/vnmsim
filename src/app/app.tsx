@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-import { applyTheme, getTheme } from "src/themes/utils";
+import { ThemeContext } from "src/themes/dispatcher";
+import { ThemeProvider } from "@fluentui/react";
+
+import * as Styles from "./app.styles";
 
 import Header from "./layout/header/Header";
 import Nav from "./layout/nav/Nav";
@@ -10,23 +14,21 @@ import Sim from "./layout/sim/Sim";
 import WorkTitle from "./layout/workTitle/WorkTitle";
 import Notification from "./layout/notification/Notification";
 
-const App = () => {
-  useEffect(() => {
-    // init app theme
-    applyTheme(getTheme());
-  }, []);
-
+const App = observer(() => {
+  const Theme = useContext(ThemeContext);
   return (
-    <div className="app">
-      <Header />
-      <Nav />
-      <Sim />
-      <Controls />
-      <Ram />
-      <WorkTitle />
-      <Notification />
-    </div>
+    <ThemeProvider theme={ Theme.getTheme() }>
+      <div style={ Styles.container }>
+        <Header />
+        <Nav />
+        <Sim />
+        <Controls />
+        <Ram />
+        <WorkTitle />
+        <Notification />
+      </div>
+    </ThemeProvider>
   );
-}
+});
 
 export default App;

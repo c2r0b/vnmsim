@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { LocaleContext } from "src/store/dispatcher";
-import { getTheme, setTheme } from "src/themes/utils";
+import { LocaleContext } from "src/locale/dispatcher";
+import { ThemeContext } from "src/themes/dispatcher";
 
 import {
   Panel, PanelType, Stack, ChoiceGroup,
@@ -41,12 +41,10 @@ const languageOptions: IDropdownOption[] = [
 
 const Settings = observer((props) => {
   const Locale = useContext(LocaleContext);
-
-  const [selTheme, setSelTheme] = useState(getTheme());
+  const Theme = useContext(ThemeContext);
 
   const onChangeTheme = (ev, option) => {
-    setTheme(option.key);
-    setSelTheme(option.key);
+    Theme.setTheme(option.key);
   };
 
   const onChangeLanguage = (ev, option) => {
@@ -66,7 +64,7 @@ const Settings = observer((props) => {
       <Stack tokens={{ childrenGap: 20, padding: "15px 0" }}>
         <ChoiceGroup
           label={ Locale.get("SETTINGS_THEME") }
-          selectedKey={ selTheme }
+          selectedKey={ Theme.getCurrentThemeName() }
           options={ themeOptions }
           onChange={ onChangeTheme }
         />

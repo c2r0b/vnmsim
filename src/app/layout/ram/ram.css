@@ -9,11 +9,11 @@
 }
 
 .gutter {
-  background-color: #fff;
+  background-color: var(--white);
   background-repeat: no-repeat;
   background-position: 50%;
-  border-top: 1px solid #eee;
-  border-right: 1px solid #eee;
+  border-top: 1px solid var(--neutralLight);
+  border-right: 1px solid var(--neutralLight);
 }
 
 .gutter.gutter-horizontal {
@@ -28,7 +28,7 @@
 
 .CodeMirror {
   height: 100%;
-  border-right: 1px solid #eee;
+  border-right: 1px solid var(--neutralLight);
   font-size: 14px;
   line-height: 1.5;
 
@@ -36,27 +36,27 @@
     background: rgba(254, 138, 39, 0.1);
   }
   .cm-cmd {
-    color: blue;
+    color: var(--codeCmd);
   }
   .cm-num {
-    color: green;
+    color: var(--codeNum);
   }
   .cm-cell {
-    color: red;
+    color: var(--codeCell);
   }
   .cm-val {
-    color: purple;
+    color: var(--codeVal);
   }
   .cm-comment {
     color: #999;
   }
   .CodeMirror-lint-markers {
     float: left;
-    background-color: white;
+    background-color: var(--white);
     cursor: default;
   }
   .CodeMirror-linenumbers {
     float: left;
-    background-color: white;
+    background-color: var(--white);
   }
 }

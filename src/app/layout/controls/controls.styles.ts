@@ -5,9 +5,9 @@ export const container = {
     bottom: 0,
     left: 0,
     padding: "11px 15px",
-    backgroundColor: "white",
-    borderTop: "1px solid #eee",
-    zIndex: 100
+    backgroundColor: "var(--white)",
+    borderTop: "1px solid var(--neutralLight)",
+    zIndex: 900
   }
 };
 

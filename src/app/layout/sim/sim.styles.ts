@@ -4,7 +4,7 @@ export const infoMsg = {
     bottom: 70,
     left: 105,
     width: "auto",
-    background: "white",
+    background: "var(--white)",
     zIndex: 9999
   },
   text: {
@@ -12,7 +12,7 @@ export const infoMsg = {
   }
 };
 
-export const container = {
+export const container:React.CSSProperties = {
   width: 800,
   height: 800,
   maxHeight: 700,
@@ -20,40 +20,39 @@ export const container = {
   marginLeft: 90
 };
 
-export const dataBus = {
+export const dataBus:React.CSSProperties = {
   position: "absolute",
   top: 15,
   right: 0,
   bottom: 0,
   left: 15,
-  float: "center",
   margin: "0 auto",
   width: 800,
   height: 550,
-  fill: "#bbb",
+  fill: "var(--neutralTertiaryAlt)",
   overflowY: "hidden"
 };
 
-export const addressBus = {
+export const addressBus:React.CSSProperties = {
   ...dataBus,
-  fill: "#000"
+  fill: "var(--neutralTertiary)"
 };
 
-const label = {
+const label:React.CSSProperties = {
   position: "absolute",
   fontSize: 17,
   zIndex: 100,
   cursor: "help"
 };
 
-const fieldStyles = {
+const fieldStyles:React.CSSProperties = {
   fontSize: "18px",
   textAlign: "center"
 };
 
 /* program counter */
 export const pc = {
-  container: {
+  container:<React.CSSProperties> {
     position: "absolute",
     top: 95,
     left: 480,
@@ -93,7 +92,7 @@ export const pc = {
 
 /* arithmetic logic unit */
 export const alu = {
-  container: {
+  container:<React.CSSProperties> {
     position: "absolute",
     top: 187,
     left: 100,
@@ -102,8 +101,8 @@ export const alu = {
     zIndex: 1
   },
   svg: {
-    fill: "white",
-    stroke: "#ccc",
+    fill: "var(--white)",
+    stroke: "var(--neutralTertiary)",
     strokeWidth: 1,
     width: 400,
     height: 400
@@ -164,7 +163,7 @@ export const alu = {
 
 /* instructions register */
 export const ir = {
-  container: {
+  container:<React.CSSProperties> {
     position: "absolute",
     top: 20,
     bottom: 30
@@ -208,7 +207,7 @@ export const ir = {
 
 /* accumulator */
 export const acc = {
-  container: {
+  container:<React.CSSProperties> {
     position: "absolute",
     top: 247,
     left: 155
@@ -254,14 +253,14 @@ export const labels = {
 };
 
 export const ram = {
-  container: {
+  container:<React.CSSProperties> {
     position: "absolute",
     top: 30,
     left: 570,
     zIndex: 1
   },
   svg: {
-    fill: "white",
+    fill: "var(--white)",
     stroke: "#ccc",
     strokeWidth: 1,
     width: 50,
@@ -278,5 +277,6 @@ export const ram = {
 };
 
 export const focus = {
-  backgroundColor: "#f9c55b"
+  backgroundColor: "#f9c55b",
+  color: "black"
 };

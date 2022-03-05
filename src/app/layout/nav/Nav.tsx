@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
 
-import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { SimulatorContext } from "src/store/dispatcher";
+import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
 
-import {
-  Stack, IconButton, TooltipHost
-} from"@fluentui/react";
+import { Stack, IconButton, TooltipHost } from"@fluentui/react";
 
 import DropZone from "../dropZone/DropZone";
 import Help from "../../modals/help";
@@ -20,7 +19,8 @@ const githubIconProps = {
   imageProps: {
     width: 16,
     height: 16,
-    src: Styles.github.img
+    src: Styles.github.img,
+    styles: Styles.github.styles
   }
 };
 
@@ -37,7 +37,7 @@ const Nav = observer(() => {
   const [ selPanel, setSelPanel ] = useState("");
 
   const isSimRunning = [1,2,3].includes(Sim.getSimStatus());
-
+  
   const onOpen = (input) => {
     const onError = () => {
       Sim.setError(Locale.get("LOG_OPENING_FAILURE"))
@@ -65,7 +65,7 @@ const Nav = observer(() => {
   const _menuItems = [
     {
       ariaLabel: Locale.get("PROJECT_OPEN"),
-      iconProps: { iconName: "Open" },
+      iconProps: { iconName: "Open", styles: Styles.menuIcon },
       disabled: isSimRunning,
       onClick: () => {
         document.getElementById('openProject').click();
@@ -74,17 +74,17 @@ const Nav = observer(() => {
     {
       ariaLabel: Locale.get("PROJECT_SAVE"),
       disabled: isSimRunning,
-      iconProps: { iconName: "Save" },
+      iconProps: { iconName: "Save", styles: Styles.menuIcon },
       onClick: onSave
     },
     {
       ariaLabel: Locale.get("SAMPLES"),
-      iconProps: { iconName: "Sample" },
+      iconProps: { iconName: "Sample", styles: Styles.menuIcon },
       onClick: () => setSelPanel("samples")
     },
     {
       ariaLabel: Locale.get("HELP"),
-      iconProps: { iconName: "Help" },
+      iconProps: { iconName: "Help", styles: Styles.menuIcon },
       onClick: () => setSelPanel("help")
     },
     {
@@ -94,7 +94,7 @@ const Nav = observer(() => {
     },
     {
       ariaLabel: Locale.get("SETTINGS"),
-      iconProps: { iconName: "Settings" },
+      iconProps: { iconName: "Settings", styles: Styles.menuIcon },
       onClick: () => setSelPanel("settings")
     }
   ];

@@ -21,7 +21,16 @@ export const THEMES = {
     neutralPrimary: "#323130",
     neutralDark: "#201f1e",
     black: "#000000",
-    white: "#ffffff"
+    white: "#ffffff",
+
+    // code mirror
+    codeCmd: "blue",
+    codeNum: "green",
+    codeCell: "red",
+    codeVal: "purple",
+
+    // github icon
+    invert: 0
   },
   dark: {
     themePrimary: "#f9c55b",
@@ -45,6 +54,15 @@ export const THEMES = {
     neutralPrimary: "#ffffff",
     neutralDark: "#f4f4f4",
     black: "#f8f8f8",
-    white: "#000000"
+    white: "#000000",
+
+    // code mirror
+    codeCmd: "#8196eb",
+    codeNum: "#76de8a",
+    codeCell: "#f05959",
+    codeVal: "#e182ed",
+
+    // github icon
+    invert: 1
   }
 };

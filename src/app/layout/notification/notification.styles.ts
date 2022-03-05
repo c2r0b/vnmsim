@@ -1,4 +1,4 @@
-export const container = {
+export const container:React.CSSProperties = {
   position: "absolute",
   bottom: 16,
   left: 105

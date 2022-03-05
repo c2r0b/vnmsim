@@ -2,10 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./app/app";
-import {
-  SimulatorContext, SimulatorStore,
-  LocaleContext, LocaleStore
-} from "./store/dispatcher";
+import { SimulatorContext, SimulatorStore } from "./store/dispatcher";
+import { LocaleContext, LocaleStore } from "./locale/dispatcher";
+import { ThemeContext, ThemeStore } from "./themes/dispatcher";
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -53,10 +52,12 @@ registerIcons({
 });
 
 ReactDOM.render(
-  <LocaleContext.Provider value={ new LocaleStore() }>
-    <SimulatorContext.Provider value={ new SimulatorStore() }>
-      <App />
-    </SimulatorContext.Provider>
-  </LocaleContext.Provider>,
+  <ThemeContext.Provider value={ new ThemeStore() }>
+    <LocaleContext.Provider value={ new LocaleStore() }>
+      <SimulatorContext.Provider value={ new SimulatorStore() }>
+        <App />
+      </SimulatorContext.Provider>
+    </LocaleContext.Provider>
+  </ThemeContext.Provider>,
   document.getElementById("app")
 );

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { LocaleContext } from "src/store/dispatcher";
+import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
 import { Panel, PanelType, Link } from "@fluentui/react";

@@ -10,9 +10,13 @@
     >
     <link rel="stylesheet" href="index.css" />
     <style>
+      :root {
+        color-scheme: var(--color-scheme);
+      }
+      
       ::selection {
-        color: white;
-        background: black;
+        color: var(--white);
+        background: var(--black);
       }
 
       html, body {
@@ -33,9 +37,6 @@
         margin: 0;
         font-family: Verdana, Geneva, sans-serif;
         letter-spacing: .5px;
-        background-color: #f3f2f1;
-        background-image: linear-gradient(#efeeee .1em, transparent .1em), linear-gradient(90deg, #efeeee .1em, transparent .1em);
-        background-size: .5em .5em;
         overflow: hidden;
       }
 

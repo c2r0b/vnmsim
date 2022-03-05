@@ -1,4 +1,4 @@
-export const container = (isDragging:boolean) => ({
+export const container = (isDragging:boolean):React.CSSProperties => ({
   position: "fixed",
   top: 50,
   right: 0,
@@ -8,7 +8,7 @@ export const container = (isDragging:boolean) => ({
   display: (isDragging === true) ? "block" : "none"
 });
 
-export const opaqueBack = {
+export const opaqueBack:React.CSSProperties = {
   position: "absolute",
   top: 0,
   right: 0,
@@ -18,7 +18,7 @@ export const opaqueBack = {
   opacity: 0.6,
 };
 
-export const element = {
+export const element:React.CSSProperties = {
   position: "absolute",
   top: 10,
   right: 10,
@@ -28,7 +28,7 @@ export const element = {
   textAlign: "center"
 };
 
-export const message = {
+export const message:React.CSSProperties = {
   margin: 0,
   position: "absolute",
   top: "50%",

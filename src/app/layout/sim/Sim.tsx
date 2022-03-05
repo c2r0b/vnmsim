@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { SimulatorContext } from "src/store/dispatcher";
+import { LocaleContext } from "src/locale/dispatcher";
 
 import { TextField, SpinButton, Text, MessageBar } from "@fluentui/react";
 import { PanZoom } from "react-easy-panzoom";

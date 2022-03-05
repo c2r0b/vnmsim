@@ -1,6 +1,4 @@
 production ready:
-- settings
-- dark mode
 - jest tests
 - solve single iteration not loading IR
 - PWA ready
@@ -27,3 +25,4 @@ future proposal:
 - app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)
 - documentation (docusaurus)
 - sponsors
+- customized theme

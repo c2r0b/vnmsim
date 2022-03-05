@@ -1,4 +1,4 @@
-export const container = {
+export const container:React.CSSProperties = {
   position: "fixed",
   top: 0,
   left: 0,
@@ -8,7 +8,7 @@ export const container = {
   zIndex: 100
 };
 
-const cube = {
+const cube:React.CSSProperties = {
   float: "left",
   width: 10,
   height: 10,

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { SimulatorContext, LocaleContext } from "src/store/dispatcher";
+import { SimulatorContext } from "src/store/dispatcher";
+import { LocaleContext } from "src/locale/dispatcher";
 
 import {
   Stack, TooltipHost, IconButton, Slider

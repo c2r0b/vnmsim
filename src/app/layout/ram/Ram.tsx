@@ -13,7 +13,7 @@ import { UnControlled as CodeMirror } from 'react-codemirror2';
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { Localize } from "src/locale/Localize";
-import { getTheme } from "src/themes/utils";
+import { ThemeContext } from "src/themes/dispatcher";
 
 require('codemirror/addon/selection/active-line.js');
 require('codemirror/addon/display/autorefresh.js');
@@ -31,6 +31,7 @@ import * as Styles from "./ram.styles";
 
 const Ram = observer(() => {
   const Sim = useContext(SimulatorContext);
+  const Theme = useContext(ThemeContext);
 
   const [focusedVar, setFocusedVar] = useState("");
   const [currentMark, setCurrentMark] = useState({ clear: () => {}});
@@ -103,7 +104,7 @@ const Ram = observer(() => {
     autoRefresh: true,
     firstLineNumber: 0,
     cursorBlinkRate: 800,
-    theme: (getTheme() === "dark") ? "material-darker" : "default",
+    theme: (Theme.getCurrentThemeName() === "dark") ? "material-darker" : "default",
     gutters: ["CodeMirror-linenumbers", "CodeMirror-lint-markers"],
     lineNumbers: true,
     lint
