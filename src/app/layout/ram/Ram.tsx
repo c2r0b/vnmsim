@@ -104,7 +104,7 @@ const Ram = observer(() => {
     autoRefresh: true,
     firstLineNumber: 0,
     cursorBlinkRate: 800,
-    theme: (Theme.getCurrentThemeName() === "dark") ? "material-darker" : "default",
+    theme: (Theme.getNormalizedThemeName() === "dark") ? "material-darker" : "default",
     gutters: ["CodeMirror-linenumbers", "CodeMirror-lint-markers"],
     lineNumbers: true,
     lint

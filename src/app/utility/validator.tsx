@@ -6,7 +6,7 @@ export const validator = (t, lastIndex: number, getLine: Function) => {
     (
       t.match(/^(lod|add|sub|mul|div|sto)\s\d+\s*$/i)
       && (line = +t.split(' ')[1]) < lastIndex
-      && getLine(line).match(/^\d*$/)
+      && getLine(line).match(/^(\d|$)*$/)
     )
     // jumps
     || t.match(/^(jmp|jmz)\s\d+\s*$/i) && +t.split(' ')[1] < lastIndex

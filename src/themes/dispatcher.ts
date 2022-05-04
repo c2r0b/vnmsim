@@ -32,7 +32,7 @@ export class ThemeStore {
   }
 
   // get theme name translating the "System" option into an actual choice
-  private getNormalizedThemeName(theme = this.theme) {
+  getNormalizedThemeName(theme = this.theme) {
     if (theme === "system") {
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         theme = "dark";

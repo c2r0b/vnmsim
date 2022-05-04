@@ -109,7 +109,6 @@ export const Variables = observer((props:IProps) => {
           selectionMode={ SelectionMode.none }
           layoutMode={ DetailsListLayoutMode.justified }
           isHeaderVisible={ false }
-          styles={ Styles.list }
         />
       </div>
     </>

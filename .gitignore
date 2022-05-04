@@ -1,13 +1,13 @@
 # Compiled source #
 ###################
-/app/
-prod/
+build/
+dist/
 coverage/
 node_modules/
-_old_version/
 yarn.lock
 yarn-error.log
 package-lock.json
+.yarnrc
 
 # OS generated files #
 ######################

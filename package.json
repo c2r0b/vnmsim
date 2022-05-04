@@ -4,7 +4,10 @@
   "description": "A simulator of the Von Neumann machine",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p app && cp ./src/index.template.html ./app/index.html && node ./build.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "test": "jest --coverage"
   },
   "repository": {
@@ -34,17 +37,13 @@
     "react-virtualized-auto-sizer": "^1.0.6"
   },
   "devDependencies": {
-    "@deanc/esbuild-plugin-postcss": "^1.0.1",
     "@types/jest": "^27.4.0",
     "@types/node": "^14.14.37",
     "@types/react": "^17.0.0",
     "@types/react-codemirror": "^1.0.3",
     "@types/react-dom": "^17.0.0",
-    "autoprefixer": "^10.2.5",
-    "esbuild": "0.10",
-    "esbuild-plugin-postcss2": "^0.0.9",
+    "esbuild": "0.14.23",
     "jest": "^27.5.1",
-    "postcss-nested": "^5.0.5",
     "ts-jest": "^27.1.3",
     "ts-loader": "^8.0.11",
     "typescript": "^4.1.2"

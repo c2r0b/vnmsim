@@ -1,4 +1,4 @@
-export const lastStep = 8;
+export const lastStep = 9;
 
 const commands = {
   LOD: '=',
@@ -17,6 +17,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
   // execute code related to the current simulator step
   switch(sim.step) {
     case 1:
+      sim.focus.cell = -1;
       sim.focus.var = -1;
       stats.executed_step++;
 
@@ -35,14 +36,14 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       }
       break;
     case 2:
-      sim.focus.cell = 1;
+      sim.focus.cell = sim.pc.val;
       sim.focus.el = 'ir.input.field';
       sim.ir.cmd = sim.line.substr(0, 3).toUpperCase();
       break;
     case 3:
-      sim.focus.cell = 1;
+      sim.focus.cell = sim.pc.val;
       sim.focus.el = 'ir.input.field';
-      sim.ir.loc = sim.line.substr(4).toUpperCase();
+      sim.ir.loc = sim.line.substr(4).toUpperCase().trim();
       break;
     case 4:
       sim.focus.el = 'pc.increment.input';
@@ -54,6 +55,9 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       sim.pc.val = +sim.pc.val + sim.pc.step;
       break;
     case 6:
+      sim.focus.el = 'ir.decoder.field';
+      break;
+    case 7:
       // get correct alu operation
       switch (sim.ir.cmd) {
         case 'NOP':
@@ -85,7 +89,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
           break;
       }
       break;
-    case 7:
+    case 8:
       // JMZ instruction behaviour
       if (sim.ir.cmd == 'JMZ') {
         if (sim.acc == 0) {
@@ -131,7 +135,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       }
       sim.focus.el = 'alu.p2.field';
       break;
-    case 8:
+    case 9:
       if (sim.ir.cmd != 'STO') {
         // execute operation
         switch (sim.alu.op) {
@@ -165,11 +169,22 @@ export const execute = ({ sim, stats, status, line, editor }) => {
             break;
         }
       }
-      // STO instruction -> edit cell / variable
+      // STO instruction -> edit variable
       else if (sim.ir.loc.match(/T|X|Y|Z|W/)) {
         sim.focus.var = sim.ir.loc;
         sim.variables[sim.ir.loc] = sim.acc;
         stats.variable_access++;
+      }
+      // STO instruction -> edit cell
+      else {
+        sim.focus.cell = sim.ir.loc;
+        editor.doc.replaceRange(
+          sim.acc.toString(),
+          {
+            line: sim.ir.loc,
+            ch: 0
+          }
+        );
       }
       break;
   }

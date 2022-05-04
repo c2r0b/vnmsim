@@ -14,7 +14,7 @@ import Sim from "./layout/sim/Sim";
 import WorkTitle from "./layout/workTitle/WorkTitle";
 import Notification from "./layout/notification/Notification";
 
-const App = observer(() => {
+export const App = observer(() => {
   const Theme = useContext(ThemeContext);
   return (
     <ThemeProvider theme={ Theme.getTheme() }>
@@ -30,5 +30,3 @@ const App = observer(() => {
     </ThemeProvider>
   );
 });
-
-export default App;

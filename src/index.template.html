@@ -8,12 +8,20 @@
       http-equiv="Content-Security-Policy"
       content="style-src 'self' 'unsafe-inline'; connect-src self * 'unsafe-inline' blob: data: gap:;"
     >
+
+    <link rel="apple-touch-icon" href="images/touch/192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/16x16.png">
+    <meta name="theme-color" content="#000000"/>
+
     <link rel="stylesheet" href="index.css" />
+    <link rel="manifest" href="manifest.json">
+
     <style>
       :root {
         color-scheme: var(--color-scheme);
       }
-      
+
       ::selection {
         color: var(--white);
         background: var(--black);

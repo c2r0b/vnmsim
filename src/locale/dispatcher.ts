@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
 
-import { Locale } from "../locale/locale";
+import { Locale } from "./locale";
 
 export class LocaleStore {
   language

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./app/app";
+import { App } from "./app/app";
 import { SimulatorContext, SimulatorStore } from "./store/dispatcher";
 import { LocaleContext, LocaleStore } from "./locale/dispatcher";
 import { ThemeContext, ThemeStore } from "./themes/dispatcher";
@@ -51,7 +51,7 @@ registerIcons({
   }
 });
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <ThemeContext.Provider value={ new ThemeStore() }>
     <LocaleContext.Provider value={ new LocaleStore() }>
       <SimulatorContext.Provider value={ new SimulatorStore() }>

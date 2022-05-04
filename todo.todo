@@ -1,26 +1,26 @@
 production ready:
+- nextjs
 - jest tests
 - solve single iteration not loading IR
-- PWA ready
-- all github issues resolved
-- live version - vnmsim.io
 - move to master
+- live version (Vercel)
 
 future proposal:
+- domain vnmsim.app (already registered)
+- PWA with Next (https://github.com/shadowwalker/next-pwa)
 - controls keyboard shortcuts
 - svg move and zoom keyboard shortcuts
 - settings
-  - jump comments
+  - jump comment lines
   - jump empty cells
 - inline comments
 - welcome splash screen
 - mobile usable
 - lighthouse 100%
-- open/save from local storage
+- open/save from local storage / cloud services
 - tutorial interactive tour
 - binary mode
 - codemirror6
-- webassembly version
 - autodeploy
 - app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)
 - documentation (docusaurus)

@@ -1,4 +1,4 @@
-export const container = {
+export const container:React.CSSProperties = {
   position: "fixed",
   top: 0,
   left: 0,

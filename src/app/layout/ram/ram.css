@@ -31,32 +31,31 @@
   border-right: 1px solid var(--neutralLight);
   font-size: 14px;
   line-height: 1.5;
-
-  .CodeMirror-activeline-background {
-    background: rgba(254, 138, 39, 0.1);
-  }
-  .cm-cmd {
-    color: var(--codeCmd);
-  }
-  .cm-num {
-    color: var(--codeNum);
-  }
-  .cm-cell {
-    color: var(--codeCell);
-  }
-  .cm-val {
-    color: var(--codeVal);
-  }
-  .cm-comment {
-    color: #999;
-  }
-  .CodeMirror-lint-markers {
-    float: left;
-    background-color: var(--white);
-    cursor: default;
-  }
-  .CodeMirror-linenumbers {
-    float: left;
-    background-color: var(--white);
-  }
+}
+.CodeMirror .CodeMirror-activeline-background {
+  background: rgba(254, 138, 39, 0.1);
+}
+.CodeMirror .cm-cmd {
+  color: var(--codeCmd);
+}
+.CodeMirror .cm-num {
+  color: var(--codeNum);
+}
+.CodeMirror .cm-cell {
+  color: var(--codeCell);
+}
+.CodeMirror .cm-val {
+  color: var(--codeVal);
+}
+.CodeMirror .cm-comment {
+  color: #999;
+}
+.CodeMirror .CodeMirror-lint-markers {
+  float: left;
+  background-color: var(--white);
+  cursor: default;
+}
+.CodeMirror .CodeMirror-linenumbers {
+  float: left;
+  background-color: var(--white);
 }
