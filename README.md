@@ -5,6 +5,8 @@ This simulator is meant to be a solution for students and teachers to study how 
 
 Online version: `coming soon`
 
+![Powered by Vercel](/repository/public/powered-by-vercel.svg "Powered by Vercel")
+
 ## Simulator guide
 
 This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP).
