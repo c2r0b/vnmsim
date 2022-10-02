@@ -7,10 +7,16 @@ export const container:IStackStyles = {
     right: 0,
     bottom: 0,
     left: 0,
-    padding: "11px 15px",
+    paddingRight: 15,
     backgroundColor: "var(--white)",
     borderTop: "1px solid var(--neutralLight)",
     zIndex: 900
+  }
+};
+
+export const controls:IStackStyles = {
+  root: {
+    padding: "11px 15px"
   }
 };
 

@@ -11,7 +11,6 @@ import Nav from "./layout/nav/Nav";
 import Controls from "./layout/controls/Controls";
 import Ram from "./layout/ram/Ram";
 import Sim from "./layout/sim/Sim";
-import WorkTitle from "./layout/workTitle/WorkTitle";
 import Notification from "./layout/notification/Notification";
 
 export const App = observer(() => {
@@ -24,7 +23,6 @@ export const App = observer(() => {
         <Sim />
         <Controls />
         <Ram />
-        <WorkTitle />
         <Notification />
       </div>
     </ThemeProvider>

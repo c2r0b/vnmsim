@@ -19,8 +19,8 @@ export const container:React.CSSProperties = {
   width: 800,
   height: 800,
   maxHeight: 700,
-  marginTop: 100,
-  marginLeft: 90
+  marginTop: 55,
+  marginLeft: 75
 };
 
 export const dataBus:React.CSSProperties = {

@@ -10,30 +10,17 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import { Resizable } from "re-resizable";
 import Split from "react-split";
 
-import dynamic from 'next/dynamic';
-
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import CodeMirror from '@uiw/react-codemirror';
+import { githubDark } from '@uiw/codemirror-theme-github';
+import { StreamLanguage } from "@codemirror/language"
+import { linter, lintGutter } from "@codemirror/lint"
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { Localize } from "src/locale/Localize";
 import { ThemeContext } from "src/themes/dispatcher";
 
-// codemirror addons
-dynamic(
-  () => require('codemirror/addon/selection/active-line.js'),
-  { ssr: false }
-);
-dynamic(
-  () => require('codemirror/addon/display/autorefresh.js'),
-  { ssr: false }
-);
-dynamic(
-  () => require('codemirror/addon/lint/lint.js'),
-  { ssr: false }
-);
-
-import { editorMode } from "../../utility/mode";
-import { linter } from "../../utility/linter";
+import { editorMode as vnmLang } from "../../utility/mode";
+import { editorLinter } from "../../utility/linter";
 
 import { Text } from '@fluentui/react';
 
@@ -99,8 +86,14 @@ const Ram = observer(() => {
     }
   }, [Sim.getSim().step]);
 
-  const lint = (doc) => {
-    const errors = linter(doc);
+  // on editor content change
+  const onEditorChange = React.useCallback((value, viewUpdate) => {
+    Sim.setEditor(viewUpdate);
+  }, []);
+
+  // on editor update check for highlighted errors
+  const vnmLinter = linter(view => {
+    const errors = editorLinter(view);
     if (errors.length) {
       Sim.fireError(errors.length);
     }
@@ -108,19 +101,16 @@ const Ram = observer(() => {
       Sim.clearErrors();
     }
     return errors;
-  };
+  });
   
-  const codeMirrorOptions = {
+  const editorOptions = {
     mode: "vnm",
-    styleActiveLine: true,
-    styleSelectedText: true,
-    autoRefresh: true,
+    highlightActiveLine: true,
+    highlightActiveLineGutter: true,
+    highlightSelectionMatches: true,
     firstLineNumber: 0,
     cursorBlinkRate: 800,
-    theme: (Theme.getNormalizedThemeName() === "dark") ? "material-darker" : "default",
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-lint-markers"],
-    lineNumbers: true,
-    lint
+    lineNumbers: true
   };
 
   return (
@@ -152,11 +142,12 @@ const Ram = observer(() => {
               <CodeMirror
                 ref={ editorRef }
                 className={ ramStyles.CodeMirror }
-                value={ Sim.getCode() }
-                defineMode={ editorMode }
-                options={ codeMirrorOptions }
-                editorDidMount={ (editor) => Sim.setEditor(editor) }
-                onChange={ (editor) => Sim.setEditor(editor) }
+                value={ Sim.getCode() || "" }
+                height="200px"
+                extensions={[lintGutter(), StreamLanguage.define(vnmLang), vnmLinter]}
+                theme={ (Theme.getNormalizedThemeName() === "dark") ? githubDark : "light" }
+                onChange={ onEditorChange }
+                basicSetup={ editorOptions }
               />
             </div>
             <Split

@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
+import Image from 'next/image';
+
+import poweredByVercelImg from "public/powered-by-vercel.svg";
+
+
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 
@@ -67,29 +72,40 @@ export default observer(() => {
   return (
     <Stack
       horizontal
-      tokens={{ childrenGap: 10 }}
+      horizontalAlign="space-between"
       styles={ Styles.container }
     >
-      {
-        _controls.map(props => (
-          <TooltipHost
-            content={ props.ariaLabel }
-            calloutProps={{ gapSpace: 0 }}
-          >
-            <IconButton {...props} />
-          </TooltipHost>
-        ))
-      }
-      <Slider
-        styles={ Styles.speed }
-        valueFormat={ speedFormat }
-        min={ 0 }
-        max={ 2000 }
-        step={ 50 }
-        defaultValue={ 500 }
-        onChange={ onIntervalChange }
-        showValue
-        snapToStep
+      <Stack
+        horizontal
+        tokens={{ childrenGap: 10 }}
+        styles={ Styles.controls }
+      >
+        {
+          _controls.map(props => (
+            <TooltipHost
+              content={ props.ariaLabel }
+              calloutProps={{ gapSpace: 0 }}
+            >
+              <IconButton {...props} />
+            </TooltipHost>
+          ))
+        }
+        <Slider
+          styles={ Styles.speed }
+          valueFormat={ speedFormat }
+          min={ 0 }
+          max={ 2000 }
+          step={ 50 }
+          defaultValue={ 500 }
+          onChange={ onIntervalChange }
+          showValue
+          snapToStep
+        />
+      </Stack>
+      <Image
+        src={ poweredByVercelImg }
+        alt="Powered by Vercel"
+        width={ 150 }
       />
     </Stack>
   );

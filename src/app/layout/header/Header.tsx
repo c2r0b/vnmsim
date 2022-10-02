@@ -8,6 +8,8 @@ import { Stack, Spinner } from "@fluentui/react";
 
 import * as Styles from "./header.styles";
 
+import WorkTitle from "./workTitle/WorkTitle";
+
 const Header = observer(() => {
   const Sim = useContext(SimulatorContext);
   const Locale = useContext(LocaleContext);
@@ -29,14 +31,17 @@ const Header = observer(() => {
     <>
       <div style={ Styles.container }>
         <Stack horizontal horizontalAlign="space-between">
-          <div style={ Styles.logo.container }>
-            <div>
-              <div style={ Styles.logo.cube.standard } />
-              <div style={ Styles.logo.cube.colored } />
-              <div style={ Styles.logo.cube.standard } />
-              <div style={ Styles.logo.cube.standard } />
+          <Stack horizontal>
+            <div style={ Styles.logo.container }>
+              <div>
+                <div style={ Styles.logo.cube.standard } />
+                <div style={ Styles.logo.cube.colored } />
+                <div style={ Styles.logo.cube.standard } />
+                <div style={ Styles.logo.cube.standard } />
+              </div>
             </div>
-          </div>
+            <WorkTitle />
+          </Stack>
           { runningSpinner }
         </Stack>
       </div>

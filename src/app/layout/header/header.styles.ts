@@ -10,8 +10,8 @@ export const container:React.CSSProperties = {
 
 const cube:React.CSSProperties = {
   float: "left",
-  width: 8,
-  height: 8,
+  width: 10,
+  height: 10,
   marginBottom: 1,
   marginRight: 1,
   border: "2.5px solid white",
@@ -20,7 +20,7 @@ const cube:React.CSSProperties = {
 
 export const logo = {
   container: {
-    marginTop: 12,
+    marginTop: 15,
     marginBottom: 15,
     marginLeft: 15,
     width: 30,

@@ -1,11 +1,11 @@
 production ready:
-- nextjs
-- jest tests
+- codemirror v6
 - solve single iteration not loading IR
 - move to master
 - live version (Vercel)
 
 future proposal:
+- jest tests
 - domain vnmsim.app (already registered)
 - PWA with Next (https://github.com/shadowwalker/next-pwa)
 - controls keyboard shortcuts
@@ -21,7 +21,7 @@ future proposal:
 - open/save from cloud services
 - tutorial interactive tour
 - binary mode
-- codemirror6
+- fluentui v9
 - autodeploy
 - app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)
 - documentation (docusaurus)

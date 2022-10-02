@@ -32,12 +32,3 @@
 .CodeMirror .cm-comment {
   color: #999;
 }
-.CodeMirror .CodeMirror-lint-markers {
-  float: left;
-  background-color: var(--white);
-  cursor: default;
-}
-.CodeMirror .CodeMirror-linenumbers {
-  float: left;
-  background-color: var(--white);
-}
