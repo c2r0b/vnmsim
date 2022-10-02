@@ -2,7 +2,6 @@
 
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
-This branch is home to the third generation of this project.
 
 Online version: `coming soon`
 
@@ -14,18 +13,17 @@ A guide to the simulator is also available from the `Help` section accessible fr
 
 ## Specifications
 
-The simulator is developed as an installable PWA written with React and ES6 (partially in Typescript).
-The code editor uses CodeMirror2, while most of the simulator UI is done using SVG elements.
+The simulator is developed as a NextJS app writter using React and Typescript.
+The code editor uses CodeMirror.
 The chosen design framework is FluentUI by Microsoft.
 
 ## How to compile
 
-After downloading the repository and installing the dependencies using `npm` or `yarn`, a simple `yarn run build` is enough to start a compiled and live updated version at `localhost:8000`.
-Building settings for `ESBuild` are available in `./build.js`.
+After downloading the repository and installing the dependencies using `npm install`, a simple `npm run build` is enough to start a compiled and live updated version at `localhost:3000`.
 
 ## Testing
 
-Testing is done using `Jest` and can be run using `yarn run test`.
+TBD
 
 ## Contribute
 
