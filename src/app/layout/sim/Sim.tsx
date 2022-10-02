@@ -17,7 +17,7 @@ const Sim = observer(() => {
   const Locale = useContext(LocaleContext);
 
   const [msg, setMsg] = useState("");
-  const [intervalId, setIntervalId] = useState({});
+  const [intervalId, setIntervalId] = useState(undefined);
   const [styles, setStyles] = useState({ ...Styles });
 
   const sim = Sim.getSim();
@@ -72,19 +72,22 @@ const Sim = observer(() => {
     }
 
     switch (status) {
-      case 0: // stop
+      case 0: { // stop
         Sim.loseFocus();
         clearInterval(intervalId);
         break;
-      case 4: // pause
+      }
+      case 4: { // pause
         clearInterval(intervalId);
         break;
-      case 2: // single step
+      }
+      case 2: { // single step
         runSimulator();
         Sim.setSimStatus(4);
         break;
+      }
       case 1: // play
-      case 3: // single iteration
+      case 3: { // single iteration
         if (interval === 0) {
           while (Sim.getSimStatus()) {
             runSimulator();
@@ -94,6 +97,7 @@ const Sim = observer(() => {
           setIntervalId(setInterval(runSimulator, interval));
           return () => clearInterval(intervalId);
         }
+      }
     }
   }, [status]);
 
@@ -245,7 +249,9 @@ const Sim = observer(() => {
           <svg style={ styles.ram.svg }>
             <rect width="50" height="100" />
           </svg>
-          <Text styles={ styles.ram.text }>RAM</Text>
+          <Text styles={ styles.ram.text }>
+            RAM
+          </Text>
         </div>
       </PanZoom>
     </>

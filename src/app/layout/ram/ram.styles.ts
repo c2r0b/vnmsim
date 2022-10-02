@@ -1,3 +1,5 @@
+import { ITextStyles } from "@fluentui/react";
+
 export const container:React.CSSProperties = {
   position: "fixed",
   top: 50,
@@ -22,7 +24,7 @@ export const title:React.CSSProperties = {
   overflow: "hidden"
 };
 
-export const titleText = {
+export const titleText:ITextStyles = {
   root: {
     lineHeight: 38,
     fontWeight: 600

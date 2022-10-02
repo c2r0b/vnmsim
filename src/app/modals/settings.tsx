@@ -39,7 +39,12 @@ const languageOptions: IDropdownOption[] = [
   { key: "de", text: "Deutsche" }
 ];
 
-const Settings = observer((props) => {
+interface IProps {
+  show: boolean;
+  onDismiss: Function;
+}
+
+const Settings = observer((props:IProps) => {
   const Locale = useContext(LocaleContext);
   const Theme = useContext(ThemeContext);
 
@@ -58,7 +63,7 @@ const Settings = observer((props) => {
       isLightDismiss={ true }
       type={ PanelType.custom }
       styles={{ main: { width: 500 }}}
-      onDismiss={ props.onDismiss }
+      onDismiss={ () => props.onDismiss() }
       closeButtonAriaLabel={ Locale.get("CLOSE") }
     >
       <Stack tokens={{ childrenGap: 20, padding: "15px 0" }}>

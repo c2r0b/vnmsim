@@ -8,8 +8,13 @@ export class ThemeStore {
 
   constructor() {
     makeAutoObservable(this);
-    this.theme = localStorage.getItem("theme") || "system";
-    this.setCSSVariables();
+    if (typeof window !== "undefined") {
+      this.theme = localStorage.getItem("theme") || "system";
+      this.setCSSVariables();
+    }
+    else {
+      this.theme = "system";
+    }
   }
   
   // sets FluentUI theme palette as CSS variables for ease of use
@@ -33,6 +38,9 @@ export class ThemeStore {
 
   // get theme name translating the "System" option into an actual choice
   getNormalizedThemeName(theme = this.theme) {
+    if (typeof window === "undefined") {
+      return "light";
+    }
     if (theme === "system") {
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         theme = "dark";
@@ -49,7 +57,9 @@ export class ThemeStore {
   }
 
   setTheme(theme) {
-    localStorage.setItem("theme", theme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", theme);
+    }
     this.theme = theme;
     this.setCSSVariables();
   }

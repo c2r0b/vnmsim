@@ -55,15 +55,13 @@ const Samples = observer((props:IProps) => {
         type={ DocumentCardType.compact }
         styles={ Styles.card }
       >
-        <DocumentCardDetails>
-          <DocumentCardTitle
-            title={ s.label }
-            shouldTruncate
-          />
-          <DocumentCardLocation
-            location={ s.desc }
-          />
-        </DocumentCardDetails>
+        <DocumentCardTitle
+          title={ s.label }
+          shouldTruncate
+        />
+        <DocumentCardLocation
+          location={ s.desc }
+        />
         <DocumentCardActions
           actions={ actions }
         />
@@ -88,7 +86,7 @@ const Samples = observer((props:IProps) => {
         tokens={{ childrenGap: 20 }}
         styles={ Styles.stack }
       >
-        { ...samplesList }
+        { samplesList }
       </Stack>
     </Panel>
   );

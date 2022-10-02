@@ -8,6 +8,7 @@ yarn.lock
 yarn-error.log
 package-lock.json
 .yarnrc
+.next
 
 # OS generated files #
 ######################

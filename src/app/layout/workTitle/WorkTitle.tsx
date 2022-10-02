@@ -23,7 +23,7 @@ const WorkTitle = observer(() => {
     <div style={ Styles.container }>
       <Stack>
         <Text
-          styles={ Styles.title}
+          styles={ Styles.title }
         >
           <ContentEditable
             tagName="pre"

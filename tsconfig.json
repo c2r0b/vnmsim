@@ -12,14 +12,31 @@
       "dom"
     ],
     "paths": {
-      "src": ["/src/"]
+      "src": [
+        "/src/"
+      ]
     },
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "allowJs": false,
     "skipLibCheck": true,
-    "baseUrl": "./"
-  }
+    "baseUrl": "./",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

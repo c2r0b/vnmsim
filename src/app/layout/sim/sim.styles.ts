@@ -1,6 +1,9 @@
-export const infoMsg = {
+import { ICSSRule } from "@fluentui/merge-styles";
+import { IMessageBarStyles, ISpinButtonStyles, ITextFieldStyles, ITextStyles } from "@fluentui/react";
+
+export const infoMsg:IMessageBarStyles = {
   root: {
-    position: "fixed",
+    position: "fixed" as ICSSRule,
     bottom: 70,
     left: 105,
     width: "auto",
@@ -59,14 +62,14 @@ export const pc = {
     width: 125,
     height: 200
   },
-  label: {
+  label:<ITextStyles> {
     root: {
       ...label,
       top: 140,
       left: 10
     }
   },
-  input: {
+  input:<ISpinButtonStyles> {
     root: {
       position: "absolute",
       top: 170,
@@ -78,7 +81,7 @@ export const pc = {
       ...fieldStyles
     }
   },
-  increment: {
+  increment:<ISpinButtonStyles> {
     root: {
       width: 30,
       margin: "80px 70px",
@@ -107,14 +110,14 @@ export const alu = {
     width: 400,
     height: 400
   },
-  label: {
+  label:<ITextStyles> {
     root: {
       ...label,
       top: 37,
       left: 155
     }
   },
-  p1: {
+  p1:<ITextFieldStyles> {
     root: {
       position: "absolute",
       top: 65,
@@ -129,7 +132,7 @@ export const alu = {
       border: "none"
     }
   },
-  p2: {
+  p2:<ITextFieldStyles> {
     root: {
       position: "absolute",
       top: 65,
@@ -144,7 +147,7 @@ export const alu = {
       border: "none"
     }
   },
-  op: {
+  op:<ITextFieldStyles> {
     root: {
       position: "absolute",
       top: 120,
@@ -168,14 +171,14 @@ export const ir = {
     top: 20,
     bottom: 30
   },
-  label: {
+  label:<ITextStyles> {
     root: {
       ...label,
       top: 12,
       left: 40
     }
   },
-  input: {
+  input:<ITextFieldStyles> {
     root: {
       width: 250,
       margin: 40
@@ -184,7 +187,7 @@ export const ir = {
       ...fieldStyles
     }
   },
-  decoder: {
+  decoder:<ITextFieldStyles> {
     root: {
       position: "absolute",
       top: 100,
@@ -219,7 +222,7 @@ export const acc = {
       width: 163
     }
   },
-  label: {
+  label:<ITextStyles> {
     root: {
       ...label,
       top: 133,
@@ -231,7 +234,7 @@ export const acc = {
 
 /* other sim labels */
 export const labels = {
-  bus: {
+  bus:<ITextStyles> {
     root: {
       ...label,
       top: 25,
@@ -240,7 +243,7 @@ export const labels = {
       width: 100
     }
   },
-  addressesBus: {
+  addressesBus:<ITextStyles> {
     root: {
       ...label,
       top: 100,
@@ -266,7 +269,7 @@ export const ram = {
     width: 50,
     height: 100
   },
-  text: {
+  text:<ITextStyles> {
     root: {
       ...label,
       top: 38,

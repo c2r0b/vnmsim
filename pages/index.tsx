@@ -1,16 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
-import { App } from "./app/app";
-import { SimulatorContext, SimulatorStore } from "./store/dispatcher";
-import { LocaleContext, LocaleStore } from "./locale/dispatcher";
-import { ThemeContext, ThemeStore } from "./themes/dispatcher";
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js");
-  });
-}
+import { App } from "../src/app/app";
+import { SimulatorContext, SimulatorStore } from "../src/store/dispatcher";
+import { LocaleContext, LocaleStore } from "../src/locale/dispatcher";
+import { ThemeContext, ThemeStore } from "../src/themes/dispatcher";
 
 import { registerIcons } from "@fluentui/react/lib/Styling";
 import {
@@ -23,7 +16,7 @@ import {
   ChevronDownSmallIcon, AddIcon,
   Rotate90CounterClockwiseIcon
 } from "@fluentui/react-icons-mdl2";
-
+/*
 registerIcons({
   icons: {
     Open: <FolderHorizontalIcon />,
@@ -49,15 +42,16 @@ registerIcons({
     Add: <AddIcon />,
     ClearStats: <Rotate90CounterClockwiseIcon />,
   }
-});
+});*/
 
-ReactDOM.hydrate(
-  <ThemeContext.Provider value={ new ThemeStore() }>
-    <LocaleContext.Provider value={ new LocaleStore() }>
-      <SimulatorContext.Provider value={ new SimulatorStore() }>
-        <App />
-      </SimulatorContext.Provider>
-    </LocaleContext.Provider>
-  </ThemeContext.Provider>,
-  document.getElementById("app")
-);
+export default () => {
+  return (
+    <ThemeContext.Provider value={ new ThemeStore() }>
+      <LocaleContext.Provider value={ new LocaleStore() }>
+        <SimulatorContext.Provider value={ new SimulatorStore() }>
+          <App />
+        </SimulatorContext.Provider>
+      </LocaleContext.Provider>
+    </ThemeContext.Provider>
+  );
+}

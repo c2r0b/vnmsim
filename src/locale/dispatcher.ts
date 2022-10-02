@@ -16,7 +16,9 @@ export class LocaleStore {
   }
   
   setLanguage(lang) {
-    localStorage.setItem("language", this.language = lang);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("language", this.language = lang);
+    }
   }
 
   // get string from correct locale
@@ -26,16 +28,20 @@ export class LocaleStore {
 
   // set saved language preferences (fallback to browser language or english)
   setLocale() {
+    let language = null;
+    if (typeof window !== "undefined") {
+      language = localStorage.getItem("language");
+    }
     const fallbackLanguage = "en";
-    if (localStorage.getItem("language") === null) {
-      const browserPreference = navigator.language?.split("-")[0];
+    if (language === null) {
+      const browserPreference = "en"/*navigator.language?.split("-")[0]*/;
       if (browserPreference && Locale[browserPreference]) {
         this.language = browserPreference;
       }
       this.language = fallbackLanguage;
       return;
     }
-    this.language = localStorage.getItem("language") || fallbackLanguage;
+    this.language = language || fallbackLanguage;
   }
 };
 

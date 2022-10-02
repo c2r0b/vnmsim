@@ -1,6 +1,9 @@
-export const container = {
+import { ICSSRule } from "@fluentui/merge-styles";
+import { IStackStyles } from "@fluentui/react";
+
+export const container:IStackStyles = {
   root: {
-    position: "fixed",
+    position: "fixed" as ICSSRule,
     top: 50,
     left: 0,
     bottom: 0,

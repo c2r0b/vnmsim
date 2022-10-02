@@ -17,7 +17,8 @@ future proposal:
 - welcome splash screen
 - mobile usable
 - lighthouse 100%
-- open/save from local storage / cloud services
+- open/save from local storage
+- open/save from cloud services
 - tutorial interactive tour
 - binary mode
 - codemirror6

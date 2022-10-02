@@ -8,7 +8,12 @@ import { Panel, PanelType, Link } from "@fluentui/react";
 
 import * as Styles from "./help.styles";
 
-const Help = observer((props) => {
+interface IProps {
+  show: boolean;
+  onDismiss: Function;
+}
+
+const Help = observer((props:IProps) => {
   const Locale = useContext(LocaleContext);
 
   return (
@@ -18,7 +23,7 @@ const Help = observer((props) => {
       isLightDismiss={ true }
       type={ PanelType.custom }
       styles={{ main: { width: 500 }}}
-      onDismiss={ props.onDismiss }
+      onDismiss={ () => props.onDismiss() }
       closeButtonAriaLabel="Close"
     >
       <h3><Localize label="GUIDE_INTRODUCTION_H"/></h3>
