@@ -5,7 +5,7 @@ This simulator is meant to be a solution for students and teachers to study how 
 
 Online version: `coming soon`
 
-![Powered by Vercel](/repository/public/powered-by-vercel.svg "Powered by Vercel")
+![Powered by Vercel](/public/powered-by-vercel.svg "Powered by Vercel")
 
 ## Simulator guide
 
