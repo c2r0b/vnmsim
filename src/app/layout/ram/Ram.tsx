@@ -1,7 +1,4 @@
 import ramStyles from './ram.module.css';
-import '../../../../node_modules/codemirror/lib/codemirror.css';
-import '../../../../node_modules/codemirror/addon/lint/lint.css';
-import "../../../../node_modules/codemirror/theme/material-darker.css";
 
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";

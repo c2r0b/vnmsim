@@ -1641,11 +1641,6 @@
   "resolved" "https://registry.npmjs.org/co/-/co-4.6.0.tgz"
   "version" "4.6.0"
 
-"codemirror@^5.65.3", "codemirror@5.x":
-  "integrity" "sha512-kCC0iwGZOVZXHEKW3NDTObvM7pTIyowjty4BUqeREROc/3I6bWbgZDA3fGDwlA+rbgRjvnRnfqs9SfXynel1AQ=="
-  "resolved" "https://registry.npmjs.org/codemirror/-/codemirror-5.65.3.tgz"
-  "version" "5.65.3"
-
 "codemirror@^6.0.0":
   "integrity" "sha512-J8j+nZ+CdWmIeFIGXEFbFPtpiYacFMDR8GlHK3IyHQJMCaVRfGx9NT+Hxivv1ckLWPvNdZqndbr/7lVhrf/Svg=="
   "resolved" "https://registry.npmjs.org/codemirror/-/codemirror-6.0.1.tgz"
@@ -3647,11 +3642,6 @@
   "resolved" "https://registry.npmjs.org/re-resizable/-/re-resizable-6.9.9.tgz"
   "version" "6.9.9"
 
-"react-codemirror2@^7.2.1":
-  "integrity" "sha512-t7YFmz1AXdlImgHXA9Ja0T6AWuopilub24jRaQdPVbzUJVNKIYuy3uCFZYa7CE5S3UW6SrSa5nAqVQvtzRF9gw=="
-  "resolved" "https://registry.npmjs.org/react-codemirror2/-/react-codemirror2-7.2.1.tgz"
-  "version" "7.2.1"
-
 "react-contenteditable@^3.3.6":
   "integrity" "sha512-61+Anbmzggel1sP7nwvxq3d2woD3duR5R89RoLGqKan1A+nruFIcmLjw2F+qqk70AyABls0BDKzE1vqS1UIF1g=="
   "resolved" "https://registry.npmjs.org/react-contenteditable/-/react-contenteditable-3.3.6.tgz"
@@ -3703,7 +3693,7 @@
   "resolved" "https://registry.npmjs.org/react-virtualized-auto-sizer/-/react-virtualized-auto-sizer-1.0.7.tgz"
   "version" "1.0.7"
 
-"react@*", "react@^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0-rc", "react@^16.13.1 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.1.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=15.5 <=16.x", "react@>=16.0.0", "react@>=16.3", "react@>=16.8.0", "react@>=16.8.0 <18.0.0", "react@17.0.2":
+"react@*", "react@^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0-rc", "react@^16.13.1 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17 || ^18", "react@^17.0.2 || ^18.0.0-0", "react@^18.1.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.0.0", "react@>=16.3", "react@>=16.8.0", "react@>=16.8.0 <18.0.0", "react@17.0.2":
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
