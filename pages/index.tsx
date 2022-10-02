@@ -16,7 +16,7 @@ import {
   ChevronDownSmallIcon, AddIcon,
   Rotate90CounterClockwiseIcon
 } from "@fluentui/react-icons-mdl2";
-/*
+
 registerIcons({
   icons: {
     Open: <FolderHorizontalIcon />,
@@ -42,7 +42,7 @@ registerIcons({
     Add: <AddIcon />,
     ClearStats: <Rotate90CounterClockwiseIcon />,
   }
-});*/
+});
 
 export default () => {
   return (

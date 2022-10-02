@@ -1,5 +1,4 @@
 import { validator } from "./validator";
-import CodeMirror from "codemirror";
 
 export const linter = (doc) => {
   const code = doc.split('\n'), errors = [];
@@ -11,8 +10,8 @@ export const linter = (doc) => {
     if (!validator(code[i], code.length, getLine)) {
       errors.push({
         severity: "error",
-        from: CodeMirror.Pos(+i, 0),
-        to: CodeMirror.Pos(+i, code[i].length)
+        from: { line: +i, ch: 0 },
+        to: { line: +i, ch: code[i].length }
       });
     }
   }

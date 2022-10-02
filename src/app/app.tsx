@@ -9,7 +9,7 @@ import * as Styles from "./app.styles";
 import Header from "./layout/header/Header";
 import Nav from "./layout/nav/Nav";
 import Controls from "./layout/controls/Controls";
-//import Ram from "./layout/ram/Ram";
+import Ram from "./layout/ram/Ram";
 import Sim from "./layout/sim/Sim";
 import WorkTitle from "./layout/workTitle/WorkTitle";
 import Notification from "./layout/notification/Notification";
@@ -23,7 +23,7 @@ export const App = observer(() => {
         <Nav />
         <Sim />
         <Controls />
-        {/*<Ram />*/ null }
+        <Ram />
         <WorkTitle />
         <Notification />
       </div>

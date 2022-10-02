@@ -1,4 +1,4 @@
-import './ram.css';
+import ramStyles from './ram.module.css';
 import '../../../../node_modules/codemirror/lib/codemirror.css';
 import '../../../../node_modules/codemirror/addon/lint/lint.css';
 import "../../../../node_modules/codemirror/theme/material-darker.css";
@@ -9,15 +9,28 @@ import { observer } from "mobx-react-lite";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { Resizable } from "re-resizable";
 import Split from "react-split";
+
+import dynamic from 'next/dynamic';
+
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { Localize } from "src/locale/Localize";
 import { ThemeContext } from "src/themes/dispatcher";
 
-require('codemirror/addon/selection/active-line.js');
-require('codemirror/addon/display/autorefresh.js');
-require('codemirror/addon/lint/lint.js');
+// codemirror addons
+dynamic(
+  () => require('codemirror/addon/selection/active-line.js'),
+  { ssr: false }
+);
+dynamic(
+  () => require('codemirror/addon/display/autorefresh.js'),
+  { ssr: false }
+);
+dynamic(
+  () => require('codemirror/addon/lint/lint.js'),
+  { ssr: false }
+);
 
 import { editorMode } from "../../utility/mode";
 import { linter } from "../../utility/linter";
@@ -123,7 +136,7 @@ const Ram = observer(() => {
           }}
         >
           <Split
-            className="split"
+            className={ ramStyles.split }
             sizes={[50, 50]}
             minSize={ 0 }
             gutterSize={ 20 }
@@ -138,6 +151,7 @@ const Ram = observer(() => {
               </div>
               <CodeMirror
                 ref={ editorRef }
+                className={ ramStyles.CodeMirror }
                 value={ Sim.getCode() }
                 defineMode={ editorMode }
                 options={ codeMirrorOptions }
@@ -146,7 +160,6 @@ const Ram = observer(() => {
               />
             </div>
             <Split
-              className="splitVertical"
               sizes={[55, 45]}
               minSize={ 40 }
               gutterSize={ 20 }
