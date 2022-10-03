@@ -7,9 +7,9 @@ production ready:
 future proposal:
 - jest tests
 - domain vnmsim.app (already registered)
-- PWA with Next (https://github.com/shadowwalker/next-pwa)
 - controls keyboard shortcuts
 - svg move and zoom keyboard shortcuts
+- codemirror custom theme
 - settings
   - jump comment lines
   - jump empty cells

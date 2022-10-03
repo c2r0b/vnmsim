@@ -1,8 +1,5 @@
-var CACHE_NAME = 'vnms-app-cache-v{{version}}';
+var CACHE_NAME = 'vnms-app-cache';
 var urlsToCache = [
-  '/',
-  '/index.html',
-  '/index.css'
 ];
 
 self.addEventListener('install', function(event) {

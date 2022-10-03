@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
+import { githubDark } from "@uiw/codemirror-theme-github";
+
 import { LocaleContext } from "src/locale/dispatcher";
 import { ThemeContext } from "src/themes/dispatcher";
 
@@ -9,6 +11,7 @@ import {
   IChoiceGroupOption, IDropdownStyles,
   IDropdownOption, Dropdown
 } from "@fluentui/react";
+import { SimulatorContext } from "src/store/dispatcher";
 
 const themeOptions: IChoiceGroupOption[] = [
   {
@@ -45,6 +48,7 @@ interface IProps {
 }
 
 const Settings = observer((props:IProps) => {
+  const Sim = useContext(SimulatorContext);
   const Locale = useContext(LocaleContext);
   const Theme = useContext(ThemeContext);
 

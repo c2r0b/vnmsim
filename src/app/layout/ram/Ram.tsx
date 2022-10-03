@@ -8,9 +8,10 @@ import { Resizable } from "re-resizable";
 import Split from "react-split";
 
 import CodeMirror from '@uiw/react-codemirror';
-import { githubDark } from '@uiw/codemirror-theme-github';
-import { StreamLanguage } from "@codemirror/language"
-import { linter, lintGutter } from "@codemirror/lint"
+import { githubLight, githubDark } from '@uiw/codemirror-theme-github';
+import { StreamLanguage } from "@codemirror/language";
+import { linter, lintGutter } from "@codemirror/lint";
+import { Compartment } from "@codemirror/state";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { Localize } from "src/locale/Localize";
@@ -25,24 +26,23 @@ import { Variables } from "./variables/Variables";
 import { Statistics } from "./stats/Stats";
 
 import * as Styles from "./ram.styles";
+import { addLineHighlight, clearHighlight, lineHighlightField } from 'src/app/utility/highlight';
+
+const editorTheme = new Compartment();
 
 const Ram = observer(() => {
   const Sim = useContext(SimulatorContext);
   const Theme = useContext(ThemeContext);
 
   const [focusedVar, setFocusedVar] = useState("");
-  const [currentMark, setCurrentMark] = useState({ clear: () => {}});
   
   const interval = Sim.getInterval();
   const editorRef = useRef(null);
 
-  const focusCell = (line: number, start: number, end: number) => {
-    currentMark.clear();
-    setCurrentMark(editorRef.current.editor.markText(
-      { line, ch: start },
-      { line, ch: end },
-      { css: "background-color: #f9c55b" }
-    ));
+  const focusCell = (lineNo: number, start: number, end: number) => {
+    const editor = Sim.getEditor();
+    const docPosition = editor.state.doc.line(lineNo + 1).from;
+    editor.view.dispatch({ effects: addLineHighlight.of(docPosition) });
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Ram = observer(() => {
     }
 
     if (sim.focus.cell < 0) {
-      currentMark.clear();
+      clearHighlight(Sim.getEditor());
     }
     else {
       switch (sim.step) {
@@ -71,7 +71,7 @@ const Ram = observer(() => {
           focusCell(sim.focus.cell, 0, 10);
           break;
         default:
-          currentMark.clear();
+          clearHighlight(Sim.getEditor());
       }
     }
 
@@ -110,6 +110,25 @@ const Ram = observer(() => {
     lineNumbers: true
   };
 
+  const currentEditorTheme = () => {
+    const useDarkMode = Theme.getNormalizedThemeName() === "dark";
+    return useDarkMode ? githubDark : githubLight;
+  };
+
+  const editorExtensions = [
+    lintGutter(),
+    StreamLanguage.define(vnmLang),
+    vnmLinter,
+    lineHighlightField,
+    editorTheme.of(currentEditorTheme())
+  ];
+  
+  useEffect(() => {
+    Sim.getEditor().view?.dispatch({
+      effects: editorTheme.reconfigure(currentEditorTheme())
+    });
+  }, [Theme.getNormalizedThemeName()]);
+
   return (
     <AutoSizer>
       {({ width }) => (
@@ -141,8 +160,7 @@ const Ram = observer(() => {
                 className={ ramStyles.CodeMirror }
                 value={ Sim.getCode() || "" }
                 height="200px"
-                extensions={[lintGutter(), StreamLanguage.define(vnmLang), vnmLinter]}
-                theme={ (Theme.getNormalizedThemeName() === "dark") ? githubDark : "light" }
+                extensions={ editorExtensions }
                 onChange={ onEditorChange }
                 basicSetup={ editorOptions }
               />

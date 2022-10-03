@@ -40,6 +40,7 @@ const Sim = observer(() => {
 
   const runSimulator = () => {
     let sim = { ...Sim.getSim() };
+    
     sim.step++;
     if (sim.step > lastStep) {
       sim.step = 1;
@@ -52,13 +53,13 @@ const Sim = observer(() => {
         return;
       }
     }
-    
+
     const result = execute({
       sim,
       stats: {...Sim.getStats()},
       status,
-      line: editor?.getLine(sim.codeLine),
-      editor
+      line: editor.state.doc.lineAt(sim.codeLine || 0).text,
+      editor: editor.state
     });
 
     Sim.updateSim(result.sim);
@@ -67,7 +68,7 @@ const Sim = observer(() => {
   };
 
   useEffect(() => {
-    if (!editor.getLine) {
+    if (!editor?.state) {
       return;
     }
 

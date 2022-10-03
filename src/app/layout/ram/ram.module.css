@@ -14,19 +14,19 @@
   font-size: 14px;
   line-height: 1.5;
 }
-.CodeMirror .CodeMirror-activeline-background {
-  background: rgba(254, 138, 39, 0.1);
+.CodeMirror .cm-editor {
+  background-color: var(--white);
 }
-.CodeMirror .cm-cmd {
+.CodeMirror .cm-keyword {
   color: var(--codeCmd);
 }
-.CodeMirror .cm-num {
+.CodeMirror .cm-number {
   color: var(--codeNum);
 }
-.CodeMirror .cm-cell {
+.CodeMirror .cm-operator {
   color: var(--codeCell);
 }
-.CodeMirror .cm-val {
+.CodeMirror .cm-string {
   color: var(--codeVal);
 }
 .CodeMirror .cm-comment {

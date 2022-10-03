@@ -15,13 +15,13 @@ A guide to the simulator is also available from the `Help` section accessible fr
 
 ## Specifications
 
-The simulator is developed as a NextJS app writter using React and Typescript.
+The simulator is developed as a NextJS app developed using React and Typescript.
 The code editor uses CodeMirror.
 The chosen design framework is FluentUI by Microsoft.
 
 ## How to compile
 
-After downloading the repository and installing the dependencies using `npm install`, a simple `npm run build` is enough to start a compiled and live updated version at `localhost:3000`.
+After downloading the repository and installing the dependencies using `npm install`, a simple `npm run dev` is enough to start a compiled and live updated version at `localhost:3000`.
 
 ## Testing
 
