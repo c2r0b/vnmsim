@@ -11,7 +11,7 @@ export const lineHighlightField = StateField.define({
   create() {
     return Decoration.none;
   },
-  update(lines, tr) {
+  update(lines:any, tr) {
     for (let e of tr.effects) {
       if (e.is(addLineHighlight)) {
         lines = Decoration.none;
