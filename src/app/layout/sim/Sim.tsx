@@ -118,6 +118,7 @@ const Sim = observer(() => {
         </MessageBar>
       ) : null }
       <PanZoom
+        id="simulator"
         zoomSpeed={ 0.5 }
         minZoom={ 0.5 }
         maxZoom={ 1.5 }
@@ -147,6 +148,7 @@ const Sim = observer(() => {
             <rect x="102" y="40" width="2" height="115"></rect>
           </svg>
           <SpinButton
+            id="pcIncrement"
             min={ 1 }
             styles={ styles.pc.increment }
             value={ sim.pc.step.toString() }
@@ -160,6 +162,7 @@ const Sim = observer(() => {
             PC
           </Text>
           <SpinButton
+            id="pc"
             min={ 0 }
             step={ sim.pc.step }
             styles={ styles.pc.input }
@@ -182,14 +185,17 @@ const Sim = observer(() => {
             ALU
           </Text>
           <TextField
+            id="aluE1"
             styles={ styles.alu.p1 }
             value={ sim.alu.e1.toString() }
           />
           <TextField
+            id="aluE2"
             styles={ styles.alu.p2 }
             value={ sim.alu.e2.toString() }
           />
           <TextField
+            id="aluOp"
             styles={ styles.alu.op }
             value={ sim.alu.op }
             readOnly
@@ -202,6 +208,7 @@ const Sim = observer(() => {
             <rect x="120" y="160" width="162" height="2"></rect>
           </svg>
           <Text
+            id="accLabel"
             styles={ styles.acc.label }
             onMouseEnter={ () => setMsg(Locale.get("ACC")) }
             onMouseLeave={ () => setMsg("") }
@@ -209,12 +216,14 @@ const Sim = observer(() => {
             ACC
           </Text>
           <TextField
+            id="acc"
             styles={ styles.acc.field }
             value={ sim.acc.toString() }
           />
         </div>
         <div style={ styles.ir.container }>
           <Text
+            id="irLabel"
             styles={ styles.ir.label }
             onMouseEnter={ () => setMsg(Locale.get("IR")) }
             onMouseLeave={ () => setMsg("") }
@@ -222,10 +231,12 @@ const Sim = observer(() => {
             IR
           </Text>
           <TextField
+            id="ir"
             styles={ styles.ir.input }
             value={ sim.ir.cmd + " " + sim.ir.loc }
           />
           <TextField
+            id="irDecoder"
             styles={ styles.ir.decoder }
             defaultValue={ Locale.get("DECODER") }
             readOnly

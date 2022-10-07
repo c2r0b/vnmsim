@@ -46,6 +46,7 @@ export const Variables = observer((props:IProps) => {
       onRender: (item) => {
         return (
           <SpinButton
+            id="value"
             step={ 1 }
             value={ Sim.getVariable(item.type) }
             onChange={ (e, v) => onVariableChange(item.type, v) }
