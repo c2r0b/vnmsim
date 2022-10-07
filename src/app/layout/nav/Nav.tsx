@@ -64,6 +64,7 @@ const Nav = observer(() => {
 
   const _menuItems = [
     {
+      key: "open",
       ariaLabel: Locale.get("PROJECT_OPEN"),
       iconProps: { iconName: "Open", styles: Styles.menuIcon },
       disabled: isSimRunning,
@@ -72,44 +73,53 @@ const Nav = observer(() => {
       }
     },
     {
+      key: "save",
       ariaLabel: Locale.get("PROJECT_SAVE"),
       disabled: isSimRunning,
       iconProps: { iconName: "Save", styles: Styles.menuIcon },
       onClick: onSave
     },
     {
+      key: "samples",
       ariaLabel: Locale.get("SAMPLES"),
       iconProps: { iconName: "Sample", styles: Styles.menuIcon },
       onClick: () => setSelPanel("samples")
     },
     {
+      key: "help",
       ariaLabel: Locale.get("HELP"),
       iconProps: { iconName: "Help", styles: Styles.menuIcon },
       onClick: () => setSelPanel("help")
     },
     {
+      key: "github",
       ariaLabel: "GitHub",
       iconProps: githubIconProps,
       onClick: onGithubClick
     },
     {
+      key: "settings",
       ariaLabel: Locale.get("SETTINGS"),
       iconProps: { iconName: "Settings", styles: Styles.menuIcon },
       onClick: () => setSelPanel("settings")
     }
   ];
 
-  const menuItems = _menuItems.map(props => (
-    <TooltipHost
-      content={ props.ariaLabel }
-      calloutProps={{ gapSpace: 0 }}
-    >
-      <IconButton
-        { ...props }
-        styles={ Styles.menuButton }
-      />
-    </TooltipHost>
-  ));
+  const menuItems = _menuItems.map(props => {
+    return (
+      <TooltipHost
+        key={ props.key }
+        id={ props.key }
+        content={ props.ariaLabel }
+        calloutProps={{ gapSpace: 0 }}
+      >
+        <IconButton
+          { ...props }
+          styles={ Styles.menuButton }
+        />
+      </TooltipHost>
+    );
+  });
 
   return (
     <>

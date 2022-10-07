@@ -36,7 +36,7 @@ export const lineNumbersExtension = gutter({
 	},
 	updateSpacer(spacer, update) {
 		let max = maxLineNumber(update.view.state.doc.lines);
-		return max === spacer.number ? spacer : new NumberMarker(max);
+		return new NumberMarker(max);
 	},
 	domEventHandlers: {
 		click(view, line, event) {

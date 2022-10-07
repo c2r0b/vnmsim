@@ -26,30 +26,35 @@ export default observer(() => {
 
   const _controls = [
     {
+      key: "run",
       ariaLabel: Locale.get("RUN"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Play" },
       onClick: () => Sim.setSimStatus(1),
     },
     {
+      key: "step",
       ariaLabel: Locale.get("STEP"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Step" },
       onClick: () => Sim.setSimStatus(2),
     },
     {
+      key: "iteration",
       ariaLabel: Locale.get("ITERATION"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
       iconProps: { iconName: "Circle" },
       onClick: () => Sim.setSimStatus(3),
     },
     {
+      key: "pause",
       ariaLabel: Locale.get("PAUSE"),
       disabled: hasErrors || [0,4].includes(simStatus),
       iconProps: { iconName: "Pause" },
       onClick: () => Sim.setSimStatus(4),
     },
     {
+      key: "stop",
       ariaLabel: Locale.get("STOP"),
       disabled: hasErrors || simStatus === 0,
       iconProps: { iconName: "Stop" },
@@ -83,6 +88,7 @@ export default observer(() => {
         {
           _controls.map(props => (
             <TooltipHost
+              key={ props.key }
               content={ props.ariaLabel }
               calloutProps={{ gapSpace: 0 }}
             >

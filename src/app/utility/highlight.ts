@@ -12,12 +12,11 @@ export const lineHighlightField = StateField.define({
     return Decoration.none;
   },
   update(lines, tr) {
-    lines = lines.map(tr.changes);
     for (let e of tr.effects) {
       if (e.is(addLineHighlight)) {
         lines = Decoration.none;
         if (e.value !== null) {
-          lines = lines.update({add: [lineHighlightMark.range(e.value)]});
+          lines = lines.update({ add: [lineHighlightMark.range(e.value)] });
         }
       }
     }
