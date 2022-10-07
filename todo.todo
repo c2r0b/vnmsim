@@ -1,6 +1,4 @@
 production ready:
-- codemirror v6
-- solve single iteration not loading IR
 - move to master
 - live version (Vercel)
 

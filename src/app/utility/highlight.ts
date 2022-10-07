@@ -16,7 +16,9 @@ export const lineHighlightField = StateField.define({
     for (let e of tr.effects) {
       if (e.is(addLineHighlight)) {
         lines = Decoration.none;
-        lines = lines.update({add: [lineHighlightMark.range(e.value)]});
+        if (e.value !== null) {
+          lines = lines.update({add: [lineHighlightMark.range(e.value)]});
+        }
       }
     }
     return lines;
@@ -25,5 +27,5 @@ export const lineHighlightField = StateField.define({
 });
 
 export const clearHighlight = (editor) => {
-  editor.view?.dispatch({});
+  editor.view?.dispatch({ effects: addLineHighlight.of(null) });
 }

@@ -10,9 +10,12 @@ const commands = {
 };
 
 export const execute = ({ sim, stats, status, line, editor }) => {
-  if (!sim.codeLine || sim.codeLine < 0) {
-    sim.codeLine = 0;
-  }
+  // get line, interpret comments as NOP operations
+  sim.line = (
+    (!line || line.match(/^((\d+)|(\/\/[\s\S]*))$/i))
+    ? 'NOP'
+    : line
+  );
 
   // execute code related to the current simulator step
   switch(sim.step) {
@@ -20,13 +23,6 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       sim.focus.cell = -1;
       sim.focus.var = -1;
       stats.executed_step++;
-
-      // get line, interpret comments as NOP operations
-      sim.line = (
-        (!line || line.match(/^((\d+)|(\/\/[\s\S]*))$/i))
-        ? 'NOP'
-        : line
-      );
 
       // stop the simulator if the PC has a negative value
       if (sim.pc.val < 0) {
@@ -46,10 +42,10 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       sim.ir.loc = sim.line.substr(4).toUpperCase().trim();
       break;
     case 4:
+      sim.focus.cell = -1;
       sim.focus.el = 'pc.increment.input';
       break;
     case 5:
-      sim.focus.cell = -1;
       sim.focus.el = 'pc.input.input';
       // increment program counter
       sim.pc.val = +sim.pc.val + sim.pc.step;
@@ -70,7 +66,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
           sim.focus.el = "";
           sim.focus.var = -1;
           sim.focus.cell = -1;
-          sim.codeLine = 0;
+          sim.codeLine = -1;
           status = 0;
           break;
         case 'JMP':

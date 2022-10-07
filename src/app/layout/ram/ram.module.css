@@ -32,3 +32,6 @@
 .CodeMirror .cm-comment {
   color: #999;
 }
+.CodeMirror .cm-gutterElement {
+  text-align: left;
+}

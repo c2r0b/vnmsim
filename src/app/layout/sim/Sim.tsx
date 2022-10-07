@@ -53,12 +53,16 @@ const Sim = observer(() => {
         return;
       }
     }
-
+    
+    if (!sim.codeLine || sim.codeLine < 0) {
+      sim.codeLine = 0;
+    }
+    
     const result = execute({
       sim,
       stats: {...Sim.getStats()},
       status,
-      line: editor.state.doc.lineAt(sim.codeLine || 0).text,
+      line: editor.state.doc.text[sim.codeLine],
       editor: editor.state
     });
 

@@ -27,8 +27,10 @@ import { Statistics } from "./stats/Stats";
 
 import * as Styles from "./ram.styles";
 import { addLineHighlight, clearHighlight, lineHighlightField } from 'src/app/utility/highlight';
+import { lineNumbersExtension } from 'src/app/utility/gutter';
 
 const editorTheme = new Compartment();
+
 
 const Ram = observer(() => {
   const Sim = useContext(SimulatorContext);
@@ -39,8 +41,15 @@ const Ram = observer(() => {
   const interval = Sim.getInterval();
   const editorRef = useRef(null);
 
-  const focusCell = (lineNo: number, start: number, end: number) => {
+  const focusCell = (lineNo: number) => {
     const editor = Sim.getEditor();
+
+    // if out of bounds, return
+    if (lineNo < 0 || lineNo > editor.state.doc.lines) {
+      clearHighlight(editor);
+      return;
+    }
+
     const docPosition = editor.state.doc.line(lineNo + 1).from;
     editor.view.dispatch({ effects: addLineHighlight.of(docPosition) });
   };
@@ -55,25 +64,7 @@ const Ram = observer(() => {
       return;
     }
 
-    if (sim.focus.cell < 0) {
-      clearHighlight(Sim.getEditor());
-    }
-    else {
-      switch (sim.step) {
-        case 2: // IR command
-          focusCell(sim.codeLine, 0, sim.ir.cmd.length);
-          break;
-        case 3: // IR location
-          const positionZero = sim.ir.cmd.length + 1;
-          focusCell(sim.codeLine, positionZero, positionZero + sim.ir.loc.length);
-          break;
-        case 7: // number store in cell
-          focusCell(sim.focus.cell, 0, 10);
-          break;
-        default:
-          clearHighlight(Sim.getEditor());
-      }
-    }
+    focusCell(sim.focus.cell);
 
     if (sim.focus.var < 0) {
       setFocusedVar("");
@@ -86,6 +77,7 @@ const Ram = observer(() => {
   // on editor content change
   const onEditorChange = React.useCallback((value, viewUpdate) => {
     Sim.setEditor(viewUpdate);
+    Sim.setCode(viewUpdate.state.doc.toString());
   }, []);
 
   // on editor update check for highlighted errors
@@ -107,7 +99,7 @@ const Ram = observer(() => {
     highlightSelectionMatches: true,
     firstLineNumber: 0,
     cursorBlinkRate: 800,
-    lineNumbers: true
+    lineNumbers: false
   };
 
   const currentEditorTheme = () => {
@@ -116,6 +108,7 @@ const Ram = observer(() => {
   };
 
   const editorExtensions = [
+    lineNumbersExtension,
     lintGutter(),
     StreamLanguage.define(vnmLang),
     vnmLinter,
@@ -162,6 +155,7 @@ const Ram = observer(() => {
                 height="200px"
                 extensions={ editorExtensions }
                 onChange={ onEditorChange }
+                onUpdate={ (viewUpdate) => onEditorChange("", viewUpdate) }
                 basicSetup={ editorOptions }
               />
             </div>
