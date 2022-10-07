@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es6",
+    "experimentalDecorators": false,
+    "lib": [
+      "es2015",
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "src": [
+        "/src/"
+      ]
+    },
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": true,
+    "jsx": "preserve",
+    "allowJs": false,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

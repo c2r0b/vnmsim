@@ -1,0 +1,27 @@
+production ready:
+- move to master
+- live version (Vercel)
+
+future proposal:
+- jest tests
+- domain vnmsim.app (already registered)
+- controls keyboard shortcuts
+- svg move and zoom keyboard shortcuts
+- codemirror custom theme
+- settings
+  - jump comment lines
+  - jump empty cells
+- inline comments
+- welcome splash screen
+- mobile usable
+- lighthouse 100%
+- open/save from local storage
+- open/save from cloud services
+- tutorial interactive tour
+- binary mode
+- fluentui v9
+- autodeploy
+- app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)
+- documentation (docusaurus)
+- sponsors
+- customized theme

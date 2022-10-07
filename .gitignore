@@ -1,8 +1,14 @@
 # Compiled source #
 ###################
-dist/
 build/
+dist/
+coverage/
 node_modules/
+yarn.lock
+yarn-error.log
+package-lock.json
+.yarnrc
+.next
 
 # OS generated files #
 ######################

@@ -1,1 +1,0 @@
-{"status":0,"step":0,"alu":{"e1":"","e2":"","op":""},"acc":0,"pc":{"val":0,"step":1},"ir":{"cmd":"","loc":""},"line":"HLT","variables":{"X":3,"Y":2,"Z":null,"W":null},"tVarCount":0,"focus":{"el":"","var":""},"code":"// X^Y = Z\nLOD #1\nSTO Z\nLOD Y\nJMZ 12\nLOD Z\nMUL X\nSTO Z\nLOD Y\nSUB #1\nSTO Y\nJMP 4\nHLT"}

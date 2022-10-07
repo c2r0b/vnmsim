@@ -1,1 +1,0 @@
-{"status":0,"step":0,"alu":{"e1":"","e2":"","op":""},"acc":0,"pc":{"val":0,"step":1},"ir":{"cmd":"","loc":""},"line":"","variables":{"X":4,"Y":2,"Z":0,"W":0},"tVarCount":0,"focus":{"el":"","var":""},"code":"// X % Y == 0? Z\nLOD X\nDIV Y\nMUL Y\nSTO Y\nLOD X\nSUB Y\nJMZ 11\nLOD #0\nSTO Z\nJMP 13\nLOD #1\nSTO Z\nHLT"}

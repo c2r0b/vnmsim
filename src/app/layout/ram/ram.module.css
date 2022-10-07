@@ -1,0 +1,37 @@
+.split {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 105px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.CodeMirror {
+  height: 100%;
+  border-right: 1px solid var(--neutralLight);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.CodeMirror .cm-editor {
+  background-color: var(--white);
+}
+.CodeMirror .cm-keyword {
+  color: var(--codeCmd);
+}
+.CodeMirror .cm-number {
+  color: var(--codeNum);
+}
+.CodeMirror .cm-operator {
+  color: var(--codeCell);
+}
+.CodeMirror .cm-string {
+  color: var(--codeVal);
+}
+.CodeMirror .cm-comment {
+  color: #999;
+}
+.CodeMirror .cm-gutterElement {
+  text-align: left;
+}

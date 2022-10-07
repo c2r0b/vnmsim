@@ -1,1 +1,0 @@
-{"status":0,"step":0,"alu":{"e1":"","e2":"","op":""},"acc":1,"pc":{"val":0,"step":1},"ir":{"cmd":"","loc":""},"line":"NOP","variables":{"X":6,"Y":7,"Z":0,"W":0},"tVarCount":0,"focus":{"el":"","var":""},"code":"// X * Y = Z\nLOD X\nMUL Y\nSTO Z\nHLT"}
