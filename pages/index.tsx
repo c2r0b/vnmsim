@@ -65,7 +65,7 @@ export default () => {
       <Head>
         <title>Von Neumann machine simulator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline'; connect-src self * 'unsafe-inline' blob: data: gap:;" />
+        <meta httpEquiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline'; connect-src self * 'unsafe-inline' blob: data: gap:;" />
         <meta name="theme-color" content="#000000" />
 
         <link rel="apple-touch-icon" href="/images/touch/192x192.png" />
