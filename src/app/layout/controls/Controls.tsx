@@ -14,6 +14,7 @@ import {
 } from "@fluentui/react";
 
 import * as Styles from "./controls.styles";
+import { clearHighlight } from "src/app/utility/highlight";
 
 const speedFormat = (value: number) => `${value} ms`;
 
@@ -58,7 +59,10 @@ export default observer(() => {
       ariaLabel: Locale.get("STOP"),
       disabled: hasErrors || simStatus === 0,
       iconProps: { iconName: "Stop" },
-      onClick: () => Sim.setSimStatus(0),
+      onClick: () => {
+        Sim.setSimStatus(0);
+        clearHighlight(Sim.getEditor());
+      }
     },
   ];
 

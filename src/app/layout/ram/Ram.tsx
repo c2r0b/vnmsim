@@ -49,8 +49,10 @@ const Ram = observer(() => {
       return;
     }
 
-    const docPosition = editor.state.doc.line(lineNo + 1).from;
-    editor.view.dispatch({ effects: addLineHighlight.of(docPosition) });
+    if (editor.state.doc.lines > lineNo) {
+      const docPosition = editor.state.doc.line(lineNo + 1).from;
+      editor.view.dispatch({ effects: addLineHighlight.of(docPosition) });
+    }
   };
 
   useEffect(() => {
