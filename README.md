@@ -3,7 +3,7 @@
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
-Online version: [vnmsim.vercel.app](https://vnmsim.vercel.app)
+Online version: [vnmsim.app](https://vnmsim.app)
 
 [![Powered by Vercel](/public/powered-by-vercel.svg "Powered by Vercel")](https://vercel.com/?utm_source=vnmsim&utm_campaign=oss)
 

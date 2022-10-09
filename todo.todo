@@ -1,5 +1,8 @@
+- fix dark editor theme
+- fix dark theme simulator text
+- fix dark theme controls
+
 - jest tests
-- domain vnmsim.app (already registered)
 - controls keyboard shortcuts
 - svg move and zoom keyboard shortcuts
 - codemirror custom theme
