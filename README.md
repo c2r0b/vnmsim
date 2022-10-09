@@ -3,7 +3,7 @@
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
-Online version: `coming soon`
+Online version: [vnmsim.vercel.app](https://vnmsim.vercel.app)
 
 ![Powered by Vercel](/public/powered-by-vercel.svg "Powered by Vercel")
 
@@ -37,6 +37,10 @@ If you'd like to add a new language or improve the translations, you can do that
 In 2015 a different simulator of the Von Neumann machine inspired by this one has been developed for Zanichelli Editor S.p.A. as an extension of the work of Giorgio Meini, Fiorenzo Formichi: "Tecnologie e progettazione di sistemi informatici e di telecomunicazioni".
 
 If you were looking for that simulator (available only in italian), you can download it [here](http://goo.gl/hSwG4m).
+
+# AngularJS version
+
+The previous version written in AngularJS is available in the `old` repository and online [here](http://vnsimulator.altervista.org/). 
 
 ## License
 
