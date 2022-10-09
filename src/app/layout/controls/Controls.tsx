@@ -112,12 +112,14 @@ export default observer(() => {
           snapToStep
         />
       </Stack>
-      <Image
-        priority
-        src={ poweredByVercelImg }
-        alt="Powered by Vercel"
-        width={ 150 }
-      />
+      <a href="https://vercel.com/?utm_source=vnmsim&utm_campaign=oss">
+        <Image
+          priority
+          src={ poweredByVercelImg }
+          alt="Powered by Vercel"
+          width={ 150 }
+        />
+      </a>
     </Stack>
   );
 });

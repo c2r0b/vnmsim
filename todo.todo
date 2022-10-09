@@ -3,6 +3,7 @@
 - controls keyboard shortcuts
 - svg move and zoom keyboard shortcuts
 - codemirror custom theme
+- loop prevention (page freeze fix)
 - settings
   - jump comment lines
   - jump empty cells
