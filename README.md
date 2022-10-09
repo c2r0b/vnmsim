@@ -1,4 +1,4 @@
-# Von Neumann machine simulator
+# VNMS (AngularJS version)
 
 A simulator of the Von Neumann machine written in Javascript. It is built mainly using Pug (previously Jade), Sass, AngularJS and CodeMirror.
 
