@@ -188,11 +188,13 @@ const Sim = observer(() => {
             id="aluE1"
             styles={ styles.alu.p1 }
             value={ sim.alu.e1.toString() }
+            readOnly
           />
           <TextField
             id="aluE2"
             styles={ styles.alu.p2 }
             value={ sim.alu.e2.toString() }
+            readOnly
           />
           <TextField
             id="aluOp"
@@ -219,6 +221,7 @@ const Sim = observer(() => {
             id="acc"
             styles={ styles.acc.field }
             value={ sim.acc.toString() }
+            readOnly
           />
         </div>
         <div style={ styles.ir.container }>
@@ -234,6 +237,7 @@ const Sim = observer(() => {
             id="ir"
             styles={ styles.ir.input }
             value={ sim.ir.cmd + " " + sim.ir.loc }
+            readOnly
           />
           <TextField
             id="irDecoder"

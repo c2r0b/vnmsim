@@ -31,7 +31,6 @@ import { lineNumbersExtension } from 'src/app/utility/gutter';
 
 const editorTheme = new Compartment();
 
-
 const Ram = observer(() => {
   const Sim = useContext(SimulatorContext);
   const Theme = useContext(ThemeContext);

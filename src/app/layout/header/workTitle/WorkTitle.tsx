@@ -9,7 +9,6 @@ import ContentEditable from "react-contenteditable";
 
 import * as Styles from "./workTitle.styles";
 
-
 const WorkTitle = observer(() => {
   const Sim = useContext(SimulatorContext);
 
@@ -22,9 +21,7 @@ const WorkTitle = observer(() => {
   return (
     <div style={ Styles.container }>
       <Stack>
-        <Text
-          styles={ Styles.title }
-        >
+        <Text styles={ Styles.title }>
           <ContentEditable
             tagName="pre"
             innerRef={ workTitleRef }

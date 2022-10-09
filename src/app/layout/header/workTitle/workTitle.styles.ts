@@ -9,14 +9,17 @@ export const title:ITextStyles = {
   root: {
     fontSize: 21,
     fontWeight: 600,
-    color: "white"
+    color: "white",
+    lineHeight: 0,
+    marginTop: -10,
+    marginBottom: -7
   }
 };
 
 export const date = {
   root: {
     fontSize: 9,
-    paddingTop: 1,
+    paddingTop: 0,
     cursor: "default",
     color: "white"
   }

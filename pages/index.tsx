@@ -1,5 +1,4 @@
 import React from "react";
-
 import Head from "next/head";
 
 import { App } from "../src/app/app";
@@ -48,7 +47,7 @@ registerIcons({
 
 export default () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Von Neumann machine simulator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,7 +59,6 @@ export default () => {
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/16x16.png" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-
       <ThemeContext.Provider value={ new ThemeStore() }>
         <LocaleContext.Provider value={ new LocaleStore() }>
           <SimulatorContext.Provider value={ new SimulatorStore() }>
@@ -68,6 +66,6 @@ export default () => {
           </SimulatorContext.Provider>
         </LocaleContext.Provider>
       </ThemeContext.Provider>
-    </div>
+    </>
   );
 };

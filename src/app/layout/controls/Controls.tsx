@@ -109,6 +109,7 @@ export default observer(() => {
         />
       </Stack>
       <Image
+        priority
         src={ poweredByVercelImg }
         alt="Powered by Vercel"
         width={ 150 }
