@@ -5,7 +5,7 @@ This simulator is meant to be a solution for students and teachers to study how 
 
 Online version: [vnmsim.vercel.app](https://vnmsim.vercel.app)
 
-![Powered by Vercel](/public/powered-by-vercel.svg "Powered by Vercel")
+[![Powered by Vercel](/public/powered-by-vercel.svg "Powered by Vercel")](https://vercel.com/?utm_source=vnmsim&utm_campaign=oss)
 
 ## Simulator guide
 
