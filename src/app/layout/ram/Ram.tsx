@@ -125,7 +125,7 @@ const Ram = observer(() => {
 
   return (
     <AutoSizer>
-      {({ width }) => (
+      {({ width, height }) => (
         <Resizable
           style={ Styles.container }
           minWidth={ 500 }
@@ -153,7 +153,7 @@ const Ram = observer(() => {
                 ref={ editorRef }
                 className={ ramStyles.CodeMirror }
                 value={ Sim.getCode() || "" }
-                height="200px"
+                height={ height }
                 extensions={ editorExtensions }
                 onChange={ onEditorChange }
                 onUpdate={ (viewUpdate) => onEditorChange("", viewUpdate) }

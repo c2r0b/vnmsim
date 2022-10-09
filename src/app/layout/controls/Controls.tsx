@@ -118,6 +118,7 @@ export default observer(() => {
           src={ poweredByVercelImg }
           alt="Powered by Vercel"
           width={ 150 }
+          style={{ marginTop: 5 }}
         />
       </a>
     </Stack>

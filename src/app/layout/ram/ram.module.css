@@ -35,3 +35,7 @@
 .CodeMirror .cm-gutterElement {
   text-align: left;
 }
+.CodeMirror .cm-wrap {
+  height: var(--codemirror-height);
+  border: 1px solid silver
+}
