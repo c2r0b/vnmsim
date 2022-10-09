@@ -57,6 +57,12 @@ const Sim = observer(() => {
     if (!sim.codeLine || sim.codeLine < 0) {
       sim.codeLine = 0;
     }
+
+    // stop if RAM out of bounds
+    if (editor.state.doc.lines < sim.codeLine + 1) {
+      Sim.setSimStatus(0);
+      return;
+    }
     
     const result = execute({
       sim,
