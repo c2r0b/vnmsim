@@ -38,7 +38,7 @@ In 2015 a different simulator of the Von Neumann machine inspired by this one ha
 
 If you were looking for that simulator (available only in italian), you can download it [here](http://goo.gl/hSwG4m).
 
-# AngularJS version
+## AngularJS version
 
 The previous version written in AngularJS is available in the `old` repository and online [here](http://vnsimulator.altervista.org/). 
 
