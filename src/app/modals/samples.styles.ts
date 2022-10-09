@@ -7,6 +7,19 @@ export const stack = {
 export const card = {
   root: {
     width: 200,
-    height: 70
+    height: 75
+  }
+};
+
+export const title = {
+  root: {
+    fontSize: 16,
+    paddingBottom: 0
+  }
+};
+
+export const desc = {
+  root: {
+    padding: 20
   }
 };

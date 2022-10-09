@@ -46,7 +46,7 @@ export const samples = [
   },
   {
     key: "greater_than",
-    label: "Is greater than",
+    label: "Greater than",
     desc: "x > y"
   },
 ];

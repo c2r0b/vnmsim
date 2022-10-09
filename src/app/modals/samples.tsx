@@ -6,8 +6,8 @@ import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
 import {
-  Panel, PanelType, Stack, DocumentCard, DocumentCardType, DocumentCardDetails,
-  DocumentCardTitle, DocumentCardLocation, DocumentCardActions
+  Panel, PanelType, Stack, DocumentCard, DocumentCardTitle,
+  DocumentCardActions, Text
 } from "@fluentui/react";
 
 import { samples } from "./samples.list";
@@ -52,19 +52,25 @@ const Samples = observer((props:IProps) => {
     return (
       <DocumentCard
         key={ s.key }
-        type={ DocumentCardType.compact }
         styles={ Styles.card }
       >
-        <DocumentCardTitle
-          title={ s.label }
-          shouldTruncate
-        />
-        <DocumentCardLocation
-          location={ s.desc }
-        />
-        <DocumentCardActions
-          actions={ actions }
-        />
+        <Stack horizontal horizontalAlign="space-between">
+          <Stack.Item>
+            <DocumentCardTitle
+              title={ s.label }
+              styles={ Styles.title }
+            />
+            <Text
+              variant="medium"
+              styles={ Styles.desc }
+            >
+              { s.desc }
+            </Text>
+          </Stack.Item>
+          <DocumentCardActions
+            actions={ actions }
+          />
+        </Stack>
       </DocumentCard>
     );
   });
@@ -79,7 +85,10 @@ const Samples = observer((props:IProps) => {
       onDismiss={ () => props.onDismiss() }
       closeButtonAriaLabel={ Locale.get("CLOSE") }
     >
-      <p><Localize label="SAMPLES_MSG"/></p>
+      <p>
+        <Localize label="SAMPLES_MSG"/>
+      </p>
+      
       <Stack
         horizontal
         wrap
