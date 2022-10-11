@@ -11,9 +11,13 @@ import { PanZoom } from "react-easy-panzoom";
 import { execute, lastStep } from "../../utility/execute";
 import { strToObj, mergeDeep } from "../../utility/objects";
 
+import { preventPan } from "./preventPan";
+import * as DataBus from "./DataBus";
+import * as AddressesBus from "./AddressesBus";
+
 import * as Styles from "./sim.styles";
 
-const Sim = observer(() => {
+export default observer(() => {
   const Sim = useContext(SimulatorContext);
   const Locale = useContext(LocaleContext);
 
@@ -119,80 +123,22 @@ const Sim = observer(() => {
   const decoderInputRef = useRef(null);
   const pcInputRef = useRef(null);
   const pcIncrementInputRef = useRef(null);
-  
-  // prevent pan on inputs
-  const preventPan = (e, x, y) => {
-    if (e.target === decoderInputRef?.current) {
-      return true
-    }
-    if (e.target === pcInputRef?.current) {
-      return true
-    }
-    if (e.target === pcIncrementInputRef?.current) {
-      return true
-    }
-   
-    const decoder_contentRect = decoderInputRef?.current?.getBoundingClientRect()
-    const pc_contentRect = pcInputRef?.current?.getBoundingClientRect()
-    const pcInc_contentRect = pcIncrementInputRef?.current?.getBoundingClientRect()
-   
-    const decoder_x1 = decoder_contentRect.left
-    const decoder_x2 = decoder_contentRect.right
-    const decoder_y1 = decoder_contentRect.top
-    const decoder_y2 = decoder_contentRect.bottom
-
-    const pc_x1 = pc_contentRect.left
-    const pc_x2 = pc_contentRect.right
-    const pc_y1 = pc_contentRect.top
-    const pc_y2 = pc_contentRect.bottom
-
-    const pcInc_x1 = pcInc_contentRect.left
-    const pcInc_x2 = pcInc_contentRect.right
-    const pcInc_y1 = pcInc_contentRect.top
-    const pcInc_y2 = pcInc_contentRect.bottom
-   
-    return (
-      (x >= decoder_x1 && x <= decoder_x2) && (y >= decoder_y1 && y <= decoder_y2)
-      && (x >= pc_x1 && x <= pc_x2) && (y >= pc_y1 && y <= pc_y2)
-      && (x >= pcInc_x1 && x <= pcInc_x2) && (y >= pcInc_y1 && y <= pcInc_y2)
-    )
-  };
+  const refsWithoutPan = [decoderInputRef, pcInputRef, pcIncrementInputRef];
 
   return (
     <>
       <PanZoom
-        id="simulator"
         zoomSpeed={ 0.5 }
         minZoom={ 0.5 }
         maxZoom={ 1.5 }
-        preventPan={ preventPan }
+        preventPan={ (e, x, y) => preventPan(e, x, y, refsWithoutPan) }
         style={ styles.container }
       >
-        <svg style={ styles.dataBus }>
-          <rect x="0" y="0" width="2" height="480"></rect>
-          <rect x="0" y="0" width="580" height="2"></rect>
-          <rect x="580" y="0" width="2" height="20"></rect>
-          <rect x="0" y="480" width="256" height="2"></rect>
-          <rect x="256" y="352" width="2" height="130"></rect>
-          <rect x="160" y="0" width="2" height="11%"></rect>
-          <rect x="350" y="0" width="2" height="48%"></rect>
-          <rect x="0" y="170" width="150" height="2"></rect>
-          <rect x="150" y="170" width="2" height="40"></rect>
-          <rect x="65" y="70" width="2" height="240"></rect>
-          <rect x="65" y="310" width="150" height="2"></rect>
-        </svg>
-        <svg style={{ ...styles.addressBus, top: 90, left: 220 }}>
-          <rect x="0" y="0" width="2" height="60"></rect>
-          <rect x="0" y="60" width="377" height="2"></rect>
-          <rect x="377" y="0" width="2" height="150"></rect>
-        </svg>
+        <DataBus.main />
+        <AddressesBus.main />
         <div style={ styles.pc.container }>
-          <svg style={ styles.addressBus }>
-            <rect x="30" y="40" width="2" height="115"></rect>
-            <rect x="102" y="40" width="2" height="115"></rect>
-          </svg>
+          <AddressesBus.pc />
           <SpinButton
-            id="pcIncrement"
             ref={ pcIncrementInputRef }
             min={ 1 }
             style={ styles.pc.increment }
@@ -209,7 +155,6 @@ const Sim = observer(() => {
             </Text>
           </Tooltip>
           <SpinButton
-            id="pc"
             ref={ pcInputRef }
             min={ 0 }
             step={ sim.pc.step }
@@ -235,30 +180,23 @@ const Sim = observer(() => {
             </Text>
           </Tooltip>
           <Input
-            id="aluE1"
             style={ styles.alu.p1 }
             value={ sim.alu.e1.toString() }
             readOnly
           />
           <Input
-            id="aluE2"
             style={ styles.alu.p2 }
             value={ sim.alu.e2.toString() }
             readOnly
           />
           <Input
-            id="aluOp"
             style={ styles.alu.op }
             value={ sim.alu.op }
             readOnly
           />
         </div>
         <div style={ styles.acc.container }>
-          <svg style={ styles.dataBus }>
-            <rect x="120" y="0" width="160" height="2"></rect>
-            <rect x="280" y="0" width="2" height="160"></rect>
-            <rect x="120" y="160" width="162" height="2"></rect>
-          </svg>
+          <DataBus.acc />
           <Tooltip
             content={ Locale.get("ACC") }
             relationship="label"
@@ -269,7 +207,6 @@ const Sim = observer(() => {
             </Text>
           </Tooltip>
           <Input
-            id="acc"
             style={ styles.acc.field }
             value={ sim.acc.toString() }
             readOnly
@@ -281,21 +218,16 @@ const Sim = observer(() => {
             relationship="label"
             withArrow
           >
-            <Text
-              id="irLabel"
-              style={ styles.ir.label }
-            >
+            <Text style={ styles.ir.label }>
               IR
             </Text>
           </Tooltip>
           <Input
-            id="ir"
             style={ styles.ir.input }
             value={ sim.ir.cmd + " " + sim.ir.loc }
             readOnly
           />
           <Input
-            id="irDecoder"
             ref={ decoderInputRef }
             style={ styles.ir.decoder }
             defaultValue={ Locale.get("DECODER") }
@@ -340,5 +272,3 @@ const Sim = observer(() => {
     </>
   );
 });
-
-export default Sim;
