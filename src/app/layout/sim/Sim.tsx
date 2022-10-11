@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 
-import { Input, SpinButton, Text } from "@fluentui/react-components";
-import { Alert } from "@fluentui/react-components/unstable";
+import { Input, SpinButton, Text, Tooltip } from "@fluentui/react-components";
 
 import { PanZoom } from "react-easy-panzoom";
 
@@ -18,7 +17,6 @@ const Sim = observer(() => {
   const Sim = useContext(SimulatorContext);
   const Locale = useContext(LocaleContext);
 
-  const [msg, setMsg] = useState("");
   const [intervalId, setIntervalId] = useState(undefined);
   const [styles, setStyles] = useState({ ...Styles });
 
@@ -118,18 +116,56 @@ const Sim = observer(() => {
     return null;
   }
   
+  const decoderInputRef = useRef(null);
+  const pcInputRef = useRef(null);
+  const pcIncrementInputRef = useRef(null);
+  
+  // prevent pan on inputs
+  const preventPan = (e, x, y) => {
+    if (e.target === decoderInputRef?.current) {
+      return true
+    }
+    if (e.target === pcInputRef?.current) {
+      return true
+    }
+    if (e.target === pcIncrementInputRef?.current) {
+      return true
+    }
+   
+    const decoder_contentRect = decoderInputRef?.current?.getBoundingClientRect()
+    const pc_contentRect = pcInputRef?.current?.getBoundingClientRect()
+    const pcInc_contentRect = pcIncrementInputRef?.current?.getBoundingClientRect()
+   
+    const decoder_x1 = decoder_contentRect.left
+    const decoder_x2 = decoder_contentRect.right
+    const decoder_y1 = decoder_contentRect.top
+    const decoder_y2 = decoder_contentRect.bottom
+
+    const pc_x1 = pc_contentRect.left
+    const pc_x2 = pc_contentRect.right
+    const pc_y1 = pc_contentRect.top
+    const pc_y2 = pc_contentRect.bottom
+
+    const pcInc_x1 = pcInc_contentRect.left
+    const pcInc_x2 = pcInc_contentRect.right
+    const pcInc_y1 = pcInc_contentRect.top
+    const pcInc_y2 = pcInc_contentRect.bottom
+   
+    return (
+      (x >= decoder_x1 && x <= decoder_x2) && (y >= decoder_y1 && y <= decoder_y2)
+      && (x >= pc_x1 && x <= pc_x2) && (y >= pc_y1 && y <= pc_y2)
+      && (x >= pcInc_x1 && x <= pcInc_x2) && (y >= pcInc_y1 && y <= pcInc_y2)
+    )
+  };
+
   return (
     <>
-      { msg ? (
-        <Alert style={ styles.infoMsg }>
-          { msg }
-        </Alert>
-      ) : null }
       <PanZoom
         id="simulator"
         zoomSpeed={ 0.5 }
         minZoom={ 0.5 }
         maxZoom={ 1.5 }
+        preventPan={ preventPan }
         style={ styles.container }
       >
         <svg style={ styles.dataBus }>
@@ -157,25 +193,29 @@ const Sim = observer(() => {
           </svg>
           <SpinButton
             id="pcIncrement"
+            ref={ pcIncrementInputRef }
             min={ 1 }
             style={ styles.pc.increment }
             value={ sim.pc.step.toString() }
-            onChange={ (ev, val) => Sim.setPcIncrement(+val) }
+            onChange={ (ev, val) => Sim.setPcIncrement(+val.value) }
           />
-          <Text
-            style={ styles.pc.label }
-            onMouseEnter={ () => setMsg(Locale.get("PC")) }
-            onMouseLeave={ () => setMsg("") }
+          <Tooltip
+            content={ Locale.get("PC") }
+            relationship="label"
+            withArrow
           >
-            PC
-          </Text>
+            <Text style={ styles.pc.label }>
+              PC
+            </Text>
+          </Tooltip>
           <SpinButton
             id="pc"
+            ref={ pcInputRef }
             min={ 0 }
             step={ sim.pc.step }
             style={ styles.pc.input }
             value={ sim.pc.val.toString() }
-            onChange={ (ev, val) => { Sim.setProgramCounter(+val) } }
+            onChange={ (ev, val) => { Sim.setProgramCounter(+val.value) } }
           />
         </div>
         <div style={ styles.alu.container }>
@@ -185,13 +225,15 @@ const Sim = observer(() => {
             >
             </polygon>
           </svg>
-          <Text
-            style={ styles.alu.label }
-            onMouseEnter={ () => setMsg(Locale.get("ALU")) }
-            onMouseLeave={ () => setMsg("") }
+          <Tooltip
+            content={ Locale.get("ALU") }
+            relationship="label"
+            withArrow
           >
-            ALU
-          </Text>
+            <Text style={ styles.alu.label }>
+              ALU
+            </Text>
+          </Tooltip>
           <Input
             id="aluE1"
             style={ styles.alu.p1 }
@@ -217,14 +259,15 @@ const Sim = observer(() => {
             <rect x="280" y="0" width="2" height="160"></rect>
             <rect x="120" y="160" width="162" height="2"></rect>
           </svg>
-          <Text
-            id="accLabel"
-            style={ styles.acc.label }
-            onMouseEnter={ () => setMsg(Locale.get("ACC")) }
-            onMouseLeave={ () => setMsg("") }
+          <Tooltip
+            content={ Locale.get("ACC") }
+            relationship="label"
+            withArrow
           >
-            ACC
-          </Text>
+            <Text style={ styles.acc.label }>
+              ACC
+            </Text>
+          </Tooltip>
           <Input
             id="acc"
             style={ styles.acc.field }
@@ -233,14 +276,18 @@ const Sim = observer(() => {
           />
         </div>
         <div style={ styles.ir.container }>
-          <Text
-            id="irLabel"
-            style={ styles.ir.label }
-            onMouseEnter={ () => setMsg(Locale.get("IR")) }
-            onMouseLeave={ () => setMsg("") }
+          <Tooltip
+            content={ Locale.get("IR") }
+            relationship="label"
+            withArrow
           >
-            IR
-          </Text>
+            <Text
+              id="irLabel"
+              style={ styles.ir.label }
+            >
+              IR
+            </Text>
+          </Tooltip>
           <Input
             id="ir"
             style={ styles.ir.input }
@@ -249,38 +296,46 @@ const Sim = observer(() => {
           />
           <Input
             id="irDecoder"
+            ref={ decoderInputRef }
             style={ styles.ir.decoder }
             defaultValue={ Locale.get("DECODER") }
             readOnly
           />
         </div>
-        <Text
-          style={ styles.labels.bus }
-          onMouseEnter={ () => setMsg(Locale.get("DATA_BUS")) }
-          onMouseLeave={ () => setMsg("") }
+        <Tooltip
+          content={ Locale.get("DATA_BUS") }
+          relationship="label"
+          withArrow
         >
-          Data bus
-        </Text>
-        <Text
-          style={ styles.labels.addressesBus }
-          onMouseEnter={ () => setMsg(Locale.get("ADDRESSES_BUS")) }
-          onMouseLeave={ () => setMsg("") }
-        >
-          Add. bus
-        </Text>
-        
-        <div
-          style={ styles.ram.container }
-          onMouseEnter={ () => setMsg(Locale.get("RAM")) }
-          onMouseLeave={ () => setMsg("") }
-        >
-          <svg style={ styles.ram.svg }>
-            <rect width="50" height="100" />
-          </svg>
-          <Text style={ styles.ram.text }>
-            RAM
+          <Text style={ styles.labels.bus }>
+            Data bus
           </Text>
-        </div>
+        </Tooltip>
+        <Tooltip
+          content={ Locale.get("ADDRESSES_BUS") }
+          relationship="label"
+          withArrow
+        >
+          <Text style={ styles.labels.addressesBus }>
+            Add. bus
+          </Text>
+        </Tooltip>
+        
+        <Tooltip
+          content={ Locale.get("RAM") }
+          relationship="label"
+          positioning="before"
+          withArrow
+        >
+          <div style={ styles.ram.container }>
+            <svg style={ styles.ram.svg }>
+              <rect width="50" height="100" />
+            </svg>
+            <Text style={ styles.ram.text }>
+              RAM
+            </Text>
+          </div>
+        </Tooltip>
       </PanZoom>
     </>
   );

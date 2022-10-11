@@ -1,18 +1,10 @@
-export const infoMsg:React.CSSProperties = {
-  position: "fixed",
-  bottom: 70,
-  left: 105,
-  width: "auto",
-  background: "var(--white)",
-  zIndex: 9999
-};
-
 export const container:React.CSSProperties = {
   width: 800,
   height: 800,
   maxHeight: 700,
   marginTop: 55,
-  marginLeft: 75
+  marginLeft: 75,
+  cursor: "move"
 };
 
 export const dataBus:React.CSSProperties = {
@@ -98,34 +90,20 @@ export const alu = {
     left: 155
   },
   p1:<React.CSSProperties> {
-    root: {
-      position: "absolute",
-      top: 65,
-      left: 60,
-      width: 70,
-    },
-    fieldGroup: {
-      border: "none"
-    },
-    field: {
-      ...fieldStyles,
-      border: "none"
-    }
+    position: "absolute",
+    top: 65,
+    left: 60,
+    width: 70,
+    border: "none",
+    ...fieldStyles
   },
   p2:<React.CSSProperties> {
-    root: {
-      position: "absolute",
-      top: 65,
-      left: 210,
-      width: 70,
-    },
-    fieldGroup: {
-      border: "none"
-    },
-    field: {
-      ...fieldStyles,
-      border: "none"
-    }
+    position: "absolute",
+    top: 65,
+    left: 210,
+    width: 70,
+    border: "none",
+    ...fieldStyles
   },
   op:<React.CSSProperties> {
     position: "absolute",
@@ -164,8 +142,7 @@ export const ir = {
     borderColor: "#ccc",
     ...fieldStyles,
     fontSize: 14,
-    fontWeight: 600,
-    cursor: "pointer"
+    fontWeight: 600
   }
 };
 
@@ -196,15 +173,15 @@ export const labels = {
     top: 25,
     left: 380,
     fontSize: 14,
-    width: 100
+    width: 80
   },
   addressesBus: {
     ...label,
-    top: 100,
+    top: 120,
     left: 380,
-    paddingTop: 20,
+    paddingTop: 0,
     fontSize: 14,
-    width: 100
+    width: 80
   }
 };
 
