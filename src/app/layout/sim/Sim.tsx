@@ -116,14 +116,14 @@ export default observer(() => {
     }
   }, [status]);
 
-  if (interval === 0 && [1,2,3].includes(status)) {
-    return null;
-  }
-  
   const decoderInputRef = useRef(null);
   const pcInputRef = useRef(null);
   const pcIncrementInputRef = useRef(null);
   const refsWithoutPan = [decoderInputRef, pcInputRef, pcIncrementInputRef];
+
+  if (interval === 0 && [1,2,3].includes(status)) {
+    return null;
+  }  
 
   return (
     <>
