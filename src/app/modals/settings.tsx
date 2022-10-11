@@ -84,7 +84,12 @@ const Settings = observer((props:IProps) => {
                 onOptionSelect={ onChangeTheme }
               >
                 { themeOptions.map((option) => (
-                  <Option value={ option.value }>{ option.label }</Option>
+                  <Option 
+                    key={ option.value }
+                    value={ option.value }
+                  >
+                    { option.label }
+                  </Option>
                 ))}
               </Dropdown>
             </div>
@@ -97,7 +102,12 @@ const Settings = observer((props:IProps) => {
                 onOptionSelect={ onChangeLanguage }
               >
                 { languageOptions.map((option) => (
-                  <Option value={ option.value }>{ option.label }</Option>
+                  <Option
+                    key={ option.value }
+                    value={ option.value }
+                  >
+                    { option.label }
+                  </Option>
                 ))}
               </Dropdown>
             </div>

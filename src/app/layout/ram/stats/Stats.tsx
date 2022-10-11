@@ -51,7 +51,7 @@ export const Statistics = observer(() => {
         <Table size="small">
           <TableBody>
             { items.map((item) => (
-              <TableRow>
+              <TableRow key={ item.type }>
                 <TableCell style={ Styles.cell }>{ item.type }</TableCell>
                 <TableCell style={ Styles.cell }>{ item.count }</TableCell>
               </TableRow>

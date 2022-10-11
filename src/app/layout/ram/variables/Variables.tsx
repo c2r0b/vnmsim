@@ -75,7 +75,7 @@ export const Variables = observer((props:IProps) => {
         <Table size="small">
           <TableBody>
             { items.map(item => (
-              <TableRow>
+              <TableRow key={ item.type }>
                 <TableCell style={ Styles.typeCell }>
                   { item.type }
                 </TableCell>
