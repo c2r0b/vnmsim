@@ -109,6 +109,7 @@ const Nav = observer(() => {
         key={ props.key }
         content={ props.ariaLabel }
         relationship="label"
+        positioning="after"
         withArrow
       >
         <Button

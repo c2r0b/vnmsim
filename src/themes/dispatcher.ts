@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
 
 import { THEMES } from "./themes";
-import { webDarkTheme, webLightTheme } from "@fluentui/react-components";
+import { createDarkTheme, createLightTheme } from "@fluentui/react-components";
 
 export class ThemeStore {
   theme
@@ -70,30 +70,11 @@ export class ThemeStore {
   getTheme(theme = this.theme) {
     theme = this.getNormalizedThemeName();
     
-    return theme === "dark" ? webDarkTheme : webLightTheme;
-    /*return {
-      palette: THEMES[theme],
-      fonts: {
-        small: {
-          fontSize: "11px",
-          fontFamily: "Arial"
-        },
-        medium: {
-          fontSize: "12px",
-          fontFamily: "Arial"
-        },
-        large: {
-          fontSize: "20px",
-          fontWeight: "semibold",
-          fontFamily: "Arial"
-        },
-        xLarge: {
-          fontSize: "22px",
-          fontWeight: "semibold",
-          fontFamily: "Arial"
-        },
-      },
-    };*/
+    if (theme === "dark") {
+      return createDarkTheme(THEMES[theme]);
+    }
+    
+    return createLightTheme(THEMES[theme]);
   }
 };
 
