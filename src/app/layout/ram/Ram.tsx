@@ -20,7 +20,7 @@ import { ThemeContext } from "src/themes/dispatcher";
 import { editorMode as vnmLang } from "../../utility/mode";
 import { editorLinter } from "../../utility/linter";
 
-import { Text } from '@fluentui/react';
+import { Text } from "@fluentui/react-components";
 
 import { Variables } from "./variables/Variables";
 import { Statistics } from "./stats/Stats";
@@ -145,7 +145,7 @@ const Ram = observer(() => {
           >
             <div style={ Styles.ramHalf }>
               <div style={ Styles.title }>
-                <Text styles={ Styles.titleText }>
+                <Text style={ Styles.titleText }>
                   <Localize label="MEMORY"/>
                 </Text>
               </div>
@@ -161,7 +161,7 @@ const Ram = observer(() => {
               />
             </div>
             <Split
-              sizes={[55, 45]}
+              sizes={[54, 46]}
               minSize={ 40 }
               gutterSize={ 20 }
               dragInterval={ 30 }

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { SimulatorContext } from "src/store/dispatcher";
 import { Localize } from "src/locale/Localize";
 
-import { Text, Stack } from '@fluentui/react';
+import { Text } from "@fluentui/react-components";
 import ContentEditable from "react-contenteditable";
 
 import * as Styles from "./workTitle.styles";
@@ -20,19 +20,17 @@ const WorkTitle = observer(() => {
 
   return (
     <div style={ Styles.container }>
-      <Stack>
-        <Text styles={ Styles.title }>
-          <ContentEditable
-            tagName="pre"
-            innerRef={ workTitleRef }
-            html={ Sim.getTitle() }
-            onChange={ onTitleChange }
-          />
-        </Text>
-        <Text styles={ Styles.date }>
-          <Localize label="CREATED_ON"/> { Sim.getOpenDate() }
-        </Text>
-      </Stack>
+      <Text style={ Styles.title }>
+        <ContentEditable
+          tagName="pre"
+          innerRef={ workTitleRef }
+          html={ Sim.getTitle() }
+          onChange={ onTitleChange }
+        />
+      </Text>
+      <Text style={ Styles.date }>
+        <Localize label="CREATED_ON"/> { Sim.getOpenDate() }
+      </Text>
     </div>
   );
 });

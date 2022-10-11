@@ -5,74 +5,59 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
-import {
-  Stack, Text, TooltipHost, IconButton, DetailsList,
-  SelectionMode, DetailsListLayoutMode, IColumn
-} from "@fluentui/react";
+import { Text, Tooltip, Button } from "@fluentui/react-components";
+import { Table, TableBody, TableCell, TableRow } from "@fluentui/react-components/unstable";
+
+import { ArrowRotateClockwise24Filled } from "@fluentui/react-icons";
 
 import * as Styles from "../ram.styles";
 
-const columns:IColumn[] = [
-  {
-    key: "type",
-    name: "Type",
-    fieldName: "type",
-    data: "string",
-    minWidth: 90,
-    isPadded: true
-  },
-  {
-    key: "count",
-    name: "Count",
-    fieldName: "count",
-    data: "number",
-    minWidth: 20,
-    isPadded: true
-  }
-];
-
+interface IItem {
+  type: string
+  count: number
+}
 export const Statistics = observer(() => {
   const Sim = useContext(SimulatorContext);
   const Locale = useContext(LocaleContext);
 
   const stats = Sim.getStats();
 
-  const items = Object.entries(stats).map(([key, value], i) => ({
-    key: i.toString(),
+  const items:Array<IItem> = Object.entries(stats).map(([key, value], i) => ({
     type: key,
-    count: value
+    count: +value
   }));
 
   return (
     <>
       <div style={ Styles.verticalHalf }>
         <div style={ Styles.title }>
-          <Stack horizontal horizontalAlign="space-between">
-            <p/>
-            <Text styles={ Styles.titleText }>
-              <Localize label="STATS"/>
-            </Text>
-            <TooltipHost
-              content={ Locale.get("STATS_CLEAR") }
-              calloutProps={{ gapSpace: 0 }}
-            >
-              <IconButton
-                ariaLabel={ Locale.get("STATS_CLEAR") }
-                iconProps={{ iconName: "ClearStats" }}
-                onClick={ () => Sim.clearStats() }
-                styles={ Styles.titleButton }
-              />
-            </TooltipHost>
-          </Stack>
+          <Text style={ Styles.titleText }>
+            <Localize label="STATS"/>
+          </Text>
+          <Tooltip
+            content={ Locale.get("STATS_CLEAR") }
+            relationship="label"
+            withArrow
+          >
+            <Button
+              aria-label={ Locale.get("STATS_CLEAR") }
+              icon={ <ArrowRotateClockwise24Filled /> }
+              onClick={ () => Sim.clearStats() }
+              style={ Styles.titleButton }
+              appearance="subtle"
+            />
+          </Tooltip>
         </div>
-        <DetailsList
-          items={ items }
-          compact={ true }
-          columns={ columns }
-          selectionMode={ SelectionMode.none }
-          layoutMode={ DetailsListLayoutMode.justified }
-          isHeaderVisible={ false }
-        />
+        <Table size="small">
+          <TableBody>
+            { items.map((item) => (
+              <TableRow>
+                <TableCell style={ Styles.cell }>{ item.type }</TableCell>
+                <TableCell style={ Styles.cell }>{ item.count }</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </>
   );

@@ -14,9 +14,6 @@
   font-size: 14px;
   line-height: 1.5;
 }
-.CodeMirror .cm-editor {
-  background-color: var(--white);
-}
 .CodeMirror .cm-keyword {
   color: var(--codeCmd);
 }
@@ -34,8 +31,4 @@
 }
 .CodeMirror .cm-gutterElement {
   text-align: left;
-}
-.CodeMirror .cm-wrap {
-  height: var(--codemirror-height);
-  border: 1px solid silver
 }

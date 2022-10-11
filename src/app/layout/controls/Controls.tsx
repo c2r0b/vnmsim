@@ -5,18 +5,17 @@ import Image from 'next/image';
 
 import poweredByVercelImg from "public/powered-by-vercel.svg";
 
-
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 
-import {
-  Stack, TooltipHost, IconButton, Slider
-} from "@fluentui/react";
+import { Tooltip, Button, Slider, Label, useId } from "@fluentui/react-components";
+import { Next24Regular, FastForward24Regular, Pause24Regular, Play24Regular, Stop24Regular } from "@fluentui/react-icons";
 
-import * as Styles from "./controls.styles";
 import { clearHighlight } from "src/app/utility/highlight";
 
-const speedFormat = (value: number) => `${value} ms`;
+import * as Styles from "./controls.styles";
+
+const vercelLink = "https://vercel.com/?utm_source=vnmsim&utm_campaign=oss";
 
 export default observer(() => {
   const Sim = useContext(SimulatorContext);
@@ -30,35 +29,35 @@ export default observer(() => {
       key: "run",
       ariaLabel: Locale.get("RUN"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
-      iconProps: { iconName: "Play" },
+      icon: <Play24Regular />,
       onClick: () => Sim.setSimStatus(1),
     },
     {
       key: "step",
       ariaLabel: Locale.get("STEP"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
-      iconProps: { iconName: "Step" },
+      icon: <Next24Regular />,
       onClick: () => Sim.setSimStatus(2),
     },
     {
       key: "iteration",
       ariaLabel: Locale.get("ITERATION"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
-      iconProps: { iconName: "Circle" },
+      icon: <FastForward24Regular />,
       onClick: () => Sim.setSimStatus(3),
     },
     {
       key: "pause",
       ariaLabel: Locale.get("PAUSE"),
       disabled: hasErrors || [0,4].includes(simStatus),
-      iconProps: { iconName: "Pause" },
+      icon: <Pause24Regular />,
       onClick: () => Sim.setSimStatus(4),
     },
     {
       key: "stop",
       ariaLabel: Locale.get("STOP"),
       disabled: hasErrors || simStatus === 0,
-      iconProps: { iconName: "Stop" },
+      icon: <Stop24Regular />,
       onClick: () => {
         Sim.setSimStatus(0);
         clearHighlight(Sim.getEditor());
@@ -66,7 +65,7 @@ export default observer(() => {
     },
   ];
 
-  const onIntervalChange = (value) => {
+  const onIntervalChange = (e, value) => {
     // if running restore interval
     if ([1,2,3].includes(simStatus)) {
       const oldStatus = simStatus;
@@ -75,52 +74,63 @@ export default observer(() => {
         Sim.setSimStatus(oldStatus);
       });
     }
-    Sim.setInterval(value);
+    Sim.setInterval(value.value);
   };
 
+  const sliderId = useId('slider');
+  const interval = Sim.getInterval();
+
   return (
-    <Stack
-      horizontal
-      horizontalAlign="space-between"
-      styles={ Styles.container }
-    >
-      <Stack
-        horizontal
-        tokens={{ childrenGap: 10 }}
-        styles={ Styles.controls }
-      >
+    <div style={ Styles.container }>
+      <div style={ Styles.controls }>
         {
           _controls.map(props => (
-            <TooltipHost
+            <Tooltip
               key={ props.key }
               content={ props.ariaLabel }
-              calloutProps={{ gapSpace: 0 }}
+              relationship="label"
+              withArrow
             >
-              <IconButton {...props} />
-            </TooltipHost>
+              <Button
+                aria-label={ props.ariaLabel }
+                icon={ props.icon }
+                disabled={ props.disabled }
+                onClick={ props.onClick }
+                appearance="subtle"
+              />
+            </Tooltip>
           ))
         }
+      </div>
+
+      <div style={ Styles.sliderContainer }>
         <Slider
-          styles={ Styles.speed }
-          valueFormat={ speedFormat }
+          id={ sliderId }
+          style={ Styles.slider }
           min={ 0 }
           max={ 2000 }
           step={ 50 }
           defaultValue={ 500 }
           onChange={ onIntervalChange }
-          showValue
-          snapToStep
         />
-      </Stack>
-      <a href="https://vercel.com/?utm_source=vnmsim&utm_campaign=oss">
-        <Image
-          priority
-          src={ poweredByVercelImg }
-          alt="Powered by Vercel"
-          width={ 150 }
-          style={{ marginTop: 5 }}
-        />
-      </a>
-    </Stack>
+        <Label
+          style={ Styles.sliderLabel }
+          htmlFor={ sliderId }
+        >
+          { `${interval} ms` }
+        </Label>
+      </div>
+      
+      <div style={ Styles.poweredByVercel }>
+        <a href={ vercelLink }>
+          <Image
+            priority
+            src={ poweredByVercelImg }
+            alt="Powered by Vercel"
+            width={ 150 }
+          />
+        </a>
+      </div>
+    </div>
   );
 });

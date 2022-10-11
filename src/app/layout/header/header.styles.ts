@@ -5,13 +5,15 @@ export const container:React.CSSProperties = {
   right: 0,
   height: 50,
   backgroundColor: "#000",
+  display: "flex",
+  flexDirection: "row",
   zIndex: 100
 };
 
 const cube:React.CSSProperties = {
   float: "left",
-  width: 8,
-  height: 8,
+  width: 10,
+  height: 10,
   marginBottom: 1,
   marginRight: 1,
   border: "2.5px solid white",
@@ -20,7 +22,7 @@ const cube:React.CSSProperties = {
 
 export const logo = {
   container: {
-    marginTop: 12,
+    marginTop: 15,
     marginBottom: 15,
     marginLeft: 15,
     width: 30,
@@ -33,21 +35,5 @@ export const logo = {
       ...cube,
       borderColor: "#f9c55b"
     }
-  }
-};
-
-export const status = {
-  root: {
-    marginTop: -12,
-    marginRight: 15,
-    color: "white"
-  },
-  label: {
-    color: "white",
-    fontSize: 14,
-    marginTop: -2
-  },
-  circle: {
-    color: "white"
   }
 };

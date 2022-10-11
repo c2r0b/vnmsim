@@ -1,26 +1,21 @@
-import { ITextStyles } from "@fluentui/react";
-
 export const container:React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 7,
   marginLeft: 15,
-  marginTop: 4
+  marginTop: 17
 };
 
-export const title:ITextStyles = {
-  root: {
-    fontSize: 21,
-    fontWeight: 600,
-    color: "white",
-    lineHeight: 0,
-    marginTop: -10,
-    marginBottom: -7
-  }
+export const title = {
+  fontSize: 21,
+  fontWeight: 600,
+  color: "white",
+  lineHeight: 0
 };
 
 export const date = {
-  root: {
-    fontSize: 9,
-    paddingTop: 0,
-    cursor: "default",
-    color: "white"
-  }
+  fontSize: 7,
+  paddingTop: 0,
+  cursor: "default",
+  color: "white"
 };

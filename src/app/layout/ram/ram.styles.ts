@@ -1,5 +1,3 @@
-import { ITextStyles } from "@fluentui/react";
-
 export const container:React.CSSProperties = {
   position: "fixed",
   top: 50,
@@ -9,7 +7,7 @@ export const container:React.CSSProperties = {
   borderLeft: "1px solid var(--neutralLight)",
   overflow: "hidden",
   zIndex: 100
-};
+}
 
 export const title:React.CSSProperties = {
   position: "sticky",
@@ -21,33 +19,35 @@ export const title:React.CSSProperties = {
   textAlign: "center",
   height: 40,
   zIndex: 100,
-  overflow: "hidden"
-};
+  overflow: "hidden",
+  display: "flex",
+  flexDirection: "row",
+  paddingTop: 10,
+  paddingLeft: 10
+}
 
-export const titleText:ITextStyles = {
-  root: {
-    lineHeight: 38,
-    fontWeight: 600
-  }
-};
+export const titleText = {
+  fontWeight: 600,
+  fontSize: 12
+}
 
-export const titleButton = {
-  root: {
-    marginTop: 3,
-    marginRight: 3
-  },
-  icon: {
-    fontSize: 12
-  }
-};
+export const titleButton:React.CSSProperties = {
+  position: "absolute",
+  top: 5,
+  right: 5
+}
 
 export const ramHalf:React.CSSProperties = {
   overflowY: "scroll"
-};
+}
 
 export const verticalHalf:React.CSSProperties = {
   position: "relative",
   width: "100%",
   overflowY: "scroll",
   overflowX: "auto"
-};
+}
+
+export const cell:React.CSSProperties = {
+  fontSize: 11
+}

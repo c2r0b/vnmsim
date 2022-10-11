@@ -5,11 +5,10 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
-import {
-  Stack, Text, TooltipHost, IconButton, DetailsList,
-  SelectionMode, DetailsListLayoutMode, IColumn,
-  SpinButton
-} from "@fluentui/react";
+import { Add24Filled } from "@fluentui/react-icons";
+
+import { Text, Tooltip, Button, Input } from "@fluentui/react-components";
+import { Table, TableBody, TableCell, TableCellLayout, TableRow } from "@fluentui/react-components/unstable";
 
 import * as RamStyles from "../ram.styles";
 import * as Styles from "./variables.styles";
@@ -26,37 +25,6 @@ export const Variables = observer((props:IProps) => {
 
   const [lastTvariable, setLastTvariable] = useState(10);
 
-  const columns:IColumn[] = [
-    {
-      key: "type",
-      name: "Type",
-      fieldName: "type",
-      data: "string",
-      minWidth: 30,
-      maxWidth: 30,
-      isPadded: true
-    },
-    {
-      key: "value",
-      name: "Value",
-      fieldName: "value",
-      data: "number",
-      minWidth: 30,
-      isPadded: false,
-      onRender: (item) => {
-        return (
-          <SpinButton
-            id="value"
-            step={ 1 }
-            value={ Sim.getVariable(item.type) }
-            onChange={ (e, v) => onVariableChange(item.type, v) }
-            styles={ props.focusedVar === item.type ? Styles.focusedVar : Styles.varSpin }
-          />
-        );
-      },
-    }
-  ];
-
   // generate T variables
   const allVariables = [
     ...variables, 
@@ -71,7 +39,9 @@ export const Variables = observer((props:IProps) => {
     value: Sim.getVariable(key)
   }));
 
-  const onVariableChange = (key, newValue) => {
+  const onVariableChange = (key, value) => {
+    console.log(value)
+    const newValue = value.value || value.displayValue;
     if (newValue === undefined) return;
     Sim.setVariable(key, newValue);
   };
@@ -85,32 +55,46 @@ export const Variables = observer((props:IProps) => {
     <>
       <div style={ RamStyles.verticalHalf }>
         <div style={ RamStyles.title }>
-          <Stack horizontal horizontalAlign="space-between">
-            <p/>
-            <Text styles={ RamStyles.titleText }>
-              <Localize label="VARIABLES"/>
-            </Text>
-            <TooltipHost
-              content={ Locale.get("ADD_VARIABLE") }
-              calloutProps={{ gapSpace: 0 }}
-            >
-              <IconButton
-                ariaLabel={ Locale.get("ADD_VARIABLE") }
-                iconProps={{ iconName: "Add" }}
-                onClick={ addVariable }
-                styles={ RamStyles.titleButton }
-              />
-            </TooltipHost>
-          </Stack>
+          <Text style={ RamStyles.titleText }>
+            <Localize label="VARIABLES"/>
+          </Text>
+          <Tooltip
+            content={ Locale.get("ADD_VARIABLE") }
+            relationship="label"
+            withArrow
+          >
+            <Button
+              aria-label={ Locale.get("ADD_VARIABLE") }
+              icon={ <Add24Filled /> }
+              onClick={ addVariable }
+              style={ RamStyles.titleButton }
+              appearance="subtle"
+            />
+          </Tooltip>
         </div>
-        <DetailsList
-          items={ items }
-          compact={ true }
-          columns={ columns }
-          selectionMode={ SelectionMode.none }
-          layoutMode={ DetailsListLayoutMode.justified }
-          isHeaderVisible={ false }
-        />
+        <Table size="small">
+          <TableBody>
+            { items.map(item => (
+              <TableRow>
+                <TableCell style={ Styles.typeCell }>
+                  { item.type }
+                </TableCell>
+                <TableCell style={ Styles.inputCell }>
+                  <TableCellLayout>
+                    <Input
+                      type="number"
+                      appearance="filled-lighter"
+                      step={ 1 }
+                      value={ Sim.getVariable(item.type) }
+                      onChange={ (e, v) => onVariableChange(item.type, v) }
+                      style={ props.focusedVar === item.type ? Styles.focusedVar : Styles.varSpin }
+                    />
+                  </TableCellLayout>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </>
   );

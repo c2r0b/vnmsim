@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { ThemeContext } from "src/themes/dispatcher";
-import { ThemeProvider } from "@fluentui/react";
+import { FluentProvider } from "@fluentui/react-components";
 
 import * as Styles from "./app.styles";
 
@@ -16,7 +16,7 @@ import Notification from "./layout/notification/Notification";
 export const App = observer(() => {
   const Theme = useContext(ThemeContext);
   return (
-    <ThemeProvider theme={ Theme.getTheme() }>
+    <FluentProvider theme={ Theme.getTheme() }>
       <div style={ Styles.container }>
         <Header />
         <Nav />
@@ -25,6 +25,6 @@ export const App = observer(() => {
         <Ram />
         <Notification />
       </div>
-    </ThemeProvider>
+    </FluentProvider>
   );
 });

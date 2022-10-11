@@ -4,7 +4,8 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
 
-import { MessageBar, MessageBarType, Text } from '@fluentui/react';
+import { Alert } from "@fluentui/react-components/unstable";
+import { Text } from "@fluentui/react-components";
 
 import * as Styles from "./notification.styles";
 
@@ -20,17 +21,15 @@ const Notification = observer(() => {
 
   return (
     <div style={ Styles.container }>
-      <MessageBar
-        styles={ Styles.message }
-        messageBarType={ MessageBarType.error }
-        isMultiline={ false }
-        onDismiss={ () => Sim.dismissError() }
-        dismissButtonAriaLabel={ Locale.get("CLOSE") }
+      <Alert
+        intent="error"
+        action={ Locale.get("CLOSE") }
+        onClick={ () => Sim.dismissError() }
       >
-        <Text styles={ Styles.text }>
+        <Text style={ Styles.text }>
           { errorMessage }
         </Text>
-      </MessageBar>
+      </Alert>
     </div>
   );
 });

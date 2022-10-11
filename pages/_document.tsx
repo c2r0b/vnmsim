@@ -1,36 +1,43 @@
-import * as React from 'react';
-import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { Stylesheet, resetIds } from '@fluentui/react';
+// source: https://react.fluentui.dev/?path=/docs/concepts-developer-server-side-rendering--page
+import { createDOMRenderer, renderToStyleElements } from "@fluentui/react-components";
+import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
 
-const stylesheet = Stylesheet.getInstance();
+class Page extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const renderer = createDOMRenderer();
+    const originalRenderPage = ctx.renderPage;
 
-interface IFluentUIProps {
-  styleTags: any
-  serializedStylesheet: any
-}
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: App =>
+          function EnhancedApp(props) {
+            const enhancedProps = {
+              ...props,
+              renderer
+            };
 
-export default class Page extends React.Component<IFluentUIProps, Document> {
-  static async getInitialProps(ctx) {
-    resetIds();
+            return <App {...enhancedProps} />;
+          },
+      });
+
     const initialProps = await Document.getInitialProps(ctx);
-    
+    const styles = renderToStyleElements(renderer);
+
     return {
       ...initialProps,
-      styleTags: stylesheet.getRules(true),
-      serializedStylesheet: stylesheet.serialize()
+      styles: (
+        <>
+          {initialProps.styles}
+          {styles}
+        </>
+      ),
     };
   }
 
   render() {
     return (
       <Html>
-        <Head>
-          <style type="text/css" dangerouslySetInnerHTML={{ __html: this.props.styleTags }} />
-          <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
-            window.FabricConfig = window.FabricConfig || {};
-            window.FabricConfig.serializedStylesheet = ${this.props.serializedStylesheet};
-          ` }} />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />
@@ -39,3 +46,5 @@ export default class Page extends React.Component<IFluentUIProps, Document> {
     );
   }
 }
+
+export default Page;

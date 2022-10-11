@@ -1,6 +1,4 @@
 - fix dark editor theme
-- fix dark theme simulator text
-- fix dark theme controls
 
 - jest tests
 - controls keyboard shortcuts
@@ -18,7 +16,6 @@
 - open/save from cloud services
 - tutorial interactive tour
 - binary mode
-- fluentui v9
 - autodeploy
 - app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)
 - documentation (docusaurus)

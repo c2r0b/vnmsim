@@ -1,45 +1,40 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { githubDark } from "@uiw/codemirror-theme-github";
-
 import { LocaleContext } from "src/locale/dispatcher";
 import { ThemeContext } from "src/themes/dispatcher";
 
-import {
-  Panel, PanelType, Stack, ChoiceGroup,
-  IChoiceGroupOption, IDropdownStyles,
-  IDropdownOption, Dropdown
-} from "@fluentui/react";
+import { Text, RadioGroup, Radio, Label, useId, Button } from "@fluentui/react-components";
+import { Settings24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from "@fluentui/react-icons";
+import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Dropdown, Option } from "@fluentui/react-components/unstable";
+
 import { SimulatorContext } from "src/store/dispatcher";
 
-const themeOptions: IChoiceGroupOption[] = [
+import * as Styles from "./settings.styles";
+
+const themeOptions = [
   {
-    key: "system",
-    text: "System",
-    iconProps: { iconName: "Settings" }
+    value: "system",
+    label: "System",
+    icon: <Settings24Regular />
   },
   {
-    key: "light",
-    text: "Light",
-    iconProps: { iconName: "Light" }
+    value: "light",
+    label: "Light",
+    icon: <WeatherSunny24Regular />
   },
   {
-    key: "dark",
-    text: "Dark",
-    iconProps: { iconName: "Dark" }
+    value: "dark",
+    label: "Dark",
+    icon: <WeatherMoon24Regular />
   },
 ];
 
-const dropdownStyles: Partial<IDropdownStyles> = {
-  dropdown: { width: 300 },
-};
-
-const languageOptions: IDropdownOption[] = [
-  { key: "en", text: "English" },
-  { key: "it", text: "Italiano" },
-  { key: "es", text: "Español" },
-  { key: "de", text: "Deutsche" }
+const languageOptions = [
+  { value: "en", label: "English" },
+  { value: "it", label: "Italiano" },
+  { value: "es", label: "Español" },
+  { value: "de", label: "Deutsche" }
 ];
 
 interface IProps {
@@ -53,39 +48,70 @@ const Settings = observer((props:IProps) => {
   const Theme = useContext(ThemeContext);
 
   const onChangeTheme = (ev, option) => {
-    Theme.setTheme(option.key);
+    Theme.setTheme(option.optionValue);
   };
 
   const onChangeLanguage = (ev, option) => {
-    Locale.setLanguage(option.key);
+    Locale.setLanguage(option.optionValue);
   };
 
+  const themeLabelId = useId('label');
+  const languageLabelId = useId('label');
+
+  const selectedTheme = themeOptions
+  .find(o => o.value === Theme.getCurrentThemeName())
+  .label;
+
+  const selectedLanguage = languageOptions
+    .find(o => o.value === Locale.getLanguage())
+    .label;
+
   return (
-    <Panel
-      headerText={ Locale.get("SETTINGS") }
-      isOpen={ props.show }
-      isLightDismiss={ true }
-      type={ PanelType.custom }
-      styles={{ main: { width: 500 }}}
-      onDismiss={ () => props.onDismiss() }
-      closeButtonAriaLabel={ Locale.get("CLOSE") }
+    <Dialog
+      open={ props.show }
+      onOpenChange={ () => props.onDismiss() }
     >
-      <Stack tokens={{ childrenGap: 20, padding: "15px 0" }}>
-        <ChoiceGroup
-          label={ Locale.get("SETTINGS_THEME") }
-          selectedKey={ Theme.getCurrentThemeName() }
-          options={ themeOptions }
-          onChange={ onChangeTheme }
-        />
-        <Dropdown
-          label={ Locale.get("SETTINGS_LANGUAGE") }
-          selectedKey={ Locale.getLanguage() }
-          options={ languageOptions }
-          styles={ dropdownStyles }
-          onChange={ onChangeLanguage }
-        />
-      </Stack>
-    </Panel>
+      <DialogSurface>
+        <DialogBody>
+          <DialogTitle>{ Locale.get("SETTINGS") }</DialogTitle>
+          <DialogContent style={ Styles.container }>
+            <div style={ Styles.setting }>
+              <Label id={ themeLabelId }>{ Locale.get("SETTINGS_THEME") }</Label>
+              <Dropdown
+                aria-labelledby={ themeLabelId }
+                selectedOptions={ [selectedTheme] }
+                style={{ width: 300 }}
+                onOptionSelect={ onChangeTheme }
+              >
+                { themeOptions.map((option) => (
+                  <Option value={ option.value }>{ option.label }</Option>
+                ))}
+              </Dropdown>
+            </div>
+            <div style={ Styles.setting }>
+              <Label id={ languageLabelId }>{ Locale.get("SETTINGS_LANGUAGE") }</Label>
+              <Dropdown
+                aria-labelledby={ themeLabelId }
+                selectedOptions={ [selectedLanguage] }
+                style={{ width: 300 }}
+                onOptionSelect={ onChangeLanguage }
+              >
+                { languageOptions.map((option) => (
+                  <Option value={ option.value }>{ option.label }</Option>
+                ))}
+              </Dropdown>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <DialogTrigger>
+              <Button appearance="secondary">
+                { Locale.get("DONE") }
+              </Button>
+            </DialogTrigger>
+          </DialogActions>
+        </DialogBody>
+      </DialogSurface>
+    </Dialog>
   );
 });
 

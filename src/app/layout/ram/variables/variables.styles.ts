@@ -1,24 +1,19 @@
-export const varSpin = {
-  root: {
-    padding: 0,
-    margin: 0
-  },
-  spinButtonWrapper: {
-    height: 17,
-    selectors: {
-      "&::after": {
-        border: "none"
-      }
-    }
-  },
-  input: {
-    backgroundColor: "transparent"
-  }
-};
+export const varSpin:React.CSSProperties = {
+  padding: 3,
+  margin: 0,
+  minHeight: 0
+}
 
 export const focusedVar = {
   ...varSpin,
-  input: {
-    backgroundColor: "#f9c55b"
-  }
-};
+  backgroundColor: "#f9c55b"
+}
+
+export const typeCell = {
+  width: 55,
+  fontSize: 10
+}
+
+export const inputCell = {
+  padding: 2
+}

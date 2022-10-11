@@ -6,45 +6,6 @@ import { SimulatorContext, SimulatorStore } from "../src/store/dispatcher";
 import { LocaleContext, LocaleStore } from "../src/locale/dispatcher";
 import { ThemeContext, ThemeStore } from "../src/themes/dispatcher";
 
-import { registerIcons } from "@fluentui/react/lib/Styling";
-import {
-  FolderHorizontalIcon, SaveIcon, LifesaverIcon, 
-  TestBeakerSolidIcon, ErrorBadgeIcon, SettingsIcon, 
-  PlayIcon, PauseIcon, ThreeQuarterCircleIcon, 
-  NextIcon, StopIcon, CancelIcon, MoreIcon, 
-  DownloadDocumentIcon, InfoIcon, SunnyIcon, 
-  ClearNightIcon, ClearIcon, ChevronUpSmallIcon,
-  ChevronDownSmallIcon, AddIcon,
-  Rotate90CounterClockwiseIcon
-} from "@fluentui/react-icons-mdl2";
-
-registerIcons({
-  icons: {
-    Open: <FolderHorizontalIcon />,
-    Save: <SaveIcon />,
-    Sample: <TestBeakerSolidIcon />,
-    Help: <LifesaverIcon />,
-    Settings: <SettingsIcon />,
-    Play: <PlayIcon />,
-    Pause: <PauseIcon />,
-    Circle: <ThreeQuarterCircleIcon />,
-    Step: <NextIcon />,
-    Stop: <StopIcon />,
-    Cancel: <CancelIcon />,
-    More: <MoreIcon />,
-    DownloadDocument: <DownloadDocumentIcon />,
-    Info: <InfoIcon />,
-    Light: <SunnyIcon />,
-    Dark: <ClearNightIcon />,
-    ErrorBadge: <ErrorBadgeIcon />,
-    Clear: <ClearIcon />,
-    ChevronUpSmall: <ChevronUpSmallIcon />,
-    ChevronDownSmall: <ChevronDownSmallIcon />,
-    Add: <AddIcon />,
-    ClearStats: <Rotate90CounterClockwiseIcon />,
-  }
-});
-
 export default () => {
   return (
     <>
@@ -58,6 +19,8 @@ export default () => {
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/16x16.png" />
         <link rel="manifest" href="/manifest.json" />
+
+        <link rel="stylesheet" href="styles.css" />  
       </Head>
       <ThemeContext.Provider value={ new ThemeStore() }>
         <LocaleContext.Provider value={ new LocaleStore() }>

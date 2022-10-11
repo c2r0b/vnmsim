@@ -49,6 +49,8 @@ export const Locale = {
   
     "LOG_OPENING_FAILURE": "Unable to load the selected file",
     "CLOSE": "Close",
+    "DONE": "Done",
+    "GOT_IT": "OK, got it",
   
     "GUIDE_INTRODUCTION_H": "Introduction",
     "GUIDE_INTRODUCTION_P1": "This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.",
@@ -121,6 +123,8 @@ export const Locale = {
   
     "LOG_OPENING_FAILURE": "Impossibile caricare il file selezionato",
     "CLOSE": "Chiudi",
+    "DONE": "Fatto",
+    "GOT_IT": "OK, capito",
   
     "GUIDE_INTRODUCTION_H": "Introduzione",
     "GUIDE_INTRODUCTION_P1": "Questo simulatore è stato ideato come soluzione per studenti ed insegnanti per studiare il funzionamento della macchina di Von Neumann.",
@@ -193,6 +197,8 @@ export const Locale = {
   
     "LOG_OPENING_FAILURE": "No puede cargar el archivo",
     "CLOSE": "Cerrar",
+    "DONE": "Hecho",
+    "GOT_IT": "OK, lo tengo",
   
     "GUIDE_INTRODUCTION_H": "Introducción",
     "GUIDE_INTRODUCTION_P1": "Este simulador está destinado a ser una solución para los estudiantes y profesores para estudiar cómo funciona una máquina de Von Neumann.",
@@ -265,6 +271,8 @@ export const Locale = {
   
     "LOG_OPENING_FAILURE": "Fehler beim Öffnen der Datei",
     "CLOSE": "Nah dran",
+    "DONE": "Erledigt",
+    "GOT_IT": "Verstanden",
   
     "GUIDE_INTRODUCTION_H": "Einführung",
     "GUIDE_INTRODUCTION_P1": "Diese Simulation zeigt, wie ein von Neumann Rechner im Prinzip funktioniert.",

@@ -4,7 +4,8 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
 
-import { Stack, IconButton, TooltipHost } from"@fluentui/react";
+import { Tooltip, Button, Image } from"@fluentui/react-components";
+import { Beaker24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from "@fluentui/react-icons";
 
 import DropZone from "../dropZone/DropZone";
 import Help from "../../modals/help";
@@ -15,14 +16,6 @@ import { readFile, save } from "../../utility/io";
 
 import * as Styles from "./nav.styles";
 
-const githubIconProps = {
-  imageProps: {
-    width: 16,
-    height: 16,
-    src: Styles.github.img,
-    styles: Styles.github.styles
-  }
-};
 
 const onGithubClick = () => {
   window.open("https://github.com/c2r0b/vnmsim", "_blank");
@@ -66,7 +59,7 @@ const Nav = observer(() => {
     {
       key: "open",
       ariaLabel: Locale.get("PROJECT_OPEN"),
-      iconProps: { iconName: "Open", styles: Styles.menuIcon },
+      icon: <FolderOpen24Regular />,
       disabled: isSimRunning,
       onClick: () => {
         document.getElementById('openProject').click();
@@ -76,48 +69,59 @@ const Nav = observer(() => {
       key: "save",
       ariaLabel: Locale.get("PROJECT_SAVE"),
       disabled: isSimRunning,
-      iconProps: { iconName: "Save", styles: Styles.menuIcon },
+      icon: <Save24Regular />,
       onClick: onSave
     },
     {
       key: "samples",
       ariaLabel: Locale.get("SAMPLES"),
-      iconProps: { iconName: "Sample", styles: Styles.menuIcon },
+      icon: <Beaker24Regular />,
       onClick: () => setSelPanel("samples")
     },
     {
       key: "help",
       ariaLabel: Locale.get("HELP"),
-      iconProps: { iconName: "Help", styles: Styles.menuIcon },
+      icon: <ChatHelp24Regular />,
       onClick: () => setSelPanel("help")
     },
     {
       key: "github",
       ariaLabel: "GitHub",
-      iconProps: githubIconProps,
+      children: (
+        <Image
+          src={ Styles.githubIcon }
+          style={ Styles.github }
+        />
+      ),
       onClick: onGithubClick
     },
     {
       key: "settings",
       ariaLabel: Locale.get("SETTINGS"),
-      iconProps: { iconName: "Settings", styles: Styles.menuIcon },
+      icon: <Settings24Regular />,
       onClick: () => setSelPanel("settings")
     }
   ];
 
   const menuItems = _menuItems.map(props => {
     return (
-      <TooltipHost
+      <Tooltip
         key={ props.key }
-        id={ props.key }
         content={ props.ariaLabel }
-        calloutProps={{ gapSpace: 0 }}
+        relationship="label"
+        withArrow
       >
-        <IconButton
-          { ...props }
-          styles={ Styles.menuButton }
-        />
-      </TooltipHost>
+        <Button
+          aria-label={ props.ariaLabel }
+          icon={ props.icon }
+          disabled={ props.disabled }
+          style={ Styles.menuItem }
+          onClick={ props.onClick }
+          appearance="subtle"
+        >
+          { props.children || null }
+        </Button>
+      </Tooltip>
     );
   });
 
@@ -148,12 +152,9 @@ const Nav = observer(() => {
         onChange={ (e) => onOpen(e.target.files[0]) }
       />
 
-      <Stack
-        tokens={{ childrenGap: 20 }}
-        styles={ Styles.container }
-      >
+      <div style={ Styles.container }>
         { menuItems }
-      </Stack>
+      </div>
     </>
   );
 });

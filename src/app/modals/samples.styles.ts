@@ -1,25 +1,16 @@
-export const stack = {
-  root: {
-    paddingTop: 20
-  }
-};
+export const list = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(170px, .3fr))",
+  gap: 15,
+  paddingLeft: 2,
+  paddingBottom: 2
+}
 
 export const card = {
-  root: {
-    width: 200,
-    height: 75
-  }
-};
-
-export const title = {
-  root: {
-    fontSize: 16,
-    paddingBottom: 0
-  }
-};
+  width: 170,
+  height: 65
+}
 
 export const desc = {
-  root: {
-    padding: 20
-  }
-};
+  fontSize: 10
+}

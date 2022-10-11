@@ -5,10 +5,9 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
-import {
-  Panel, PanelType, Stack, DocumentCard, DocumentCardTitle,
-  DocumentCardActions, Text
-} from "@fluentui/react";
+import { Button, Caption1, Text } from "@fluentui/react-components";
+import { Card, CardHeader, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components/unstable";
+import { ArrowDownload24Filled } from "@fluentui/react-icons";
 
 import { samples } from "./samples.list";
 
@@ -25,79 +24,69 @@ const Samples = observer((props:IProps) => {
   const Locale = useContext(LocaleContext);
 
   const samplesList = samples.map(s => {
-    const actions = [
-      {
-        iconProps: { iconName: "DownloadDocument" },
-        onClick: () => {
-          const obj = SAMPLES[s.key].input;
-          
-          // set code
-          Sim.setCode(obj.code);
-          delete obj.code;
+    const onClick = () => {
+      const obj = SAMPLES[s.key].input;
+      
+      // set code
+      Sim.setCode(obj.code);
+      delete obj.code;
 
-          // set title and date
-          obj.title = s.label;
-          obj.created = new Date().toISOString().slice(0, 10);
+      // set title and date
+      obj.title = s.label;
+      obj.created = new Date().toISOString().slice(0, 10);
 
-          // set simulator status object
-          Sim.updateSim(obj);
+      // set simulator status object
+      Sim.updateSim(obj);
 
-          // close panel
-          props.onDismiss();
-        },
-        ariaLabel: Locale.get("SAMPLES_OPEN")
-      }
-    ];
+      // close panel
+      props.onDismiss();
+    };
 
     return (
-      <DocumentCard
+      <Card
         key={ s.key }
-        styles={ Styles.card }
+        style={ Styles.card }
       >
-        <Stack horizontal horizontalAlign="space-between">
-          <Stack.Item>
-            <DocumentCardTitle
-              title={ s.label }
-              styles={ Styles.title }
+        <CardHeader
+          header={  <Text weight="semibold">{ s.label }</Text> }
+          description={ <Caption1 style={ Styles.desc }>{ s.desc }</Caption1> }
+          action={
+            <Button
+              appearance="transparent"
+              aria-label={ Locale.get("SAMPLES_OPEN") }
+              icon={ <ArrowDownload24Filled /> }
+              onClick={ onClick }
             />
-            <Text
-              variant="medium"
-              styles={ Styles.desc }
-            >
-              { s.desc }
-            </Text>
-          </Stack.Item>
-          <DocumentCardActions
-            actions={ actions }
-          />
-        </Stack>
-      </DocumentCard>
+          }
+        />
+      </Card>
     );
   });
 
   return (
-    <Panel
-      headerText={ Locale.get("SAMPLES") }
-      isOpen={ props.show }
-      isLightDismiss={ true }
-      type={ PanelType.custom }
-      styles={{ main: { width: 500 }}}
-      onDismiss={ () => props.onDismiss() }
-      closeButtonAriaLabel={ Locale.get("CLOSE") }
+    <Dialog
+      open={ props.show }
+      onOpenChange={ () => props.onDismiss() }
     >
-      <p>
-        <Localize label="SAMPLES_MSG"/>
-      </p>
-      
-      <Stack
-        horizontal
-        wrap
-        tokens={{ childrenGap: 20 }}
-        styles={ Styles.stack }
-      >
-        { samplesList }
-      </Stack>
-    </Panel>
+      <DialogSurface>
+        <DialogBody>
+          <DialogTitle>{ Locale.get("SAMPLES") }</DialogTitle>
+          <DialogContent>
+            <p><Localize label="SAMPLES_MSG"/></p>
+            <div style={ Styles.list }>
+              { samplesList }
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <DialogTrigger>
+              <Button appearance="secondary">
+                { Locale.get("CLOSE") }
+              </Button>
+            </DialogTrigger>
+          </DialogActions>
+        </DialogBody>
+      </DialogSurface>
+    </Dialog>
   );
 });
 
