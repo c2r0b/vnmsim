@@ -36,25 +36,25 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       break;
     case 2:
       sim.focus.cell = sim.pc.val;
-      sim.focus.el = 'ir.input.field';
+      sim.focus.el = 'ir.input';
       sim.ir.cmd = sim.line.substr(0, 3).toUpperCase();
       break;
     case 3:
       sim.focus.cell = sim.pc.val;
-      sim.focus.el = 'ir.input.field';
+      sim.focus.el = 'ir.input';
       sim.ir.loc = sim.line.substr(4).toUpperCase().trim();
       break;
     case 4:
       sim.focus.cell = -1;
-      sim.focus.el = 'pc.increment.input';
+      sim.focus.el = 'pc.increment';
       break;
     case 5:
-      sim.focus.el = 'pc.input.input';
+      sim.focus.el = 'pc.input';
       // increment program counter
       sim.pc.val = +sim.pc.val + sim.pc.step;
       break;
     case 6:
-      sim.focus.el = 'ir.decoder.field';
+      sim.focus.el = 'ir.decoder';
       break;
     case 7:
       // get correct alu operation
@@ -73,17 +73,17 @@ export const execute = ({ sim, stats, status, line, editor }) => {
           status = 0;
           break;
         case 'JMP':
-          sim.focus.el = 'pc.input.input';
+          sim.focus.el = 'pc.input';
           sim.pc.val = +sim.ir.loc;
           sim.step = lastStep;
           sim.codeLine = +sim.ir.loc - 1;
           stats.performed_jmp++;
           break;
         case 'JMZ':
-          sim.focus.el = 'acc.field.field';
+          sim.focus.el = 'acc.field';
           break;
         default:
-          sim.focus.el = 'alu.op.field';
+          sim.focus.el = 'alu.op';
           sim.alu.op = commands[sim.ir.cmd] || "=";
           break;
       }
@@ -92,7 +92,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       // JMZ instruction behaviour
       if (sim.ir.cmd == 'JMZ') {
         if (sim.acc == 0) {
-          sim.focus.el = 'pc.input.input';
+          sim.focus.el = 'pc.input';
           sim.pc.val = +sim.ir.loc;
           sim.codeLine = +sim.ir.loc - 1;
           stats.performed_jmz++;
@@ -106,7 +106,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
 
       // STO instruction behaviour
       if (sim.ir.cmd == 'STO') {
-        sim.focus.el = 'acc.field.field';
+        sim.focus.el = 'acc.field';
         break;
       }
 
@@ -132,7 +132,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
         sim.alu.e2 = parseInt(editor.doc.getLine(sim.ir.loc)) || 0;
         stats.cell_access++;
       }
-      sim.focus.el = 'alu.p2.field';
+      sim.focus.el = 'alu.p2';
       break;
     case 9:
       if (sim.ir.cmd != 'STO') {
@@ -144,7 +144,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
             break;
           default:
             stats.alu_calculation++;
-            sim.focus.el = 'acc.field.field';
+            sim.focus.el = 'acc.field';
 
             // execute requested operation
             const data = parseInt(sim.alu.e2);
