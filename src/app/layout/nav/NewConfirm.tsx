@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components/unstable";
-import { Button } from "@fluentui/react-components";
+import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";

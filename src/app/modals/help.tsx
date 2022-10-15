@@ -4,10 +4,9 @@ import { observer } from "mobx-react-lite";
 import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
-import { Button, Link, Text } from "@fluentui/react-components";
+import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Link } from "@fluentui/react-components";
 
 import * as Styles from "./help.styles";
-import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components/unstable";
 
 interface IProps {
   show: boolean;

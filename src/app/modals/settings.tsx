@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite";
 import { LocaleContext } from "src/locale/dispatcher";
 import { ThemeContext } from "src/themes/dispatcher";
 
-import { Text, RadioGroup, Radio, Label, useId, Button } from "@fluentui/react-components";
+import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Label, useId, Button } from "@fluentui/react-components";
 import { Settings24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from "@fluentui/react-icons";
-import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Dropdown, Option } from "@fluentui/react-components/unstable";
+import { Dropdown, Option } from "@fluentui/react-components/unstable";
 
 import { SimulatorContext } from "src/store/dispatcher";
 

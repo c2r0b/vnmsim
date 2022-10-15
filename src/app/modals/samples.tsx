@@ -5,8 +5,8 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { Localize } from "src/locale/Localize";
 
-import { Button, Caption1, Text } from "@fluentui/react-components";
-import { Card, CardHeader, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components/unstable";
+import { Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from "@fluentui/react-components";
+import { Card, CardHeader } from "@fluentui/react-components/unstable";
 import { ArrowDownload24Filled } from "@fluentui/react-icons";
 
 import { samples } from "./samples.list";
