@@ -1,6 +1,15 @@
 // syntax validator
 export const validator = (t, lastIndex: number, getLine: Function) => {
   let line: number;
+
+  // comment lines
+  if (t.match(/^\/\/[\s\S]*$/)) {
+    return true;
+  }
+  
+  // pardon inline comments
+  t = t.split("//")[0];
+  
   return (
     // cmds with cell number parameter
     (

@@ -17,6 +17,9 @@ export const execute = ({ sim, stats, status, line, editor }) => {
     : line
   );
 
+  // pardon inline comments
+  sim.line = sim.line.split("//")[0];
+
   // execute code related to the current simulator step
   switch(sim.step) {
     case 1:
