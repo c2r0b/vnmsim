@@ -27,26 +27,26 @@ export const samples = [
   {
     key: "power",
     label: "Power",
-    desc: "x ^ y"
+    desc: "x ^ y = z"
   },
   {
     key: "square_root",
     label: "Square root",
-    desc: "sqrt(x)"
+    desc: "sqrt(x) = y"
   },
   {
     key: "modulo",
     label: "Modulo",
-    desc: "x % y"
+    desc: "x % y = z"
   },
   {
     key: "even",
     label: "Is even",
-    desc: "x % 2 == 0"
+    desc: "(x % 2 == 0) ? z"
   },
   {
     key: "greater_than",
     label: "Greater than",
-    desc: "x > y"
+    desc: "x > y ? z"
   },
 ];
