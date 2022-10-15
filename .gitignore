@@ -9,6 +9,7 @@ yarn-error.log
 package-lock.json
 .yarnrc
 .next
+todo.todo
 
 # OS generated files #
 ######################
