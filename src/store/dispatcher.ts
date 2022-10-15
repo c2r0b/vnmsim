@@ -1,5 +1,7 @@
 import { createContext } from "react";
+
 import { configure, makeAutoObservable } from "mobx";
+import { makePersistable } from "mobx-persist-store";
 
 import status from "./status.store";
 import sim from "./sim.store";
@@ -13,12 +15,28 @@ export class SimulatorStore {
   status
   sim
   stats
+  editor:any
 
   constructor() {
     this.status = status;
     this.sim = sim;
     this.stats = stats;
+    this.editor = {};
     makeAutoObservable(this);
+
+    if (typeof window !== "undefined") {
+      makePersistable(this, {
+        name: "SimulatorStore",
+        properties: ["sim", "stats", "status"],
+        storage: localStorage
+      });
+    }
+  }
+
+  reset() {
+    this.status = status;
+    this.sim = sim;
+    this.stats = stats;
   }
 
   getTitle() {
@@ -46,11 +64,11 @@ export class SimulatorStore {
   }
 
   getEditor() {
-    return this.status.editor;
+    return this.editor;
   }
 
   setEditor(newEditor: any) {
-    this.status.editor = newEditor;
+    this.editor = newEditor;
   }
 
   getError() {

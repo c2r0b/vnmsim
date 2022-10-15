@@ -5,6 +5,5 @@ export default {
   error: undefined,
   simStatus: 0,
   code: '',
-  editor: {},
   interval: 500
 };

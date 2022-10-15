@@ -1,7 +1,10 @@
 export const Locale = {
   en: {
+    "PROJECT_NEW": "New Project",
     "PROJECT_OPEN": "Open from file",
     "PROJECT_SAVE": "Save project",
+
+    "PROJECT_NEW_CONFIRM": "Are you sure you want to create a new project? All unsaved changes will be lost.",
   
     "HELP": "Help",
     "SAMPLES": "Samples",
@@ -74,8 +77,11 @@ export const Locale = {
     "SAMPLES_OPEN": "Open"
   },
   it: {
+    "PROJECT_NEW": "Nuovo progetto",
     "PROJECT_OPEN": "Apri da file",
     "PROJECT_SAVE": "Salva progetto",
+
+    "PROJECT_NEW_CONFIRM": "Sei sicuro di voler creare un nuovo progetto? Tutte le modifiche non salvate andranno perse.",
   
     "HELP": "Aiuto",
     "SAMPLES": "Esempi",
@@ -148,8 +154,11 @@ export const Locale = {
     "SAMPLES_OPEN": "Apri"
   },
   es: {
+    "PROJECT_NEW": "Nuevo proyecto",
     "PROJECT_OPEN": "Abrir desde archivo",
     "PROJECT_SAVE": "Guardar proyecto",
+
+    "PROJECT_NEW_CONFIRM": "¿Estás seguro de que quieres crear un nuevo proyecto? Se perderán los cambios no guardados.",
   
     "HELP": "Ayuda",
     "SAMPLES": "Muestras",
@@ -222,8 +231,11 @@ export const Locale = {
     "SAMPLES_OPEN": "Abrir"
   },
   de: {
+    "PROJECT_NEW": "Neues Projekt",
     "PROJECT_OPEN": "Öffnen",
     "PROJECT_SAVE": "Speichern",
+
+    "PROJECT_NEW_CONFIRM": "Alle nicht gespeicherten Änderungen gehen verloren. Fortfahren?",
   
     "HELP": "Hilfe",
     "SAMPLES": "Beispiele",

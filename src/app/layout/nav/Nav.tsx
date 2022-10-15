@@ -5,7 +5,7 @@ import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
 
 import { Tooltip, Button, Image } from"@fluentui/react-components";
-import { Beaker24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from "@fluentui/react-icons";
+import { Beaker24Regular, CalendarStar24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from "@fluentui/react-icons";
 
 import DropZone from "../dropZone/DropZone";
 import Help from "../../modals/help";
@@ -15,6 +15,7 @@ import Settings from "../../modals/settings";
 import { readFile, save } from "../../utility/io";
 
 import * as Styles from "./nav.styles";
+import NewConfirm from "./NewConfirm";
 
 
 const onGithubClick = () => {
@@ -56,6 +57,13 @@ const Nav = observer(() => {
   });
 
   const _menuItems = [
+    {
+      key: "new",
+      ariaLabel: Locale.get("PROJECT_NEW"),
+      icon: <CalendarStar24Regular />,
+      disabled: isSimRunning,
+      onClick: () => setSelPanel("newConfirm")
+    },
     {
       key: "open",
       ariaLabel: Locale.get("PROJECT_OPEN"),
@@ -128,6 +136,10 @@ const Nav = observer(() => {
 
   return (
     <>
+      <NewConfirm
+        show={ selPanel == "newConfirm" }
+        onDismiss={ () => setSelPanel("") }
+      />
       <Help
         show={ selPanel == "help" }
         onDismiss={ () => setSelPanel("") }

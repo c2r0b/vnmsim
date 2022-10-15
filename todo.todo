@@ -5,9 +5,7 @@
 - loop prevention (page freeze fix)
 - welcome splash screen
 - mobile usable
-- open/save from local storage
 - open/save from cloud services
 - tutorial interactive tour
 - binary mode
-- app in stores (https://developer.microsoft.com/en-us/microsoft-store/pwa/)
 - documentation (docusaurus)
