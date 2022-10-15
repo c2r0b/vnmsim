@@ -23,20 +23,15 @@ The chosen design framework is FluentUI by Microsoft.
 
 After downloading the repository and installing the dependencies using `npm install`, a simple `npm run dev` is enough to start a compiled and live updated version at `localhost:3000`.
 
-## Contribute
+## AngularJS version
 
-Please feel free to create an issue or a pull request.
-If you'd like to add a new language or improve the translations, you can do that from the official Transifex project of this simulator available [here](https://www.transifex.com/lorenzo-ganni/von-neumann-machine-simulator/).
+The previous version written in AngularJS is available in the `old` repository and online [here](http://vnsimulator.altervista.org/). 
 
 ## Zanichelli version
 
 In 2015 a different simulator of the Von Neumann machine inspired by this one has been developed for Zanichelli Editor S.p.A. as an extension of the work of Giorgio Meini, Fiorenzo Formichi: "Tecnologie e progettazione di sistemi informatici e di telecomunicazioni".
 
 If you were looking for that simulator (available only in italian), you can download it [here](http://goo.gl/hSwG4m).
-
-## AngularJS version
-
-The previous version written in AngularJS is available in the `old` repository and online [here](http://vnsimulator.altervista.org/). 
 
 ## License
 
