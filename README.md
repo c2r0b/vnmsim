@@ -23,10 +23,6 @@ The chosen design framework is FluentUI by Microsoft.
 
 After downloading the repository and installing the dependencies using `npm install`, a simple `npm run dev` is enough to start a compiled and live updated version at `localhost:3000`.
 
-## Testing
-
-TBD
-
 ## Contribute
 
 Please feel free to create an issue or a pull request.
