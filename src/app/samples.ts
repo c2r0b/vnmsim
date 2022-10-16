@@ -47,3 +47,8 @@ export const subtraction = {
   input: {"status":0,"step":0,"alu":{"e1":"","e2":"","op":""},"acc":1,"pc":{"val":0,"step":1},"ir":{"cmd":"","loc":""},"line":"NOP","variables":{"X":3,"Y":2,"Z":0,"W":0},"tVarCount":0,"focus":{"el":"","var":""},"code":"// X - Y = Z\nLOD X\nSUB Y\nSTO Z\nHLT"},
   result: {"status":0,"step":9,"alu":{"e1":3,"e2":2,"op":"="},"acc":1,"pc":{"val":0,"step":1},"ir":{"cmd":"HLT","loc":""},"line":"HLT","variables":{"X":3,"Y":2,"Z":1,"W":0},"tVarCount":0,"focus":{"el":"","cell":-1,"var":-1},"title":"Subtraction","codeLine":0}
 };
+
+export const is_negative = {
+  input: {"status":0,"step":0,"alu":{"e1":"","e2":"","op":""},"acc":1,"pc":{"val":0,"step":1},"ir":{"cmd":"","loc":""},"line":"NOP","variables":{"X":-3,"Z":0,"T1":0,"T2":0},"tVarCount":0,"focus":{"el":"","var":""},"code":"// X < 0 ? Z\nLOD X\nMUL X\nSTO T1\nSUB X\nSTO T2\nJMZ 23 // 0 is positive\n\nLOD T1\nJMZ 19\nSUB #1\nSTO T1\nLOD T2\nJMZ 23\nSUB #1\nSTO T2\nJMP 7\n\n// is negative\nLOD #1\nJMP 27\n\n// is positive\nLOD #0\nJMP 27\n\n// save result\nSTO Z\nHLT"},
+  result: {"status":0,"step":9,"alu":{"e1":4,"e2":1,"op":"="},"acc":1,"pc":{"val":0,"step":1},"ir":{"cmd":"HLT","loc":""},"line":"HLT","variables":{"X":-3,"Z":1,"T1":0,"T2":3},"tVarCount":0,"focus":{"el":"","cell":-1,"var":-1},"title":"Is negative","codeLine":0}
+};

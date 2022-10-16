@@ -49,4 +49,9 @@ export const samples = [
     label: "Greater than",
     desc: "x > y ? z"
   },
+  {
+    key: "is_negative",
+    label: "Is negative",
+    desc: "x < 0 ? z"
+  },
 ];
