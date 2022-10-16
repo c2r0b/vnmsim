@@ -39,9 +39,8 @@ export const Variables = observer((props:IProps) => {
     value: Sim.getVariable(key)
   }));
 
-  const onVariableChange = (key, value) => {
-    console.log(value)
-    const newValue = value.value || value.displayValue;
+  const onChange = (key, event) => {
+    const newValue = event.target.value;
     if (newValue === undefined) return;
     Sim.setVariable(key, newValue);
   };
@@ -49,6 +48,35 @@ export const Variables = observer((props:IProps) => {
   const addVariable = () => {
     Sim.setVariable("T" + (lastTvariable + 1), 0);
     setLastTvariable(lastTvariable + 1);
+  };
+
+  const displayVariable = (item) => {
+    const value = Sim.getVariable(item.type);
+    let style = Styles.varSpin;
+
+    // change style on focus variable
+    if (props.focusedVar === item.type) {
+      style = Styles.focusedVar;
+    }
+
+    return (
+      <TableRow key={ item.type }>
+        <TableCell style={ Styles.typeCell }>
+          { item.type }
+        </TableCell>
+        <TableCell style={ Styles.inputCell }>
+          <TableCellLayout>
+            <input
+              type="number"
+              step={ 1 }
+              value={ value }
+              onChange={ (e) => onChange(item.type, e) }
+              style={ style }
+            />
+          </TableCellLayout>
+        </TableCell>
+      </TableRow>
+    );
   };
 
   return (
@@ -74,25 +102,7 @@ export const Variables = observer((props:IProps) => {
         </div>
         <Table size="small">
           <TableBody>
-            { items.map(item => (
-              <TableRow key={ item.type }>
-                <TableCell style={ Styles.typeCell }>
-                  { item.type }
-                </TableCell>
-                <TableCell style={ Styles.inputCell }>
-                  <TableCellLayout>
-                    <Input
-                      type="number"
-                      appearance="filled-lighter"
-                      step={ 1 }
-                      value={ Sim.getVariable(item.type) }
-                      onChange={ (e, v) => onVariableChange(item.type, v) }
-                      style={ props.focusedVar === item.type ? Styles.focusedVar : Styles.varSpin }
-                    />
-                  </TableCellLayout>
-                </TableCell>
-              </TableRow>
-            ))}
+            { items.map(displayVariable) }
           </TableBody>
         </Table>
       </div>

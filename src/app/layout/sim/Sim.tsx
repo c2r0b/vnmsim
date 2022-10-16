@@ -34,7 +34,6 @@ export default observer(() => {
   // Styles object
   const updateStyles = () => {
     const newStyles = strToObj(sim.focus.el, Styles.focus);
-    console.log(sim.focus.el, mergeDeep({}, Styles, newStyles))
     setStyles(mergeDeep({}, Styles, newStyles));
   };
 

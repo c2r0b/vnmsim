@@ -1,7 +1,8 @@
 export const varSpin:React.CSSProperties = {
   padding: 3,
   margin: 0,
-  minHeight: 0
+  minHeight: 0,
+  border: 0
 }
 
 export const focusedVar = {
