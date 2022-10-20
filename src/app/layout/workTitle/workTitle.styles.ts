@@ -9,7 +9,6 @@ export const container:React.CSSProperties = {
 export const title = {
   fontSize: 21,
   fontWeight: 600,
-  color: "white",
   lineHeight: 0
 };
 
@@ -17,5 +16,4 @@ export const date = {
   fontSize: 7,
   paddingTop: 0,
   cursor: "default",
-  color: "white"
 };

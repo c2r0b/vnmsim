@@ -36,8 +36,6 @@ pre {
   background-color: var(--white);
   background-repeat: no-repeat;
   background-position: 50%;
-  border-top: 1px solid var(--neutralLight);
-  border-right: 1px solid var(--neutralLight);
 }
 
 .gutter.gutter-horizontal {

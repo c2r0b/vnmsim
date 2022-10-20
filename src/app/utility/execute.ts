@@ -9,7 +9,7 @@ const commands = {
   DIV: '/'
 };
 
-export const execute = ({ sim, stats, status, line, editor }) => {
+export const execute = ({ sim, stats, status, line, code }) => {
   // get line, interpret comments as NOP operations
   sim.line = (
     (!line || line.match(/^((\d+)|(\/\/[\s\S]*))$/i))
@@ -129,7 +129,7 @@ export const execute = ({ sim, stats, status, line, editor }) => {
       // memory cell
       else {
         sim.focus.cell = sim.ir.loc;
-        sim.alu.e2 = parseInt(editor.doc.getLine(sim.ir.loc)) || 0;
+        sim.alu.e2 = parseInt(code[sim.ir.loc]) || 0;
         stats.cell_access++;
       }
       sim.focus.el = 'alu.p2';
@@ -173,17 +173,6 @@ export const execute = ({ sim, stats, status, line, editor }) => {
         sim.focus.var = sim.ir.loc;
         sim.variables[sim.ir.loc] = sim.acc;
         stats.variable_access++;
-      }
-      // STO instruction -> edit cell
-      else {
-        sim.focus.cell = sim.ir.loc;
-        editor.doc.replaceRange(
-          sim.acc.toString(),
-          {
-            line: sim.ir.loc,
-            ch: 0
-          }
-        );
       }
       break;
   }

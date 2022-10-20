@@ -27,8 +27,6 @@ export const Locale = {
     
     "WARNING_UNSAVED": "Any unsaved changes will be lost. Continue?",
   
-    "MEMORY": "Memory cells",
-    "VARIABLES": "Variables",
     "ADD_VARIABLE": "Add T variable",
   
     "MADE_BY": "Made by",
@@ -38,8 +36,6 @@ export const Locale = {
     "STEP": "Single step",
     "PAUSE": "Pause",
     "STOP": "Stop",
-
-    "RUNNING": "Running...",
   
     "DATA_BUS": "Data/instructions bus",
     "ADDRESSES_BUS": "Addresses bus",
@@ -73,7 +69,6 @@ export const Locale = {
     "GUIDE_BUG_H": "Found a bug?",
     "GUIDE_BUG_P": "Have you noticed something not working as expected? Please file an issue on GitHub. If you are a developer, feel free to create a pull request. On this project GitHub page you will find information on how to contribute to translations too.",
 
-    "SAMPLES_MSG": "The following list of samples is meant as a way to introduce to and practice with the main commands of this simulator. These samples are not meant to be 'the right way' to approach the described problem since there is not a single solution to them.",
     "SAMPLES_OPEN": "Open"
   },
   it: {
@@ -104,8 +99,6 @@ export const Locale = {
     
     "WARNING_UNSAVED": "Verranno perse le modifiche non salvate. Proseguire?",
   
-    "MEMORY": "Celle di memoria",
-    "VARIABLES": "Variabili",
     "ADD_VARIABLE": "Aggiungi variabile T",
   
     "MADE_BY": "Creato da",
@@ -115,8 +108,6 @@ export const Locale = {
     "STEP": "Singolo step",
     "PAUSE": "Pausa",
     "STOP": "Termina",
-
-    "RUNNING": "Eseguendo...",
   
     "DATA_BUS": "Bus data/istruzioni",
     "ADDRESSES_BUS": "Bus indirizzi",
@@ -150,7 +141,6 @@ export const Locale = {
     "GUIDE_BUG_H": "Hai trovato un bug?",
     "GUIDE_BUG_P": "Hai notato che qualcosa non funziona come previsto? Segnala un problema su GitHub. Se sei uno sviluppatore, sentiti libero di creare una pull request. Nella pagina GitHub del progetto, troverai anche informazioni su come contribuire alle traduzioni.",
 
-    "SAMPLES_MSG": "Il seguente elenco di esempi è inteso come modo per esercitarsi con i principali comandi di questo simulatore. Questi esempi non sono pensati per essere 'il modo giusto' per affrontare il problema descritto, poiché non prevedono un'unica soluzione valida.",
     "SAMPLES_OPEN": "Apri"
   },
   es: {
@@ -181,8 +171,6 @@ export const Locale = {
 
     "WARNING_UNSAVED": "Se perderán todos los cambios no guardados. ¿Continuar?",
   
-    "MEMORY": "Células de memoria",
-    "VARIABLES": "Variables",
     "ADD_VARIABLE": "Añadir variable t",
   
     "MADE_BY": "Realizado por",
@@ -192,8 +180,6 @@ export const Locale = {
     "STEP": "Un solo paso",
     "PAUSE": "Pausa",
     "STOP": "Para",
-
-    "RUNNING": "Corriendo...",
   
     "DATA_BUS": "Datos/instrucciones bus",
     "ADDRESSES_BUS": "Bus de direcciones",
@@ -227,7 +213,6 @@ export const Locale = {
     "GUIDE_BUG_H": "¿Encontraste un error?",
     "GUIDE_BUG_P": "¿Ha notado que algo no funciona como se esperaba? Presente un problema en GitHub. Si es un desarrollador, no dude en crear una pull request. En la página de GitHub del proyecto, también encontrará información sobre cómo contribuir a las traducciones.",
 
-    "SAMPLES_MSG": "La siguiente lista de ejemplos pretende ser una forma de practicar los comandos principales de este simulador. Estos ejemplos no pretenden ser 'la forma correcta' de abordar el problema descrito, ya que no brindan una solución única y viable.",
     "SAMPLES_OPEN": "Abrir"
   },
   de: {
@@ -258,8 +243,6 @@ export const Locale = {
 
     "WARNING_UNSAVED": "Alle Änderungen gehen verloren. Fortfahren?",
   
-    "MEMORY": "Programm",
-    "VARIABLES": "Daten",
     "ADD_VARIABLE": "T-Variable hinzufügen",
   
     "MADE_BY": "Entwickelt von",
@@ -269,8 +252,6 @@ export const Locale = {
     "STEP": "Einzelschritt",
     "PAUSE": "Pause",
     "STOP": "Stop",
-
-    "RUNNING": "Laufen...",
   
     "DATA_BUS": "Datenbus",
     "ADDRESSES_BUS": "Adressbus",
@@ -304,7 +285,6 @@ export const Locale = {
     "GUIDE_BUG_H": "Einen Fehler gefunden?",
     "GUIDE_BUG_P": "Haben Sie bemerkt, dass etwas nicht wie erwartet funktioniert? Bitte melden Sie ein Problem auf GitHub. Wenn Sie ein Entwickler sind, können Sie gerne eine Pull-Anforderung erstellen. Auf der GitHub-Seite des Projekts finden Sie auch Informationen zur Mitwirkung an Übersetzungen.",
 
-    "SAMPLES_MSG": "Die folgende Liste von Beispielen soll dazu dienen, die Hauptbefehle dieses Simulators zu üben. Diese Beispiele sind nicht als „der richtige Weg“ gedacht, um das beschriebene Problem anzugehen, da sie keine einzige, praktikable Lösung bieten.",
     "SAMPLES_OPEN": "Öffnen"
   }
 };

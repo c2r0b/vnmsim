@@ -1,12 +1,15 @@
+import appStyles from './app.module.css';
+
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { ThemeContext } from "src/themes/dispatcher";
 import { FluentProvider } from "@fluentui/react-components";
 
+import Split from "react-split";
+
 import * as Styles from "./app.styles";
 
-import Header from "./layout/header/Header";
 import Nav from "./layout/nav/Nav";
 import Controls from "./layout/controls/Controls";
 import Ram from "./layout/ram/Ram";
@@ -18,11 +21,23 @@ export const App = observer(() => {
   return (
     <FluentProvider theme={ Theme.getTheme() }>
       <div style={ Styles.container }>
-        <Header />
-        <Nav />
-        <Sim />
-        <Controls />
-        <Ram />
+        <Split
+          className={ appStyles.split }
+          sizes={[45, 55]}
+          minSize={ [500] }
+          expandToMin={ true }
+          gutterSize={ 20 }
+          dragInterval={ 30 }
+          direction="horizontal"
+        >
+          <div>
+            <Nav />
+            <Ram />
+            <Controls />
+          </div>
+          <Sim />
+        </Split>
+
         <Notification />
       </div>
     </FluentProvider>

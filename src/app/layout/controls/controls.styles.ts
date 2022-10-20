@@ -1,11 +1,10 @@
 export const container:React.CSSProperties = {
-  position: "fixed",
-  right: 0,
-  bottom: 0,
+  position: "absolute",
   left: 0,
+  bottom: 0,
+  right: 0,
   paddingRight: 15,
   backgroundColor: "var(--white)",
-  borderTop: "1px solid var(--neutralLight)",
   zIndex: 900,
   display: "flex",
   flexDirection: "row",
@@ -13,7 +12,7 @@ export const container:React.CSSProperties = {
 };
 
 export const controls:React.CSSProperties = {
-  paddingTop: 15,
+  paddingTop: 10,
   paddingLeft: 15,
   paddingBottom: 15,
   display: "flex",
@@ -23,14 +22,14 @@ export const controls:React.CSSProperties = {
 
 export const sliderContainer:React.CSSProperties = {
   display: "flex",
-  flexDirection: "column",
-  gap: 0,
-  marginTop: 6
+  flexDirection: "row",
+  gap: 10,
+  marginTop: 10
 };
 
 export const sliderLabel = {
   fontSize: 10,
-  marginTop: -8
+  marginTop: 5
 };
 
 export const slider = {
@@ -39,6 +38,6 @@ export const slider = {
 
 export const poweredByVercel:React.CSSProperties = {
   position: "fixed",
-  right: 15,
-  bottom: 3
+  right: 10,
+  bottom: 0
 };

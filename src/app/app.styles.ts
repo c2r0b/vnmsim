@@ -4,7 +4,14 @@ export const container:React.CSSProperties = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: "var(--neutralLighter)",
-  backgroundImage: "linear-gradient(var(--neutralLight) .1em, transparent .1em), linear-gradient(90deg, var(--neutralLight) .1em, transparent .1em)",
-  backgroundSize: ".5em .5em"
+  backgroundColor: "var(--white)"
 };
+
+export const panel:React.CSSProperties = {
+  position: "relative",
+  width: "100%",
+  height: "100%",
+  backgroundColor: "var(--white)",
+  overflow: "hidden",
+  zIndex: 100
+}

@@ -40,14 +40,14 @@ export const samples = [
     desc: "x % y = z"
   },
   {
-    key: "even",
-    label: "Is even",
-    desc: "(x % 2 == 0) ? z"
-  },
-  {
     key: "greater_than",
     label: "Greater than",
     desc: "x > y ? z"
+  },
+  {
+    key: "even",
+    label: "Is even",
+    desc: "(x % 2 == 0) ? z"
   },
   {
     key: "is_negative",

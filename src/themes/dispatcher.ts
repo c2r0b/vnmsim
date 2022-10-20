@@ -71,7 +71,11 @@ export class ThemeStore {
     theme = this.getNormalizedThemeName();
     
     if (theme === "dark") {
-      return createDarkTheme(THEMES[theme]);
+      return {
+        ...createDarkTheme(THEMES[theme]),
+        colorNeutralBackground1: "#000000",
+        colorNeutralForegroundOnBrand: "#000000"
+      };
     }
     
     return createLightTheme(THEMES[theme]);

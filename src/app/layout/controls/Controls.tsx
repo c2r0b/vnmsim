@@ -13,6 +13,8 @@ import { Next24Regular, FastForward24Regular, Pause24Regular, Play24Regular, Sto
 
 import { clearHighlight } from "src/app/utility/highlight";
 
+import Spinner from "./Spinner";
+
 import * as Styles from "./controls.styles";
 
 const vercelLink = "https://vercel.com/?utm_source=vnmsim&utm_campaign=oss";
@@ -120,6 +122,8 @@ export default observer(() => {
           { `${interval} ms` }
         </Label>
       </div>
+
+      <Spinner />
       
       <div style={ Styles.poweredByVercel }>
         <a href={ vercelLink }>

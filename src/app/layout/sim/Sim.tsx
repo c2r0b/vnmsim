@@ -8,6 +8,8 @@ import { Input, SpinButton, Text, Tooltip } from "@fluentui/react-components";
 
 import { PanZoom } from "react-easy-panzoom";
 
+import WorkTitle from "../workTitle/WorkTitle";
+
 import { execute, lastStep } from "../../utility/execute";
 import { strToObj, mergeDeep } from "../../utility/objects";
 
@@ -42,14 +44,18 @@ export default observer(() => {
     updateStyles();
   }, [sim.focus.el]);
 
-  const runSimulator = () => {
-    let sim = { ...Sim.getSim() };
-    
+  const runSimulator = (set = true, {
+    sim = { ...Sim.getSim() },
+    stats = { ...Sim.getStats() },
+    status = Sim.getSimStatus(),
+    code = editor.state.doc.text
+  }) => {
     sim.step++;
     if (sim.step > lastStep) {
       sim.step = 1;
       sim.codeLine++;
 
+      // single iteration
       if (status === 3) {
         Sim.updateSim(sim);
         Sim.loseFocus();
@@ -63,22 +69,23 @@ export default observer(() => {
     }
 
     // stop if RAM out of bounds
-    if (editor.state.doc.lines < sim.codeLine + 1) {
+    if (code.length < sim.codeLine + 1) {
       Sim.setSimStatus(0);
-      return;
+      return { sim, stats, status: 0 };
     }
     
-    const result = execute({
+    let result = execute({
       sim,
-      stats: {...Sim.getStats()},
+      stats,
       status,
-      line: editor.state.doc.text[sim.codeLine],
-      editor: editor.state
+      line: code[sim.codeLine],
+      code
     });
 
-    Sim.updateSim(result.sim);
-    Sim.updateStats(result.stats);
-    Sim.setSimStatus(result.status);
+    while (set === false && result.status) {
+      result = runSimulator(true, { ...result, code });
+    }
+    return result;
   };
 
   useEffect(() => {
@@ -97,19 +104,27 @@ export default observer(() => {
         break;
       }
       case 2: { // single step
-        runSimulator();
+        const result = runSimulator(true, {});
+        Sim.updateSim(result.sim);
+        Sim.updateStats(result.stats);
         Sim.setSimStatus(4);
         break;
       }
       case 1: // play
       case 3: { // single iteration
         if (interval === 0) {
-          while (Sim.getSimStatus()) {
-            runSimulator();
-          }
+          const result = runSimulator(false, {});
+          Sim.updateSim(result.sim);
+          Sim.updateStats(result.stats);
+          Sim.setSimStatus(result.status);
         }
         else {
-          setIntervalId(setInterval(runSimulator, interval));
+          setIntervalId(setInterval(() => {
+            const result = runSimulator(true, {});
+            Sim.updateSim(result.sim);
+            Sim.updateStats(result.stats);
+            Sim.setSimStatus(result.status);
+          }, interval));
           return () => clearInterval(intervalId);
         }
       }
@@ -126,7 +141,8 @@ export default observer(() => {
   }  
 
   return (
-    <>
+    <div style={ styles.box }>
+      <WorkTitle />
       <PanZoom
         zoomSpeed={ 0.5 }
         minZoom={ 0.5 }
@@ -269,6 +285,6 @@ export default observer(() => {
           </div>
         </Tooltip>
       </PanZoom>
-    </>
+    </div>
   );
 });

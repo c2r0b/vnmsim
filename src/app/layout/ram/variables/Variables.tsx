@@ -3,11 +3,10 @@ import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
-import { Localize } from "src/locale/Localize";
 
 import { Add24Filled } from "@fluentui/react-icons";
 
-import { Text, Tooltip, Button, Input } from "@fluentui/react-components";
+import { Tooltip, Button } from "@fluentui/react-components";
 import { Table, TableBody, TableCell, TableCellLayout, TableRow } from "@fluentui/react-components/unstable";
 
 import * as RamStyles from "../ram.styles";
@@ -23,7 +22,9 @@ export const Variables = observer((props:IProps) => {
   const Sim = useContext(SimulatorContext);
   const Locale = useContext(LocaleContext);
 
-  const [lastTvariable, setLastTvariable] = useState(10);
+  const [lastTvariable, setLastTvariable] = useState(20);
+
+  const interval = Sim.getInterval();
 
   // generate T variables
   const allVariables = [
@@ -55,12 +56,12 @@ export const Variables = observer((props:IProps) => {
     let style = Styles.varSpin;
 
     // change style on focus variable
-    if (props.focusedVar === item.type) {
+    if (props.focusedVar === item.type && interval !== 0) {
       style = Styles.focusedVar;
     }
 
     return (
-      <TableRow key={ item.type }>
+      <TableRow key={ item.type } style={ RamStyles.row }>
         <TableCell style={ Styles.typeCell }>
           { item.type }
         </TableCell>
@@ -80,32 +81,26 @@ export const Variables = observer((props:IProps) => {
   };
 
   return (
-    <>
-      <div style={ RamStyles.verticalHalf }>
-        <div style={ RamStyles.title }>
-          <Text style={ RamStyles.titleText }>
-            <Localize label="VARIABLES"/>
-          </Text>
-          <Tooltip
-            content={ Locale.get("ADD_VARIABLE") }
-            relationship="label"
-            withArrow
-          >
-            <Button
-              aria-label={ Locale.get("ADD_VARIABLE") }
-              icon={ <Add24Filled /> }
-              onClick={ addVariable }
-              style={ RamStyles.titleButton }
-              appearance="subtle"
-            />
-          </Tooltip>
-        </div>
-        <Table size="small">
-          <TableBody>
-            { items.map(displayVariable) }
-          </TableBody>
-        </Table>
-      </div>
-    </>
+    <div style={ RamStyles.verticalHalf }>
+      <Table size="small">
+        <TableBody>
+          { items.map(displayVariable) }
+          <TableRow>
+            <Tooltip
+              content={ Locale.get("ADD_VARIABLE") }
+              relationship="label"
+              withArrow
+            >
+              <Button
+                aria-label={ Locale.get("ADD_VARIABLE") }
+                icon={ <Add24Filled /> }
+                onClick={ addVariable }
+                appearance="subtle"
+              />
+            </Tooltip>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
   );
 });

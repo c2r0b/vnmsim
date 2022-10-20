@@ -4,19 +4,19 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
 
-import { Tooltip, Button, Image } from"@fluentui/react-components";
-import { Beaker24Regular, CalendarStar24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from "@fluentui/react-icons";
+import { Tooltip, Button, Image, Title3 } from"@fluentui/react-components";
+import { Microscope24Regular, Beaker24Regular, CalendarStar24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from "@fluentui/react-icons";
 
 import DropZone from "../dropZone/DropZone";
 import Help from "../../modals/help";
 import Samples from "../../modals/samples";
 import Settings from "../../modals/settings";
+import Stats from "../../modals/stats";
 
 import { readFile, save } from "../../utility/io";
 
 import * as Styles from "./nav.styles";
 import NewConfirm from "./NewConfirm";
-
 
 const onGithubClick = () => {
   window.open("https://github.com/c2r0b/vnmsim", "_blank");
@@ -87,10 +87,22 @@ const Nav = observer(() => {
       onClick: () => setSelPanel("samples")
     },
     {
+      key: "stats",
+      ariaLabel: Locale.get("STATS"),
+      icon: <Microscope24Regular />,
+      onClick: () => setSelPanel("stats")
+    },
+    {
       key: "help",
       ariaLabel: Locale.get("HELP"),
       icon: <ChatHelp24Regular />,
       onClick: () => setSelPanel("help")
+    },
+    {
+      key: "settings",
+      ariaLabel: Locale.get("SETTINGS"),
+      icon: <Settings24Regular />,
+      onClick: () => setSelPanel("settings")
     },
     {
       key: "github",
@@ -102,12 +114,6 @@ const Nav = observer(() => {
         />
       ),
       onClick: onGithubClick
-    },
-    {
-      key: "settings",
-      ariaLabel: Locale.get("SETTINGS"),
-      icon: <Settings24Regular />,
-      onClick: () => setSelPanel("settings")
     }
   ];
 
@@ -117,7 +123,7 @@ const Nav = observer(() => {
         key={ props.key }
         content={ props.ariaLabel }
         relationship="label"
-        positioning="after"
+        positioning="below"
         withArrow
       >
         <Button
@@ -152,6 +158,10 @@ const Nav = observer(() => {
         show={ selPanel == "settings" }
         onDismiss={ () => setSelPanel("") }
       />
+      <Stats
+        show={ selPanel == "stats" }
+        onDismiss={ () => setSelPanel("") }
+      />
 
       <DropZone
         onOpen={ onOpen }
@@ -166,6 +176,7 @@ const Nav = observer(() => {
       />
 
       <div style={ Styles.container }>
+        <Title3 style={ Styles.title }>vnms</Title3>
         { menuItems }
       </div>
     </>

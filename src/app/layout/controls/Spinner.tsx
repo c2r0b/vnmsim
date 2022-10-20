@@ -5,8 +5,6 @@ import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 import { Spinner } from "@fluentui/react-components";
 
-import * as Styles from "./spinner.styles";
-
 export default observer(() => {  
 	const Sim = useContext(SimulatorContext);
 	const Locale = useContext(LocaleContext);
@@ -17,12 +15,9 @@ export default observer(() => {
 	}
 	return (
 		<Spinner
-			appearance="inverted"
 			size="small"
-			label={ Locale.get("RUNNING") }
 			aria-live="assertive"
 			labelPosition="before"
-			style={ Styles.status }
 		/>
 	);
 });

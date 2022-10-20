@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import AutoSizer from "react-virtualized-auto-sizer";
-import { Resizable } from "re-resizable";
 import Split from "react-split";
 
 import CodeMirror from '@uiw/react-codemirror';
@@ -14,16 +13,12 @@ import { linter, lintGutter } from "@codemirror/lint";
 import { Compartment } from "@codemirror/state";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { Localize } from "src/locale/Localize";
 import { ThemeContext } from "src/themes/dispatcher";
 
 import { editorMode as vnmLang } from "../../utility/mode";
 import { editorLinter } from "../../utility/linter";
 
-import { Text } from "@fluentui/react-components";
-
 import { Variables } from "./variables/Variables";
-import { Statistics } from "./stats/Stats";
 
 import * as Styles from "./ram.styles";
 import { addLineHighlight, clearHighlight, lineHighlightField } from 'src/app/utility/highlight';
@@ -42,6 +37,7 @@ const Ram = observer(() => {
 
   const focusCell = (lineNo: number) => {
     const editor = Sim.getEditor();
+    if (!editor.state) return;
 
     // if out of bounds, return
     if (lineNo < 0 || lineNo > editor.state.doc.lines) {
@@ -125,30 +121,17 @@ const Ram = observer(() => {
 
   return (
     <AutoSizer>
-      {({ width, height }) => (
-        <Resizable
-          style={ Styles.container }
-          minWidth={ 500 }
-          maxWidth={ width - 60 }
-          defaultSize={{
-            width: 500,
-            height: "100%",
-          }}
-        >
+      {({ height }) => (
+        <div style={ Styles.container }>
           <Split
             className={ ramStyles.split }
-            sizes={[50, 50]}
+            sizes={[55, 45]}
             minSize={ 0 }
             gutterSize={ 20 }
             dragInterval={ 30 }
             direction="horizontal"
           >
             <div style={ Styles.ramHalf }>
-              <div style={ Styles.title }>
-                <Text style={ Styles.titleText }>
-                  <Localize label="MEMORY"/>
-                </Text>
-              </div>
               <CodeMirror
                 ref={ editorRef }
                 className={ ramStyles.CodeMirror }
@@ -160,18 +143,9 @@ const Ram = observer(() => {
                 basicSetup={ editorOptions }
               />
             </div>
-            <Split
-              sizes={[54, 46]}
-              minSize={ 40 }
-              gutterSize={ 20 }
-              dragInterval={ 30 }
-              direction="vertical"
-            >
-              <Variables focusedVar={ focusedVar } />
-              <Statistics />
-            </Split>
+            <Variables focusedVar={ focusedVar } />
           </Split>
-        </Resizable>
+        </div>
       )}
     </AutoSizer>
   );

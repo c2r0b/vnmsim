@@ -72,7 +72,6 @@ const Samples = observer((props:IProps) => {
         <DialogBody>
           <DialogTitle>{ Locale.get("SAMPLES") }</DialogTitle>
           <DialogContent>
-            <p><Localize label="SAMPLES_MSG"/></p>
             <div style={ Styles.list }>
               { samplesList }
             </div>
