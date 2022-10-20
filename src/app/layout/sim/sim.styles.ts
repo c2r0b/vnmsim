@@ -1,7 +1,6 @@
 export const box:React.CSSProperties = {
   padding: 10,
   backgroundColor: "var(--neutralLighter)",
-  backgroundImage: "linear-gradient(var(--neutralLight) .1em, transparent .1em), linear-gradient(90deg, var(--neutralLight) .1em, transparent .1em)",
   backgroundSize: ".5em .5em"
 };
 
