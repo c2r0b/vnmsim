@@ -9,7 +9,7 @@ export const container:React.CSSProperties = {
   backgroundColor: "var(--white)",
   display: "flex",
   flexDirection: "row",
-  gap: 20,
+  gap: 28,
   zIndex: 100
 }
 

@@ -18,6 +18,7 @@ import Notification from "./layout/notification/Notification";
 
 export const App = observer(() => {
   const Theme = useContext(ThemeContext);
+
   return (
     <FluentProvider theme={ Theme.getTheme() }>
       <div style={ Styles.container }>
@@ -35,7 +36,9 @@ export const App = observer(() => {
             <Ram />
             <Controls />
           </div>
-          <Sim />
+          <div>
+            <Sim />
+          </div>
         </Split>
 
         <Notification />

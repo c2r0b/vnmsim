@@ -23,12 +23,12 @@ export const controls:React.CSSProperties = {
 export const sliderContainer:React.CSSProperties = {
   display: "flex",
   flexDirection: "row",
-  gap: 10,
+  gap: 5,
   marginTop: 10
 };
 
 export const sliderLabel = {
-  fontSize: 10,
+  fontSize: 8,
   marginTop: 5
 };
 
