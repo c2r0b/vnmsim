@@ -23,8 +23,8 @@ export const App = observer(() => {
       <div style={ Styles.container }>
         <Split
           className={ appStyles.split }
-          sizes={[45, 55]}
-          minSize={ [500] }
+          sizes={[35, 65]}
+          minSize={ [400] }
           expandToMin={ true }
           gutterSize={ 20 }
           dragInterval={ 30 }

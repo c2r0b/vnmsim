@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
-import Image from 'next/image';
-
-import poweredByVercelImg from "public/powered-by-vercel.svg";
-
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 
@@ -16,8 +12,6 @@ import { clearHighlight } from "src/app/utility/highlight";
 import Spinner from "./Spinner";
 
 import * as Styles from "./controls.styles";
-
-const vercelLink = "https://vercel.com/?utm_source=vnmsim&utm_campaign=oss";
 
 export default observer(() => {
   const Sim = useContext(SimulatorContext);
@@ -124,18 +118,6 @@ export default observer(() => {
       </div>
 
       <Spinner />
-      
-      <div style={ Styles.poweredByVercel }>
-        <a href={ vercelLink }>
-          <Image
-            priority
-            src={ poweredByVercelImg }
-            alt="Powered by Vercel"
-            width={ 150 }
-            height={ 44 }
-          />
-        </a>
-      </div>
     </div>
   );
 });

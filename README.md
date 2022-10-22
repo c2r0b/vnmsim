@@ -5,8 +5,6 @@ This simulator is meant to be a solution for students and teachers to study how 
 
 Online version: [vnmsim.app](https://vnmsim.app)
 
-[![Powered by Vercel](/public/powered-by-vercel.svg "Powered by Vercel")](https://vercel.com/?utm_source=vnmsim&utm_campaign=oss)
-
 ## Simulator guide
 
 This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP).

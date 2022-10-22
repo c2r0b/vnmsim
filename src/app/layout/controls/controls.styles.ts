@@ -17,7 +17,7 @@ export const controls:React.CSSProperties = {
   paddingBottom: 15,
   display: "flex",
   flexDirection: "row",
-  gap: 10
+  gap: 5
 };
 
 export const sliderContainer:React.CSSProperties = {
@@ -33,11 +33,5 @@ export const sliderLabel = {
 };
 
 export const slider = {
-  width: 150
-};
-
-export const poweredByVercel:React.CSSProperties = {
-  position: "fixed",
-  right: 10,
-  bottom: 0
+  width: 100
 };

@@ -103,17 +103,6 @@ const Nav = observer(() => {
       ariaLabel: Locale.get("SETTINGS"),
       icon: <Settings24Regular />,
       onClick: () => setSelPanel("settings")
-    },
-    {
-      key: "github",
-      ariaLabel: "GitHub",
-      children: (
-        <Image
-          src={ Styles.githubIcon }
-          style={ Styles.github }
-        />
-      ),
-      onClick: onGithubClick
     }
   ];
 
@@ -133,9 +122,7 @@ const Nav = observer(() => {
           style={ Styles.menuItem }
           onClick={ props.onClick }
           appearance="subtle"
-        >
-          { props.children || null }
-        </Button>
+        />
       </Tooltip>
     );
   });
@@ -176,7 +163,6 @@ const Nav = observer(() => {
       />
 
       <div style={ Styles.container }>
-        <Title3 style={ Styles.title }>vnms</Title3>
         { menuItems }
       </div>
     </>
