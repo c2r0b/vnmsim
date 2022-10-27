@@ -48,9 +48,10 @@ export default observer(() => {
     sim = { ...Sim.getSim() },
     stats = { ...Sim.getStats() },
     status = Sim.getSimStatus(),
-    code = editor.state.doc.text
+    code = Sim.getCode().split("\n")
   }) => {
     sim.step++;
+     console.log(code, editor)
     if (sim.step > lastStep) {
       sim.step = 1;
       sim.codeLine++;

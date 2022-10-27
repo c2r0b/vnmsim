@@ -19,8 +19,8 @@ export const even = {
 };
 
 export const greater_than = {
-  input: {"status":0,"step":0,"alu":{"e1":"","e2":"","op":""},"acc":0,"pc":{"val":0,"step":1},"ir":{"cmd":"","loc":""},"line":"HLT","variables":{"X":3,"Y":2,"Z":0,"W":0},"tVarCount":0,"focus":{"el":"","var":""},"code":"// X > Y ? Z\nLOD X\nJMZ 11\nSUB #1\nSTO X\nLOD Y\nJMZ 15\nSUB #1\nSTO Y\nJMP 1\n// X < Y\nLOD #0\nSTO Z\nHLT\n// X > Y\nLOD #1\nSTO Z\nHLT\n\n\n\n\n\n"},
-  result: {"status":0,"step":9,"alu":{"e1":1,"e2":"1","op":"="},"acc":1,"pc":{"val":0,"step":1},"ir":{"cmd":"HLT","loc":""},"line":"HLT","variables":{"X":0,"Y":0,"Z":1,"W":0},"tVarCount":0,"focus":{"el":"","cell":-1,"var":-1},"title":"Is greater than","created":"2022-02-20","codeLine":0}
+  input: {"status":0,"step":0,"alu":{"e1":"","e2":"","op":""},"acc":0,"pc":{"val":0,"step":1},"ir":{"cmd":"","loc":""},"line":"HLT","variables":{"X":3,"Y":2,"Z":0,"W":0},"tVarCount":0,"focus":{"el":"","var":""},"code":"// X > Y ? Z\nLOD X\nSTO T1 // save +X\nMUL #-1\nSTO T2 // save -X\nLOD Y\nSTO T3 // save +Y\nMUL #-1\nSTO T4 // save -Y\n\n// decrement all 4 counters\nLOD T1\nJMZ 30\nSUB #1\nSTO T1\nLOD T2\nJMZ 30\nSUB #1\nSTO T2\nLOD T3\nJMZ 41\nSUB #1\nSTO T3\nLOD T4\nJMZ 41\nSUB #1\nSTO T4\nJMP 11\n\n// X reached 0\nLOD T3\nJMZ 57\nSUB #1\nSTO T3\nLOD T4\nJMZ 52\nSUB #1\nSTO T4\nJMP 30\n\n// Y reached 0\nLOD T1\nJMZ 52\nSUB #1\nSTO T1\nLOD T2\nJMZ 57\nSUB #1\nSTO T2\nJMP 41\n\n// Result 1\nLOD #1\nSTO Z\nHLT\n\n// Result 0\nLOD #0\nSTO Z\nHLT"},
+  result: {"status":0,"step":9,"alu":{"e1":1,"e2":"1","op":"="},"acc":1,"pc":{"val":0,"step":1},"ir":{"cmd":"HLT","loc":""},"line":"HLT","variables":{"X":3,"Y":2,"Z":1,"W":0},"tVarCount":0,"focus":{"el":"","cell":-1,"var":-1},"title":"Is greater than","created":"2022-02-20","codeLine":0}
 };
 
 export const modulo = {
