@@ -3,10 +3,8 @@ import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
-import { Localize } from "src/locale/Localize";
 
-import { Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from "@fluentui/react-components";
-import { Card, CardHeader } from "@fluentui/react-components/unstable";
+import { Card, CardHeader, Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from "@fluentui/react-components";
 import { ArrowDownload24Filled } from "@fluentui/react-icons";
 
 import { samples } from "./samples.list";

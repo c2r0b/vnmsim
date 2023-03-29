@@ -6,8 +6,7 @@ import { LocaleContext } from "src/locale/dispatcher";
 
 import { Add24Filled } from "@fluentui/react-icons";
 
-import { Tooltip, Button } from "@fluentui/react-components";
-import { Table, TableBody, TableCell, TableCellLayout, TableRow } from "@fluentui/react-components/unstable";
+import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow } from "@fluentui/react-components";
 
 import * as RamStyles from "../ram.styles";
 import * as Styles from "./variables.styles";

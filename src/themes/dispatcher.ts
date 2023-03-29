@@ -67,8 +67,8 @@ export class ThemeStore {
     this.setCSSVariables();
   }
 
-  getTheme(theme = this.theme) {
-    theme = this.getNormalizedThemeName();
+  getTheme() {
+    const theme = this.getNormalizedThemeName();
     
     if (theme === "dark") {
       return {
