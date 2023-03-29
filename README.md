@@ -33,4 +33,4 @@ If you were looking for that simulator (available only in italian), you can down
 
 ## License
 
-The MIT license. Please see the `LICENSE` file for more details.
+The MIT license. Please see the [`LICENSE`](./LICENCE) file for more details.
