@@ -136,7 +136,7 @@ const Ram = observer(() => {
                 ref={ editorRef }
                 className={ ramStyles.CodeMirror }
                 value={ Sim.getCode() || "" }
-                height={ height }
+                height={ height.toString() }
                 extensions={ editorExtensions }
                 onChange={ onEditorChange }
                 onUpdate={ (viewUpdate) => onEditorChange("", viewUpdate) }

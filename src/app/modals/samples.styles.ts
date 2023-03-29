@@ -4,7 +4,7 @@ export const list = {
   gap: 15,
   paddingTop: 10,
   paddingLeft: 2,
-  paddingBottom: 2
+  paddingBottom: 10
 }
 
 export const card = {

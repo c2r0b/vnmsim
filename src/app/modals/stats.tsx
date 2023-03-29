@@ -4,9 +4,7 @@ import { observer } from "mobx-react-lite";
 import { SimulatorContext } from "src/store/dispatcher";
 import { LocaleContext } from "src/locale/dispatcher";
 
-import { Button, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, DialogTrigger } from "@fluentui/react-components";
-import { Table, TableBody, TableCell, TableRow } from "@fluentui/react-components/unstable";
-
+import { Button, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, DialogTrigger, Table, TableBody, TableCell, TableRow } from "@fluentui/react-components";
 import { ArrowRotateClockwise24Filled } from "@fluentui/react-icons";
 
 import * as Styles from "./stats.styles";
