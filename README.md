@@ -5,7 +5,7 @@ This simulator is meant to be a solution for students and teachers to study how 
 
 Online version: [vnmsim.app](https://vnmsim.app)
 
-Windows, Ubuntu and MacOS offline version: [releases](github.com/c2r0b/vnmsim/releases)
+Windows, Ubuntu and MacOS offline version: [releases](https://github.com/c2r0b/vnmsim/releases)
 
 ## Simulator guide
 
