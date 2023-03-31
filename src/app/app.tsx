@@ -1,6 +1,6 @@
 import appStyles from './app.module.css';
 
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import { ThemeContext } from "src/themes/dispatcher";
@@ -18,9 +18,14 @@ import Notification from "./layout/notification/Notification";
 
 export const App = observer(() => {
   const Theme = useContext(ThemeContext);
+  const [theme, setTheme] = useState(Theme.getTheme());
+
+  useEffect(() => {
+    setTheme(Theme.getTheme());
+  }, [Theme.theme]);
 
   return (
-    <FluentProvider theme={ Theme.getTheme() }>
+    <FluentProvider theme={ theme }>
       <div style={ Styles.container }>
         <Split
           className={ appStyles.split }
