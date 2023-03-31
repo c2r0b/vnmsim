@@ -1,0 +1,48 @@
+{
+  "name": "Von Neumann machine simulator",
+  "short_name": "VNMS",
+  "start_url": "/",
+  "categories": ["education"],
+  "display": "standalone",
+  "dir": "ltr",
+  "background_color": "#000",
+  "theme_color": "#f9c55b",
+  "description": "This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.",
+  "lang": "en-US",
+  "icons": [{
+    "src": "images/touch/48x48.png",
+    "sizes": "48x48",
+    "type": "image/png",
+    "purpose": "maskable any"
+  }, {
+    "src": "images/touch/72x72.png",
+    "sizes": "72x72",
+    "type": "image/png",
+    "purpose": "maskable any"
+  }, {
+    "src": "images/touch/96x96.png",
+    "sizes": "96x96",
+    "type": "image/png",
+    "purpose": "maskable any"
+  }, {
+    "src": "images/touch/144x144.png",
+    "sizes": "144x144",
+    "type": "image/png",
+    "purpose": "maskable any"
+  }, {
+    "src": "images/touch/168x168.png",
+    "sizes": "168x168",
+    "type": "image/png",
+    "purpose": "maskable any"
+  }, {
+    "src": "images/touch/192x192.png",
+    "sizes": "192x192",
+    "type": "image/png",
+    "purpose": "maskable any"
+  }, {
+    "src": "src/assets/img/icons/512x512.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "maskable any"
+  }]
+}
