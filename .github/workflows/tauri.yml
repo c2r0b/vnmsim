@@ -32,6 +32,7 @@ jobs:
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: dW50cnVzdGVkIGNvbW1lbnQ6IHJzaWduIGVuY3J5cHRlZCBzZWNyZXQga2V5ClJXUlRZMEl5SmV1YXpOTUx6MkJtc0dPV3RDMTlPaGcxL25ocGk4YVV4bHJqaHJwdTVwOEFBQkFBQUFBQUFBQUFBQUlBQUFBQVJ1U0tKb1dtQzk2MXVWMEpKeDJOays5K3FNazlFVk9zUlRRMU1JN3ZNOTRUMmtBMXoyRjQwdVN6K1ZJYUk3dlpaSmFEVDdGRWszVHBpSmdBYzNQc0xRVWVMcldwajdGaENIZVMwTGdtNVdFdFozTFF0YnBhTHBJOWRyYk8vQS9xeTdVaytCbFZ5dG89Cg==
         with:
           tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: 'App v__VERSION__'
