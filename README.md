@@ -5,6 +5,8 @@ This simulator is meant to be a solution for students and teachers to study how 
 
 Online version: [vnmsim.app](https://vnmsim.app)
 
+Windows, Ubuntu and MacOS offline version: [releases](https://github.com/c2r0b/vnmsim/releases)
+
 ## Simulator guide
 
 This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP).
@@ -13,9 +15,9 @@ A guide to the simulator is also available from the `Help` section accessible fr
 
 ## Specifications
 
-The simulator is developed as a NextJS app developed using React and Typescript.
-The code editor uses CodeMirror.
-The chosen design framework is FluentUI by Microsoft.
+The simulator is developed as a NextJS app developed using React and Typescript. The code editor uses CodeMirror.  
+The chosen design framework is FluentUI by Microsoft.  
+The offline version of the simulator is built using Tauri.
 
 ## How to compile
 

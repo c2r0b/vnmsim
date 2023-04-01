@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint",
+    "tauri": "tauri",
     "test": "jest --coverage"
   },
   "repository": {
@@ -41,6 +43,7 @@
     "react-virtualized-auto-sizer": "^1.0.9"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^1.2.3",
     "@types/jest": "^27.5.2",
     "@types/node": "^17.0.45",
     "@types/react": "^17.0.55",
