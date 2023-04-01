@@ -4,6 +4,7 @@ build/
 dist/
 coverage/
 node_modules/
+out/
 yarn.lock
 yarn-error.log
 package-lock.json
