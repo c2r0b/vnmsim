@@ -1,4 +1,3 @@
-git:
 filters:
 - filter_type: file
   file_format: KEYVALUEJSON
