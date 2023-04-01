@@ -1,6 +1,6 @@
 {
   "name": "vnmsim",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A simulator of the Von Neumann machine",
   "main": "index.js",
   "scripts": {
