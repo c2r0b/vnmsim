@@ -3,7 +3,6 @@ import Head from "next/head";
 
 import { App } from "../src/app/app";
 import { SimulatorContext, SimulatorStore } from "../src/store/dispatcher";
-import { LocaleContext, LocaleStore } from "../src/locale/dispatcher";
 import { ThemeContext, ThemeStore } from "../src/themes/dispatcher";
 
 export default () => {
@@ -23,11 +22,9 @@ export default () => {
         <link rel="stylesheet" href="styles.css" />  
       </Head>
       <ThemeContext.Provider value={ new ThemeStore() }>
-        <LocaleContext.Provider value={ new LocaleStore() }>
-          <SimulatorContext.Provider value={ new SimulatorStore() }>
-            <App />
-          </SimulatorContext.Provider>
-        </LocaleContext.Provider>
+        <SimulatorContext.Provider value={ new SimulatorStore() }>
+          <App />
+        </SimulatorContext.Provider>
       </ThemeContext.Provider>
     </>
   );

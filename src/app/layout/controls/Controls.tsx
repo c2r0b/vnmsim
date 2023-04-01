@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
+import { useT } from '@transifex/react';
 
 import { Tooltip, Button, Slider, Label, useId } from "@fluentui/react-components";
 import { Next24Regular, FastForward24Regular, Pause24Regular, Play24Regular, Stop24Regular } from "@fluentui/react-icons";
@@ -15,43 +15,44 @@ import * as Styles from "./controls.styles";
 
 export default observer(() => {
   const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
   
   const simStatus = Sim.getSimStatus();
   const hasErrors = Sim.hasErrors();
+  
+  const t = useT();
 
   const _controls = [
     {
       key: "run",
-      ariaLabel: Locale.get("RUN"),
+      ariaLabel: t("Run loop"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
       icon: <Play24Regular />,
       onClick: () => Sim.setSimStatus(1),
     },
     {
       key: "step",
-      ariaLabel: Locale.get("STEP"),
+      ariaLabel: t("Single step"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
       icon: <Next24Regular />,
       onClick: () => Sim.setSimStatus(2),
     },
     {
       key: "iteration",
-      ariaLabel: Locale.get("ITERATION"),
+      ariaLabel: t("Single iteration"),
       disabled: hasErrors || [1,2,3].includes(simStatus),
       icon: <FastForward24Regular />,
       onClick: () => Sim.setSimStatus(3),
     },
     {
       key: "pause",
-      ariaLabel: Locale.get("PAUSE"),
+      ariaLabel: t("Pause"),
       disabled: hasErrors || [0,4].includes(simStatus),
       icon: <Pause24Regular />,
       onClick: () => Sim.setSimStatus(4),
     },
     {
       key: "stop",
-      ariaLabel: Locale.get("STOP"),
+      ariaLabel: t("Stop"),
       disabled: hasErrors || simStatus === 0,
       icon: <Stop24Regular />,
       onClick: () => {

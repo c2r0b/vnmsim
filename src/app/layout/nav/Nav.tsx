@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
+import { T, useT } from '@transifex/react';
 
-import { Tooltip, Button, Image, Title3 } from"@fluentui/react-components";
+import { Tooltip, Button } from"@fluentui/react-components";
 import { Microscope24Regular, Beaker24Regular, CalendarStar24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from "@fluentui/react-icons";
 
 import DropZone from "../dropZone/DropZone";
@@ -18,15 +18,11 @@ import { readFile, save } from "../../utility/io";
 import * as Styles from "./nav.styles";
 import NewConfirm from "./NewConfirm";
 
-const onGithubClick = () => {
-  window.open("https://github.com/c2r0b/vnmsim", "_blank");
-};
-
 const acceptedFileTypes = "application/json,.vnsp";
 
 const Nav = observer(() => {
   const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
+  const t = useT();
 
   const [ selPanel, setSelPanel ] = useState("");
 
@@ -34,7 +30,7 @@ const Nav = observer(() => {
   
   const onOpen = (input) => {
     const onError = () => {
-      Sim.setError(Locale.get("LOG_OPENING_FAILURE"))
+      Sim.setError(t("Unable to load the selected file"))
     };
 
     const onSuccess = (obj) => {
@@ -59,14 +55,14 @@ const Nav = observer(() => {
   const _menuItems = [
     {
       key: "new",
-      ariaLabel: Locale.get("PROJECT_NEW"),
+      ariaLabel: t("New project"),
       icon: <CalendarStar24Regular />,
       disabled: isSimRunning,
       onClick: () => setSelPanel("newConfirm")
     },
     {
       key: "open",
-      ariaLabel: Locale.get("PROJECT_OPEN"),
+      ariaLabel: t("Open from file"),
       icon: <FolderOpen24Regular />,
       disabled: isSimRunning,
       onClick: () => {
@@ -75,32 +71,32 @@ const Nav = observer(() => {
     },
     {
       key: "save",
-      ariaLabel: Locale.get("PROJECT_SAVE"),
+      ariaLabel: t("Save to file"),
       disabled: isSimRunning,
       icon: <Save24Regular />,
       onClick: onSave
     },
     {
       key: "samples",
-      ariaLabel: Locale.get("SAMPLES"),
+      ariaLabel: t("Samples"),
       icon: <Beaker24Regular />,
       onClick: () => setSelPanel("samples")
     },
     {
       key: "stats",
-      ariaLabel: Locale.get("STATS"),
+      ariaLabel: t("Statistics"),
       icon: <Microscope24Regular />,
       onClick: () => setSelPanel("stats")
     },
     {
       key: "help",
-      ariaLabel: Locale.get("HELP"),
+      ariaLabel: t("Help"),
       icon: <ChatHelp24Regular />,
       onClick: () => setSelPanel("help")
     },
     {
       key: "settings",
-      ariaLabel: Locale.get("SETTINGS"),
+      ariaLabel: t("Settings"),
       icon: <Settings24Regular />,
       onClick: () => setSelPanel("settings")
     }

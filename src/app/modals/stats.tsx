@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
+import { T } from "@transifex/react";
 
 import { Button, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, DialogTrigger, Table, TableBody, TableCell, TableRow } from "@fluentui/react-components";
 import { ArrowRotateClockwise24Filled } from "@fluentui/react-icons";
@@ -21,7 +21,6 @@ interface IProps {
 
 const Stats = observer((props:IProps) => {
   const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
 
   const stats = Sim.getStats();
 
@@ -37,7 +36,9 @@ const Stats = observer((props:IProps) => {
     >
       <DialogSurface>
         <DialogBody>
-          <DialogTitle>{ Locale.get("STATS") }</DialogTitle>
+          <DialogTitle>
+            <T _str="Statistics" />
+          </DialogTitle>
           <DialogContent style={ Styles.container }>
             <Table size="small">
               <TableBody>
@@ -57,7 +58,7 @@ const Stats = observer((props:IProps) => {
                 icon={ <ArrowRotateClockwise24Filled /> }
                 onClick={ () => Sim.clearStats() }
               >
-                { Locale.get("STATS_CLEAR") }
+                <T _str="Clear statistics" />
               </Button>
             </DialogTrigger>
           </DialogActions>
