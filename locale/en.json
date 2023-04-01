@@ -1,0 +1,72 @@
+{
+  "PROJECT_NEW": "New Project",
+  "PROJECT_OPEN": "Open from file",
+  "PROJECT_SAVE": "Save project",
+
+  "PROJECT_NEW_CONFIRM": "Are you sure you want to create a new project? All unsaved changes will be lost.",
+
+  "HELP": "Help",
+  "SAMPLES": "Samples",
+
+  "STATS": "Statistics",
+  "STATS_EXECUTED_STEPS": "Executed steps",
+  "STATS_ALU_CALCULATIONS": "ALU calculations",
+  "STATS_PERFORMED_JMP": "Performed jumps",
+  "STATS_PERFORMED_JMZ": "Performed conditioned jumps",
+  "STATS_VARIABLES_ACCESSES": "Variables accesses",
+  "STATS_CELLS_ACCESSES": "Cells accesses",
+  "STATS_CLEAR": "Clear statistics",
+  
+  "CREATED_ON": "Created on",
+  "FILE_DROP": "Drop the file anywhere on the page to open it",
+
+  "SETTINGS": "Settings",
+  "SETTINGS_THEME": "Theme",
+  "SETTINGS_LANGUAGE": "Language",
+  
+  "WARNING_UNSAVED": "Any unsaved changes will be lost. Continue?",
+
+  "ADD_VARIABLE": "Add T variable",
+
+  "MADE_BY": "Made by",
+
+  "ITERATION": "Single iteration",
+  "RUN": "Run loop",
+  "STEP": "Single step",
+  "PAUSE": "Pause",
+  "STOP": "Stop",
+
+  "DATA_BUS": "Data/instructions bus",
+  "ADDRESSES_BUS": "Addresses bus",
+  "DECODER": "Decoder",
+  "IR": "Instructions register",
+  "ALU": "Arithmetic logic unit",
+  "ACC": "Accumulator",
+  "PC": "Program counter",
+  "RAM": "Random-access memory",
+
+  "LOG_OPENING_FAILURE": "Unable to load the selected file",
+  "CLOSE": "Close",
+  "DONE": "Done",
+  "GOT_IT": "OK, got it",
+
+  "GUIDE_INTRODUCTION_H": "Introduction",
+  "GUIDE_INTRODUCTION_P1": "This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.",
+  "GUIDE_INTRODUCTION_P2": "For information about the project and how to contribute please visit the GitHub repository here:",
+  "GUIDE_INTRODUCTION_P3": "Thank you all for using this simulator.",
+  "GUIDE_SYNTAX_H": "Syntax",
+  "GUIDE_SYNTAX_P1": "This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP). You can create comment lines using '//something' syntax, even inline at the end of a command.",
+  "GUIDE_SYNTAX_P2": "Check out the samples to learn the very basics of the operations that this machine is able to perform.",
+  "GUIDE_IO_H": "I/O features",
+  "GUIDE_IO_P": "On the left of the page you can find the menu with the I/O options, you can save your work as a file on your computer. The saving includes the current machine and simulator status with the instructions and variables contained in the memory cells. It supports files opening by drag and drop.",
+  "GUIDE_COMPATIBILITY_H": "Backward compatibility",
+  "GUIDE_COMPATIBILITY_P": "You can still open projects made with older versions of this simulator and with the Zanichelli edition, but projects saved with this release are not backward compatible at all.",
+  "GUIDE_COMPATIBILITY_DISCLOSURE": "Full disclosure",
+  "GUIDE_COMPATIBILITY_DISCLOSURE_P": "the Zanichelli edition is one of the very first versions of this simulator and it has been acquired by them in 2015 for educational purposes. This version has nothing in common with the Zanichelli edition (except for the backward compatibility) and is not affiliated with them in any way.",
+  "GUIDE_SUPPORT_H": "Support",
+  "GUIDE_SUPPORT_P": "There is no official way to financially show your appreciation for this project, a &#127775; on GitHub is more than enough.",
+  "GUIDE_BUG_H": "Found a bug?",
+  "GUIDE_BUG_P": "Have you noticed something not working as expected? Please file an issue on GitHub. If you are a developer, feel free to create a pull request. On this project GitHub page you will find information on how to contribute to translations too.",
+
+  "SAMPLES_OPEN": "Open"
+}
