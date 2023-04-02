@@ -8,9 +8,9 @@ module.exports = withPWA({
     unoptimized: true,
   },
   i18n: {
-    locales: ['en', 'it', 'de', 'es'],
-    defaultLocale: 'en',
-    localeDetection: false,
+    locales: ['default', 'en_US', 'it_IT', 'es', 'de'],
+    defaultLocale: 'default',
+    localeDetection: true,
   },
   publicRuntimeConfig: {
     TxNativePublicToken: '1/479122c5eb41260fececf770501d06ef2f76d94e',

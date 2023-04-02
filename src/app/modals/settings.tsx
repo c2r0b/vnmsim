@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
 
 import { ThemeContext } from "src/themes/dispatcher";
-import { T, useTX, useLanguages, useLocale } from "@transifex/react";
+import { T } from "@transifex/react";
+import { LocaleContext } from "src/store/locale";
+import { useCookies } from "react-cookie";
 
 import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Label, useId, Button, Select } from "@fluentui/react-components";
 import { Settings24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from "@fluentui/react-icons";
-
+  
 import * as Styles from "./settings.styles";
 
 const themeOptions = [
@@ -26,17 +29,18 @@ const themeOptions = [
     icon: <WeatherMoon24Regular />
   },
 ];
+
 interface IProps {
   show: boolean;
   onDismiss: Function;
 }
 
-const Settings = observer((props:IProps) => {
+export default observer((props:IProps) => {
   const Theme = useContext(ThemeContext);
+  const Locale = useContext(LocaleContext);
 
-  const tx = useTX();
-  const languages = useLanguages();
-  const locale = useLocale();
+  const router = useRouter();
+  const [_, setCookie] = useCookies(['NEXT_LOCALE']);
 
   const onChangeTheme = (_, option) => {
     if (!option.value) return;
@@ -45,14 +49,18 @@ const Settings = observer((props:IProps) => {
 
   const onChangeLanguage = (_, option) => {
     if (!option.value) return;
-    tx.setCurrentLocale(option.value);
+    
+    // Update the URL with the new locale while keeping the current path
+    const { pathname, asPath, query } = router;
+    setCookie('NEXT_LOCALE', option.value, { path: '/' });
+    router.push({ pathname, query }, asPath, { locale: option.value });
   };
 
   const themeLabelId = useId('label');
   const languageLabelId = useId('label');
 
   const selectedTheme = Theme.getCurrentThemeName();
-  
+
   return (
     <Dialog
       open={ props.show }
@@ -90,16 +98,16 @@ const Settings = observer((props:IProps) => {
               </Label>
               <Select
                 aria-labelledby={ themeLabelId }
-                value={ locale }
+                value={ Locale.locale }
                 style={{ width: 300 }}
                 onChange={ onChangeLanguage }
               >
-                { languages.map(({ code, name }) => (
+                { Locale.locales.map((code) => (
                   <option
                     key={ code }
                     value={ code }
                   >
-                    { name }
+                    { code }
                   </option>
                 ))}
               </Select>
@@ -117,5 +125,3 @@ const Settings = observer((props:IProps) => {
     </Dialog>
   );
 });
-
-export default Settings;
