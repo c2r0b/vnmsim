@@ -23,11 +23,18 @@ The offline version of the simulator is built using Tauri.
 
 After downloading the repository and installing the dependencies using `npm install`, a simple `npm run dev` is enough to start a compiled and live updated version at `localhost:3000`.
 
-## AngularJS version
+## Translations
 
-The previous version written in AngularJS is available in the `old` repository and online [here](http://vnsimulator.altervista.org/). 
+The simulator is available in multiple languages using Transifex.  
+If you want to contribute to the translation of the simulator, you can do it [here](https://www.transifex.com/lorenzo-ganni/vnmsim/).
 
-## Zanichelli version
+## Other versions
+
+### AngularJS version
+
+The previous version written in AngularJS is available in the `old` repository and online [here](http://vnsimulator.altervista.org/).
+
+### Zanichelli version
 
 In 2015 a different simulator of the Von Neumann machine inspired by this one has been developed for Zanichelli Editor S.p.A. as an extension of the work of Giorgio Meini, Fiorenzo Formichi: "Tecnologie e progettazione di sistemi informatici e di telecomunicazioni".
 

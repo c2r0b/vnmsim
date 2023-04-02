@@ -8,7 +8,7 @@ module.exports = withPWA({
     unoptimized: true,
   },
   i18n: {
-    locales: ['default', 'en_US', 'it_IT', 'es', 'de'],
+    locales: ['default', 'en_US', 'it_IT', 'es_ES', 'de_DE'],
     defaultLocale: 'default',
     localeDetection: true,
   },
