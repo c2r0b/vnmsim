@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
+import { T, useT } from "@transifex/react";
 
 import { Card, CardHeader, Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from "@fluentui/react-components";
 import { ArrowDownload24Filled } from "@fluentui/react-icons";
@@ -19,7 +19,7 @@ interface IProps {
 
 const Samples = observer((props:IProps) => {
   const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
+  const t = useT();
 
   const samplesList = samples.map(s => {
     const onClick = () => {
@@ -51,7 +51,7 @@ const Samples = observer((props:IProps) => {
           action={
             <Button
               appearance="transparent"
-              aria-label={ Locale.get("SAMPLES_OPEN") }
+              aria-label={ t("Open") }
               icon={ <ArrowDownload24Filled /> }
               onClick={ onClick }
             />
@@ -68,7 +68,9 @@ const Samples = observer((props:IProps) => {
     >
       <DialogSurface>
         <DialogBody>
-          <DialogTitle>{ Locale.get("SAMPLES") }</DialogTitle>
+          <DialogTitle>
+            <T _str="Samples" />
+          </DialogTitle>
           <DialogContent>
             <div style={ Styles.list }>
               { samplesList }
@@ -77,7 +79,7 @@ const Samples = observer((props:IProps) => {
           <DialogActions>
             <DialogTrigger>
               <Button appearance="secondary">
-                { Locale.get("CLOSE") }
+                <T _str="Close" />
               </Button>
             </DialogTrigger>
           </DialogActions>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Localize } from "src/locale/Localize";
+import { T } from "@transifex/react";
 
 import * as Styles from "./dropZone.styles";
 
@@ -38,7 +38,7 @@ const DropZone = observer((props:IProps) => {
       <div style={ Styles.opaqueBack } />
       <div style={ Styles.element }>
         <p style={ Styles.message }>
-          <Localize label="FILE_DROP"/>
+          <T _str="Drop the file anywhere on the page to open it" />
         </p>
       </div>
     </div>

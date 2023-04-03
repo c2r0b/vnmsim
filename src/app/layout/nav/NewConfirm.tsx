@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
+import { T } from "@transifex/react";
 
 interface IProps {
 	show: boolean;
@@ -13,7 +13,6 @@ interface IProps {
 
 export default observer((props:IProps) => {
 	const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
 
 	const confirm = () => {
 		Sim.reset();
@@ -29,19 +28,19 @@ export default observer((props:IProps) => {
 			<DialogSurface>
 				<DialogBody>
 					<DialogTitle>
-						{ Locale.get("PROJECT_NEW") }
+						<T _str="New Project" />
 					</DialogTitle>
 					<DialogContent>
-						{ Locale.get("PROJECT_NEW_CONFIRM") }
+						<T _str="Are you sure you want to create a new project? All unsaved changes will be lost." />
 					</DialogContent>
 					<DialogActions>
 						<DialogTrigger>
 							<Button appearance="secondary">
-								{ Locale.get("CLOSE") }
+								<T _str="Close" />
 							</Button>
 						</DialogTrigger>
 						<Button appearance="primary" onClick={ confirm }>
-							{ Locale.get("GOT_IT")}
+							<T _str="OK, got it" />
 						</Button>
 					</DialogActions>
 				</DialogBody>
