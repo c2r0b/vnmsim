@@ -5,6 +5,8 @@ dist/
 coverage/
 node_modules/
 out/
+public/sw*
+public/workbox-*
 yarn.lock
 yarn-error.log
 package-lock.json
