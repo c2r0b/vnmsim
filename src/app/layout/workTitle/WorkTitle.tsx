@@ -2,7 +2,7 @@ import React, { useRef, useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { Localize } from "src/locale/Localize";
+import { T } from "@transifex/react";
 
 import { Text } from "@fluentui/react-components";
 import ContentEditable from "react-contenteditable";
@@ -29,7 +29,7 @@ const WorkTitle = observer(() => {
         />
       </Text>
       <Text style={ Styles.date }>
-        <Localize label="CREATED_ON"/> { Sim.getOpenDate() }
+        <T _str="Created on" /> { Sim.getOpenDate() }
       </Text>
     </div>
   );

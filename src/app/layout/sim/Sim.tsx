@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
+import { useT } from "@transifex/react";
 
 import { Input, SpinButton, Text, Tooltip } from "@fluentui/react-components";
 
@@ -21,7 +21,7 @@ import * as Styles from "./sim.styles";
 
 export default observer(() => {
   const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
+  const t = useT();
 
   const [intervalId, setIntervalId] = useState(undefined);
   const [styles, setStyles] = useState({ ...Styles });
@@ -163,7 +163,7 @@ export default observer(() => {
             onChange={ (ev, val) => Sim.setPcIncrement(+val.value) }
           />
           <Tooltip
-            content={ Locale.get("PC") }
+            content={ t("Program counter") }
             relationship="label"
             withArrow
           >
@@ -188,7 +188,7 @@ export default observer(() => {
             </polygon>
           </svg>
           <Tooltip
-            content={ Locale.get("ALU") }
+            content={ t("Arithmetic logic unit") }
             relationship="label"
             withArrow
           >
@@ -215,7 +215,7 @@ export default observer(() => {
         <div style={ styles.acc.container }>
           <DataBus.acc />
           <Tooltip
-            content={ Locale.get("ACC") }
+            content={ t("Accumulator") }
             relationship="label"
             withArrow
           >
@@ -231,7 +231,7 @@ export default observer(() => {
         </div>
         <div style={ styles.ir.container }>
           <Tooltip
-            content={ Locale.get("IR") }
+            content={ t("Instructions register") }
             relationship="label"
             withArrow
           >
@@ -247,12 +247,12 @@ export default observer(() => {
           <Input
             ref={ decoderInputRef }
             style={ styles.ir.decoder }
-            defaultValue={ Locale.get("DECODER") }
+            defaultValue={ t("Decoder") }
             readOnly
           />
         </div>
         <Tooltip
-          content={ Locale.get("DATA_BUS") }
+          content={ t("Data/instructions bus") }
           relationship="label"
           withArrow
         >
@@ -261,7 +261,7 @@ export default observer(() => {
           </Text>
         </Tooltip>
         <Tooltip
-          content={ Locale.get("ADDRESSES_BUS") }
+          content={ t("Addresses bus") }
           relationship="label"
           withArrow
         >
@@ -271,7 +271,7 @@ export default observer(() => {
         </Tooltip>
         
         <Tooltip
-          content={ Locale.get("RAM") }
+          content={ t("Random-access memory") }
           relationship="label"
           positioning="before"
           withArrow

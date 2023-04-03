@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 
-import { LocaleContext } from "src/locale/dispatcher";
-import { Localize } from "src/locale/Localize";
+import { T } from "@transifex/react";
 
 import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Link } from "@fluentui/react-components";
 
@@ -14,8 +13,6 @@ interface IProps {
 }
 
 const Help = observer((props:IProps) => {
-  const Locale = useContext(LocaleContext);
-
   return (
     <Dialog
       open={ props.show }
@@ -23,14 +20,16 @@ const Help = observer((props:IProps) => {
     >
       <DialogSurface>
         <DialogBody>
-          <DialogTitle>{ Locale.get("HELP") }</DialogTitle>
+          <DialogTitle>
+            <T _str="Help" />
+          </DialogTitle>
           <DialogContent>
-            <h3><Localize label="GUIDE_INTRODUCTION_H"/></h3>
-            <p><Localize label="GUIDE_INTRODUCTION_P1"/></p>
-            <p><Localize label="GUIDE_INTRODUCTION_P2"/> <Link href="https://github.com/c2r0b/vnmsim">github.com/c2r0b/vnmsim</Link></p>
-            <p><Localize label="GUIDE_INTRODUCTION_P3"/> &#129303;</p>
-            <h3><Localize label="GUIDE_SYNTAX_H"/></h3>
-            <p><Localize label="GUIDE_SYNTAX_P1"/></p>
+            <h3><T _str="Introduction"/></h3>
+            <p><T _str="This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works."/></p>
+            <p><T _str="For information about the project and how to contribute please visit the GitHub repository here:"/> <Link href="https://github.com/c2r0b/vnmsim">github.com/c2r0b/vnmsim</Link></p>
+            <p><T _str="Thank you all for using this simulator."/> &#129303;</p>
+            <h3><T _str="Syntax"/></h3>
+            <p><T _str="This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP). You can create comment lines using '//something' syntax, even inline at the end of a command."/></p>
             <table style={ Styles.table }>
               <tbody>
                 <tr>
@@ -56,21 +55,21 @@ const Help = observer((props:IProps) => {
                 </tr>
               </tbody>
             </table>
-            <p><Localize label="GUIDE_SYNTAX_P2"/></p>
-            <h3><Localize label="GUIDE_IO_H"/></h3>
-            <p><Localize label="GUIDE_IO_P"/></p>
-            <h3><Localize label="GUIDE_COMPATIBILITY_H"/></h3>
-            <p><Localize label="GUIDE_COMPATIBILITY_P"/></p>
-            <p><b><Localize label="GUIDE_COMPATIBILITY_DISCLOSURE"/> &#128584;:</b> <Localize label="GUIDE_COMPATIBILITY_DISCLOSURE_P"/></p>
-            <h3><Localize label="GUIDE_SUPPORT_H"/></h3>
-            <p><Localize label="GUIDE_SUPPORT_P"/></p>
-            <h3><Localize label="GUIDE_BUG_H"/> &#128030;</h3>
-            <p><Localize label="GUIDE_BUG_P"/></p>
+            <p><T _str="Check out the samples to learn the very basics of the operations that this machine is able to perform."/></p>
+            <h3><T _str="I/O features"/></h3>
+            <p><T _str="On the left of the page you can find the menu with the I/O options, you can save your work as a file on your computer. The saving includes the current machine and simulator status with the instructions and variables contained in the memory cells. It supports files opening by drag and drop."/></p>
+            <h3><T _str="Backward compatibility"/></h3>
+            <p><T _str="You can still open projects made with older versions of this simulator and with the Zanichelli edition, but projects saved with this release are not backward compatible at all."/></p>
+            <p><b><T _str="Full disclosure"/> &#128584;:</b> <T _str="the Zanichelli edition is one of the very first versions of this simulator and it has been acquired by them in 2015 for educational purposes. This version has nothing in common with the Zanichelli edition (except for the backward compatibility) and is not affiliated with them in any way."/></p>
+            <h3><T _str="Support"/></h3>
+            <p><T _str="There is no official way to financially show your appreciation for this project, a &#127775; on GitHub is more than enough."/></p>
+            <h3><T _str="Found a bug?"/> &#128030;</h3>
+            <p><T _str="Have you noticed something not working as expected? Please file an issue on GitHub. If you are a developer, feel free to create a pull request. On this project GitHub page you will find information on how to contribute to translations too."/></p>
           </DialogContent>
           <DialogActions>
             <DialogTrigger>
               <Button appearance="secondary">
-                { Locale.get("GOT_IT") }
+                <T _str="OK, got it"/>
               </Button>
             </DialogTrigger>
           </DialogActions>

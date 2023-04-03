@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
 import { observer } from "mobx-react-lite";
+import { useT } from '@transifex/react';
 
 import { Alert } from "@fluentui/react-components/unstable";
 import { Text } from "@fluentui/react-components";
@@ -11,7 +11,7 @@ import * as Styles from "./notification.styles";
 
 const Notification = observer(() => {
   const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
+  const t = useT();
 
   const errorMessage = Sim.getError();
 
@@ -23,7 +23,7 @@ const Notification = observer(() => {
     <div style={ Styles.container }>
       <Alert
         intent="error"
-        action={ Locale.get("CLOSE") }
+        action={ t("Close") }
         onClick={ () => Sim.dismissError() }
       >
         <Text style={ Styles.text }>

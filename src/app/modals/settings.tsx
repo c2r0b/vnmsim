@@ -1,12 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
 
-import { LocaleContext } from "src/locale/dispatcher";
 import { ThemeContext } from "src/themes/dispatcher";
+import { T } from "@transifex/react";
+import { LocaleContext } from "src/store/locale";
+import { useCookies } from "react-cookie";
 
 import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Label, useId, Button, Select } from "@fluentui/react-components";
 import { Settings24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from "@fluentui/react-icons";
-
+  
 import * as Styles from "./settings.styles";
 
 const themeOptions = [
@@ -27,38 +30,37 @@ const themeOptions = [
   },
 ];
 
-const languageOptions = [
-  { value: "en", label: "English" },
-  { value: "it", label: "Italiano" },
-  { value: "es", label: "Español" },
-  { value: "de", label: "Deutsche" }
-];
-
 interface IProps {
   show: boolean;
   onDismiss: Function;
 }
 
-const Settings = observer((props:IProps) => {
-  const Locale = useContext(LocaleContext);
+export default observer((props:IProps) => {
   const Theme = useContext(ThemeContext);
+  const Locale = useContext(LocaleContext);
 
-  const onChangeTheme = (ev, option) => {
+  const router = useRouter();
+  const [_, setCookie] = useCookies(['NEXT_LOCALE']);
+
+  const onChangeTheme = (_, option) => {
     if (!option.value) return;
     Theme.setTheme(option.value);
   };
 
-  const onChangeLanguage = (ev, option) => {
+  const onChangeLanguage = (_, option) => {
     if (!option.value) return;
-    Locale.setLanguage(option.value);
+    
+    // Update the URL with the new locale while keeping the current path
+    const { pathname, asPath, query } = router;
+    setCookie('NEXT_LOCALE', option.value, { path: '/' });
+    router.push({ pathname, query }, asPath, { locale: option.value });
   };
 
   const themeLabelId = useId('label');
   const languageLabelId = useId('label');
 
   const selectedTheme = Theme.getCurrentThemeName();
-  const selectedLanguage = Locale.getLanguage();
-
+  
   return (
     <Dialog
       open={ props.show }
@@ -66,10 +68,14 @@ const Settings = observer((props:IProps) => {
     >
       <DialogSurface>
         <DialogBody>
-          <DialogTitle>{ Locale.get("SETTINGS") }</DialogTitle>
+          <DialogTitle>
+            <T _str="Settings" />
+          </DialogTitle>
           <DialogContent style={ Styles.container }>
             <div style={ Styles.setting }>
-              <Label id={ themeLabelId }>{ Locale.get("SETTINGS_THEME") }</Label>
+              <Label id={ themeLabelId }>
+                <T _str="Theme" />
+              </Label>
               <Select
                 aria-labelledby={ themeLabelId }
                 value={ selectedTheme }
@@ -87,19 +93,21 @@ const Settings = observer((props:IProps) => {
               </Select>
             </div>
             <div style={ Styles.setting }>
-              <Label id={ languageLabelId }>{ Locale.get("SETTINGS_LANGUAGE") }</Label>
+              <Label id={ languageLabelId }>
+                <T _str="Language" />
+              </Label>
               <Select
                 aria-labelledby={ themeLabelId }
-                value={ selectedLanguage }
+                value={ Locale.locale }
                 style={{ width: 300 }}
                 onChange={ onChangeLanguage }
               >
-                { languageOptions.map((option) => (
+                { Locale.languages.map((lang) => (
                   <option
-                    key={ option.value }
-                    value={ option.value }
+                    key={ lang.code }
+                    value={ lang.code }
                   >
-                    { option.label }
+                    { lang.name }
                   </option>
                 ))}
               </Select>
@@ -108,7 +116,7 @@ const Settings = observer((props:IProps) => {
           <DialogActions>
             <DialogTrigger>
               <Button appearance="secondary">
-                { Locale.get("DONE") }
+                <T _str="Done" />
               </Button>
             </DialogTrigger>
           </DialogActions>
@@ -117,5 +125,3 @@ const Settings = observer((props:IProps) => {
     </Dialog>
   );
 });
-
-export default Settings;

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { SimulatorContext } from "src/store/dispatcher";
-import { LocaleContext } from "src/locale/dispatcher";
+import { useT } from "@transifex/react";
 
 import { Add24Filled } from "@fluentui/react-icons";
 
@@ -19,7 +19,7 @@ interface IProps {
 
 export const Variables = observer((props:IProps) => {
   const Sim = useContext(SimulatorContext);
-  const Locale = useContext(LocaleContext);
+  const t = useT();
 
   const [lastTvariable, setLastTvariable] = useState(20);
 
@@ -86,12 +86,12 @@ export const Variables = observer((props:IProps) => {
           { items.map(displayVariable) }
           <TableRow>
             <Tooltip
-              content={ Locale.get("ADD_VARIABLE") }
+              content={ t("Add T variable") }
               relationship="label"
               withArrow
             >
               <Button
-                aria-label={ Locale.get("ADD_VARIABLE") }
+                aria-label={ t("Add T variable") }
                 icon={ <Add24Filled /> }
                 onClick={ addVariable }
                 appearance="subtle"
