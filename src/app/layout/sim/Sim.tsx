@@ -51,7 +51,6 @@ export default observer(() => {
     code = Sim.getCode().split("\n")
   }) => {
     sim.step++;
-     console.log(code, editor)
     if (sim.step > lastStep) {
       sim.step = 1;
       sim.codeLine++;
