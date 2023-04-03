@@ -62,15 +62,45 @@ export default observer((props) => {
   );
 });
 
-export async function getServerSideProps(context) {
-  const data = await getServerSideTranslations(context)
+// get the list of paths based on locales from the API
+const getPathSlugs = async () => {
   const languages = await tx.getLanguages();
+
+  // We fetched locales from our API once at build time
+  return languages
+        .filter((language) => language.code !== 'en')
+        .map((language) => ({
+    params: {
+      locale: language.code.replace('_', '-').toLocaleLowerCase(),
+    },
+  }));
+}
+
+export async function getStaticPaths(_) {
+  const pathsWithLocale = await getPathSlugs();
+  return {
+    paths: pathsWithLocale,
+    fallback: false,
+  };
+}
+
+// get the locales information from the API
+export async function getStaticProps(context) {
+  const languages = (await tx.getLanguages())
+    .filter((language) => language.code !== 'en');
+  if (!context.locale) {
+    context.locale = context.params.locale;
+  }
+  if (!context.locales) {
+    context.locales = languages.map((language) => language.code);
+  }
+
+  const data = await getServerSideTranslations(context)
 
   return {
     props: {
       ...data,
       languages: languages
-        .filter((language) => language.code !== 'en')
         .map((language) => ({
           ...language,
           code: language.code.replace('_', '-').toLocaleLowerCase(),

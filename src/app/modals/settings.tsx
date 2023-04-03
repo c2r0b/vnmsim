@@ -51,9 +51,8 @@ export default observer((props:IProps) => {
     if (!option.value) return;
     
     // Update the URL with the new locale while keeping the current path
-    const { pathname, asPath, query } = router;
     setCookie('NEXT_LOCALE', option.value, { path: '/' });
-    router.push({ pathname, query }, asPath, { locale: option.value });
+    router.push("/" + option.value);
   };
 
   const themeLabelId = useId('label');
