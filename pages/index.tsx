@@ -6,6 +6,7 @@ import appStyles from 'src/app/app.module.css';
 import { ThemeContext } from "src/themes/dispatcher";
 import { FluentProvider } from "@fluentui/react-components";
 import { getServerSideTranslations } from "src/i18n";
+import { tx } from "@transifex/native";
 
 import Split from "react-split";
 
@@ -18,11 +19,15 @@ import Ram from "src/app/layout/ram/Ram";
 import Sim from "src/app/layout/sim/Sim";
 import Notification from "src/app/layout/notification/Notification";
 
+tx.init({
+  token: process.env.TX_NATIVE_PUBLIC_TOKEN,
+});
+
 export default observer((props) => {
   const Theme = useContext(ThemeContext);
 
   const [theme, setTheme] = useState(Theme.getTheme());
-
+  
   useEffect(() => {
     setTheme(Theme.getTheme());
   }, [Theme.theme]);
@@ -59,9 +64,18 @@ export default observer((props) => {
 
 export async function getServerSideProps(context) {
   const data = await getServerSideTranslations(context)
+  const languages = await tx.getLanguages();
+
   return {
     props: {
-      ...data
+      ...data,
+      languages: languages
+        .filter((language) => language.code !== 'en')
+        .map((language) => ({
+          ...language,
+          code: language.code.replace('_', '-').toLocaleLowerCase(),
+        })),
+      locale: context.locale
     }
   }
 }

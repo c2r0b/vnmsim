@@ -60,7 +60,7 @@ export default observer((props:IProps) => {
   const languageLabelId = useId('label');
 
   const selectedTheme = Theme.getCurrentThemeName();
-
+  
   return (
     <Dialog
       open={ props.show }
@@ -102,12 +102,12 @@ export default observer((props:IProps) => {
                 style={{ width: 300 }}
                 onChange={ onChangeLanguage }
               >
-                { Locale.locales.map((code) => (
+                { Locale.languages.map((lang) => (
                   <option
-                    key={ code }
-                    value={ code }
+                    key={ lang.code }
+                    value={ lang.code }
                   >
-                    { code }
+                    { lang.name }
                   </option>
                 ))}
               </Select>
