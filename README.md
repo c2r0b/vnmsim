@@ -1,3 +1,5 @@
+<img align="left" width="80" height="80" src="https://github.com/c2r0b/vnmsim/blob/main/src-tauri/icons/Square89x89Logo.png" />
+
 # Von Neumann machine simulator (VNMS)
 
 A simulator of the Von Neumann machine.
