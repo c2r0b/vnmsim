@@ -18,19 +18,36 @@ import Controls from "src/app/layout/controls/Controls";
 import Ram from "src/app/layout/ram/Ram";
 import Sim from "src/app/layout/sim/Sim";
 import Notification from "src/app/layout/notification/Notification";
+import { useCookies } from "react-cookie";
 
 tx.init({
   token: process.env.TX_NATIVE_PUBLIC_TOKEN,
 });
 
-export default observer((props) => {
+interface ILanguage {
+  code: string;
+}
+
+interface IProps {
+  locale: string;
+  languages: ILanguage[];
+}
+
+export default observer((props:IProps) => {
   const Theme = useContext(ThemeContext);
 
+  const [cookies] = useCookies(['NEXT_LOCALE']);
   const [theme, setTheme] = useState(Theme.getTheme());
+
+  // redirect to the saved locale route if it's different from the current one
+  if (cookies.NEXT_LOCALE && cookies.NEXT_LOCALE !== props.locale) {
+    window.location.href = "/" + cookies.NEXT_LOCALE;
+  }
   
   useEffect(() => {
     setTheme(Theme.getTheme());
   }, [Theme.theme]);
+
 
   return (
     <LocaleContext.Provider value={ props }>
@@ -45,12 +62,12 @@ export default observer((props) => {
             dragInterval={ 30 }
             direction="horizontal"
           >
-            <div>
+            <div style={ Styles.panel }>
               <Nav />
               <Ram />
               <Controls />
             </div>
-            <div>
+            <div style={ Styles.panel }>
               <Sim />
             </div>
           </Split>
