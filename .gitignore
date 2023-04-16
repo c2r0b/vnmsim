@@ -13,6 +13,8 @@ package-lock.json
 .yarnrc
 .next
 todo.todo
+next-env.d.ts
+.eslintrc.json
 
 # OS generated files #
 ######################
