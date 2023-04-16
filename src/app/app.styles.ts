@@ -11,7 +11,11 @@ export const panel:React.CSSProperties = {
   position: "relative",
   width: "100%",
   height: "100%",
-  backgroundColor: "var(--white)",
   overflow: "hidden",
-  zIndex: 100
-}
+  zIndex: 100,
+};
+
+export const sidebar:React.CSSProperties = {
+  position: "relative",
+  zIndex: 9999,
+};
