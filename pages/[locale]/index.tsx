@@ -22,6 +22,7 @@ import { useCookies } from "react-cookie";
 
 tx.init({
   token: process.env.TX_NATIVE_PUBLIC_TOKEN,
+  filterStatus: "reviewed",
 });
 
 interface ILanguage {
