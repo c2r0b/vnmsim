@@ -162,7 +162,7 @@ export const execute = ({ sim, stats, status, line, code }) => {
                 sim.acc *= data;
                 break;
               case '/':
-                sim.acc /= data;
+                sim.acc =  Math.floor(sim.acc / data);
                 break;
             }
             break;
