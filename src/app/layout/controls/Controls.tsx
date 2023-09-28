@@ -57,6 +57,9 @@ export default observer(() => {
       icon: <Stop24Regular />,
       onClick: () => {
         Sim.setSimStatus(0);
+        Sim.setProgramCounter(0);
+        Sim.setStep(0);
+        Sim.setCodeLine(0);
         clearHighlight(Sim.getEditor());
       }
     },

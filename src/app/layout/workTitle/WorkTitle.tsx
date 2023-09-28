@@ -12,7 +12,7 @@ import * as Styles from "./workTitle.styles";
 const WorkTitle = observer(() => {
   const Sim = useContext(SimulatorContext);
 
-  const workTitleRef = useRef();
+  const workTitleRef = useRef<HTMLElement | null>(null);
 
   const onTitleChange = (ev) => {
     Sim.setTitle(ev.target.value);

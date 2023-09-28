@@ -21,12 +21,15 @@ const DropZone = observer((props:IProps) => {
   useEffect(() => {
     window.addEventListener("dragenter", (e) => handleDrag(e, true));
     const el = document.getElementById("dropZone");
+    if (!el) return;
     el.addEventListener("dragenter", (e) => handleDrag(e, true));
     el.addEventListener("dragover", (e) => handleDrag(e, true));
     el.addEventListener("dragleave", (e) => handleDrag(e, false));
     el.addEventListener("drop", (e) => {
-      props.onOpen(e.dataTransfer.files[0]);
-      handleDrag(e, false);
+      if (e.dataTransfer?.files.length) {
+        props.onOpen(e.dataTransfer.files[0]);
+        handleDrag(e, false);
+      }
     });
   }, []);
 

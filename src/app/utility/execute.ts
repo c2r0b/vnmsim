@@ -1,3 +1,5 @@
+import { OperationResult } from "src/types/operation-result";
+
 export const lastStep = 9;
 
 const commands = {
@@ -9,7 +11,32 @@ const commands = {
   DIV: '/'
 };
 
-export const execute = ({ sim, stats, status, line, code }) => {
+export const execute = ({ sim, stats, status, line, code }):OperationResult => {
+  sim.step++;
+  if (sim.step > lastStep) {
+    sim.step = 1;
+    sim.codeLine++;
+
+    // single iteration
+    if (status === 3) {
+      sim.focus = {
+        el: "",
+        cell: -1,
+        var: -1
+      };
+      return { sim, stats, status: 0 };
+    }
+  }
+    
+  if (!sim.codeLine || sim.codeLine < 0) {
+    sim.codeLine = 0;
+  }
+
+  // stop if RAM out of bounds
+  if (code.length < sim.codeLine + 1) {
+    return { sim, stats, status: 0 };
+  }
+
   // get line, interpret comments as NOP operations
   sim.line = (
     (!line || line.match(/^((\d+)|(\/\/[\s\S]*))$/i))
@@ -118,10 +145,10 @@ export const execute = ({ sim, stats, status, line, code }) => {
       // parse data portion (instruction register loc)
       // #n
       if (sim.ir.loc.indexOf('#') != -1) {
-        sim.alu.e2 = sim.ir.loc.replace('#','');
+        sim.alu.e2 = +sim.ir.loc.replace('#','');
       }
       // variable
-      else if (sim.ir.loc.match(/T|X|Y|Z|W/)) {
+      else if (sim.ir.loc.match(/[TXYZW]/)) {
         sim.focus.var = sim.ir.loc;
         sim.alu.e2 = parseInt(sim.variables[sim.ir.loc]) || 0;
         stats.variable_access++;
@@ -162,7 +189,7 @@ export const execute = ({ sim, stats, status, line, code }) => {
                 sim.acc *= data;
                 break;
               case '/':
-                sim.acc /= data;
+                sim.acc =  Math.floor(sim.acc / data);
                 break;
             }
             break;

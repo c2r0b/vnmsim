@@ -23,7 +23,7 @@ const Samples = observer((props:IProps) => {
 
   const samplesList = samples.map(s => {
     const onClick = () => {
-      const obj = SAMPLES[s.key].input;
+      const obj = { ...SAMPLES[s.key].input };
       
       // set code
       Sim.setCode(obj.code);

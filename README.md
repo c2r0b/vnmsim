@@ -34,7 +34,7 @@ If you want to contribute to the translation of the simulator, you can do it [he
 
 ### AngularJS version
 
-The previous version written in AngularJS is available in the `old` repository and online [here](http://vnsimulator.altervista.org/).
+The previous version written in AngularJS is available in the `old` repository.
 
 ### Zanichelli version
 

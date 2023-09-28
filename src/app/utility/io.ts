@@ -14,16 +14,18 @@ export const save = ({ sim, code, title, date }) => {
   dlProj.download = fileName;
   document.body.appendChild(dlProj);
   dlProj.click();
+  dlProj.remove();
 };
 
 export const readFile = (input, onSuccess, onError) => {
   // file reader init
-  var reader = new FileReader();
+  const reader = new FileReader();
   reader.readAsText(input, "UTF-8");
 
   // read the file
   reader.onload = (evt) => {
-    const file = evt.target.result;
+    const file = evt.target?.result;
+    if (!file) return;
     let obj:any;
 
     // retrocompatibility
