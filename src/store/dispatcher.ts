@@ -3,9 +3,9 @@ import { createContext } from "react";
 import { configure, makeAutoObservable } from "mobx";
 import { makePersistable } from "mobx-persist-store";
 
-import status from "./status.store";
-import sim from "./sim.store";
-import stats from "./stats.store";
+import StatusStore from "./status.store";
+import StatsStore from "./stats.store";
+import SimStore from "./sim.store";
 
 configure({
   enforceActions: "never",
@@ -18,9 +18,9 @@ export class SimulatorStore {
   editor:any
 
   constructor() {
-    this.status = status;
-    this.sim = sim;
-    this.stats = stats;
+    this.status = StatusStore;
+    this.sim = SimStore;
+    this.stats = StatsStore;
     this.editor = {};
     makeAutoObservable(this);
 
@@ -34,9 +34,9 @@ export class SimulatorStore {
   }
 
   reset() {
-    this.status = status;
-    this.sim = sim;
-    this.stats = stats;
+    this.status = StatusStore;
+    this.sim = SimStore;
+    this.stats = StatsStore;
   }
 
   getTitle() {
@@ -160,6 +160,14 @@ export class SimulatorStore {
   setPcIncrement(step: string|number) {
     this.sim.pc.step = +step;
   }
+
+  setCodeLine(line: string|number) {
+    this.sim.codeLine = +line;
+  }
+
+  setStep(step: string|number) {
+    this.sim.step = +step;
+  }
 };
 
-export const SimulatorContext = createContext<SimulatorStore>(null);
+export const SimulatorContext = createContext<SimulatorStore>(new SimulatorStore());

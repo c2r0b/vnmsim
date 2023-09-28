@@ -18,12 +18,13 @@ import * as DataBus from "./DataBus";
 import * as AddressesBus from "./AddressesBus";
 
 import * as Styles from "./sim.styles";
+import { OperationResult } from "src/types/operation-result";
 
 export default observer(() => {
   const Sim = useContext(SimulatorContext);
   const t = useT();
 
-  const [intervalId, setIntervalId] = useState(undefined);
+  const [intervalId, setIntervalId] = useState<any>(undefined);
   const [styles, setStyles] = useState({ ...Styles });
 
   const sim = Sim.getSim();
@@ -44,47 +45,26 @@ export default observer(() => {
     updateStyles();
   }, [sim.focus.el]);
 
-  const runSimulator = (set = true, {
+  const runSimulator = (set, {
     sim = { ...Sim.getSim() },
     stats = { ...Sim.getStats() },
     status = Sim.getSimStatus(),
     code = Sim.getCode().split("\n")
   }) => {
-    sim.step++;
-    if (sim.step > lastStep) {
-      sim.step = 1;
-      sim.codeLine++;
-
-      // single iteration
-      if (status === 3) {
-        Sim.updateSim(sim);
-        Sim.loseFocus();
-        Sim.setSimStatus(0);
-        return;
-      }
-    }
-    
-    if (!sim.codeLine || sim.codeLine < 0) {
-      sim.codeLine = 0;
-    }
-
-    // stop if RAM out of bounds
-    if (code.length < sim.codeLine + 1) {
-      Sim.setSimStatus(0);
-      return { sim, stats, status: 0 };
-    }
-    
-    let result = execute({
+    let result:OperationResult|undefined = {
       sim,
       stats,
-      status,
-      line: code[sim.codeLine],
-      code
-    });
+      status
+    };
 
-    while (set === false && result.status) {
-      result = runSimulator(true, { ...result, code });
-    }
+    do {
+      result = execute({
+        ...result,
+        line: code[result.sim.codeLine],
+        code
+      });
+    } while (set === false && result?.status);
+    
     return result;
   };
 
@@ -159,7 +139,7 @@ export default observer(() => {
             min={ 1 }
             style={ styles.pc.increment }
             value={ sim.pc.step.toString() }
-            onChange={ (ev, val) => Sim.setPcIncrement(+val.value) }
+            onChange={ (_ev, val) => Sim.setPcIncrement(+(val.value ?? 0)) }
           />
           <Tooltip
             content={ t("Program counter") }
@@ -176,7 +156,7 @@ export default observer(() => {
             step={ sim.pc.step }
             style={ styles.pc.input }
             value={ sim.pc.val.toString() }
-            onChange={ (ev, val) => { Sim.setProgramCounter(+val.value) } }
+            onChange={ (_ev, val) => { Sim.setProgramCounter(+(val.value ?? 0)) } }
           />
         </div>
         <div style={ styles.alu.container }>

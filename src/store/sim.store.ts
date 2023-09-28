@@ -1,4 +1,6 @@
-export default {
+import type Sim from "../types/sim";
+
+const sim:Sim = {
   title: 'vnms',
   created: new Date().toISOString().slice(0, 10),
   codeLine: 0,
@@ -31,3 +33,5 @@ export default {
     T1: 0
   }
 };
+
+export default sim;
