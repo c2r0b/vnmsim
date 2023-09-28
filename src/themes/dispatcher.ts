@@ -28,7 +28,7 @@ export class ThemeStore {
     Object.entries(palette).forEach(([key, value]) => {
       document.documentElement.style.setProperty(
         "--" + key,
-        value.toString()
+        (value as string).toString()
       );
     });
 
@@ -82,4 +82,4 @@ export class ThemeStore {
   }
 };
 
-export const ThemeContext = createContext<ThemeStore>(null);
+export const ThemeContext = createContext<ThemeStore>(new ThemeStore());

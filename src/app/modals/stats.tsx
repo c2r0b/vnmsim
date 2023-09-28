@@ -26,7 +26,7 @@ const Stats = observer((props:IProps) => {
 
   const items:Array<IItem> = Object.entries(stats).map(([key, value], i) => ({
     type: key,
-    count: +value
+    count: +(value as number)
   }));
 
   return (

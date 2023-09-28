@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import { SimulatorContext } from "src/store/dispatcher";
 import { observer } from "mobx-react-lite";
-import { T, useT } from '@transifex/react';
+import { useT } from '@transifex/react';
 
 import { Tooltip, Button } from"@fluentui/react-components";
 import { Microscope24Regular, Beaker24Regular, CalendarStar24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from "@fluentui/react-icons";
@@ -66,7 +66,7 @@ const Nav = observer(() => {
       icon: <FolderOpen24Regular />,
       disabled: isSimRunning,
       onClick: () => {
-        document.getElementById('openProject').click();
+        document.getElementById('openProject')?.click();
       }
     },
     {
@@ -155,7 +155,10 @@ const Nav = observer(() => {
         id="openProject"
         accept={ acceptedFileTypes }
         style={  Styles.openInput }
-        onChange={ (e) => onOpen(e.target.files[0]) }
+        onChange={ (e) => {
+          if (!e.target.files?.length) return;
+          onOpen(e.target.files[0]);
+        }}
       />
 
       <div style={ Styles.container }>
