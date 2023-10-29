@@ -1,7 +1,6 @@
+'use client'
 import { createContext } from "react";
-
 import { configure, makeAutoObservable } from "mobx";
-import { makePersistable } from "mobx-persist-store";
 
 import StatusStore from "./status.store";
 import StatsStore from "./stats.store";
@@ -23,14 +22,6 @@ export class SimulatorStore {
     this.stats = StatsStore;
     this.editor = {};
     makeAutoObservable(this);
-
-    if (typeof window !== "undefined") {
-      makePersistable(this, {
-        name: "SimulatorStore",
-        properties: ["sim", "stats", "status"],
-        storage: localStorage
-      });
-    }
   }
 
   reset() {

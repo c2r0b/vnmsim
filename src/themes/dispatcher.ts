@@ -1,5 +1,6 @@
+'use client'
 import { createContext } from "react";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable,  } from "mobx";
 
 import { THEMES } from "./themes";
 import { createDarkTheme, createLightTheme } from "@fluentui/react-components";
@@ -9,11 +10,11 @@ export class ThemeStore {
 
   constructor() {
     makeAutoObservable(this);
-    if (typeof window !== "undefined") {
+    try {
       this.theme = localStorage.getItem("theme") || "system";
       this.setCSSVariables();
-    }
-    else {
+    } catch (e) {
+      console.error(e);
       this.theme = "system";
     }
   }
@@ -41,16 +42,18 @@ export class ThemeStore {
 
   // get theme name translating the "System" option into an actual choice
   getNormalizedThemeName(theme = this.theme) {
-    if (typeof window === "undefined") {
-      return "light";
-    }
-    if (theme === "system") {
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        theme = "dark";
+    try {
+      if (theme === "system") {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = "dark";
+        }
+        else {
+          theme = "light";
+        }
       }
-      else {
-        theme = "light";
-      }
+    } catch (e) {
+      console.error(e);
+      theme = "light";
     }
     return theme;
   }
@@ -60,8 +63,10 @@ export class ThemeStore {
   }
 
   setTheme(theme) {
-    if (typeof window !== "undefined") {
+    try {
       localStorage.setItem("theme", theme);
+    } catch (e) {
+      console.error(e);
     }
     this.theme = theme;
     this.setCSSVariables();
