@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import { ThemeContext } from "src/themes/dispatcher";
 import { T } from "@transifex/react";
@@ -101,7 +101,7 @@ export default observer((props:IProps) => {
                 style={{ width: 300 }}
                 onChange={ onChangeLanguage }
               >
-                { Locale.languages.map((lang) => (
+                { Locale.languages?.map((lang) => (
                   <option
                     key={ lang.code }
                     value={ lang.code }
