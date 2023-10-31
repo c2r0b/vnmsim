@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { T } from '@transifex/react'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { T } from "@transifex/react";
+import { Button, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, DialogTrigger, Table, TableBody, TableCell, TableRow } from '@fluentui/react-components'
+import { ArrowRotateClockwise24Filled } from '@fluentui/react-icons'
 
-import { Button, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, DialogTrigger, Table, TableBody, TableCell, TableRow } from "@fluentui/react-components";
-import { ArrowRotateClockwise24Filled } from "@fluentui/react-icons";
+import { RootState } from 'src/store'
+import { clearStats } from 'src/store/stats.slice'
 
-import * as Styles from "./stats.styles";
+import * as Styles from './stats.styles'
 
 interface IItem {
   type: string
@@ -15,19 +16,22 @@ interface IItem {
 }
 
 interface IProps {
-  show: boolean;
-  onDismiss: Function;
+  show: boolean
+  onDismiss: Function
 }
 
-const Stats = observer((props:IProps) => {
-  const Sim = useContext(SimulatorContext);
-
-  const stats = Sim.getStats();
+const Stats = (props:IProps) => {
+  const dispatch = useDispatch()
+  const stats = useSelector((state:RootState) => state.stats)
 
   const items:Array<IItem> = Object.entries(stats).map(([key, value], i) => ({
     type: key,
     count: +(value as number)
-  }));
+  }))
+
+  const handleClearStats = () => {
+    dispatch(clearStats())
+  }
 
   return (
     <Dialog
@@ -56,7 +60,7 @@ const Stats = observer((props:IProps) => {
               <Button 
                 appearance="secondary"
                 icon={ <ArrowRotateClockwise24Filled /> }
-                onClick={ () => Sim.clearStats() }
+                onClick={ handleClearStats }
               >
                 <T _str="Clear statistics" />
               </Button>
@@ -65,7 +69,7 @@ const Stats = observer((props:IProps) => {
         </DialogBody>
       </DialogSurface>
     </Dialog>
-  );
-});
+  )
+}
 
-export default Stats;
+export default Stats

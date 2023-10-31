@@ -1,0 +1,1 @@
+export { isSimulatorRunning } from './isSimulatorRunning'

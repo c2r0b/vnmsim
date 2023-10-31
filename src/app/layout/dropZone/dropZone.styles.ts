@@ -6,7 +6,7 @@ export const container = (isDragging:boolean):React.CSSProperties => ({
   left: 0,
   zIndex: 9999,
   display: (isDragging === true) ? "block" : "none"
-});
+})
 
 export const opaqueBack:React.CSSProperties = {
   position: "absolute",
@@ -16,7 +16,7 @@ export const opaqueBack:React.CSSProperties = {
   left: 0,
   backgroundColor: "#ccc",
   opacity: 0.6,
-};
+}
 
 export const element:React.CSSProperties = {
   position: "absolute",
@@ -26,7 +26,7 @@ export const element:React.CSSProperties = {
   left: 10,
   border: "3px dashed black",
   textAlign: "center"
-};
+}
 
 export const message:React.CSSProperties = {
   margin: 0,

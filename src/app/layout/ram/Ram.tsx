@@ -1,93 +1,90 @@
-import ramStyles from './ram.module.css';
+import ramStyles from './ram.module.css'
 
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import AutoSizer from "react-virtualized-auto-sizer";
-import Split from "react-split";
+import AutoSizer from 'react-virtualized-auto-sizer'
+import Split from 'react-split'
 
-import CodeMirror from '@uiw/react-codemirror';
-import { githubLight, githubDark } from '@uiw/codemirror-theme-github';
-import { StreamLanguage } from "@codemirror/language";
-import { linter, lintGutter } from "@codemirror/lint";
-import { Compartment } from "@codemirror/state";
+import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror'
+import { githubLight, githubDark } from '@uiw/codemirror-theme-github'
+import { StreamLanguage } from '@codemirror/language'
+import { linter, lintGutter } from '@codemirror/lint'
+import { Compartment } from '@codemirror/state'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { ThemeContext } from "src/themes/dispatcher";
+import { RootState } from 'src/store'
 
-import { editorMode as vnmLang } from "../../utility/mode";
-import { editorLinter } from "../../utility/linter";
+import { editorMode as vnmLang } from '../../utility/mode'
+import { editorLinter } from '../../utility/linter'
 
-import { Variables } from "./variables/Variables";
+import { Variables } from './variables/Variables'
 
-import * as Styles from "./ram.styles";
-import { addLineHighlight, clearHighlight, lineHighlightField } from 'src/app/utility/highlight';
-import { lineNumbersExtension } from 'src/app/utility/gutter';
+import * as Styles from './ram.styles'
+import { addLineHighlight, clearHighlight, lineHighlightField } from 'src/app/utility/highlight'
+import { lineNumbersExtension } from 'src/app/utility/gutter'
 
-const editorTheme = new Compartment();
+import { setError, clearError } from 'src/store/errors.slice'
+import { setCode } from 'src/store/ram.slice'
 
-const Ram = observer(() => {
-  const Sim = useContext(SimulatorContext);
-  const Theme = useContext(ThemeContext);
+import { getNormalizedThemeName } from 'src/themes/utils'
 
-  const [focusedVar, setFocusedVar] = useState("");
+const editorTheme = new Compartment()
+
+const Ram = forwardRef((_props, ref) => {
+  const dispatch = useDispatch()
   
-  const interval = Sim.getInterval();
-  const editorRef = useRef(null);
+  const sim = useSelector((state:RootState) => state.sim)
+  const ramCode = useSelector((state:RootState) => state.ram.code)
+  const theme = useSelector((state:RootState) => state.theme.name)
+
+  const editorRef = useRef<ReactCodeMirrorRef>(null)
+
+  useImperativeHandle(ref, () => ({
+    clearHighlight: () => clearHighlight(editorRef?.current)
+  }), [])
 
   const focusCell = (lineNo: number) => {
-    const editor = Sim.getEditor();
-    if (!editor.state) return;
+    const editor = editorRef?.current
+    if (!editor?.state) return
 
     // if out of bounds, return
     if (lineNo < 0 || lineNo > editor.state.doc.lines) {
-      clearHighlight(editor);
-      return;
+      clearHighlight(editor)
+      return
     }
 
-    if (editor.state.doc.lines > lineNo) {
-      const docPosition = editor.state.doc.line(lineNo + 1).from;
-      editor.view.dispatch({ effects: addLineHighlight.of(docPosition) });
+    if (editor.view && editor.state.doc.lines > lineNo) {
+      const docPosition = editor.state.doc.line(lineNo + 1).from
+      editor.view.dispatch({ effects: addLineHighlight.of(docPosition) })
     }
-  };
+  }
 
   useEffect(() => {
-    if (interval === 0) {
-      return;
-    }
-    
-    const sim = Sim.getSim();
-    if (!editorRef?.current) {
-      return;
-    }
-
-    focusCell(sim.focus.cell);
-
-    if (sim.focus.var < 0) {
-      setFocusedVar("");
-    }
-    else if (sim.step >= 7) {
-      setFocusedVar(sim.focus.var);
-    }
-  }, [Sim.getSim().step]);
+    focusCell(sim.focus.cell)
+  }, [sim.focus.cell])
 
   // on editor content change
-  const onEditorChange = React.useCallback((value, viewUpdate) => {
-    Sim.setEditor(viewUpdate);
-    Sim.setCode(viewUpdate.state.doc.toString());
-  }, []);
+  const onEditorChange = (_value, viewUpdate) => {
+    if (!viewUpdate) {
+      return
+    }
+    const newCode = viewUpdate.state.doc.toString()
+    if (newCode != ramCode) {
+      dispatch(setCode(newCode))
+    }
+  }
 
   // on editor update check for highlighted errors
   const vnmLinter = linter(view => {
-    const errors = editorLinter(view);
+    const errors = editorLinter(view)
     if (errors.length) {
-      Sim.fireError(errors.length);
+      dispatch(setError(errors.length))
     }
     else {
-      Sim.clearErrors();
+      dispatch(clearError())
     }
-    return errors;
-  });
+    return errors
+  })
   
   const editorOptions = {
     mode: "vnm",
@@ -97,12 +94,12 @@ const Ram = observer(() => {
     firstLineNumber: 0,
     cursorBlinkRate: 800,
     lineNumbers: false
-  };
+  }
 
   const currentEditorTheme = () => {
-    const useDarkMode = Theme.getNormalizedThemeName() === "dark";
-    return useDarkMode ? githubDark : githubLight;
-  };
+    const useDarkMode = getNormalizedThemeName(theme) === "dark"
+    return useDarkMode ? githubDark : githubLight
+  }
 
   const editorExtensions = [
     lineNumbersExtension,
@@ -111,13 +108,13 @@ const Ram = observer(() => {
     vnmLinter,
     lineHighlightField,
     editorTheme.of(currentEditorTheme())
-  ];
+  ]
   
   useEffect(() => {
-    Sim.getEditor().view?.dispatch({
+    editorRef?.current?.view?.dispatch({
       effects: editorTheme.reconfigure(currentEditorTheme())
-    });
-  }, [Theme.getNormalizedThemeName()]);
+    })
+  }, [theme])
 
   return (
     <AutoSizer>
@@ -135,7 +132,7 @@ const Ram = observer(() => {
               <CodeMirror
                 ref={ editorRef }
                 className={ ramStyles.CodeMirror }
-                value={ Sim.getCode() || "" }
+                value={ ramCode || "" }
                 height={ height.toString() }
                 extensions={ editorExtensions }
                 onChange={ onEditorChange }
@@ -143,12 +140,12 @@ const Ram = observer(() => {
                 basicSetup={ editorOptions }
               />
             </div>
-            <Variables focusedVar={ focusedVar } />
+            <Variables focusedVar={ sim.focus.var } />
           </Split>
         </div>
       )}
     </AutoSizer>
-  );
-});
+  )
+})
 
-export default Ram;
+export default Ram

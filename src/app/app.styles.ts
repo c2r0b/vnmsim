@@ -5,7 +5,7 @@ export const container:React.CSSProperties = {
   right: 0,
   bottom: 0,
   backgroundColor: "var(--white)"
-};
+}
 
 export const panel:React.CSSProperties = {
   position: "relative",
@@ -13,9 +13,9 @@ export const panel:React.CSSProperties = {
   height: "100%",
   overflow: "hidden",
   zIndex: 100,
-};
+}
 
 export const sidebar:React.CSSProperties = {
   position: "relative",
   zIndex: 9999,
-};
+}

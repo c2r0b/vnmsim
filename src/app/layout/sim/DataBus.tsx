@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import { dataBus } from "./sim.styles";
+import { dataBus } from './sim.styles'
 
 export const main = () => (
 	<svg style={ dataBus }>
@@ -16,7 +16,7 @@ export const main = () => (
 		<rect x="65" y="70" width="2" height="240"></rect>
 		<rect x="65" y="310" width="150" height="2"></rect>
 	</svg>
-);
+)
 
 export const acc = () => (
 	<svg style={ dataBus }>
@@ -24,4 +24,4 @@ export const acc = () => (
 		<rect x="280" y="0" width="2" height="160"></rect>
 		<rect x="120" y="160" width="162" height="2"></rect>
 	</svg>
-);
+)

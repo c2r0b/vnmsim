@@ -1,44 +1,43 @@
-import React, { useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React, { memo } from 'react'
+import { useDispatch } from 'react-redux'
+import { T, useT } from '@transifex/react'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { T, useT } from "@transifex/react";
+import { Card, CardHeader, Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from '@fluentui/react-components'
+import { ArrowDownload24Filled } from '@fluentui/react-icons'
 
-import { Card, CardHeader, Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from "@fluentui/react-components";
-import { ArrowDownload24Filled } from "@fluentui/react-icons";
+import { samples } from './samples.list'
+import { setCode } from 'src/store/ram.slice'
 
-import { samples } from "./samples.list";
-
-import * as Styles from "./samples.styles";
-import * as SAMPLES from "../samples";
+import * as Styles from './samples.styles'
+import * as SAMPLES from '../samples'
 
 interface IProps {
-  show: boolean;
-  onDismiss: Function;
+  show: boolean
+  onDismiss: Function
 }
 
-const Samples = observer((props:IProps) => {
-  const Sim = useContext(SimulatorContext);
-  const t = useT();
+const Samples = memo((props:IProps) => {
+  const dispatch = useDispatch()
+  const t = useT()
 
   const samplesList = samples.map(s => {
     const onClick = () => {
-      const obj = { ...SAMPLES[s.key].input };
+      const obj = { ...SAMPLES[s.key].input }
       
       // set code
-      Sim.setCode(obj.code);
-      delete obj.code;
+      dispatch(setCode(obj.code))
+      delete obj.code
 
       // set title and date
-      obj.title = s.label;
-      obj.created = new Date().toISOString().slice(0, 10);
+      obj.title = s.label
+      obj.created = new Date().toISOString().slice(0, 10)
 
-      // set simulator status object
-      Sim.updateSim(obj);
+      // TODO: set simulator status object
+      //Sim.updateSim(obj)
 
       // close panel
-      props.onDismiss();
-    };
+      props.onDismiss()
+    }
 
     return (
       <Card
@@ -58,8 +57,8 @@ const Samples = observer((props:IProps) => {
           }
         />
       </Card>
-    );
-  });
+    )
+  })
 
   return (
     <Dialog
@@ -86,7 +85,7 @@ const Samples = observer((props:IProps) => {
         </DialogBody>
       </DialogSurface>
     </Dialog>
-  );
-});
+  )
+})
 
-export default Samples;
+export default Samples

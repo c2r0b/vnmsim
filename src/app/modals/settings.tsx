@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/navigation";
+import React, { useContext } from 'react'
+import { useRouter } from 'next/navigation'
 
-import { ThemeContext } from "src/themes/dispatcher";
-import { T } from "@transifex/react";
-import { LocaleContext } from "src/store/locale";
-import { useCookies } from "react-cookie";
+import { T } from '@transifex/react'
+import { LocaleContext } from 'src/store/locale.context'
+import { useCookies } from 'react-cookie'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Label, useId, Button, Select } from "@fluentui/react-components";
-import { Settings24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from "@fluentui/react-icons";
+import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Label, useId, Button, Select } from '@fluentui/react-components'
+import { Settings24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from '@fluentui/react-icons'
   
-import * as Styles from "./settings.styles";
+import * as Styles from './settings.styles'
+import { setTheme } from 'src/store/theme.slice'
+import { RootState } from 'src/store'
 
 const themeOptions = [
   {
@@ -28,38 +29,38 @@ const themeOptions = [
     label: "Dark",
     icon: <WeatherMoon24Regular />
   },
-];
+]
 
 interface IProps {
-  show: boolean;
-  onDismiss: Function;
+  show: boolean
+  onDismiss: Function
 }
 
-export default observer((props:IProps) => {
-  const Theme = useContext(ThemeContext);
-  const Locale = useContext(LocaleContext);
+export default (props:IProps) => {
+  const theme = useSelector((state:RootState) => state.theme.name)
+  const dispatch = useDispatch()
+  
+  const Locale = useContext(LocaleContext)
 
-  const router = useRouter();
-  const [_, setCookie] = useCookies(['NEXT_LOCALE']);
+  const router = useRouter()
+  const [_, setCookie] = useCookies(['NEXT_LOCALE'])
 
   const onChangeTheme = (_, option) => {
-    if (!option.value) return;
-    Theme.setTheme(option.value);
-  };
+    if (!option.value) return
+    dispatch(setTheme(option.value))
+  }
 
   const onChangeLanguage = (_, option) => {
-    if (!option.value) return;
+    if (!option.value) return
     
     // Update the URL with the new locale while keeping the current path
-    setCookie('NEXT_LOCALE', option.value, { path: '/' });
-    router.push("/" + option.value);
-  };
+    setCookie('NEXT_LOCALE', option.value, { path: '/' })
+    router.push("/" + option.value)
+  }
 
-  const themeLabelId = useId('label');
-  const languageLabelId = useId('label');
+  const themeLabelId = useId('label')
+  const languageLabelId = useId('label')
 
-  const selectedTheme = Theme.getCurrentThemeName();
-  
   return (
     <Dialog
       open={ props.show }
@@ -77,7 +78,7 @@ export default observer((props:IProps) => {
               </Label>
               <Select
                 aria-labelledby={ themeLabelId }
-                value={ selectedTheme }
+                value={ theme }
                 style={{ width: 300 }}
                 onChange={ onChangeTheme }
               >
@@ -122,5 +123,5 @@ export default observer((props:IProps) => {
         </DialogBody>
       </DialogSurface>
     </Dialog>
-  );
-});
+  )
+}

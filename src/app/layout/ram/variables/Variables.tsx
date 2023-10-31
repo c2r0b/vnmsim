@@ -1,62 +1,56 @@
-import React, { useState, useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React, { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { useT } from "@transifex/react";
+import { useT } from '@transifex/react'
 
-import { Add24Filled } from "@fluentui/react-icons";
+import { Add24Filled } from '@fluentui/react-icons'
 
-import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow } from "@fluentui/react-components";
+import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow } from '@fluentui/react-components'
 
-import * as RamStyles from "../ram.styles";
-import * as Styles from "./variables.styles";
+import * as RamStyles from '../ram.styles'
+import * as Styles from './variables.styles'
+import { RootState } from "src/store"
+import { addVariable, setVariable } from "src/store/ram.slice"
 
-const variables = ["X", "Y", "Z", "W"];
+const mainVariables = ['X', 'Y', 'Z', 'W']
 
 interface IProps {
   focusedVar?: string
 }
 
-export const Variables = observer((props:IProps) => {
-  const Sim = useContext(SimulatorContext);
-  const t = useT();
+export const Variables = (props:IProps) => {
+  const dispatch = useDispatch()
+  const interval = useSelector((state:RootState) => state.sim.interval)
+  const variables = useSelector((state:RootState) => state.ram.variables)
 
-  const [lastTvariable, setLastTvariable] = useState(20);
-
-  const interval = Sim.getInterval();
+  const t = useT()
 
   // generate T variables
-  const allVariables = [
-    ...variables, 
-    ...Array.from(
-      Array(lastTvariable).keys()
-    ).map(i => "T" + ++i)
-  ];
+  const allVariables = Object.keys(variables)
 
   const items = allVariables.map((key, i) => ({
     key: i.toString(),
     type: key,
-    value: Sim.getVariable(key)
-  }));
+    value: variables[key]
+  }))
 
   const onChange = (key, event) => {
-    const newValue = event.target.value;
-    if (newValue === undefined) return;
-    Sim.setVariable(key, newValue);
-  };
+    const newValue = event.target.value
+    if (newValue === undefined) return
+    dispatch(setVariable({ name: key, value: newValue }))
+  }
 
-  const addVariable = () => {
-    Sim.setVariable("T" + (lastTvariable + 1), 0);
-    setLastTvariable(lastTvariable + 1);
-  };
+  const handleAddVariable = () => {
+    dispatch(addVariable())
+  }
 
   const displayVariable = (item) => {
-    const value = Sim.getVariable(item.type);
-    let style = Styles.varSpin;
+    const value = variables[item.type]
+    let style = Styles.varSpin
 
     // change style on focus variable
-    if (props.focusedVar === item.type && interval !== 0) {
-      style = Styles.focusedVar;
+    if (props.focusedVar === item.type) {
+      style = Styles.focusedVar
     }
 
     return (
@@ -76,8 +70,8 @@ export const Variables = observer((props:IProps) => {
           </TableCellLayout>
         </TableCell>
       </TableRow>
-    );
-  };
+    )
+  }
 
   return (
     <div style={ RamStyles.verticalHalf }>
@@ -93,7 +87,7 @@ export const Variables = observer((props:IProps) => {
               <Button
                 aria-label={ t("Add T variable") }
                 icon={ <Add24Filled /> }
-                onClick={ addVariable }
+                onClick={ handleAddVariable }
                 appearance="subtle"
               />
             </Tooltip>
@@ -101,5 +95,5 @@ export const Variables = observer((props:IProps) => {
         </TableBody>
       </Table>
     </div>
-  );
-});
+  )
+}

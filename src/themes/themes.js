@@ -79,4 +79,4 @@ export const THEMES = {
     // github icon
     invert: 1
   }
-};
+}

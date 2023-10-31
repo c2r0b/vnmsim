@@ -1,123 +1,106 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { observer } from "mobx-react-lite";
+import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useT } from '@transifex/react'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { useT } from "@transifex/react";
+import { Input, SpinButton, Text, Tooltip } from '@fluentui/react-components'
 
-import { Input, SpinButton, Text, Tooltip } from "@fluentui/react-components";
+import { PanZoom } from 'react-easy-panzoom'
 
-import { PanZoom } from "react-easy-panzoom";
+import WorkTitle from '../workTitle/WorkTitle'
 
-import WorkTitle from "../workTitle/WorkTitle";
+import { execute } from '../../../middleware/execute'
+import { strToObj, mergeDeep } from '../../utility/objects'
 
-import { execute, lastStep } from "../../utility/execute";
-import { strToObj, mergeDeep } from "../../utility/objects";
+import { preventPan } from './preventPan'
+import * as DataBus from './DataBus'
+import * as AddressesBus from './AddressesBus'
 
-import { preventPan } from "./preventPan";
-import * as DataBus from "./DataBus";
-import * as AddressesBus from "./AddressesBus";
+import * as Styles from './sim.styles'
+import { AppThunkDispatch, RootState } from 'src/store'
+import { clearFocus, setStatus } from 'src/store/sim.slice'
+import { setPc, setPcStep } from 'src/store/pc.slice'
+import { isSimulatorRunning } from 'src/selectors'
 
-import * as Styles from "./sim.styles";
-import { OperationResult } from "src/types/operation-result";
+import { Status } from 'src/types/status'
+import { immediate } from 'src/middleware/immediate'
 
-export default observer(() => {
-  const Sim = useContext(SimulatorContext);
-  const t = useT();
+export default () => {
+  const dispatch = useDispatch<AppThunkDispatch>()
+  
+  const isRunning = useSelector(isSimulatorRunning)
 
-  const [intervalId, setIntervalId] = useState<any>(undefined);
-  const [styles, setStyles] = useState({ ...Styles });
+  const sim = useSelector((state:RootState) => state.sim)
+  const alu = useSelector((state:RootState) => state.alu)
+  const ir = useSelector((state:RootState) => state.ir)
+  const pc = useSelector((state:RootState) => state.pc)
 
-  const sim = Sim.getSim();
-  const status = Sim.getSimStatus();
-  const editor = Sim.getEditor();
-  const interval = Sim.getInterval();
+  const t = useT()
+
+  const [intervalId, setIntervalId] = useState<any>(undefined)
+  const [styles, setStyles] = useState({ ...Styles })
 
   // highlight requested element by creating a new focus style object
   // with the requested property cascade and merging it into the default
   // Styles object
   const updateStyles = () => {
-    const newStyles = strToObj(sim.focus.el, Styles.focus);
-    setStyles(mergeDeep({}, Styles, newStyles));
-  };
+    const newStyles = strToObj(sim.focus.el, Styles.focus)
+    setStyles(mergeDeep({}, Styles, newStyles))
+  }
 
   useEffect(() => {
-    if (interval === 0) return;
-    updateStyles();
-  }, [sim.focus.el]);
+    updateStyles()
+  }, [sim.focus.el])
 
-  const runSimulator = (set, {
-    sim = { ...Sim.getSim() },
-    stats = { ...Sim.getStats() },
-    status = Sim.getSimStatus(),
-    code = Sim.getCode().split("\n")
-  }) => {
-    let result:OperationResult|undefined = {
-      sim,
-      stats,
-      status
-    };
-
+  // execute an entire cicle of the simulator
+  const runSimulatorCicle = (set) => {
     do {
-      result = execute({
-        ...result,
-        line: code[result.sim.codeLine],
-        code
-      });
-    } while (set === false && result?.status);
-    
-    return result;
-  };
+      dispatch(execute)
+    } while (set === false && sim.status)
+  }
+
+  // run entire program
+  const continousExecution = () => {
+    if (sim.interval === 0) {
+      dispatch(immediate)
+    }
+    else {
+      setIntervalId(setInterval(() => {
+        runSimulatorCicle(true)
+      }, sim.interval))
+      return () => clearInterval(intervalId)
+    }
+  }
 
   useEffect(() => {
-    if (!editor?.state) {
-      return;
-    }
-
-    switch (status) {
-      case 0: { // stop
-        Sim.loseFocus();
-        clearInterval(intervalId);
-        break;
+    switch (sim.status) {
+      case Status.STOP: { // stop
+        dispatch(clearFocus())
+        clearInterval(intervalId)
+        break
       }
-      case 4: { // pause
-        clearInterval(intervalId);
-        break;
+      case Status.PAUSE: { // pause
+        clearInterval(intervalId)
+        break
       }
-      case 2: { // single step
-        const result = runSimulator(true, {});
-        Sim.updateSim(result.sim);
-        Sim.updateStats(result.stats);
-        Sim.setSimStatus(4);
-        break;
+      case Status.SINGLE_STEP: { // single step
+        runSimulatorCicle(true)
+        dispatch(setStatus(4))
+        break
       }
-      case 1: // play
-      case 3: { // single iteration
-        if (interval === 0) {
-          const result = runSimulator(false, {});
-          Sim.updateSim(result.sim);
-          Sim.updateStats(result.stats);
-          Sim.setSimStatus(result.status);
-        }
-        else {
-          setIntervalId(setInterval(() => {
-            const result = runSimulator(true, {});
-            Sim.updateSim(result.sim);
-            Sim.updateStats(result.stats);
-            Sim.setSimStatus(result.status);
-          }, interval));
-          return () => clearInterval(intervalId);
-        }
+      case Status.PLAY: // play
+      case Status.SINGLE_ITERATION: { // single iteration
+        return continousExecution()
       }
     }
-  }, [status]);
+  }, [sim.status])
 
-  const decoderInputRef = useRef(null);
-  const pcInputRef = useRef(null);
-  const pcIncrementInputRef = useRef(null);
-  const refsWithoutPan = [decoderInputRef, pcInputRef, pcIncrementInputRef];
+  const decoderInputRef = useRef(null)
+  const pcInputRef = useRef(null)
+  const pcIncrementInputRef = useRef(null)
+  const refsWithoutPan = [decoderInputRef, pcInputRef, pcIncrementInputRef]
 
-  if (interval === 0 && [1,2,3].includes(status)) {
-    return null;
+  if (sim.interval === 0 && isRunning) {
+    return null
   }  
 
   return (
@@ -138,8 +121,8 @@ export default observer(() => {
             ref={ pcIncrementInputRef }
             min={ 1 }
             style={ styles.pc.increment }
-            value={ sim.pc.step.toString() }
-            onChange={ (_ev, val) => Sim.setPcIncrement(+(val.value ?? 0)) }
+            value={ pc.step }
+            onChange={ (_ev, val) => dispatch(setPcStep(+(val.value ?? 0))) }
           />
           <Tooltip
             content={ t("Program counter") }
@@ -153,10 +136,10 @@ export default observer(() => {
           <SpinButton
             ref={ pcInputRef }
             min={ 0 }
-            step={ sim.pc.step }
+            step={ pc.step }
             style={ styles.pc.input }
-            value={ sim.pc.val.toString() }
-            onChange={ (_ev, val) => { Sim.setProgramCounter(+(val.value ?? 0)) } }
+            value={ pc.val }
+            onChange={ (_ev, val) => { dispatch(setPc(+(val.value ?? 0))) } }
           />
         </div>
         <div style={ styles.alu.container }>
@@ -177,17 +160,17 @@ export default observer(() => {
           </Tooltip>
           <Input
             style={ styles.alu.p1 }
-            value={ sim.alu.e1.toString() }
+            value={ alu.e1.toString() }
             readOnly
           />
           <Input
             style={ styles.alu.p2 }
-            value={ sim.alu.e2.toString() }
+            value={ alu.e2.toString() }
             readOnly
           />
           <Input
             style={ styles.alu.op }
-            value={ sim.alu.op }
+            value={ alu.op }
             readOnly
           />
         </div>
@@ -204,7 +187,7 @@ export default observer(() => {
           </Tooltip>
           <Input
             style={ styles.acc.field }
-            value={ sim.acc.toString() }
+            value={ alu.acc.toString() }
             readOnly
           />
         </div>
@@ -220,7 +203,7 @@ export default observer(() => {
           </Tooltip>
           <Input
             style={ styles.ir.input }
-            value={ sim.ir.cmd + " " + sim.ir.loc }
+            value={ ir.cmd + " " + ir.loc }
             readOnly
           />
           <Input
@@ -266,5 +249,5 @@ export default observer(() => {
         </Tooltip>
       </PanZoom>
     </div>
-  );
-});
+  )
+}

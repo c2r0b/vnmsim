@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React from 'react'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { Spinner } from "@fluentui/react-components";
+import { Spinner } from '@fluentui/react-components'
+import { useSelector } from 'react-redux'
+import { isSimulatorRunning } from 'src/selectors'
 
-export default observer(() => {  
-	const Sim = useContext(SimulatorContext);
+export default () => {
+	const isRunning = useSelector(isSimulatorRunning)
 
 	// display running spinner according to sim status
-	if (![1,2,3].includes(Sim.getSimStatus())) {
-		return null;
+	if (!isRunning) {
+		return null
 	}
 	return (
 		<Spinner
@@ -17,5 +17,5 @@ export default observer(() => {
 			aria-live="assertive"
 			labelPosition="before"
 		/>
-	);
-});
+	)
+}

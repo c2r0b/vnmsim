@@ -1,22 +1,26 @@
-import React, { useRef, useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React, { useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { T } from "@transifex/react";
+import { T } from '@transifex/react'
 
-import { Text } from "@fluentui/react-components";
-import ContentEditable from "react-contenteditable";
+import { Text } from '@fluentui/react-components'
+import ContentEditable from 'react-contenteditable'
 
-import * as Styles from "./workTitle.styles";
+import { RootState } from 'src/store'
+import { setTitle } from 'src/store/sim.slice'
 
-const WorkTitle = observer(() => {
-  const Sim = useContext(SimulatorContext);
+import * as Styles from './workTitle.styles'
 
-  const workTitleRef = useRef<HTMLElement | null>(null);
+const WorkTitle = () => {
+  const dispatch = useDispatch()
+  const title = useSelector((state:RootState) => state.sim.title)
+  const created = useSelector((state:RootState) => state.sim.created)
+
+  const workTitleRef = useRef<HTMLElement | null>(null)
 
   const onTitleChange = (ev) => {
-    Sim.setTitle(ev.target.value);
-  };
+    dispatch(setTitle(ev.target.value))
+  }
 
   return (
     <div style={ Styles.container }>
@@ -24,15 +28,15 @@ const WorkTitle = observer(() => {
         <ContentEditable
           tagName="pre"
           innerRef={ workTitleRef }
-          html={ Sim.getTitle() }
+          html={ title }
           onChange={ onTitleChange }
         />
       </Text>
       <Text style={ Styles.date }>
-        <T _str="Created on" /> { Sim.getOpenDate() }
+        <T _str="Created on" /> { created }
       </Text>
     </div>
-  );
-});
+  )
+}
 
-export default WorkTitle;
+export default WorkTitle

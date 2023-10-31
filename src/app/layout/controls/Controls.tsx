@@ -1,84 +1,88 @@
-import React, { useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useT } from '@transifex/react'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { useT } from '@transifex/react';
+import { Tooltip, Button, Slider, Label, useId } from '@fluentui/react-components'
+import { Next24Regular, FastForward24Regular, Pause24Regular, Play24Regular, Stop24Regular } from '@fluentui/react-icons'
 
-import { Tooltip, Button, Slider, Label, useId } from "@fluentui/react-components";
-import { Next24Regular, FastForward24Regular, Pause24Regular, Play24Regular, Stop24Regular } from "@fluentui/react-icons";
+import { RootState } from 'src/store'
+import { setCodeLine, setStatus, setStep, setInterval } from 'src/store/sim.slice'
+import { setPc } from 'src/store/pc.slice'
+import { Status } from 'src/types/status'
+import { isSimulatorRunning } from 'src/selectors'
 
-import { clearHighlight } from "src/app/utility/highlight";
+import Spinner from './Spinner'
 
-import Spinner from "./Spinner";
+import * as Styles from './controls.styles'
 
-import * as Styles from "./controls.styles";
-
-export default observer(() => {
-  const Sim = useContext(SimulatorContext);
+export default ({ clearEditorHighlight }) => {
+  const dispatch = useDispatch()
   
-  const simStatus = Sim.getSimStatus();
-  const hasErrors = Sim.hasErrors();
+  const simStatus = useSelector((state:RootState) => state.sim.status)
+  const hasErrors = useSelector((state:RootState) => state.errors.hasErrors)
+  const interval = useSelector((state:RootState) => state.sim.interval)
+
+  const isRunning = useSelector(isSimulatorRunning)
   
-  const t = useT();
+  const t = useT()
 
   const _controls = [
     {
       key: "run",
       ariaLabel: t("Run loop"),
-      disabled: hasErrors || [1,2,3].includes(simStatus),
+      disabled: hasErrors || isRunning,
       icon: <Play24Regular />,
-      onClick: () => Sim.setSimStatus(1),
+      onClick: () => dispatch(setStatus(Status.PLAY)),
     },
     {
       key: "step",
       ariaLabel: t("Single step"),
-      disabled: hasErrors || [1,2,3].includes(simStatus),
+      disabled: hasErrors || isRunning,
       icon: <Next24Regular />,
-      onClick: () => Sim.setSimStatus(2),
+      onClick: () => dispatch(setStatus(Status.SINGLE_STEP)),
     },
     {
       key: "iteration",
       ariaLabel: t("Single iteration"),
-      disabled: hasErrors || [1,2,3].includes(simStatus),
+      disabled: hasErrors || isRunning,
       icon: <FastForward24Regular />,
-      onClick: () => Sim.setSimStatus(3),
+      onClick: () => dispatch(setStatus(Status.SINGLE_ITERATION)),
     },
     {
       key: "pause",
       ariaLabel: t("Pause"),
-      disabled: hasErrors || [0,4].includes(simStatus),
+      disabled: hasErrors || !isRunning,
       icon: <Pause24Regular />,
-      onClick: () => Sim.setSimStatus(4),
+      onClick: () => dispatch(setStatus(Status.PAUSE)),
     },
     {
       key: "stop",
       ariaLabel: t("Stop"),
-      disabled: hasErrors || simStatus === 0,
+      disabled: hasErrors || simStatus === Status.STOP,
       icon: <Stop24Regular />,
       onClick: () => {
-        Sim.setSimStatus(0);
-        Sim.setProgramCounter(0);
-        Sim.setStep(0);
-        Sim.setCodeLine(0);
-        clearHighlight(Sim.getEditor());
+        dispatch(setStatus(Status.STOP))
+        dispatch(setPc(0))
+        dispatch(setStep(0))
+        dispatch(setCodeLine(0))
+        clearEditorHighlight()
       }
     },
-  ];
+  ]
 
-  const onIntervalChange = (e, value) => {
+  const onIntervalChange = (_e, value) => {
     // if running restore interval
-    if ([1,2,3].includes(simStatus)) {
-      const oldStatus = simStatus;
-      Sim.setSimStatus(0);
+    if (isRunning) {
+      const oldStatus = simStatus
+      dispatch(setStatus(0))
       setTimeout(() => {
-        Sim.setSimStatus(oldStatus);
-      });
+        dispatch(setStatus(oldStatus))
+      })
     }
-    Sim.setInterval(value.value);
-  };
+    dispatch(setInterval(value.value))
+  }
 
-  const sliderId = useId('slider');
-  const interval = Sim.getInterval();
+  const sliderId = useId('slider')
 
   return (
     <div style={ Styles.container }>
@@ -94,7 +98,7 @@ export default observer(() => {
               <Button
                 aria-label={ props.ariaLabel }
                 icon={ props.icon }
-                disabled={ props.disabled }
+                disabled={ !!props.disabled }
                 onClick={ props.onClick }
                 appearance="subtle"
               />
@@ -123,5 +127,5 @@ export default observer(() => {
 
       <Spinner />
     </div>
-  );
-});
+  )
+}

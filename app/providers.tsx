@@ -1,25 +1,23 @@
-'use client';
+'use client'
 
-import React from "react";
+import React from 'react'
+import { Provider } from 'react-redux'
 
-import { createDOMRenderer, SSRProvider, RendererProvider, GriffelRenderer } from "@fluentui/react-components";
+import { createDOMRenderer, SSRProvider, RendererProvider } from '@fluentui/react-components'
 
-import { SimulatorContext, SimulatorStore } from "src/store/dispatcher";
-import { ThemeContext, ThemeStore } from "src/themes/dispatcher";
-
-const theme = new ThemeStore();
-const sim = new SimulatorStore();
+import { persistor, store } from 'src/store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 export default ({ children }) => {
   return (
 		<RendererProvider renderer={createDOMRenderer()}>
       <SSRProvider>
-          <ThemeContext.Provider value={ theme }>
-              <SimulatorContext.Provider value={ sim }>
-                  {children}
-              </SimulatorContext.Provider>
-          </ThemeContext.Provider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            {children}
+          </PersistGate>
+        </Provider>
       </SSRProvider>
     </RendererProvider>
-  );
+  )
 }

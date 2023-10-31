@@ -54,4 +54,4 @@ export const samples = [
     label: "Is negative",
     desc: "x < 0 ? z"
   },
-];
+]

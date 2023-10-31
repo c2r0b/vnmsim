@@ -1,5 +1,5 @@
-import { Viewport, Metadata } from 'next';
-import Providers from './providers';
+import { Viewport, Metadata } from 'next'
+import Providers from './providers'
  
 export const viewport: Viewport = {
   themeColor: '#000000',
@@ -23,6 +23,9 @@ export default function RootLayout({
   }) {
     return (
       <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+        </head>
         <body>
           <Providers>
             {children}

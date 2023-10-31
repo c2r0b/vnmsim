@@ -1,29 +1,30 @@
-import React, { useContext } from "react";
-import { observer } from "mobx-react-lite";
+import React, { memo } from 'react'
+import { useDispatch } from 'react-redux'
+import { T } from '@transifex/react'
 
-import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components";
+import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from '@fluentui/react-components'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { T } from "@transifex/react";
+import { AppThunkDispatch } from 'src/store'
+import { reset } from 'src/middleware/reset'
 
 interface IProps {
-	show: boolean;
-	onDismiss: Function;
+	show: boolean
+	onDismiss: Function
 }
 
-export default observer((props:IProps) => {
-	const Sim = useContext(SimulatorContext);
+export default memo((props:IProps) => {
+	const dispatch = useDispatch<AppThunkDispatch>()
 
 	const confirm = () => {
-		Sim.reset();
-		props.onDismiss();
-	};
+		dispatch(reset)
+		props.onDismiss()
+	}
 
 	return (
 		<Dialog
 			modalType="alert"
 			open={ props.show }
-      onOpenChange={ () => props.onDismiss() }
+      		onOpenChange={ () => props.onDismiss() }
 		>
 			<DialogSurface>
 				<DialogBody>
@@ -46,5 +47,5 @@ export default observer((props:IProps) => {
 				</DialogBody>
 			</DialogSurface>
 		</Dialog>
-	);
-});
+	)
+})

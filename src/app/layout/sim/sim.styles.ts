@@ -2,7 +2,7 @@ export const box:React.CSSProperties = {
   padding: 10,
   backgroundColor: "var(--neutralLighter)",
   backgroundSize: ".5em .5em"
-};
+}
 
 export const container:React.CSSProperties = {
   width: 800,
@@ -11,7 +11,7 @@ export const container:React.CSSProperties = {
   marginTop: 0,
   marginLeft: 0,
   cursor: "move"
-};
+}
 
 export const dataBus:React.CSSProperties = {
   position: "absolute",
@@ -24,24 +24,24 @@ export const dataBus:React.CSSProperties = {
   height: 550,
   fill: "var(--neutralTertiaryAlt)",
   overflowY: "hidden"
-};
+}
 
 export const addressBus:React.CSSProperties = {
   ...dataBus,
   fill: "var(--neutralTertiary)"
-};
+}
 
 const label:React.CSSProperties = {
   position: "absolute",
   fontSize: 17,
   zIndex: 100,
   cursor: "help"
-};
+}
 
 const fieldStyles:React.CSSProperties = {
   fontSize: "18px",
   textAlign: "center"
-};
+}
 
 /* program counter */
 export const pc = {
@@ -71,7 +71,7 @@ export const pc = {
     marginLeft: 90,
     ...fieldStyles
   }
-};
+}
 
 /* arithmetic logic unit */
 export const alu = {
@@ -119,7 +119,7 @@ export const alu = {
     border: "none",
     ...fieldStyles
   }
-};
+}
 
 
 /* instructions register */
@@ -150,7 +150,7 @@ export const ir = {
     fontSize: 14,
     fontWeight: 600
   }
-};
+}
 
 /* accumulator */
 export const acc = {
@@ -169,7 +169,7 @@ export const acc = {
     top: 133,
     left: 34
   }
-};
+}
 
 
 /* other sim labels */
@@ -189,7 +189,7 @@ export const labels = {
     fontSize: 14,
     width: 80
   }
-};
+}
 
 export const ram = {
   container:<React.CSSProperties> {
@@ -211,9 +211,9 @@ export const ram = {
     left: 8,
     transform: "rotate(90deg)"
   }
-};
+}
 
 export const focus = {
   backgroundColor: "#f9c55b",
   color: "black"
-};
+}

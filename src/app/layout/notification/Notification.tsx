@@ -1,22 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { SimulatorContext } from "src/store/dispatcher";
-import { observer } from "mobx-react-lite";
-import { useT } from '@transifex/react';
+import { useT } from '@transifex/react'
 
-import { Alert } from "@fluentui/react-components/unstable";
-import { Text } from "@fluentui/react-components";
+import { Alert } from '@fluentui/react-components/unstable'
+import { Text } from '@fluentui/react-components'
 
-import * as Styles from "./notification.styles";
+import { RootState } from 'src/store'
+import { clearError } from 'src/store/errors.slice'
 
-const Notification = observer(() => {
-  const Sim = useContext(SimulatorContext);
-  const t = useT();
+import * as Styles from './notification.styles'
 
-  const errorMessage = Sim.getError();
+const Notification = () => {
+  const dispatch = useDispatch()
+  const errorMessage = useSelector((state:RootState) => state.errors.error)
+  const t = useT()
 
   if (errorMessage === undefined) {
-    return null;
+    return null
+  }
+
+  const handleCloseError = () => {
+    dispatch(clearError())
   }
 
   return (
@@ -24,14 +29,14 @@ const Notification = observer(() => {
       <Alert
         intent="error"
         action={ t("Close") }
-        onClick={ () => Sim.dismissError() }
+        onClick={ handleCloseError }
       >
         <Text style={ Styles.text }>
           { errorMessage }
         </Text>
       </Alert>
     </div>
-  );
-});
+  )
+}
 
-export default Notification;
+export default Notification

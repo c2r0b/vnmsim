@@ -11,4 +11,4 @@ module.exports = async () => withPWA({
   publicRuntimeConfig: {
     TxNativePublicToken: process.env.TX_NATIVE_PUBLIC_TOKEN,
   },
-});
+})

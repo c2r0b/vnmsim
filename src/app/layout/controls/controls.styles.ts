@@ -9,7 +9,7 @@ export const container:React.CSSProperties = {
   display: "flex",
   flexDirection: "row",
   gap: 20
-};
+}
 
 export const controls:React.CSSProperties = {
   paddingTop: 10,
@@ -18,20 +18,20 @@ export const controls:React.CSSProperties = {
   display: "flex",
   flexDirection: "row",
   gap: 5
-};
+}
 
 export const sliderContainer:React.CSSProperties = {
   display: "flex",
   flexDirection: "row",
   gap: 5,
   marginTop: 10
-};
+}
 
 export const sliderLabel = {
   fontSize: 8,
   marginTop: 5
-};
+}
 
 export const slider = {
   width: 100
-};
+}
