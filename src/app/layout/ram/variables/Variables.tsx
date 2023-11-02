@@ -2,7 +2,7 @@ import React from "react"
 import { useT } from '@transifex/react'
 
 import { Add24Filled } from '@fluentui/react-icons'
-import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow } from '@fluentui/react-components'
+import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow, SpinButton } from '@fluentui/react-components'
 
 import { addVariable, setVariable } from "src/store/ram.slice"
 import { useAppDispatch, useAppSelector } from "src/hooks/store"
@@ -27,10 +27,9 @@ export const Variables = (props:IProps) => {
     value: variables[key]
   }))
 
-  const onChange = (key, event) => {
-    const newValue = event.target.value
-    if (newValue === undefined) return
-    dispatch(setVariable({ name: key, value: newValue }))
+  const onChange = (key, value) => {
+    if (value === undefined) return
+    dispatch(setVariable({ name: key, value }))
   }
 
   const handleAddVariable = () => {
@@ -53,12 +52,11 @@ export const Variables = (props:IProps) => {
         </TableCell>
         <TableCell style={ Styles.inputCell }>
           <TableCellLayout>
-            <input
-              type="number"
-              step={ 1 }
+            <SpinButton
+              appearance="underline"
               value={ value }
-              onChange={ (e) => onChange(item.type, e) }
               style={ style }
+              onChange={ (_e, data) => onChange(item.type, data.value) }
             />
           </TableCellLayout>
         </TableCell>
