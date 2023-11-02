@@ -12,6 +12,7 @@ import { tx } from '@transifex/native'
 
 import Split from 'react-split'
 
+import 'src/app/global.css'
 import * as Styles from 'src/app/app.styles'
 
 import Nav from 'src/app/layout/nav/Nav'
@@ -76,7 +77,7 @@ export default (props:IProps) => {
               <Ram ref={ editorRef } />
               <Controls clearEditorHighlight={ clearEditorHighlight } />
             </div>
-            <div style={ Styles.panel }>
+            <div style={ Styles.simPanel }>
               <Sim />
             </div>
           </Split>

@@ -12,7 +12,13 @@ export const panel:React.CSSProperties = {
   width: "100%",
   height: "100%",
   overflow: "hidden",
-  zIndex: 100,
+  zIndex: 100
+}
+
+
+export const simPanel:React.CSSProperties = {
+  ...panel,
+  borderRadius: "20px 0 0 0"
 }
 
 export const sidebar:React.CSSProperties = {
