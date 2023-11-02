@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from 'react'
 
 import { useCookies } from 'react-cookie'
 import { usePathname } from 'next/navigation'
-import { useSelector } from 'react-redux'
 
 import appStyles from 'src/app/app.module.css'
 
@@ -21,7 +20,7 @@ import Ram from 'src/app/layout/ram/Ram'
 import Sim from 'src/app/layout/sim/Sim'
 import Notification from 'src/app/layout/notification/Notification'
 
-import type { RootState } from 'src/store'
+import { useAppSelector } from 'src/hooks/store'
 import { LocaleContext } from 'src/store'
 import EditorRef from 'src/types/editor'
 import { getFluentTheme, setCSSVariables } from 'src/themes/utils'
@@ -41,7 +40,7 @@ interface IProps {
 }
 
 export default (props:IProps) => {
-  const theme = useSelector((state:RootState) => state.theme.name)
+  const theme = useAppSelector((state) => state.theme.name)
   const editorRef = useRef<EditorRef>(null)
   
   const currentLocale = usePathname()?.replace("/", "")
@@ -62,6 +61,7 @@ export default (props:IProps) => {
   return (
     <LocaleContext.Provider value={ props }>
       <FluentProvider theme={ getFluentTheme(theme) }>
+        <Nav />
         <div style={ Styles.container }>
           <Split
             className={ appStyles.split }
@@ -73,7 +73,6 @@ export default (props:IProps) => {
             direction="horizontal"
           >
             <div style={ Styles.panel }>
-              <Nav />
               <Ram ref={ editorRef } />
               <Controls clearEditorHighlight={ clearEditorHighlight } />
             </div>

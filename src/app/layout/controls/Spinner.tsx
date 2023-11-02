@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { Spinner } from '@fluentui/react-components'
-import { useSelector } from 'react-redux'
 import { isSimulatorRunning } from 'src/selectors'
+import { useAppSelector } from 'src/hooks/store'
 
 export default () => {
-	const isRunning = useSelector(isSimulatorRunning)
+	const isRunning = useAppSelector(isSimulatorRunning)
 
 	// display running spinner according to sim status
 	if (!isRunning) {

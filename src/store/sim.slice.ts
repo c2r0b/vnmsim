@@ -1,8 +1,7 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
-import type Sim from '../types/sim'
+import { createSlice } from '@reduxjs/toolkit'
 import { lastStep } from 'src/middleware/execute'
-import { Status } from 'src/types/status'
-import { RootState } from '.'
+
+import type Sim from '../types/sim'
 
 const initialState:Sim = {
   title: 'vnms',
@@ -29,6 +28,10 @@ const simSlice = createSlice({
       state.title = action.payload
     },
     setCreated(state, action) {
+      if (!action.payload) {
+        state.created = new Date().toISOString().slice(0, 10)
+        return
+      }
       state.created = action.payload
     },
     setCodeLine(state, action) {

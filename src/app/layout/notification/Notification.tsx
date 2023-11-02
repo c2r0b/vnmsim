@@ -1,19 +1,18 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { useT } from '@transifex/react'
 
 import { Alert } from '@fluentui/react-components/unstable'
 import { Text } from '@fluentui/react-components'
 
-import { RootState } from 'src/store'
 import { clearError } from 'src/store/errors.slice'
+import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
 import * as Styles from './notification.styles'
 
 const Notification = () => {
-  const dispatch = useDispatch()
-  const errorMessage = useSelector((state:RootState) => state.errors.error)
+  const dispatch = useAppDispatch()
+  const errorMessage = useAppSelector((state) => state.errors.error)
   const t = useT()
 
   if (errorMessage === undefined) {

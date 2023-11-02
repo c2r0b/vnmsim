@@ -1,11 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { T } from '@transifex/react'
 
 import { Button, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, DialogTrigger, Table, TableBody, TableCell, TableRow } from '@fluentui/react-components'
 import { ArrowRotateClockwise24Filled } from '@fluentui/react-icons'
 
-import { RootState } from 'src/store'
+import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { clearStats } from 'src/store/stats.slice'
 
 import * as Styles from './stats.styles'
@@ -21,8 +20,8 @@ interface IProps {
 }
 
 const Stats = (props:IProps) => {
-  const dispatch = useDispatch()
-  const stats = useSelector((state:RootState) => state.stats)
+  const dispatch = useAppDispatch()
+  const stats = useAppSelector((state) => state.stats)
 
   const items:Array<IItem> = Object.entries(stats).map(([key, value], i) => ({
     type: key,

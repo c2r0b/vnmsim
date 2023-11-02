@@ -4,14 +4,14 @@ import { useRouter } from 'next/navigation'
 import { T } from '@transifex/react'
 import { LocaleContext } from 'src/store/locale.context'
 import { useCookies } from 'react-cookie'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Label, useId, Button, Select } from '@fluentui/react-components'
 import { Settings24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from '@fluentui/react-icons'
   
+import { useAppDispatch, useAppSelector } from 'src/hooks/store'
+
 import * as Styles from './settings.styles'
 import { setTheme } from 'src/store/theme.slice'
-import { RootState } from 'src/store'
 
 const themeOptions = [
   {
@@ -37,8 +37,8 @@ interface IProps {
 }
 
 export default (props:IProps) => {
-  const theme = useSelector((state:RootState) => state.theme.name)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+  const theme = useAppSelector((state) => state.theme.name)
   
   const Locale = useContext(LocaleContext)
 

@@ -1,33 +1,26 @@
-import React, { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-
+import React from "react"
 import { useT } from '@transifex/react'
 
 import { Add24Filled } from '@fluentui/react-icons'
-
 import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow } from '@fluentui/react-components'
+
+import { addVariable, setVariable } from "src/store/ram.slice"
+import { useAppDispatch, useAppSelector } from "src/hooks/store"
 
 import * as RamStyles from '../ram.styles'
 import * as Styles from './variables.styles'
-import { RootState } from "src/store"
-import { addVariable, setVariable } from "src/store/ram.slice"
-
-const mainVariables = ['X', 'Y', 'Z', 'W']
 
 interface IProps {
   focusedVar?: string
 }
 
 export const Variables = (props:IProps) => {
-  const dispatch = useDispatch()
-  const interval = useSelector((state:RootState) => state.sim.interval)
-  const variables = useSelector((state:RootState) => state.ram.variables)
+  const dispatch = useAppDispatch()
+  const variables = useAppSelector((state) => state.ram.variables)
 
   const t = useT()
 
-  // generate T variables
   const allVariables = Object.keys(variables)
-
   const items = allVariables.map((key, i) => ({
     key: i.toString(),
     type: key,
@@ -79,18 +72,20 @@ export const Variables = (props:IProps) => {
         <TableBody>
           { items.map(displayVariable) }
           <TableRow>
-            <Tooltip
-              content={ t("Add T variable") }
-              relationship="label"
-              withArrow
-            >
-              <Button
-                aria-label={ t("Add T variable") }
-                icon={ <Add24Filled /> }
-                onClick={ handleAddVariable }
-                appearance="subtle"
-              />
-            </Tooltip>
+            <TableCell>
+              <Tooltip
+                content={ t("Add T variable") }
+                relationship="label"
+                withArrow
+              >
+                <Button
+                  aria-label={ t("Add T variable") }
+                  icon={ <Add24Filled /> }
+                  onClick={ handleAddVariable }
+                  appearance="subtle"
+                />
+              </Tooltip>
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

@@ -4,4 +4,5 @@ export enum Status {
   SINGLE_STEP = 2,
   SINGLE_ITERATION = 3,
   PAUSE = 4,
+  INSTANT = 5,
 }

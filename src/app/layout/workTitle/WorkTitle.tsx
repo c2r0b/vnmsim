@@ -1,20 +1,18 @@
 import React, { useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
 import { T } from '@transifex/react'
 
 import { Text } from '@fluentui/react-components'
 import ContentEditable from 'react-contenteditable'
 
-import { RootState } from 'src/store'
 import { setTitle } from 'src/store/sim.slice'
+import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
 import * as Styles from './workTitle.styles'
 
 const WorkTitle = () => {
-  const dispatch = useDispatch()
-  const title = useSelector((state:RootState) => state.sim.title)
-  const created = useSelector((state:RootState) => state.sim.created)
+  const dispatch = useAppDispatch()
+  const title = useAppSelector((state) => state.sim.title)
+  const created = useAppSelector((state) => state.sim.created)
 
   const workTitleRef = useRef<HTMLElement | null>(null)
 

@@ -1,12 +1,13 @@
 import React, { memo } from 'react'
-import { useDispatch } from 'react-redux'
 import { T, useT } from '@transifex/react'
 
 import { Card, CardHeader, Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from '@fluentui/react-components'
 import { ArrowDownload24Filled } from '@fluentui/react-icons'
 
+import { load } from 'src/middleware/load'
+import { useAppDispatch } from 'src/hooks/store'
+
 import { samples } from './samples.list'
-import { setCode } from 'src/store/ram.slice'
 
 import * as Styles from './samples.styles'
 import * as SAMPLES from '../samples'
@@ -17,25 +18,16 @@ interface IProps {
 }
 
 const Samples = memo((props:IProps) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const t = useT()
 
   const samplesList = samples.map(s => {
     const onClick = () => {
-      const obj = { ...SAMPLES[s.key].input }
-      
-      // set code
-      dispatch(setCode(obj.code))
-      delete obj.code
-
-      // set title and date
-      obj.title = s.label
-      obj.created = new Date().toISOString().slice(0, 10)
-
-      // TODO: set simulator status object
-      //Sim.updateSim(obj)
-
-      // close panel
+      const obj = {
+        ...SAMPLES[s.key].input,
+        title: s.label,
+      }
+      dispatch(load(obj))
       props.onDismiss()
     }
 

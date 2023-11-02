@@ -1,11 +1,10 @@
 import React, { memo } from 'react'
-import { useDispatch } from 'react-redux'
 import { T } from '@transifex/react'
 
 import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from '@fluentui/react-components'
 
-import { AppThunkDispatch } from 'src/store'
 import { reset } from 'src/middleware/reset'
+import { useAppDispatch } from 'src/hooks/store'
 
 interface IProps {
 	show: boolean
@@ -13,7 +12,7 @@ interface IProps {
 }
 
 export default memo((props:IProps) => {
-	const dispatch = useDispatch<AppThunkDispatch>()
+	const dispatch = useAppDispatch()
 
 	const confirm = () => {
 		dispatch(reset)

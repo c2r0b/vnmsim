@@ -3,6 +3,7 @@ export const container:React.CSSProperties = {
   left: 0,
   bottom: 0,
   right: 0,
+  paddingTop: 5,
   paddingRight: 15,
   backgroundColor: "var(--white)",
   zIndex: 900,
@@ -24,14 +25,9 @@ export const sliderContainer:React.CSSProperties = {
   display: "flex",
   flexDirection: "row",
   gap: 5,
-  marginTop: 10
-}
-
-export const sliderLabel = {
-  fontSize: 8,
-  marginTop: 5
+  marginTop: -3
 }
 
 export const slider = {
-  width: 100
+  width: 150
 }

@@ -1,7 +1,8 @@
 export const container:React.CSSProperties = {
-  position: "absolute",
+  position: "fixed",
   top: 0,
   left: 0,
+  right: 0,
   height: 50,
   width: "100%",
   paddingTop: 0,
@@ -10,7 +11,7 @@ export const container:React.CSSProperties = {
   display: "flex",
   flexDirection: "row",
   gap: 28,
-  zIndex: 100
+  zIndex: 9999
 }
 
 export const openInput = {
@@ -18,6 +19,6 @@ export const openInput = {
 }
 
 export const menuItem = {
-  width: 32,
-  minWidth: 0
+  minWidth: 0,
+  fontWeight: 400
 }

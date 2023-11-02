@@ -1,11 +1,11 @@
-import { calculate, setAcc, setE1, setE2, setOp } from "src/store/alu.slice"
-import { setIrCmd, setIrLoc } from "src/store/ir.slice"
-import { incrementPc, setPc } from "src/store/pc.slice"
-import { setVariable } from "src/store/ram.slice"
-import { clearFocus, clearFocusEl, incrementStep, setCodeLine, setFocusCell, setFocusEl, setFocusVar, setStatus, setStep, stopSim } from "src/store/sim.slice"
-import { incrementAluCalculation, incrementCellAccess, incrementExecutedStep, incrementPerformedJmp, incrementPerformedJmz, incrementVariableAccess } from "src/store/stats.slice"
+import { calculate, setAcc, setE1, setE2, setOp } from 'src/store/alu.slice'
+import { setIrCmd, setIrLoc } from 'src/store/ir.slice'
+import { incrementPc, setPc } from 'src/store/pc.slice'
+import { setVariable } from 'src/store/ram.slice'
+import { clearFocus, clearFocusEl, incrementStep, setCodeLine, setFocusCell, setFocusEl, setFocusVar, setStatus, setStep, stopSim } from 'src/store/sim.slice'
+import { incrementAluCalculation, incrementCellAccess, incrementExecutedStep, incrementPerformedJmp, incrementPerformedJmz, incrementVariableAccess } from 'src/store/stats.slice'
 
-import { Steps } from "src/types/steps"
+import { Steps } from 'src/types/steps'
 export const lastStep = Object.keys(Steps).length / 2 - 1
 
 const commands = {
@@ -149,7 +149,7 @@ export const execute = (dispatch, getState) => {
       }
       else {
         if (sim.interval) dispatch(setFocusVar(ir.loc))
-        dispatch(setE2(sim.variables[ir.loc] || 0))
+        dispatch(setE2(ram.variables[ir.loc] || 0))
 
         // variable
         if (ir.loc.match(/[TXYZW]/)) {

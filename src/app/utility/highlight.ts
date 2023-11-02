@@ -1,5 +1,6 @@
 import { Decoration, EditorView } from '@codemirror/view'
 import { StateEffect, StateField } from '@codemirror/state'
+import { ReactCodeMirrorRef } from '@uiw/react-codemirror'
 
 export const addLineHighlight = StateEffect.define()
 
@@ -27,4 +28,18 @@ export const lineHighlightField = StateField.define({
 
 export const clearHighlight = (editor) => {
   editor.view?.dispatch({ effects: addLineHighlight.of(null) })
+}
+
+export const focusCell = (lineNo: number, editor: ReactCodeMirrorRef) => {
+  if (!editor?.view?.state) return
+  // if out of bounds, return
+  if (lineNo < 0 || lineNo > editor.view.state.doc.lines) {
+    clearHighlight(editor)
+    return
+  }
+
+  if (editor.view && editor.view.state.doc.lines > lineNo) {
+    const docPosition = editor.view.state.doc.line(lineNo + 1).from
+    editor.view.dispatch({ effects: addLineHighlight.of(docPosition) })
+  }
 }

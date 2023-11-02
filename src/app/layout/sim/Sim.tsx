@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useT } from '@transifex/react'
 
 import { Input, SpinButton, Text, Tooltip } from '@fluentui/react-components'
@@ -16,23 +15,23 @@ import * as DataBus from './DataBus'
 import * as AddressesBus from './AddressesBus'
 
 import * as Styles from './sim.styles'
-import { AppThunkDispatch, RootState } from 'src/store'
 import { clearFocus, setStatus } from 'src/store/sim.slice'
 import { setPc, setPcStep } from 'src/store/pc.slice'
 import { isSimulatorRunning } from 'src/selectors'
+import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
 import { Status } from 'src/types/status'
 import { immediate } from 'src/middleware/immediate'
 
 export default () => {
-  const dispatch = useDispatch<AppThunkDispatch>()
+  const dispatch = useAppDispatch()
   
-  const isRunning = useSelector(isSimulatorRunning)
+  const isRunning = useAppSelector(isSimulatorRunning)
 
-  const sim = useSelector((state:RootState) => state.sim)
-  const alu = useSelector((state:RootState) => state.alu)
-  const ir = useSelector((state:RootState) => state.ir)
-  const pc = useSelector((state:RootState) => state.pc)
+  const sim = useAppSelector((state) => state.sim)
+  const alu = useAppSelector((state) => state.alu)
+  const ir = useAppSelector((state) => state.ir)
+  const pc = useAppSelector((state) => state.pc)
 
   const t = useT()
 

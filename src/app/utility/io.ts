@@ -1,9 +1,7 @@
-export const save = ({ sim, code, title, date }) => {
-  sim.code = code
-
+export const save = ({ obj, title, date }) => {
   // construct output file
   let data = "data:text/jsoncharset=utf-8,"
-  data += encodeURIComponent(JSON.stringify(sim))
+  data += encodeURIComponent(JSON.stringify(obj))
 
   // get file name as user defined
   const fileName = title + "_" + date + ".json"
@@ -128,5 +126,20 @@ export const vnspToJson = (file) => {
       W: parseInt(variables[3]),
       ...tVariables
     }
+  }
+}
+
+export const storeToObj = ({ sim, ram, alu, ir, pc }) => {
+  return {
+    ...sim,
+    code: ram.code,
+    variables: ram.variables,
+    alu: {
+      ...alu,
+      acc: undefined
+    },
+    acc: alu.acc,
+    ir,
+    pc
   }
 }
