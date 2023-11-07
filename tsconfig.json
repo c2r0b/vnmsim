@@ -13,7 +13,13 @@
     ],
     "paths": {
       "src": [
-        "/src/"
+        "/src/",
+      ],
+      "src-wasm": [
+        "/src-wasm/",
+      ],
+      "public": [
+        "/public/"
       ]
     },
     "removeComments": true,

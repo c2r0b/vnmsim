@@ -6,6 +6,7 @@ export const container:React.CSSProperties = {
   paddingTop: 5,
   paddingRight: 15,
   backgroundColor: "var(--white)",
+  borderTop: "1px solid var(--lightBorder)",
   zIndex: 900,
   display: "flex",
   flexDirection: "row",

@@ -1,6 +1,6 @@
 export const container:React.CSSProperties = {
   position: "fixed",
-  top: 50,
+  top: 60,
   left: 0,
   right: 0,
   bottom: 0,
@@ -15,10 +15,9 @@ export const panel:React.CSSProperties = {
   zIndex: 100
 }
 
-
 export const simPanel:React.CSSProperties = {
   ...panel,
-  borderRadius: "20px 0 0 0"
+  borderLeft: "2px solid var(--lightBorder)",
 }
 
 export const sidebar:React.CSSProperties = {

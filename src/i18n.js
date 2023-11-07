@@ -3,7 +3,7 @@
 import { tx, normalizeLocale } from '@transifex/native'
 import getConfig from 'next/config'
 
-const { publicRuntimeConfig } = getConfig()
+const config = getConfig()
 
 /**
  * Used by SSR to pass translation to browser
@@ -13,13 +13,13 @@ const { publicRuntimeConfig } = getConfig()
  */
 export async function getServerSideTranslations({ locale, locales }) {
   tx.init({
-    token: publicRuntimeConfig.TxNativePublicToken,
+    token: config?.publicRuntimeConfig?.TxNativePublicToken,
   })
   
   // ensure that nextjs locale is in the Transifex format,
   // for example, de-de -> de_DE
   const txLocale = normalizeLocale(locale)
-
+  
   // load translations over-the-air
   await tx.fetchTranslations(txLocale)
   return {

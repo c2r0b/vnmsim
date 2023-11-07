@@ -1,5 +1,6 @@
 const withPWA = require('next-pwa')({
-  dest: 'public'
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
 })
 
 module.exports = async () => withPWA({
@@ -10,5 +11,12 @@ module.exports = async () => withPWA({
   },
   publicRuntimeConfig: {
     TxNativePublicToken: process.env.TX_NATIVE_PUBLIC_TOKEN,
+  },
+  webpack: function (config, _options) {
+    config.experiments = {
+      layers: true,
+      asyncWebAssembly: true,
+    }
+    return config
   },
 })

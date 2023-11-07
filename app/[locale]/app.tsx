@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react'
 
 import { useCookies } from 'react-cookie'
 import { usePathname } from 'next/navigation'
+import { setClientSideTranslations } from 'src/i18n'
 
 import appStyles from 'src/app/app.module.css'
 
@@ -38,6 +39,7 @@ interface ILanguage {
 interface IProps {
   locale: string
   languages: ILanguage[]
+  translations: any
 }
 
 export default (props:IProps) => {
@@ -45,8 +47,8 @@ export default (props:IProps) => {
   const editorRef = useRef<EditorRef>(null)
   
   const currentLocale = usePathname()?.replace("/", "")
-
   const [cookies] = useCookies(['NEXT_LOCALE'])
+  setClientSideTranslations(props)
 
   // redirect to the saved locale route if it's different from the current one
   if (cookies.NEXT_LOCALE && cookies.NEXT_LOCALE !== currentLocale) {

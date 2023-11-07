@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-
+import Image from 'next/image'
 import { useT } from '@transifex/react'
-
 import { Tooltip, Button } from '@fluentui/react-components'
 import { Microscope24Regular, Beaker24Regular, CalendarStar24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from '@fluentui/react-icons'
 
@@ -12,6 +11,7 @@ import Settings from '../../modals/settings'
 import Stats from '../../modals/stats'
 
 import { readFile, save, storeToObj } from '../../utility/io'
+import logoImg from 'public/images/logo.png'
 
 import { setError } from 'src/store/errors.slice'
 import { isSimulatorRunning } from 'src/selectors'
@@ -167,6 +167,11 @@ const Nav = () => {
       />
 
       <div style={ Styles.container }>
+        <Image
+          src={ logoImg }
+          style={ Styles.logo }
+          alt="VNMS"
+        />
         { menuItems }
       </div>
     </>

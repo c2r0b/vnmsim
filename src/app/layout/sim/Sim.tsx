@@ -21,7 +21,7 @@ import { isSimulatorRunning } from 'src/selectors'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
 import { Status } from 'src/types/status'
-import { immediate } from 'src/middleware/immediate'
+import { instant } from 'src/middleware/instant'
 
 export default () => {
   const dispatch = useAppDispatch()
@@ -60,7 +60,7 @@ export default () => {
   // run entire program
   const continousExecution = () => {
     if (sim.interval === 0) {
-      dispatch(immediate)
+      dispatch(instant)
     }
     else {
       setIntervalId(setInterval(() => {
