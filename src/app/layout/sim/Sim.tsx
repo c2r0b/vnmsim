@@ -19,9 +19,9 @@ import { clearFocus, setStatus } from 'src/store/sim.slice'
 import { setPc, setPcStep } from 'src/store/pc.slice'
 import { isSimulatorRunning } from 'src/selectors'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
+import { instant } from 'src/middleware/instant'
 
 import { Status } from 'src/types/status'
-import { instant } from 'src/middleware/instant'
 
 export default () => {
   const dispatch = useAppDispatch()
@@ -59,19 +59,18 @@ export default () => {
 
   // run entire program
   const continousExecution = () => {
-    if (sim.interval === 0) {
-      dispatch(instant)
-    }
-    else {
-      setIntervalId(setInterval(() => {
-        runSimulatorCicle(true)
-      }, sim.interval))
-      return () => clearInterval(intervalId)
-    }
+    setIntervalId(setInterval(() => {
+      runSimulatorCicle(true)
+    }, sim.interval))
+    return () => clearInterval(intervalId)
   }
 
   useEffect(() => {
     switch (sim.status) {
+      case Status.INSTANT: { // no-delay exectutin
+        dispatch(instant)
+        break
+      }
       case Status.STOP: { // stop
         dispatch(clearFocus())
         clearInterval(intervalId)
@@ -112,7 +111,7 @@ export default () => {
         preventPan={ (e, x, y) => preventPan(e, x, y, refsWithoutPan) }
         style={ styles.container }
       >
-        <DataBus.main />
+        <DataBus.Main />
         <AddressesBus.main />
         <div style={ styles.pc.container }>
           <AddressesBus.pc />
@@ -174,7 +173,7 @@ export default () => {
           />
         </div>
         <div style={ styles.acc.container }>
-          <DataBus.acc />
+          <DataBus.Acc />
           <Tooltip
             content={ t("Accumulator") }
             relationship="label"

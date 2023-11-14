@@ -21,7 +21,8 @@ export const openInput = {
 
 export const menuItem = {
   minWidth: 0,
-  fontWeight: 400,
+  fontWeight: 500,
+  fontSize: 11,
 }
 
 export const logo = {

@@ -4,7 +4,7 @@ import { T, useT } from '@transifex/react'
 import { Card, CardHeader, Button, Caption1, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Text } from '@fluentui/react-components'
 import { ArrowDownload24Filled } from '@fluentui/react-icons'
 
-import { load } from 'src/middleware/load'
+import { loadFromJson } from 'src/middleware/load'
 import { useAppDispatch } from 'src/hooks/store'
 
 import { samples } from './samples.list'
@@ -27,7 +27,7 @@ const Samples = memo((props:IProps) => {
         ...SAMPLES[s.key].input,
         title: s.label,
       }
-      dispatch(load(obj))
+      dispatch(loadFromJson(obj))
       props.onDismiss()
     }
 

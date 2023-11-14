@@ -1,3 +1,4 @@
+import { getTVariableIndexFromName, isTVariable } from 'src/app/utility/tVariables'
 import { calculate, setAcc, setE1, setE2, setOp } from 'src/store/alu.slice'
 import { setIrCmd, setIrLoc } from 'src/store/ir.slice'
 import { incrementPc, setPc } from 'src/store/pc.slice'
@@ -5,7 +6,9 @@ import { setVariable } from 'src/store/ram.slice'
 import { clearFocus, clearFocusEl, incrementStep, setCodeLine, setFocusCell, setFocusEl, setFocusVar, setStatus, setStep, stopSim } from 'src/store/sim.slice'
 import { incrementAluCalculation, incrementCellAccess, incrementExecutedStep, incrementPerformedJmp, incrementPerformedJmz, incrementVariableAccess } from 'src/store/stats.slice'
 
+import { Status } from 'src/types/status'
 import { Steps } from 'src/types/steps'
+
 export const lastStep = Object.keys(Steps).length / 2 - 1
 
 const commands = {
@@ -25,7 +28,7 @@ export const execute = (dispatch, getState) => {
 
   // stop if RAM out of bounds
   if (ram.code.length < sim.codeLine + 1) {
-    dispatch(setStatus(0))
+    dispatch(setStatus(Status.STOP))
     return
   }
 
@@ -52,7 +55,7 @@ export const execute = (dispatch, getState) => {
       if (pc.val < 0) {
         dispatch(setPc(0))
         dispatch(setStep(lastStep))
-        dispatch(setStatus(4))
+        dispatch(setStatus(Status.PAUSE))
       }
       break
     }
@@ -149,7 +152,16 @@ export const execute = (dispatch, getState) => {
       }
       else {
         if (sim.interval) dispatch(setFocusVar(ir.loc))
-        dispatch(setE2(ram.variables[ir.loc] || 0))
+        
+        // get variable value
+        let value;
+        if (isTVariable(ir.loc)) {
+          value = ram.variables.T[getTVariableIndexFromName(ir.loc)]
+        }
+        else {
+          value = ram.variables[ir.loc]
+        }
+        dispatch(setE2(value || 0))
 
         // variable
         if (ir.loc.match(/[TXYZW]/)) {

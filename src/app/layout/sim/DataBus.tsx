@@ -2,7 +2,7 @@ import React from 'react'
 
 import { dataBus } from './sim.styles'
 
-export const main = () => (
+export const Main = () => (
 	<svg style={ dataBus }>
 		<rect x="0" y="0" width="2" height="480"></rect>
 		<rect x="0" y="0" width="580" height="2"></rect>
@@ -18,7 +18,7 @@ export const main = () => (
 	</svg>
 )
 
-export const acc = () => (
+export const Acc = () => (
 	<svg style={ dataBus }>
 		<rect x="120" y="0" width="160" height="2"></rect>
 		<rect x="280" y="0" width="2" height="160"></rect>

@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import type { TypeFromWasm } from '../types/fromWasm'
 import { lastStep } from 'src/middleware/execute'
 
-import type Sim from '../types/sim'
+import type { Sim } from 'src-wasm/pkg'
 
-const initialState:Sim = {
+const initialState:TypeFromWasm<Sim> = {
   title: 'vnms',
   created: new Date().toISOString().slice(0, 10),
   codeLine: 0,

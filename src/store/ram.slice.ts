@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type Ram from '../types/ram'
+import type { TypeFromWasm } from '../types/fromWasm'
+import type { Ram } from 'src-wasm/pkg'
 
-const initialState:Ram = {
+const initialState:TypeFromWasm<Ram> = {
   code: '',
-  lastTVariableIndex: 1,
   variables: {
     X: 0,
     Y: 0,
     Z: 0,
     W: 0,
-    T1: 0
+    T: new Int32Array(0),
   }
 }
 
@@ -26,9 +26,11 @@ const ramSlice = createSlice({
     setVariable(state, action) {
       state.variables[action.payload.name] = action.payload.value
     },
-    addVariable(state) {
-      state.lastTVariableIndex += 1
-      state.variables[`T${state.lastTVariableIndex}`] = 0
+    setTVariable(state, action) {
+      state.variables.T[action.payload.index] = action.payload.value
+    },
+    addTVariable(state) {
+      state.variables.T = new Int32Array([...state.variables.T, 0])
     },
   }
 })
@@ -37,6 +39,7 @@ export const {
   clearRam,
   setCode,
   setVariable,
-  addVariable,
+  setTVariable,
+  addTVariable,
 } = ramSlice.actions
 export default ramSlice.reducer

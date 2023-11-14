@@ -4,8 +4,9 @@ import { useT } from '@transifex/react'
 import { Add24Filled } from '@fluentui/react-icons'
 import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow, SpinButton } from '@fluentui/react-components'
 
-import { addVariable, setVariable } from "src/store/ram.slice"
+import { addTVariable, setVariable, setTVariable } from "src/store/ram.slice"
 import { useAppDispatch, useAppSelector } from "src/hooks/store"
+import { getTVariableIndexFromName, getTVariableNameFromIndex, isTVariable } from "src/app/utility/tVariables"
 
 import * as RamStyles from '../ram.styles'
 import * as Styles from './variables.styles'
@@ -20,20 +21,31 @@ export const Variables = (props:IProps) => {
 
   const t = useT()
 
-  const allVariables = Object.keys(variables)
-  const items = allVariables.map((key, i) => ({
-    key: i.toString(),
-    type: key,
-    value: variables[key]
-  }))
+  // create an array of all variables keys to be displayed
+  const allVariables = Object.keys(variables).filter((key) => key !== "T")
+  variables.T.forEach((_key, i) => allVariables.push(getTVariableNameFromIndex(i)))
+
+  // create an array of objects to be displayed as variables
+  const items = allVariables.map((key, i) => {
+    const value = isTVariable(key) ? variables.T[getTVariableIndexFromName(key)] : variables[key]
+    return {
+      key: i.toString(),
+      type: key,
+      value
+    }
+  })
 
   const onChange = (key, value) => {
     if (value === undefined) return
+    if (isTVariable(key)) {
+      dispatch(setTVariable({ index: getTVariableIndexFromName, value }))
+      return
+    }
     dispatch(setVariable({ name: key, value }))
   }
 
   const handleAddVariable = () => {
-    dispatch(addVariable())
+    dispatch(addTVariable())
   }
 
   const displayVariable = (item) => {

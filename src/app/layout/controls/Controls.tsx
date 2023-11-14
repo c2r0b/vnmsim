@@ -1,17 +1,17 @@
 import React from 'react'
 import { useT } from '@transifex/react'
 
-import { Tooltip, Button, Slider, Label, useId } from '@fluentui/react-components'
+import { Tooltip, Button, Slider } from '@fluentui/react-components'
 import { ArrowStepInRight24Regular, SkipForwardTab24Regular, CircleHintHalfVertical24Regular, Pause24Regular, Play24Regular, Stop24Regular } from '@fluentui/react-icons'
 
 import { setCodeLine, setStatus, setStep, setInterval } from 'src/store/sim.slice'
 import { setPc } from 'src/store/pc.slice'
-import { Status } from 'src/types/status'
 import { isSimulatorRunning } from 'src/selectors'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
-import Spinner from './Spinner'
+import { Status } from 'src/types/status'
 
+import Spinner from './Spinner'
 import * as Styles from './controls.styles'
 
 const INTERVAL = 25
@@ -75,7 +75,7 @@ export default ({ clearEditorHighlight }) => {
     // if running restore interval
     if (isRunning) {
       const oldStatus = simStatus
-      dispatch(setStatus(0))
+      dispatch(setStatus(Status.STOP))
       setTimeout(() => {
         dispatch(setStatus(oldStatus))
       })

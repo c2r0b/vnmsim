@@ -19,7 +19,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
 import * as Styles from './nav.styles'
 import NewConfirm from './NewConfirm'
-import { load } from 'src/middleware/load'
+import { loadFromJson } from 'src/middleware/load'
 
 const acceptedFileTypes = 'application/json,.vnsp'
 
@@ -43,7 +43,7 @@ const Nav = () => {
     }
 
     const onSuccess = (obj) => {
-      dispatch(load(obj))
+      dispatch(loadFromJson(obj))
     }
 
     readFile(input, onSuccess, onError)

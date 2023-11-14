@@ -24,8 +24,9 @@ import Notification from 'src/app/layout/notification/Notification'
 
 import { useAppSelector } from 'src/hooks/store'
 import { LocaleContext } from 'src/store'
-import EditorRef from 'src/types/editor'
 import { getFluentTheme, setCSSVariables } from 'src/themes/utils'
+
+import type EditorRef from 'src/types/editor'
 
 tx.init({
   token: process.env.TX_NATIVE_PUBLIC_TOKEN,
