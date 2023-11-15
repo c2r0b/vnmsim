@@ -103,7 +103,7 @@ pub struct Stats {
 
 #[wasm_bindgen(getter_with_clone)]
 #[derive(Serialize, Deserialize, Clone)]
-pub struct ExecuteParams {
+pub struct SimulatorState {
     pub sim: Sim,
     pub ram: Ram,
     pub pc: Pc,

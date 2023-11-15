@@ -1,3 +1,5 @@
+import { SimulatorState } from '../../types/simulatorState'
+
 export const save = ({ obj, title, date }) => {
   // construct output file
   let data = "data:text/jsoncharset=utf-8,"
@@ -25,29 +27,30 @@ export const readFile = (input, onSuccess, onError) => {
     const file = evt.target?.result
     if (!file) return
     let obj:any
+    let result:SimulatorState = new SimulatorState()
 
     // retrocompatibility
     if (input[0]?.name?.split(".")?.slice(-1)[0] == "vnsp") {
-      obj = vnspToJson(file)
+      result.fromVNSP(file as string)
     }
 
     // check correct file type
     if (input.type == "application/json") {
-      obj = JSON.parse(file.toString())
+      obj = JSON.parse(file as string)
       obj.focus.el = stylesRetrocompatibility(obj.focus.el)
+      result.fromJSON(obj)
     }
     else {
       onError()
       return
     }
 
-    onSuccess(obj)
+    onSuccess(result)
   }
 
   // on invalid file
   reader.onerror = () => {
     onError()
-    return
   }
 }
 
@@ -71,75 +74,4 @@ export const stylesRetrocompatibility = (el) => {
       break
   }
   return el
-}
-
-// retrocompatibility with versions that used .vnsp files
-export const vnspToJson = (file) => {
-  // split input file lines
-  file = file.split(/\n+/)
-
-  // code for memory cells (removing NOP used as placeholders)
-  const nop_cmds = new RegExp("NOP", "g")
-  const code = file[5].split(",").join("\fieldn").replace(nop_cmds, "")
-
-  // X-Y-Z-W variables
-  const variables = file[8].split(',')
-
-  // T1-40 variables
-  const tVal = file[11].split(',')
-  tVal.pop()
-  let tVariables = {}
-  for (let v in tVal) {
-    tVariables["T" + (parseInt(v) + 1)] =  parseInt(tVal[v])
-  }
-
-  return {
-    title: "Untitled",
-    created: new Date().toISOString().slice(0, 10),
-    code,
-    codeLine: 0,
-    step: 0,
-    status: 0,
-    alu: {
-      e1: '',
-      e2: '',
-      op: ''
-    },
-    acc: 0,
-    pc: {
-      val: 0,
-      step: 1,
-    },
-    ir: {
-      cmd: '',
-      loc: ''
-    },
-    focus: {
-      el: "ir",
-      cell: -1,
-      var: -1
-    },
-    variables: {
-      X: parseInt(variables[0]),
-      Y: parseInt(variables[1]),
-      Z: parseInt(variables[2]),
-      W: parseInt(variables[3]),
-      ...tVariables
-    }
-  }
-}
-
-export const storeToObj = ({ sim, ram, alu, ir, pc }) => {
-  return {
-    ...sim,
-    code: ram.code,
-    variables: ram.variables,
-    alu: {
-      ...alu,
-      acc: undefined
-    },
-    acc: alu.acc,
-    ir,
-    pc
-  }
 }

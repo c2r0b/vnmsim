@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
 import type { Ir } from 'src-wasm/pkg'
 
-const initialState:TypeFromWasm<Ir> = {
+export const initialState:TypeFromWasm<Ir> = {
   cmd: '',
   loc: ''
 }

@@ -10,16 +10,17 @@ import Samples from '../../modals/samples'
 import Settings from '../../modals/settings'
 import Stats from '../../modals/stats'
 
-import { readFile, save, storeToObj } from '../../utility/io'
+import { readFile, save } from '../../utility/io'
 import logoImg from 'public/images/logo.png'
 
 import { setError } from 'src/store/errors.slice'
 import { isSimulatorRunning } from 'src/selectors'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
+import { SimulatorState } from 'src/types/simulatorState'
+import { load } from 'src/middleware/load'
 
 import * as Styles from './nav.styles'
 import NewConfirm from './NewConfirm'
-import { loadFromJson } from 'src/middleware/load'
 
 const acceptedFileTypes = 'application/json,.vnsp'
 
@@ -42,15 +43,15 @@ const Nav = () => {
       dispatch(setError(t("Unable to load the selected file")))
     }
 
-    const onSuccess = (obj) => {
-      dispatch(loadFromJson(obj))
+    const onSuccess = (obj:SimulatorState) => {
+      dispatch(load(obj.toData()))
     }
 
     readFile(input, onSuccess, onError)
   }
 
   const onSave = () => save({
-    obj: storeToObj({ sim, ram, ir, pc, alu }),
+    obj: (new SimulatorState({ sim, ram, ir, pc, alu })).toJSON(),
     title: sim.title,
     date: sim.created
   })

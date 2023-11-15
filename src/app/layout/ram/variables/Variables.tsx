@@ -4,7 +4,7 @@ import { useT } from '@transifex/react'
 import { Add24Filled } from '@fluentui/react-icons'
 import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow, SpinButton } from '@fluentui/react-components'
 
-import { addTVariable, setVariable, setTVariable } from "src/store/ram.slice"
+import { addTVariable, setVariable } from "src/store/ram.slice"
 import { useAppDispatch, useAppSelector } from "src/hooks/store"
 import { getTVariableIndexFromName, getTVariableNameFromIndex, isTVariable } from "src/app/utility/tVariables"
 
@@ -35,13 +35,8 @@ export const Variables = (props:IProps) => {
     }
   })
 
-  const onChange = (key, value) => {
-    if (value === undefined) return
-    if (isTVariable(key)) {
-      dispatch(setTVariable({ index: getTVariableIndexFromName, value }))
-      return
-    }
-    dispatch(setVariable({ name: key, value }))
+  const onChange = (key, data) => {
+    dispatch(setVariable({ name: key, value: data.displayValue }))
   }
 
   const handleAddVariable = () => {
@@ -49,7 +44,6 @@ export const Variables = (props:IProps) => {
   }
 
   const displayVariable = (item) => {
-    const value = variables[item.type]
     let style = Styles.varSpin
 
     // change style on focus variable
@@ -66,9 +60,9 @@ export const Variables = (props:IProps) => {
           <TableCellLayout>
             <SpinButton
               appearance="underline"
-              value={ value }
+              value={ item.value }
               style={ style }
-              onChange={ (_e, data) => onChange(item.type, data.value) }
+              onChange={ (_e, data) => onChange(item.type, data) }
             />
           </TableCellLayout>
         </TableCell>

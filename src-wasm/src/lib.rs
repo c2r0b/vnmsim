@@ -4,14 +4,14 @@ mod types;
 use enum_iterator::Sequence;
 use serde_wasm_bindgen::{from_value, to_value};
 use wasm_bindgen::prelude::*;
-use types::ExecuteParams;
+use types::SimulatorState;
 
 #[wasm_bindgen]
 extern "C" {
     fn alert(s: &str);
 }
 
-pub fn execute_step(input:ExecuteParams) -> ExecuteParams {
+pub fn execute_step(input:SimulatorState) -> SimulatorState {
     let mut params = input.clone();
     
     // increment step
@@ -20,7 +20,7 @@ pub fn execute_step(input:ExecuteParams) -> ExecuteParams {
     params
 }
 
-pub fn execute_line(input:ExecuteParams) -> ExecuteParams {
+pub fn execute_line(input:SimulatorState) -> SimulatorState {
     let mut params = input.clone();
     let code_length: i32 = params.ram.code.split("\n").count() as i32;
 
@@ -44,7 +44,7 @@ pub fn execute_line(input:ExecuteParams) -> ExecuteParams {
 
 #[wasm_bindgen]
 pub fn solve(input:JsValue) -> Result<JsValue, JsValue> {
-    let mut params: ExecuteParams = from_value(input)?;
+    let mut params: SimulatorState = from_value(input)?;
 
     // run every line until stopped
     loop {
@@ -53,6 +53,6 @@ pub fn solve(input:JsValue) -> Result<JsValue, JsValue> {
             break;
         }
     }
-
+    
     Ok(to_value(&params)?)
 }

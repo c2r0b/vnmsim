@@ -147,7 +147,7 @@ export const execute = (dispatch, getState) => {
 
       // parse data portion (instruction register loc)
       // #n
-      if (ir.loc.indexOf('#') != -1) {
+      if (ir.loc.startsWith('#')) {
         dispatch(setE2(+ir.loc.replace('#','')))
       }
       else {

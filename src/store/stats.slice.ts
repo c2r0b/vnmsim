@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
 import type { Stats } from 'src-wasm/pkg'
 
-const initialState:TypeFromWasm<Stats> = {
+export const initialState:TypeFromWasm<Stats> = {
   executed_step: 0,
   alu_calculation: 0,
   variable_access: 0,
