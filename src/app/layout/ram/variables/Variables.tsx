@@ -6,7 +6,7 @@ import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow
 
 import { addTVariable, setVariable } from "src/store/ram.slice"
 import { useAppDispatch, useAppSelector } from "src/hooks/store"
-import { getTVariableIndexFromName, getTVariableNameFromIndex, isTVariable } from "src/app/utility/tVariables"
+import { getVariables } from "src/selectors/getVariables"
 
 import * as RamStyles from '../ram.styles'
 import * as Styles from './variables.styles'
@@ -17,23 +17,19 @@ interface IProps {
 
 export const Variables = (props:IProps) => {
   const dispatch = useAppDispatch()
-  const variables = useAppSelector((state) => state.ram.variables)
+  const variables = useAppSelector(getVariables)
 
   const t = useT()
 
   // create an array of all variables keys to be displayed
-  const allVariables = Object.keys(variables).filter((key) => key !== "T")
-  variables.T.forEach((_key, i) => allVariables.push(getTVariableNameFromIndex(i)))
-
+  const allVariables = Object.keys(variables)
+  
   // create an array of objects to be displayed as variables
-  const items = allVariables.map((key, i) => {
-    const value = isTVariable(key) ? variables.T[getTVariableIndexFromName(key)] : variables[key]
-    return {
-      key: i.toString(),
-      type: key,
-      value
-    }
-  })
+  const items = allVariables.map((key, i) => ({
+    key: i.toString(),
+    type: key,
+    value: variables[key]
+  }))
 
   const onChange = (key, data) => {
     dispatch(setVariable({ name: key, value: data.displayValue }))
