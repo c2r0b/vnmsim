@@ -36,13 +36,13 @@ const simSlice = createSlice({
       state.created = action.payload
     },
     setCodeLine(state, action) {
-      state.codeLine = action.payload
+      state.codeLine = action.payload ?? initialState.codeLine
     },
     incrementCodeLine(state) {
       state.codeLine += 1
     },
     setStep(state, action) {
-      state.step = action.payload
+      state.step = action.payload ?? initialState.step
     },
     incrementStep(state) {
       state.step += 1
@@ -64,13 +64,13 @@ const simSlice = createSlice({
       }
     },
     setStatus(state, action) {
-      state.status = action.payload
+      state.status = action.payload ?? initialState.status
     },
     setInterval(state, action) {
       state.interval = action.payload
     },
     setFocusCell(state, action) {
-      state.focus.cell = action.payload
+      state.focus.cell = action.payload ?? initialState.focus.cell
     },
     setFocusVar(state, action) {
       state.focus.var = action.payload

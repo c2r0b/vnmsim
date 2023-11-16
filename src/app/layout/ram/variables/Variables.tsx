@@ -6,7 +6,7 @@ import { Tooltip, Button, Table, TableBody, TableCell, TableCellLayout, TableRow
 
 import { addTVariable, setVariable } from "src/store/ram.slice"
 import { useAppDispatch, useAppSelector } from "src/hooks/store"
-import { getVariables } from "src/selectors/getVariables"
+import { getVariables } from "src/selectors"
 
 import * as RamStyles from '../ram.styles'
 import * as Styles from './variables.styles'

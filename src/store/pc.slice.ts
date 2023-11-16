@@ -18,10 +18,10 @@ const pcSlice = createSlice({
       state.val += state.step
     },
     setPc(state, action) {
-      state.val = action.payload
+      state.val = action.payload ?? initialState.val
     },
     setPcStep(state, action) {
-      state.step = action.payload
+      state.step = action.payload ?? initialState.step
     },
   }
 })

@@ -10,6 +10,7 @@ export const container:React.CSSProperties = {
   zIndex: 900,
   display: "flex",
   flexDirection: "row",
+  justifyContent: "space-between",
   gap: 20
 }
 
@@ -26,7 +27,11 @@ export const sliderContainer:React.CSSProperties = {
   display: "flex",
   flexDirection: "row",
   gap: 5,
-  marginTop: -3
+  marginTop: -5
+}
+
+export const sliderIcon:React.CSSProperties = {
+  marginTop: 17
 }
 
 export const slider = {

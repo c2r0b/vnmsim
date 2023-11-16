@@ -31,7 +31,9 @@ export class SimulatorState implements SimulatorStateData  {
 
   fromJSON(obj: ExportJSON):void {
     this.alu = {
-      ...obj.alu,
+      e1: +obj.alu.e1,
+      e2: +obj.alu.e2,
+      op: obj.alu.op,
       acc: obj.acc,
     }
 
@@ -102,8 +104,8 @@ export class SimulatorState implements SimulatorStateData  {
     }
 
     this.alu = {
-      e1: '',
-      e2: '',
+      e1: 0,
+      e2: 0,
       op: '',
       acc: 0,
     }

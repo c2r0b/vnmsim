@@ -1,4 +1,4 @@
-import { EditorState, ReactCodeMirrorRef } from '@uiw/react-codemirror'
+import { ReactCodeMirrorRef } from '@uiw/react-codemirror'
 
 export const editorOptions = {
     mode: "vnm",

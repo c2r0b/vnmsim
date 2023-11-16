@@ -11,7 +11,7 @@ export const editorMode = {
     if (stream.match(/\s[1-9]\d*(\s*)$/)) {
       return "string"
     }
-    if (stream.match(/\s(x|y|z|w|(t[1-9]\d*))(\s*)$/i)) {
+    if (stream.match(/\s(x|y|z|w|(t[0-9]\d*))(\s*)$/i)) {
       return "operator"
     }
     if (stream.match(/^\/\/[\s\S]*$/)) {

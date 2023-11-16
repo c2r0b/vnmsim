@@ -3,8 +3,8 @@ import type { TypeFromWasm } from '../types/fromWasm'
 import type { Alu } from 'src-wasm/pkg'
 
 export const initialState:TypeFromWasm<Alu> = {
-  e1: '',
-  e2: '',
+  e1: 0,
+  e2: 0,
   op: '',
   acc: 0,
 }
@@ -17,33 +17,33 @@ const aluSlice = createSlice({
       return initialState
     },
     setE1(state, action) {
-      state.e1 = action.payload
+      state.e1 = action.payload ?? initialState.e1
     },
     setE2(state, action) {
-      state.e2 = action.payload
+      state.e2 = action.payload ?? initialState.e2
     },
     setOp(state, action) {
-      state.op = action.payload
+      state.op = action.payload ?? initialState.op
     },
     setAcc(state, action) {
-      state.acc = action.payload
+      state.acc = action.payload ?? initialState.acc
     },
     calculate(state) {
       switch (state.op) {
         case '+': {
-          state.acc = parseInt(state.e1) + parseInt(state.e2)
+          state.acc = state.e1 + state.e2
           break
         }
         case '-': {
-          state.acc = parseInt(state.e1) - parseInt(state.e2)
+          state.acc = state.e1 - state.e2
           break
         }
         case '*': {
-          state.acc = parseInt(state.e1) * parseInt(state.e2)
+          state.acc = state.e1 * state.e2
           break
         }
         case '/': {
-          state.acc = parseInt(state.e1) / parseInt(state.e2)
+          state.acc = state.e1 / state.e2
           break
         }
       }

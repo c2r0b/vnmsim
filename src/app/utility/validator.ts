@@ -20,7 +20,7 @@ export const validator = (t, lastIndex: number, getLine: Function) => {
     // jumps
     || t.match(/^(jmp|jmz)\s\d+\s*$/i) && +t.split(' ')[1] < lastIndex
     // cmds with variable
-    || t.match(/^(lod|add|sub|mul|div|sto)\s(x|y|z|w|(t([1-9]\d*)))\s*$/i)
+    || t.match(/^(lod|add|sub|mul|div|sto)\s(x|y|z|w|(t([0-9]\d*)))\s*$/i)
     // cmds with numeric value
     || t.match(/^(lod|add|sub|mul|div)\s#-?\d+\s*$/i)
     // NOP and HLT with no parameters

@@ -6,13 +6,14 @@ export const getVariables = createSelector(
     (state:RootState) => state.ram.variables,
     status => {
       let variables:any = {
-        ...status,
-        T: undefined
+        ...status
       }
 
-      variables.T.forEach((v, i) => {
+      status.T.forEach((v, i) => {
         variables[getTVariableNameFromIndex(i)] = v
       })
+
+      delete variables.T
 
       return variables
     }

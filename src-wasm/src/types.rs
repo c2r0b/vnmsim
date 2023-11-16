@@ -1,7 +1,6 @@
 use serde::{Serialize, Deserialize};
 use wasm_bindgen::prelude::*;
-use enum_iterator::Sequence;
-use std::{collections::HashMap, vec};
+use std::vec;
 
 #[wasm_bindgen(getter_with_clone)]
 #[derive(Serialize, Deserialize, Clone)]
@@ -19,7 +18,7 @@ pub struct Sim  {
     pub codeLine: i32,
     pub step: i32,
     pub status: i32,
-    pub interval: i32,
+    pub interval: Option<i32>,
     pub focus: SimFocus
 }
 
@@ -50,13 +49,45 @@ impl Variables {
     }
 
     // Method to get a T variable
-    pub fn get_t(&self, index: usize) -> Option<&i32> {
-        self.T.get(index)
+    pub fn get_t(&self, index: usize) -> Option<i32> {
+        self.T.get(index).cloned()
     }
 
     // Method to set a T variable
     pub fn set_t(&mut self, index: usize, value: i32) {
+        // if index is out of bounds, add new T variables until index is reached
+        while index >= self.T.len() {
+            self.add_t();
+        }
         self.T[index] = value;
+    }
+
+    // Method to get a variable
+    pub fn get(&self, var: String) -> Option<i32> {
+        match var.as_str() {
+            "X" => self.X,
+            "Y" => self.Y,
+            "Z" => self.Z,
+            "W" => self.W,
+            _ => {
+                let t = var.replace("T","").parse::<usize>().unwrap();
+                self.get_t(t)
+            }
+        }
+    }
+
+    // Method to set a variable
+    pub fn set(&mut self, var: String, value: i32) {
+        match var.as_str() {
+            "X" => self.X = Some(value),
+            "Y" => self.Y = Some(value),
+            "Z" => self.Z = Some(value),
+            "W" => self.W = Some(value),
+            _ => {
+                let t = var.replace("T","").parse::<usize>().unwrap();
+                self.set_t(t, value);
+            }
+        }
     }
 }
 
@@ -77,8 +108,8 @@ pub struct Ir {
 #[wasm_bindgen(getter_with_clone)]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Alu {
-    pub e1: String,
-    pub e2: String,
+    pub e1: i32,
+    pub e2: i32,
     pub op: String,
     pub acc: i32
 }
@@ -110,20 +141,6 @@ pub struct SimulatorState {
     pub ir: Ir,
     pub alu: Alu,
     pub stats: Stats
-}
-
-#[derive(Sequence)]
-pub enum Steps {
-    Stop = 0,
-    Startup = 1,
-    IrCmd = 2,
-    IrLoc = 3,
-    PcStep = 4,
-    PcValue = 5,
-    IrDecoder = 6,
-    AluOperation = 7,
-    AluOperand = 8,
-    AluResult = 9,
 }
 
 pub enum Status {
