@@ -5,7 +5,7 @@ import { initialState as aluInitialState } from '../store/alu.slice'
 import { initialState as pcInitialState } from '../store/pc.slice'
 import { initialState as statsInitialState } from '../store/stats.slice'
 
-import type { SimulatorState as WasmSimulatorState } from 'src-wasm/pkg'
+import type { SimulatorState as WasmSimulatorState } from 'src-wasm/pkg/src_wasm'
 import type { TypeFromWasm } from './fromWasm'
 import type { ExportJSON } from './exportJSON'
 import { isTVariable } from 'src/app/utility/tVariables'

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
-import type { Ir } from 'src-wasm/pkg'
+import type { Ir } from 'src-wasm/pkg/src_wasm'
 
 export const initialState:TypeFromWasm<Ir> = {
   cmd: '',
