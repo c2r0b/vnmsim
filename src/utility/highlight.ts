@@ -2,7 +2,7 @@ import { Decoration, EditorView } from '@codemirror/view'
 import { StateEffect, StateField } from '@codemirror/state'
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror'
 
-export const addLineHighlight = StateEffect.define()
+export const addLineHighlight = StateEffect.define<null|number>()
 
 const lineHighlightMark = Decoration.line({
   attributes: {style: 'background-color: #f9c55b'},

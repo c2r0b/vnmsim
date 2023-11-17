@@ -1,4 +1,4 @@
-import { getTVariableIndexFromName, isTVariable } from 'src/app/utility/tVariables'
+import { getTVariableIndexFromName, isTVariable } from 'src/utility/tVariables'
 import { calculate, setAcc, setE1, setE2, setOp } from 'src/store/alu.slice'
 import { setIrCmd, setIrLoc } from 'src/store/ir.slice'
 import { incrementPc, setPc } from 'src/store/pc.slice'

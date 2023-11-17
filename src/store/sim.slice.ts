@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
 import { lastStep } from 'src/middleware/execute'
 
-import type { Sim } from 'src-wasm/pkg/src_wasm'
+import type { Sim } from 'src-wasm/pkg'
 
 export const initialState:TypeFromWasm<Sim> = {
   title: 'vnms',

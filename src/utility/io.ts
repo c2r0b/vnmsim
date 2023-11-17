@@ -1,4 +1,4 @@
-import { SimulatorState } from '../../types/simulatorState'
+import { SimulatorState } from '../types/simulatorState'
 
 export const save = ({ obj, title, date }) => {
   // construct output file

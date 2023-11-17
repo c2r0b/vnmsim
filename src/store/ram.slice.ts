@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
-import type { Ram } from 'src-wasm/pkg/src_wasm'
-import { getTVariableIndexFromName, isTVariable } from 'src/app/utility/tVariables'
+import type { Ram } from 'src-wasm/pkg'
+import { getTVariableIndexFromName, isTVariable } from 'src/utility/tVariables'
 
 export const initialState:TypeFromWasm<Ram> = {
   code: '',

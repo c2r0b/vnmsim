@@ -7,7 +7,7 @@ import { PanZoom } from 'react-easy-panzoom'
 
 import WorkTitle from '../workTitle/WorkTitle'
 
-import { execute } from '../../../middleware/execute'
+import { execute } from '../../middleware/execute'
 import { strToObj, mergeDeep } from '../../utility/objects'
 
 import { preventPan } from './preventPan'

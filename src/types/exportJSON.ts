@@ -1,4 +1,4 @@
-import type { Sim, Ram, Variables, Pc, Ir, Alu } from 'src-wasm/pkg/src_wasm'
+import type { Sim, Ram, Variables, Pc, Ir, Alu } from 'src-wasm/pkg'
 import type { TypeFromWasm } from './fromWasm'
 
 export type ExportJSON = TypeFromWasm<Sim> & {

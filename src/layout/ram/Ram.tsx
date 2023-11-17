@@ -17,14 +17,14 @@ import { editorLinter } from '../../utility/linter'
 import { Variables } from './variables/Variables'
 
 import * as Styles from './ram.styles'
-import { clearHighlight, focusCell, lineHighlightField } from 'src/app/utility/highlight'
-import { lineNumbersExtension } from 'src/app/utility/gutter'
+import { clearHighlight, focusCell, lineHighlightField } from 'src/utility/highlight'
+import { lineNumbersExtension } from 'src/utility/gutter'
 
 import { setCode } from 'src/store/ram.slice'
 import { setError, clearError } from 'src/store/errors.slice'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
-import { editorOptions, updateCode } from 'src/app/utility/editor'
+import { editorOptions, updateCode } from 'src/utility/editor'
 import { getNormalizedThemeName } from 'src/themes/utils'
 
 const editorTheme = new Compartment()

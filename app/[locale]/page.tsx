@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 }
 
 // get the locales information from the API
-export async function getData(locale) {
+async function getData(locale) {
   const languages = (await tx.getLanguages())
     .filter((language) => language.code !== 'en')
 

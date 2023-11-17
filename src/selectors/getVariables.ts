@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { getTVariableNameFromIndex } from 'src/app/utility/tVariables'
+import { getTVariableNameFromIndex } from 'src/utility/tVariables'
 import { RootState } from 'src/store'
 
 export const getVariables = createSelector(

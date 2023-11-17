@@ -1,4 +1,4 @@
-import __wbg_init, { solve } from 'src-wasm/pkg/src_wasm'
+import __wbg_init, { solve } from 'src-wasm/pkg'
 import { invoke } from '@tauri-apps/api'
 import { listen } from '@tauri-apps/api/event'
 

@@ -6,21 +6,21 @@ import { useCookies } from 'react-cookie'
 import { usePathname } from 'next/navigation'
 import { setClientSideTranslations } from 'src/i18n'
 
-import appStyles from 'src/app/app.module.css'
+import appStyles from 'src/app.module.css'
 
 import { FluentProvider } from '@fluentui/react-components'
 import { tx } from '@transifex/native'
 
 import Split from 'react-split'
 
-import 'src/app/global.css'
-import * as Styles from 'src/app/app.styles'
+import 'src/global.css'
+import * as Styles from 'src/app.styles'
 
-import Nav from 'src/app/layout/nav/Nav'
-import Controls from 'src/app/layout/controls/Controls'
-import Ram from 'src/app/layout/ram/Ram'
-import Sim from 'src/app/layout/sim/Sim'
-import Notification from 'src/app/layout/notification/Notification'
+import Nav from 'src/layout/nav/Nav'
+import Controls from 'src/layout/controls/Controls'
+import Ram from 'src/layout/ram/Ram'
+import Sim from 'src/layout/sim/Sim'
+import Notification from 'src/layout/notification/Notification'
 
 import { useAppSelector } from 'src/hooks/store'
 import { LocaleContext } from 'src/store'
