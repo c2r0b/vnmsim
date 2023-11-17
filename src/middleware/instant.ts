@@ -11,14 +11,14 @@ import type { SimulatorStateData } from '../types/simulatorState'
 // run the program without any delay
 export const instant = (dispatch, getState) => {
   const { sim, ram, pc, ir, alu, stats } = getState()
-  console.log("Running instant")
+  const params: SimulatorStateData = { sim, ram, pc, ir, alu, stats }
   
   // on desktop use Rust bindings
   if ('__TAURI__' in window) {
     console.log("Running tauri")
-    invoke('execute', { sim, ram, pc, ir, alu })
+    invoke('execute', params)
     listen('execution-complete', (event) => {
-      console.log(event.payload)
+      dispatch(load(event.payload as SimulatorStateData))
     })
   }
   // on browser use WebAssembly
@@ -27,7 +27,6 @@ export const instant = (dispatch, getState) => {
       let response
       try {
         await __wbg_init()
-        const params: SimulatorStateData = { sim, ram, pc, ir, alu, stats }
         response = solve(params)
       } catch (e) {
         console.error('Error initializing WebAssembly module:', e)
