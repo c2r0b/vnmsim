@@ -3,7 +3,7 @@ mod types;
 
 use serde_wasm_bindgen::{from_value, to_value};
 use wasm_bindgen::prelude::*;
-use types::SimulatorState;
+pub use types::SimulatorState;
 
 #[wasm_bindgen]
 extern "C" {
@@ -150,10 +150,8 @@ pub fn execute_line(input:SimulatorState) -> SimulatorState {
     params
 }
 
-#[wasm_bindgen]
-pub fn solve(input:JsValue) -> Result<JsValue, JsValue> {
-    let mut params: SimulatorState = from_value(input)?;
-
+pub fn execute(input:SimulatorState) -> SimulatorState {
+    let mut params = input.clone();
     // run every line until stopped
     loop {
         params = execute_line(params.clone());
@@ -163,6 +161,12 @@ pub fn solve(input:JsValue) -> Result<JsValue, JsValue> {
             break;
         }
     }
+    params
+}
 
+#[wasm_bindgen]
+pub fn solve(input:JsValue) -> Result<JsValue, JsValue> {
+    let mut params: SimulatorState = from_value(input)?;
+    params = execute(params);
     Ok(to_value(&params)?)
 }

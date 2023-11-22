@@ -16,8 +16,11 @@ export const instant = (dispatch, getState) => {
   // on desktop use Rust bindings
   if ('__TAURI__' in window) {
     console.log("Running tauri")
-    invoke('execute', params)
+    invoke('execute', { input: params })
+      .then(console.log)
+      .catch(console.error)
     listen('execution-complete', (event) => {
+      console.log("Execution complete", event.payload)
       dispatch(load(event.payload as SimulatorStateData))
     })
   }

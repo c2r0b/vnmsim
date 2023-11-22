@@ -4,7 +4,8 @@
   "description": "A simulator of the Von Neumann machine",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run build:wasm && next dev",
+    "dev": "npm run build:wasm && npm run dev:next",
+    "dev:next": "next dev",
     "build": "./build.sh",
     "build:next": "next build",
     "build:wasm": "cd ./src-wasm && wasm-pack build --target web && cd ../",
