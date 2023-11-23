@@ -110,7 +110,7 @@ pub fn execute_line(input:SimulatorState) -> SimulatorState {
 
     // parse data portion (instruction register loc)
     if loc.starts_with("#") { // #n
-        params.alu.e2 = loc.replace("#","").parse::<i32>().unwrap();
+        params.alu.e2 = loc.replace("#","").parse::<i64>().unwrap();
     }
     else { // X, Y, Z, W, T1, T2, ...
         params.alu.e2 = params.ram.variables.get(loc).unwrap();

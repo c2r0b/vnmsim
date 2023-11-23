@@ -25,11 +25,11 @@ pub struct Sim  {
 #[wasm_bindgen(getter_with_clone)]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Variables {
-    pub Y: Option<i32>,
-    pub X: Option<i32>,
-    pub Z: Option<i32>,
-    pub W: Option<i32>,
-    pub T: Vec<i32>,
+    pub Y: Option<i64>,
+    pub X: Option<i64>,
+    pub Z: Option<i64>,
+    pub W: Option<i64>,
+    pub T: Vec<i64>,
 }
 impl Variables {
     // Initialize the struct with empty values
@@ -49,12 +49,12 @@ impl Variables {
     }
 
     // Method to get a T variable
-    pub fn get_t(&self, index: usize) -> Option<i32> {
+    pub fn get_t(&self, index: usize) -> Option<i64> {
         self.T.get(index).cloned()
     }
 
     // Method to set a T variable
-    pub fn set_t(&mut self, index: usize, value: i32) {
+    pub fn set_t(&mut self, index: usize, value: i64) {
         // if index is out of bounds, add new T variables until index is reached
         while index >= self.T.len() {
             self.add_t();
@@ -63,7 +63,7 @@ impl Variables {
     }
 
     // Method to get a variable
-    pub fn get(&self, var: String) -> Option<i32> {
+    pub fn get(&self, var: String) -> Option<i64> {
         match var.as_str() {
             "X" => self.X,
             "Y" => self.Y,
@@ -77,7 +77,7 @@ impl Variables {
     }
 
     // Method to set a variable
-    pub fn set(&mut self, var: String, value: i32) {
+    pub fn set(&mut self, var: String, value: i64) {
         match var.as_str() {
             "X" => self.X = Some(value),
             "Y" => self.Y = Some(value),
@@ -108,10 +108,10 @@ pub struct Ir {
 #[wasm_bindgen(getter_with_clone)]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Alu {
-    pub e1: i32,
-    pub e2: i32,
+    pub e1: i64,
+    pub e2: i64,
     pub op: String,
-    pub acc: i32
+    pub acc: i64
 }
 
 #[wasm_bindgen]

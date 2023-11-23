@@ -56,7 +56,7 @@ export const Variables = (props:IProps) => {
           <TableCellLayout>
             <SpinButton
               appearance="underline"
-              value={ item.value }
+              value={ item.value.toString() }
               style={ style }
               onChange={ (_e, data) => onChange(item.type, data) }
             />

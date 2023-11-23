@@ -1,5 +1,6 @@
 import { AnyAction, ThunkDispatch, configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistCombineReducers, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+import createBigIntTransform from 'redux-persist-transform-bigint'
 import storage from 'redux-persist/lib/storage'
 
 import pcReducer from './pc.slice'
@@ -14,6 +15,9 @@ import errorsReducer from './errors.slice'
 const persistConfig = {
   key: 'root',
   storage,
+  transforms: [createBigIntTransform({
+    whitelist: ['alu', 'ram']
+  })]
 }
 
 const reducers = {

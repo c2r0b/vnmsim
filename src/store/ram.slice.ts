@@ -6,11 +6,11 @@ import { getTVariableIndexFromName, isTVariable } from 'src/utility/tVariables'
 export const initialState:TypeFromWasm<Ram> = {
   code: '',
   variables: {
-    X: 0,
-    Y: 0,
-    Z: 0,
-    W: 0,
-    T: [0],
+    X: BigInt(0),
+    Y: BigInt(0),
+    Z: BigInt(0),
+    W: BigInt(0),
+    T: [BigInt(0)],
   }
 }
 
@@ -26,14 +26,14 @@ const ramSlice = createSlice({
     },
     setVariable(state, action) {
       if (isTVariable(action.payload.name)) {
-        state.variables.T[getTVariableIndexFromName(action.payload.name)] = +action.payload.value
+        state.variables.T[getTVariableIndexFromName(action.payload.name)] = BigInt(+action.payload.value)
       }
       else {
         state.variables[action.payload.name] = +action.payload.value
       }
     },
     addTVariable(state) {
-      state.variables.T.push(0)
+      state.variables.T.push(BigInt(0))
     },
   }
 })

@@ -3,10 +3,10 @@ import type { TypeFromWasm } from '../types/fromWasm'
 import type { Alu } from 'src-wasm/pkg'
 
 export const initialState:TypeFromWasm<Alu> = {
-  e1: 0,
-  e2: 0,
+  e1: BigInt(0),
+  e2: BigInt(0),
   op: '',
-  acc: 0,
+  acc: BigInt(0),
 }
 
 const aluSlice = createSlice({
@@ -17,16 +17,16 @@ const aluSlice = createSlice({
       return initialState
     },
     setE1(state, action) {
-      state.e1 = action.payload ?? initialState.e1
+      state.e1 = BigInt(action.payload ?? initialState.e1)
     },
     setE2(state, action) {
-      state.e2 = action.payload ?? initialState.e2
+      state.e2 = BigInt(action.payload ?? initialState.e2)
     },
     setOp(state, action) {
       state.op = action.payload ?? initialState.op
     },
     setAcc(state, action) {
-      state.acc = action.payload ?? initialState.acc
+      state.acc = BigInt(action.payload ?? initialState.acc)
     },
     calculate(state) {
       switch (state.op) {
