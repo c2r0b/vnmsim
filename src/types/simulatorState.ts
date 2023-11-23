@@ -31,10 +31,10 @@ export class SimulatorState implements SimulatorStateData  {
 
   fromJSON(obj: ExportJSON):void {
     this.alu = {
-      e1: +obj.alu.e1,
-      e2: +obj.alu.e2,
+      e1: BigInt(obj.alu.e1),
+      e2: BigInt(obj.alu.e2),
       op: obj.alu.op,
-      acc: obj.acc,
+      acc: BigInt(obj.acc),
     }
 
     this.ir = obj.ir
@@ -44,13 +44,13 @@ export class SimulatorState implements SimulatorStateData  {
     this.ram = {
       code: obj.code,
       variables: {
-        X: obj.variables.X,
-        Y: obj.variables.Y,
-        Z: obj.variables.Z,
-        W: obj.variables.W,
+        X: BigInt(obj.variables.X ?? 0),
+        Y: BigInt(obj.variables.Y ?? 0),
+        Z: BigInt(obj.variables.Z ?? 0),
+        W: BigInt(obj.variables.W ?? 0),
         T: Object.entries(obj.variables)
           .filter(([key]) => isTVariable(key))
-          .map(([_key, value]) => value)
+          .map(([_key, value]) => BigInt(value.toString()))
       }
     }
 
@@ -95,19 +95,19 @@ export class SimulatorState implements SimulatorStateData  {
     this.ram = {
       code,
       variables: {
-        X: parseInt(variables[0]),
-        Y: parseInt(variables[1]),
-        Z: parseInt(variables[2]),
-        W: parseInt(variables[3]),
-        T: tVariables,
+        X: BigInt(variables[0]),
+        Y: BigInt(variables[1]),
+        Z: BigInt(variables[2]),
+        W: BigInt(variables[3]),
+        T: tVariables.map((v) => BigInt(v)),
       }
     }
 
     this.alu = {
-      e1: 0,
-      e2: 0,
+      e1: BigInt(0),
+      e2: BigInt(0),
       op: '',
-      acc: 0,
+      acc: BigInt(0),
     }
 
     this.pc = {
