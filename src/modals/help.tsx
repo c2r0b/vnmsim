@@ -33,23 +33,23 @@ const Help = memo((props:IProps) => {
             <table style={ Styles.table }>
               <tbody>
                 <tr>
-                  <td style={ Styles.cell }><b>LOD</b> <i>var/cell</i></td>
+                  <td style={ Styles.cell }><b>LOD</b> <i>var</i></td>
                   <td style={ Styles.cell }><b>LOD</b> <i>#num</i></td>
-                  <td style={ Styles.cell }><b>STO</b> <i>var/cell</i></td>
+                  <td style={ Styles.cell }><b>STO</b> <i>var</i></td>
                   <td style={ Styles.cell }><b>JMZ</b> <i>cell</i></td>
                   <td style={ Styles.cell }><b>JMP</b> <i>cell</i></td>
                 </tr>
                 <tr>
-                  <td style={ Styles.cell }><b>ADD</b> <i>var/cell</i></td>
+                  <td style={ Styles.cell }><b>ADD</b> <i>var</i></td>
                   <td style={ Styles.cell }><b>ADD</b> <i>#num</i></td>
-                  <td style={ Styles.cell }><b>SUB</b> <i>var/cell</i></td>
+                  <td style={ Styles.cell }><b>SUB</b> <i>var</i></td>
                   <td style={ Styles.cell }><b>SUB</b> <i>#num</i></td>
                   <td style={ Styles.cell }><b>NOP</b></td>
                 </tr>
                 <tr>
-                  <td style={ Styles.cell }><b>MUL</b> <i>var/cell</i></td>
+                  <td style={ Styles.cell }><b>MUL</b> <i>var</i></td>
                   <td style={ Styles.cell }><b>MUL</b> <i>#num</i></td>
-                  <td style={ Styles.cell }><b>DIV</b> <i>var/cell</i></td>
+                  <td style={ Styles.cell }><b>DIV</b> <i>var</i></td>
                   <td style={ Styles.cell }><b>DIV</b> <i>#num</i></td>
                   <td style={ Styles.cell }><b>HLT</b></td>
                 </tr>
