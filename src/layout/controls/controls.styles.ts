@@ -1,39 +1,47 @@
-export const container:React.CSSProperties = {
-  position: "absolute",
-  left: 0,
-  bottom: 0,
-  right: 0,
-  paddingTop: 5,
-  paddingRight: 15,
-  backgroundColor: "var(--white)",
-  borderTop: "1px solid var(--lightBorder)",
-  zIndex: 900,
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  gap: 20
-}
+import styled from 'styled-components'
+import { Slider as FluentUISlider } from '@fluentui/react-components'
+import { AnimalRabbit24Regular, AnimalTurtle24Regular } from '@fluentui/react-icons'
 
-export const controls:React.CSSProperties = {
-  paddingTop: 10,
-  paddingLeft: 15,
-  paddingBottom: 15,
-  display: "flex",
-  flexDirection: "row",
-  gap: 5
-}
+export const Container = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding-top: 5px;
+  padding-right: 15px;
+  background-color: var(--white);
+  border-top: 1px solid var(--lightBorder);
+  z-index: 900;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+`;
 
-export const sliderContainer:React.CSSProperties = {
-  display: "flex",
-  flexDirection: "row",
-  gap: 5,
-  marginTop: -5
-}
+export const Controls = styled.div`
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+`;
 
-export const sliderIcon:React.CSSProperties = {
-  marginTop: 17
-}
+export const SliderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: -5px;
+`;
 
-export const slider = {
-  width: 150
-}
+export const SliderSlowIcon = styled(AnimalTurtle24Regular)`
+  margin-top: 17px;
+`;
+
+export const SliderFastIcon = styled(AnimalRabbit24Regular)`
+  margin-top: 17px;
+`;
+
+export const Slider = styled(FluentUISlider)`
+  width: 150px;
+`;

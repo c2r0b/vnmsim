@@ -1,27 +1,25 @@
-export const container:React.CSSProperties = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 62,
-  width: "100%",
-  zIndex: 100
-}
+import styled from "styled-components"
 
-export const ramHalf:React.CSSProperties = {
-  overflowY: "auto"
-}
+export const Container = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 62px);
+  width: 100%;
+  z-index: 100;
+`;
 
-export const verticalHalf:React.CSSProperties = {
-  position: "relative",
-  width: "100%",
-  overflow: "auto"
-}
+export const RamHalf = styled.div`
+  overflow-y: auto;
+`;
 
-export const row:React.CSSProperties = {
-  border: 0
-}
+export const VerticalHalf = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: auto;
+`;
 
-export const cell:React.CSSProperties = {
-  fontSize: 11
-}
+export const Cell = styled.div`
+  font-size: 11px;
+`;

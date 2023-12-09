@@ -1,21 +1,12 @@
-mod utils;
-mod types;
-
-use serde_wasm_bindgen::{from_value, to_value};
-use wasm_bindgen::prelude::*;
-pub use types::SimulatorState;
-
-#[wasm_bindgen]
-extern "C" {
-    fn alert(s: &str);
-}
+pub mod types;
+pub use types::{SimulatorState, Status};
 
 pub fn execute_line(input:SimulatorState) -> SimulatorState {
     let mut params = input.clone();
     let code_length: i32 = params.ram.code.split("\n").count() as i32;
 
     if code_length < params.sim.codeLine {
-        params.sim.status = types::Status::Stop as i32;
+        params.sim.status = Status::Stop as i32;
         return params
     }
     
@@ -24,7 +15,7 @@ pub fn execute_line(input:SimulatorState) -> SimulatorState {
         Some(line) => line,
         None => {
             // Handle the case where the line doesn't exist
-            params.sim.status = types::Status::Stop as i32;
+            params.sim.status = Status::Stop as i32;
             return params;
         }
     };
@@ -56,7 +47,7 @@ pub fn execute_line(input:SimulatorState) -> SimulatorState {
         },
         "HLT" => {
             params.pc.val = 0;
-            params.sim.status = types::Status::Stop as i32;
+            params.sim.status = Status::Stop as i32;
             return params
         },
         "JMP" => {
@@ -155,7 +146,7 @@ pub fn execute(input:SimulatorState) -> SimulatorState {
     // run every line until stopped
     loop {
         params = execute_line(params.clone());
-        if params.sim.status == types::Status::Stop as i32 {
+        if params.sim.status == Status::Stop as i32 {
             params.pc.val = 0;
             params.sim.codeLine = 0;
             break;
@@ -164,7 +155,14 @@ pub fn execute(input:SimulatorState) -> SimulatorState {
     params
 }
 
-#[wasm_bindgen]
+#[cfg(feature = "wasm")]
+use serde_wasm_bindgen::{from_value, to_value};
+
+#[cfg(feature = "wasm")]
+use wasm_bindgen::prelude::*;
+
+#[cfg(feature = "wasm")]
+#[cfg_attr(feature = "wasm", wasm_bindgen)]
 pub fn solve(input:JsValue) -> Result<JsValue, JsValue> {
     let mut params: SimulatorState = from_value(input)?;
     params = execute(params);

@@ -1,12 +1,20 @@
-import __wbg_init, { solve } from 'src-wasm/pkg'
+import __wbg_init, { solve } from 'src-tauri/shared/pkg'
 import { invoke } from '@tauri-apps/api'
-import { listen } from '@tauri-apps/api/event'
 
 import { load } from './load'
 import { setStatus } from 'src/store/sim.slice'
 
 import { Status } from 'src/types/status'
 import type { SimulatorStateData } from '../types/simulatorState'
+
+const serialize = (obj) => {
+  return JSON.stringify(obj, (_key, value) => {
+    if (typeof value === 'bigint') {
+      return value.toString()
+    }
+    return value
+  })
+}
 
 // run the program without any delay
 export const instant = (dispatch, getState) => {
@@ -15,14 +23,15 @@ export const instant = (dispatch, getState) => {
   
   // on desktop use Rust bindings
   if ('__TAURI__' in window) {
-    console.log("Running tauri")
-    invoke('execute', { input: params })
-      .then(console.log)
-      .catch(console.error)
-    listen('execution-complete', (event) => {
-      console.log("Execution complete", event.payload)
-      dispatch(load(event.payload as SimulatorStateData))
-    })
+    const serializedData = serialize(params)
+    invoke('execute', { input: serializedData })
+      .then(response => {
+        dispatch(load(response as SimulatorStateData))
+      })
+      .catch(() => {
+        alert("An error occured trying to run Instant. Please make sure the desktop app is up-to-date.")
+        dispatch(setStatus(Status.STOP))
+      })
   }
   // on browser use WebAssembly
   else {

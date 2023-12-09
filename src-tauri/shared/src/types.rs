@@ -1,34 +1,43 @@
-use serde::{Serialize, Deserialize};
-use wasm_bindgen::prelude::*;
+use serde::{Deserialize, Serialize};
+use serde_with::{serde_as, DisplayFromStr};
 use std::vec;
 
-#[wasm_bindgen(getter_with_clone)]
+#[cfg(feature = "wasm")]
+use wasm_bindgen::prelude::*;
+
+#[cfg_attr(feature = "wasm", wasm_bindgen(getter_with_clone))]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct SimFocus {
     pub el: String,
     pub cell: i32,
-    pub var: String
+    pub var: String,
 }
 
-#[wasm_bindgen(getter_with_clone)]
+#[cfg_attr(feature = "wasm", wasm_bindgen(getter_with_clone))]
 #[derive(Serialize, Deserialize, Clone)]
-pub struct Sim  {
+pub struct Sim {
     pub title: String,
     pub created: String,
     pub codeLine: i32,
     pub step: i32,
     pub status: i32,
     pub interval: Option<i32>,
-    pub focus: SimFocus
+    pub focus: SimFocus,
 }
 
-#[wasm_bindgen(getter_with_clone)]
+#[cfg_attr(feature = "wasm", wasm_bindgen(getter_with_clone))]
+#[serde_as]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Variables {
+    #[serde_as(as = "Option<DisplayFromStr>")]
     pub Y: Option<i64>,
+    #[serde_as(as = "Option<DisplayFromStr>")]
     pub X: Option<i64>,
+    #[serde_as(as = "Option<DisplayFromStr>")]
     pub Z: Option<i64>,
+    #[serde_as(as = "Option<DisplayFromStr>")]
     pub W: Option<i64>,
+    #[serde_as(as = "Vec<DisplayFromStr>")]
     pub T: Vec<i64>,
 }
 impl Variables {
@@ -39,7 +48,7 @@ impl Variables {
             Y: None,
             Z: None,
             W: None,
-            T: vec![]
+            T: vec![],
         }
     }
 
@@ -70,7 +79,7 @@ impl Variables {
             "Z" => self.Z,
             "W" => self.W,
             _ => {
-                let t = var.replace("T","").parse::<usize>().unwrap();
+                let t = var.replace("T", "").parse::<usize>().unwrap();
                 self.get_t(t)
             }
         }
@@ -84,44 +93,48 @@ impl Variables {
             "Z" => self.Z = Some(value),
             "W" => self.W = Some(value),
             _ => {
-                let t = var.replace("T","").parse::<usize>().unwrap();
+                let t = var.replace("T", "").parse::<usize>().unwrap();
                 self.set_t(t, value);
             }
         }
     }
 }
 
-#[wasm_bindgen(getter_with_clone)]
+#[cfg_attr(feature = "wasm", wasm_bindgen(getter_with_clone))]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Ram {
     pub code: String,
-    pub variables: Variables
+    pub variables: Variables,
 }
 
-#[wasm_bindgen(getter_with_clone)]
+#[cfg_attr(feature = "wasm", wasm_bindgen(getter_with_clone))]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Ir {
     pub cmd: String,
-    pub loc: String
+    pub loc: String,
 }
 
-#[wasm_bindgen(getter_with_clone)]
+#[cfg_attr(feature = "wasm", wasm_bindgen(getter_with_clone))]
+#[serde_as]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Alu {
+    #[serde_as(as = "DisplayFromStr")]
     pub e1: i64,
+    #[serde_as(as = "DisplayFromStr")]
     pub e2: i64,
     pub op: String,
-    pub acc: i64
+    #[serde_as(as = "DisplayFromStr")]
+    pub acc: i64,
 }
 
-#[wasm_bindgen]
+#[cfg_attr(feature = "wasm", wasm_bindgen)]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Pc {
     pub val: i32,
-    pub step: i32
+    pub step: i32,
 }
 
-#[wasm_bindgen]
+#[cfg_attr(feature = "wasm", wasm_bindgen)]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Stats {
     pub executed_step: i32,
@@ -129,10 +142,10 @@ pub struct Stats {
     pub variable_access: i32,
     pub cell_access: i32,
     pub performed_jmp: i32,
-    pub performed_jmz: i32
+    pub performed_jmz: i32,
 }
 
-#[wasm_bindgen(getter_with_clone)]
+#[cfg_attr(feature = "wasm", wasm_bindgen(getter_with_clone))]
 #[derive(Serialize, Deserialize, Clone)]
 pub struct SimulatorState {
     pub sim: Sim,
@@ -140,9 +153,9 @@ pub struct SimulatorState {
     pub pc: Pc,
     pub ir: Ir,
     pub alu: Alu,
-    pub stats: Stats
+    pub stats: Stats,
 }
 
 pub enum Status {
-  Stop = 0,
+    Stop = 0,
 }

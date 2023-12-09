@@ -1,4 +1,4 @@
-import type { Sim, Ram, Variables, Pc, Ir, Alu } from 'src-wasm/pkg'
+import type { Sim, Ram, Variables, Pc, Ir, Alu } from 'src-tauri/shared/pkg'
 import type { TypeFromWasm } from './fromWasm'
 
 export type ExportJSON = TypeFromWasm<Sim> & {

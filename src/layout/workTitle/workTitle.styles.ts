@@ -1,19 +1,22 @@
-export const container:React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 7,
-  marginLeft: 15,
-  marginTop: 17
-}
+import styled from 'styled-components'
+import { Text } from '@fluentui/react-components'
 
-export const title = {
-  fontSize: 21,
-  fontWeight: 600,
-  lineHeight: 0
-}
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  margin-top: 17px;
+  margin-left: 15px;
+`;
 
-export const date = {
-  fontSize: 7,
-  paddingTop: 0,
-  cursor: "default",
-}
+export const Title = styled(Text)`
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 0;
+`;
+
+export const CreationDate = styled(Text)`
+  font-size: 7px;
+  padding-top: 0;
+  cursor: default;
+`;

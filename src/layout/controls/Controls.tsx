@@ -1,8 +1,8 @@
 import React from 'react'
 import { useT } from '@transifex/react'
 
-import { Tooltip, Button, Slider } from '@fluentui/react-components'
-import { ArrowStepInRight24Regular, SkipForwardTab24Regular, CircleHintHalfVertical24Regular, Pause24Regular, Play24Regular, Stop24Regular, AnimalRabbit24Regular, AnimalTurtle24Regular } from '@fluentui/react-icons'
+import { Tooltip, Button } from '@fluentui/react-components'
+import { ArrowStepInRight24Regular, SkipForwardTab24Regular, CircleHintHalfVertical24Regular, Pause24Regular, Play24Regular, Stop24Regular } from '@fluentui/react-icons'
 
 import { setCodeLine, setStatus, setStep, setInterval } from 'src/store/sim.slice'
 import { setPc } from 'src/store/pc.slice'
@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { Status } from 'src/types/status'
 
 import Spinner from './Spinner'
-import * as Styles from './controls.styles'
+import * as Styled from './controls.styles'
 
 const INTERVAL = 25
 
@@ -83,8 +83,8 @@ export default ({ clearEditorHighlight }) => {
   }
 
   return (
-    <div style={ Styles.container }>
-      <div style={ Styles.controls }>
+    <Styled.Container>
+      <Styled.Controls>
         {
           _controls.map(props => (
             <Tooltip
@@ -105,19 +105,16 @@ export default ({ clearEditorHighlight }) => {
         }
 
         <Spinner />
-      </div>
+      </Styled.Controls>
 
-      <div style={ Styles.sliderContainer }>
-        <AnimalTurtle24Regular
-          style={ Styles.sliderIcon }
-        />
+      <Styled.SliderContainer>
+        <Styled.SliderSlowIcon />
         <Tooltip
           content={ t("Speed") }
           relationship="label"
           withArrow
         >
-          <Slider
-            style={ Styles.slider }
+          <Styled.Slider
             min={ 0 }
             max={ 99 }
             step={ 1 }
@@ -125,10 +122,8 @@ export default ({ clearEditorHighlight }) => {
             onChange={ onIntervalChange }
           />
         </Tooltip>
-        <AnimalRabbit24Regular
-          style={ Styles.sliderIcon }
-        />
-      </div>
-    </div>
+        <Styled.SliderFastIcon />
+      </Styled.SliderContainer>
+    </Styled.Container>
   )
 }

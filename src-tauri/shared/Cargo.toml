@@ -1,0 +1,16 @@
+[package]
+name = "shared"
+version = "2.3.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde_with = "3.4.0"
+serde = { version = "1.0", features = ["derive"] }
+wasm-bindgen = { version = "0.2.84", features = ["serde-serialize"], optional = true }
+serde-wasm-bindgen = { version = "0.6.1", optional = true }
+
+[features]
+wasm = ["wasm-bindgen", "serde-wasm-bindgen"]

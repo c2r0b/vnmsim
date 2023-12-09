@@ -1,41 +1,46 @@
-export const container = (isDragging:boolean):React.CSSProperties => ({
-  position: "fixed",
-  top: 50,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  zIndex: 9999,
-  display: (isDragging === true) ? "block" : "none"
-})
+import styled from 'styled-components'
 
-export const opaqueBack:React.CSSProperties = {
-  position: "absolute",
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  backgroundColor: "#ccc",
-  opacity: 0.6,
-}
+export const Container = styled.div`
+  position: fixed;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  &.dragging {
+    display: block;
+  }
+`;
 
-export const element:React.CSSProperties = {
-  position: "absolute",
-  top: 10,
-  right: 10,
-  bottom: 10,
-  left: 10,
-  border: "3px dashed black",
-  textAlign: "center"
-}
+export const OverflowBg = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ccc;
+  opacity: 0.6;
+`;
 
-export const message:React.CSSProperties = {
-  margin: 0,
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  padding: 15,
-  backgroundColor: "black",
-  fontSize: 12,
-  color: "white"
-}
+export const MessageContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  border: 3px dashed black;
+  text-align: center;
+`;
+
+export const Message = styled.p`
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  background-color: black;
+  font-size: 12px;
+  color: white;
+`;

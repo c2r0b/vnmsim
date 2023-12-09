@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
 import { useT } from '@transifex/react'
-import { Tooltip, Button } from '@fluentui/react-components'
+import { Tooltip } from '@fluentui/react-components'
 import { Microscope24Regular, Beaker24Regular, CalendarStar24Regular, ChatHelp24Regular, FolderOpen24Regular, Save24Regular, Settings24Regular } from '@fluentui/react-icons'
 
 import DropZone from '../dropZone/DropZone'
@@ -19,7 +18,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 import { SimulatorState } from 'src/types/simulatorState'
 import { load } from 'src/middleware/load'
 
-import * as Styles from './nav.styles'
+import * as Styled from './nav.styles'
 import NewConfirm from './NewConfirm'
 
 const acceptedFileTypes = 'application/json,.vnsp'
@@ -108,24 +107,24 @@ const Nav = () => {
 
   const menuItems = _menuItems.map(props => {
     return (
-      <Tooltip
-        key={ props.key }
-        content={ props.label }
-        relationship="label"
-        positioning="below"
-        withArrow
-      >
-        <Button
-          aria-label={ props.label }
-          icon={ props.icon }
-          disabled={ props.disabled }
-          style={ Styles.menuItem }
-          onClick={ props.onClick }
-          appearance="subtle"
+      <Styled.MenuItem key={ props.key }>
+        <Tooltip
+          content={ props.label }
+          relationship="label"
+          positioning="below"
+          withArrow
         >
-          { props.label }
-        </Button>
-      </Tooltip>
+          <Styled.MenuButton
+            aria-label={ props.label }
+            icon={ props.icon }
+            disabled={ props.disabled }
+            onClick={ props.onClick }
+            appearance="transparent"
+          >
+            { props.label }
+          </Styled.MenuButton>
+        </Tooltip>
+      </Styled.MenuItem>
     )
   })
 
@@ -156,25 +155,23 @@ const Nav = () => {
         onOpen={ onOpen }
       />
 
-      <input
+      <Styled.Input
         type="file"
         id="openProject"
         accept={ acceptedFileTypes }
-        style={  Styles.openInput }
         onChange={ (e) => {
           if (!e.target.files?.length) return
           onOpen(e.target.files[0])
         }}
       />
 
-      <div style={ Styles.container }>
-        <Image
+      <Styled.Container>
+        <Styled.Logo
           src={ logoImg }
-          style={ Styles.logo }
           alt="VNMS"
         />
         { menuItems }
-      </div>
+      </Styled.Container>
     </>
   )
 }

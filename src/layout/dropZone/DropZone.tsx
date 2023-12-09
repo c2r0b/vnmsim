@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-
 import { T } from '@transifex/react'
 
-import * as Styles from './dropZone.styles'
+import * as Styled from './dropZone.styles'
 
 interface IProps {
   onOpen: Function
@@ -33,17 +32,17 @@ const DropZone = (props:IProps) => {
   }, [])
 
   return (
-    <div
+    <Styled.Container
       id="dropZone"
-      style={ Styles.container(isDragging) }
+      className={ isDragging ? "dragging" : "" }
     >
-      <div style={ Styles.opaqueBack } />
-      <div style={ Styles.element }>
-        <p style={ Styles.message }>
+      <Styled.OverflowBg />
+      <Styled.MessageContainer>
+        <Styled.Message>
           <T _str="Drop the file anywhere on the page to open it" />
-        </p>
-      </div>
-    </div>
+        </Styled.Message>
+      </Styled.MessageContainer>
+    </Styled.Container>
   )
 }
 

@@ -1,20 +1,25 @@
-export const varSpin:React.CSSProperties = {
-  padding: 3,
-  margin: 0,
-  minHeight: 0,
-  border: 0
-}
+import styled from 'styled-components'
+import { TableCell, TableRow, SpinButton } from '@fluentui/react-components'
 
-export const focusedVar = {
-  ...varSpin,
-  backgroundColor: "#f9c55b"
-}
+export const VarSpin = styled(SpinButton)`
+  padding: 3px;
+  margin: 0;
+  min-height: 0;
+  border: 0;
+  &.focused {
+    background-color: #f9c55b;
+  }
+`;
 
-export const typeCell = {
-  width: 55,
-  fontSize: 10
-}
+export const TypeCell = styled(TableCell)`
+  width: 55px;
+  font-size: 10px;
+`;
 
-export const inputCell = {
-  padding: 2
-}
+export const InputCell = styled(TableCell)`
+  padding: 2px;
+`;
+
+export const Row = styled(TableRow)`
+  border: none;
+`;

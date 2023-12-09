@@ -61,10 +61,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 650,
+        "height": 750,
         "resizable": true,
         "title": "Von Neumann Machine Simultator",
-        "width": 1050
+        "width": 1150
       }
     ]
   }

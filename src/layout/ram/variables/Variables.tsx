@@ -8,8 +8,8 @@ import { addTVariable, setVariable } from "src/store/ram.slice"
 import { useAppDispatch, useAppSelector } from "src/hooks/store"
 import { getVariables } from "src/selectors"
 
-import * as RamStyles from '../ram.styles'
-import * as Styles from './variables.styles'
+import * as RamStyled from '../ram.styles'
+import * as Styled from './variables.styles'
 
 interface IProps {
   focusedVar?: string
@@ -40,34 +40,29 @@ export const Variables = (props:IProps) => {
   }
 
   const displayVariable = (item) => {
-    let style = Styles.varSpin
-
-    // change style on focus variable
-    if (props.focusedVar === item.type) {
-      style = Styles.focusedVar
-    }
+    const isFocused = props.focusedVar === item.type;
 
     return (
-      <TableRow key={ item.type } style={ RamStyles.row }>
-        <TableCell style={ Styles.typeCell }>
+      <Styled.Row key={ item.type }>
+        <Styled.TypeCell>
           { item.type }
-        </TableCell>
-        <TableCell style={ Styles.inputCell }>
+        </Styled.TypeCell>
+        <Styled.InputCell>
           <TableCellLayout>
-            <SpinButton
+            <Styled.VarSpin
+              className={ isFocused ? "focused" : "" }
               appearance="underline"
               value={ item.value.toString() }
-              style={ style }
               onChange={ (_e, data) => onChange(item.type, data) }
             />
           </TableCellLayout>
-        </TableCell>
-      </TableRow>
+        </Styled.InputCell>
+      </Styled.Row>
     )
   }
 
   return (
-    <div style={ RamStyles.verticalHalf }>
+    <RamStyled.VerticalHalf>
       <Table size="small">
         <TableBody>
           { items.map(displayVariable) }
@@ -89,6 +84,6 @@ export const Variables = (props:IProps) => {
           </TableRow>
         </TableBody>
       </Table>
-    </div>
+    </RamStyled.VerticalHalf>
   )
 }

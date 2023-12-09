@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
-import type { Stats } from 'src-wasm/pkg'
+import type { Stats } from 'src-tauri/shared/pkg'
 
 export const initialState:TypeFromWasm<Stats> = {
   executed_step: 0,

@@ -1,13 +1,11 @@
 import React, { useRef } from 'react'
 import { T } from '@transifex/react'
-
-import { Text } from '@fluentui/react-components'
 import ContentEditable from 'react-contenteditable'
 
 import { setTitle } from 'src/store/sim.slice'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
-import * as Styles from './workTitle.styles'
+import * as Styled from './workTitle.styles'
 
 const WorkTitle = () => {
   const dispatch = useAppDispatch()
@@ -21,19 +19,19 @@ const WorkTitle = () => {
   }
 
   return (
-    <div style={ Styles.container }>
-      <Text style={ Styles.title }>
+    <Styled.Container>
+      <Styled.Title>
         <ContentEditable
           tagName="pre"
           innerRef={ workTitleRef }
           html={ title }
           onChange={ onTitleChange }
         />
-      </Text>
-      <Text style={ Styles.date }>
+      </Styled.Title>
+      <Styled.CreationDate>
         <T _str="Created on" /> { created }
-      </Text>
-    </div>
+      </Styled.CreationDate>
+    </Styled.Container>
   )
 }
 

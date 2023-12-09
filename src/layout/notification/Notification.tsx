@@ -1,41 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useT } from '@transifex/react'
 
-import { Alert } from '@fluentui/react-components/unstable'
-import { Text } from '@fluentui/react-components'
+import { Link, Toast, ToastBody, ToastFooter, ToastTitle, Toaster, useId, useToastController } from '@fluentui/react-components'
 
 import { clearError } from 'src/store/errors.slice'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
 
-import * as Styles from './notification.styles'
-
 const Notification = () => {
   const dispatch = useAppDispatch()
   const errorMessage = useAppSelector((state) => state.errors.error)
+  const toasterId = useId("toaster");
+  const { dispatchToast, dismissToast } = useToastController(toasterId);
   const t = useT()
 
-  if (errorMessage === undefined) {
-    return null
-  }
+  const notify = () => (
+    dispatchToast(
+      <Toast>
+        <ToastTitle>Error</ToastTitle>
+        <ToastBody>{ errorMessage }</ToastBody>
+        <ToastFooter>
+          <Link onClick={ handleCloseError }>{ t("Close") }</Link>
+        </ToastFooter>
+      </Toast>,
+      {
+        toastId: toasterId,
+        intent: "error"
+      }
+    )
+  )
+  
+  useEffect(() => {
+    if (errorMessage !== undefined) {
+      notify()
+    }
+  }, [errorMessage])
 
   const handleCloseError = () => {
     dispatch(clearError())
+    dismissToast(toasterId)
   }
 
-  return (
-    <div style={ Styles.container }>
-      <Alert
-        intent="error"
-        action={ t("Close") }
-        onClick={ handleCloseError }
-      >
-        <Text style={ Styles.text }>
-          { errorMessage }
-        </Text>
-      </Alert>
-    </div>
-  )
+  return (<Toaster toasterId={toasterId} />)
 }
 
 export default Notification

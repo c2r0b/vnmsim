@@ -15,8 +15,8 @@
       "src": [
         "/src/",
       ],
-      "src-wasm": [
-        "/src-wasm/",
+      "src-tauri": [
+        "/src-tauri/",
       ],
       "public": [
         "/public/"

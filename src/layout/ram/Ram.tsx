@@ -1,4 +1,4 @@
-import ramStyles from './ram.module.css'
+import ramStyled from './ram.module.css'
 
 import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react'
 
@@ -16,7 +16,7 @@ import { editorLinter } from '../../utility/linter'
 
 import { Variables } from './variables/Variables'
 
-import * as Styles from './ram.styles'
+import * as Styled from './ram.styles'
 import { clearHighlight, focusCell, lineHighlightField } from 'src/utility/highlight'
 import { lineNumbersExtension } from 'src/utility/gutter'
 
@@ -64,7 +64,7 @@ const Ram = forwardRef((_props, ref) => {
   const vnmLinter = linter(view => {
     const errors = editorLinter(view)
     if (errors.length) {
-      dispatch(setError(errors.length))
+      dispatch(setError(errors[0].message))
     }
     else {
       dispatch(clearError())
@@ -108,29 +108,29 @@ const Ram = forwardRef((_props, ref) => {
   return (
     <AutoSizer>
       {({ height }) => (
-        <div style={ Styles.container }>
+        <Styled.Container>
           <Split
-            className={ ramStyles.split }
+            className={ ramStyled.split }
             sizes={[55, 45]}
             minSize={ 0 }
             gutterSize={ 20 }
             dragInterval={ 30 }
             direction="horizontal"
           >
-            <div style={ Styles.ramHalf }>
+            <Styled.RamHalf>
               <CodeMirror
                 ref={ editorRef }
                 value={ ramCode || "" }
-                className={ ramStyles.CodeMirror }
+                className={ ramStyled.CodeMirror }
                 height={ height.toString() }
                 extensions={ editorExtensions }
                 onChange={ onEditorChange }
                 basicSetup={ editorOptions }
               />
-            </div>
+            </Styled.RamHalf>
             <Variables focusedVar={ sim.focus.var } />
           </Split>
-        </div>
+        </Styled.Container>
       )}
     </AutoSizer>
   )

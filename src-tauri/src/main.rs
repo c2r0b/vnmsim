@@ -3,12 +3,16 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::Window;
+use shared::types::SimulatorState;
+use shared::execute as simExecute;
+use tauri::utils::debug_eprintln;
 
 #[tauri::command]
-fn execute(window: Window, input: src_wasm::SimulatorState) {
-  let result:src_wasm::SimulatorState = src_wasm::execute(input);
-  let _ = window.emit("execution-complete", result);
+fn execute(input: String) -> SimulatorState {
+  let data:SimulatorState = serde_json::from_str(&input).unwrap();
+  debug_eprintln!("execute");
+  let result:SimulatorState = simExecute(data);
+  result.into()
 }
 
 fn main() {

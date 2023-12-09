@@ -1,5 +1,6 @@
 {
     "rust-analyzer.linkedProjects": [
-        "./src-wasm/Cargo.toml"
+        "./src-tauri/Cargo.toml",
+        "./src-tauri/shared/Cargo.toml",
     ]
 }
