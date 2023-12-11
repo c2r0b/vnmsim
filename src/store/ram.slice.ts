@@ -26,7 +26,8 @@ const ramSlice = createSlice({
     },
     setVariable(state, action) {
       if (isTVariable(action.payload.name)) {
-        state.variables.T[getTVariableIndexFromName(action.payload.name)] = BigInt(action.payload.value)
+        const index = getTVariableIndexFromName(action.payload.name)
+        state.variables.T = state.variables.T.map((item, i) => i === index ? BigInt(action.payload.value) : item);
       }
       else {
         state.variables[action.payload.name] = BigInt(action.payload.value)

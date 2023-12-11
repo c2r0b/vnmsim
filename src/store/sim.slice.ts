@@ -85,9 +85,9 @@ const simSlice = createSlice({
       state.focus.el = initialState.focus.el
     },
     stopSim(state) {
-      state.status = 0
+      state.status = initialState.status
       state.focus = initialState.focus
-      state.codeLine = -1
+      state.codeLine = initialState.codeLine
     },
   }
 })

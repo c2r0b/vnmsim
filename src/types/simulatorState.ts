@@ -50,7 +50,7 @@ export class SimulatorState implements SimulatorStateData  {
         W: BigInt(obj.variables.W ?? 0),
         T: Object.entries(obj.variables)
           .filter(([key]) => isTVariable(key))
-          .map(([_key, value]) => BigInt((value as string).toString()))
+          .map(([_key, value]) => BigInt((value as any).toString()))
       }
     }
 
@@ -70,17 +70,26 @@ export class SimulatorState implements SimulatorStateData  {
     const rows:string[] = file.split(/\n+/)
 
     // code for memory cells (removing NOP used as placeholders)
-    const nop_cmds = new RegExp("NOP", "g")
-    const code = rows[5].split(",").join("\fieldn").replace(nop_cmds, "")
+    const nop_cmds = /NOP/g;
+    const code = rows[5].split(",").join("\fieldn").replace(nop_cmds, "");
 
     // X-Y-Z-W variables
     const variables = rows[8].split(',')
 
     // T1-40 variables
-    const tVariables = rows[11].split(',')
+    let tVariables = rows[11].split(',')
+
+    // remove empty values from the end of the array of T variables
+    let lastNonEmptyIndex = 0
+    tVariables.slice().reverse().forEach((v, i) => {
+      if (v === '' || v === '0') {
+        lastNonEmptyIndex = i
+      }
+    })
+    tVariables = tVariables.slice(0, tVariables.length - 1 - lastNonEmptyIndex)
 
     this.sim = {
-      title: "Untitled",
+      title: rows[1],
       created: new Date().toISOString().slice(0, 10),
       codeLine: 0,
       step: 0,
@@ -129,12 +138,14 @@ export class SimulatorState implements SimulatorStateData  {
 
   toJSON(): ExportJSON {
     const variables = {
-      ...this.ram.variables,
-      T: undefined,
+      X: this.ram.variables.X.toString(),
+      Y: this.ram.variables.Y.toString(),
+      Z: this.ram.variables.Z.toString(),
+      W: this.ram.variables.W.toString()
     }
 
     this.ram.variables.T.forEach((v, i) => {
-      variables[`T${i}`] = v
+      variables[`T${i+1}`] = v.toString()
     })
 
     return {
@@ -142,10 +153,11 @@ export class SimulatorState implements SimulatorStateData  {
       code: this.ram.code,
       variables,
       alu: {
-        ...this.alu,
-        acc: undefined
+        e1: this.alu.e1.toString(),
+        e2: this.alu.e2.toString(),
+        op: this.alu.op
       },
-      acc: this.alu.acc,
+      acc: this.alu.acc.toString(),
       ir: this.ir,
       pc: this.pc,
     }

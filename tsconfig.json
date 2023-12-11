@@ -13,10 +13,10 @@
     ],
     "paths": {
       "src": [
-        "/src/",
+        "/src/"
       ],
       "src-tauri": [
-        "/src-tauri/",
+        "/src-tauri/"
       ],
       "public": [
         "/public/"

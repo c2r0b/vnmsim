@@ -1,4 +1,4 @@
-import { validator } from './validator'
+import { validator } from '../utility/validator'
 import * as samples from '../samples'
 
 // check all samples for valid result
