@@ -2,7 +2,7 @@ name: 'test-tauri-build'
 on:
   push:
     branches:
-      - release
+      - dev
 
 jobs:
   build-tauri:
