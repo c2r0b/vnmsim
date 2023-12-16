@@ -19,7 +19,7 @@
         "type": "shell",
         // change this to your `beforeBuildCommand`:
         "command": "npm",
-        "args": ["npm run build:next && npm run export"]
+        "args": ["npm run build:next"]
       }
     ]
   }
