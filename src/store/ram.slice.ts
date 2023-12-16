@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
-import type { Ram } from 'src-tauri/shared/pkg'
+import type { Ram } from 'src-tauri/shared/pkg/shared'
 import { getTVariableIndexFromName, isTVariable } from 'src/utility/tVariables'
 
 export const initialState:TypeFromWasm<Ram> = {
@@ -27,6 +27,9 @@ const ramSlice = createSlice({
     setVariable(state, action) {
       if (isTVariable(action.payload.name)) {
         const index = getTVariableIndexFromName(action.payload.name)
+        while (index >= state.variables.T.length) {
+          state.variables.T.push(BigInt(0))
+        }
         state.variables.T = state.variables.T.map((item, i) => i === index ? BigInt(action.payload.value) : item);
       }
       else {

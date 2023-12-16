@@ -1,27 +1,27 @@
 <img align="left" width="80" height="80" src="https://github.com/c2r0b/vnmsim/blob/main/src-tauri/icons/Square89x89Logo.png" />
 
-# Von Neumann machine simulator (VNMS)
+# Von Neumann Machine Sim
 
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
+
+## Try it
 
 Online version: [vnmsim.app](https://vnmsim.app)
 
 Windows, Ubuntu and MacOS offline version: [releases](https://github.com/c2r0b/vnmsim/releases)
 
-## Simulator guide
+## How to use
 
 This simulator is fully compatible with the most common commands for the Von Neumann Machine. It is able to load data (LOD), store it (STO), do additions (ADD), subtractions (SUB), multiplications (MUL), divisions (DIV) and perform jumps (JMZ/JMP).
 
 A guide to the simulator is also available from the `Help` section accessible from the menu of the simulator itself.
 
-## Specifications
+## Development
 
-The simulator is developed as a NextJS app developed using React and Typescript. The code editor uses CodeMirror.  
+The simulator is developed as a NextJS app developed using React, Redux, Typescript and Rust. The code editor uses CodeMirror.  
 The chosen design framework is FluentUI by Microsoft.  
 The offline version of the simulator is built using Tauri.
-
-## How to compile
 
 After downloading the repository and installing the dependencies using `npm install`, a simple `npm run dev` is enough to start a compiled and live updated version at `localhost:3000`.
 

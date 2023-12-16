@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { TypeFromWasm } from '../types/fromWasm'
-import type { Ir } from 'src-tauri/shared/pkg'
+import type { Ir } from 'src-tauri/shared/pkg/shared'
 
 export const initialState:TypeFromWasm<Ir> = {
   cmd: '',
