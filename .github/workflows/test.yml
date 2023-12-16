@@ -1,0 +1,17 @@
+name: CI
+on: push
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install dependencies
+              run: npm install
+            - name: install Rust stable
+              uses: dtolnay/rust-toolchain@stable
+            - name: Install wasm-pack
+              run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+            - name: Build wasm
+              run: npm run build:wasm
+            - name: Run tests
+              run: npm test

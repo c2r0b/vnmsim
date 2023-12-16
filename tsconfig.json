@@ -4,7 +4,7 @@
     "noImplicitAny": false,
     "module": "esnext",
     "moduleResolution": "node",
-    "target": "es6",
+    "target": "es2017",
     "experimentalDecorators": false,
     "lib": [
       "es2015",
@@ -14,6 +14,12 @@
     "paths": {
       "src": [
         "/src/"
+      ],
+      "src-tauri": [
+        "/src-tauri/"
+      ],
+      "public": [
+        "/public/"
       ]
     },
     "removeComments": true,

@@ -29,6 +29,8 @@ export const THEMES = {
     neutralDark: "#201f1e",
     white: "#ffffff",
     black: "#000000",
+    logoOrange: "#eabb60",
+    lightBorder: "#F6F5F6",
     
     // code mirror
     codeCmd: "blue",
@@ -37,7 +39,7 @@ export const THEMES = {
     codeVal: "purple",
 
     // github icon
-    invert: 0
+    invert: 0,
   },
   dark: {
     10: "#606060",
@@ -69,6 +71,8 @@ export const THEMES = {
     neutralDark: "#f4f4f4",
     white: "#000000",
     black: "#ffffff",
+    logoOrange: "#eabb60",
+    lightBorder: "#232125",
 
     // code mirror
     codeCmd: "#8196eb",
@@ -77,6 +81,6 @@ export const THEMES = {
     codeVal: "#e182ed",
 
     // github icon
-    invert: 1
+    invert: 1,
   }
-};
+}
