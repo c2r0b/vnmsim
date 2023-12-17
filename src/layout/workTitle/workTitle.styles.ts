@@ -3,7 +3,7 @@ import { Text } from '@fluentui/react-components'
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 7px;
   margin-top: 17px;
   margin-left: 15px;
@@ -16,7 +16,7 @@ export const Title = styled(Text)`
 `;
 
 export const CreationDate = styled(Text)`
-  font-size: 7px;
-  padding-top: 0;
+  font-size: 9px;
+  padding-top: 10px;
   cursor: default;
 `;
