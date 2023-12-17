@@ -146,6 +146,7 @@ pub fn execute(input:SimulatorState) -> SimulatorState {
     // run every line until stopped
     loop {
         params = execute_line(params.clone());
+        params.stats.executed_step += 1;
         if params.sim.status == Status::Stop as i32 {
             params.pc.val = 0;
             params.sim.codeLine = 0;
