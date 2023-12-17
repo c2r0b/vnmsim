@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - release
+      - dev
 
 jobs:
   publish-tauri:
@@ -42,4 +43,4 @@ jobs:
           releaseName: 'VNMSim v__VERSION__'
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: true
-          prerelease: false
+          prerelease: ${{ github.ref == 'refs/heads/dev' }} # if the branch is dev, it will be a prerelease
