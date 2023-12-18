@@ -1,6 +1,6 @@
 [package]
 name = "vnms"
-version = "2.3.0"
+version = "2.3.1"
 description = "VNMS"
 authors = ["you"]
 license = ""
