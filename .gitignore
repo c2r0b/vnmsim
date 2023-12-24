@@ -15,6 +15,8 @@ package-lock.json
 todo.todo
 next-env.d.ts
 .eslintrc.json
+embedded.provisionprofile
+*.pkg
 
 # OS generated files #
 ######################
