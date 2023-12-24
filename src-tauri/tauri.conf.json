@@ -12,7 +12,15 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "dialog": {
+        "open": true,
+        "save": true
+      },
+      "fs": {
+        "readFile": true,
+        "writeFile": true
+      }
     },
     "bundle": {
       "active": true,
@@ -29,10 +37,10 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.vnmsim.app",
+      "identifier": "com.c2r0b.vnms",
       "longDescription": "",
       "macOS": {
-        "entitlements": null,
+        "entitlements": "../entitlements.plist",
         "exceptionDomain": "",
         "frameworks": [],
         "providerShortName": null,

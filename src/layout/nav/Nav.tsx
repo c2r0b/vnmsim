@@ -9,7 +9,7 @@ import Samples from '../../modals/samples'
 import Settings from '../../modals/settings'
 import Stats from '../../modals/stats'
 
-import { readFile, save } from '../../utility/io'
+import { readFile, readFileTauri, save } from '../../utility/io'
 import logoImg from 'public/images/logo.png'
 
 import { setError } from 'src/store/errors.slice'
@@ -55,6 +55,15 @@ const Nav = () => {
     date: sim.created
   })
 
+  const handleOpenClick = async () => {
+    if ('__TAURI__' in window) {
+      onOpen(await readFileTauri())
+    }
+    else {
+      document.getElementById('openProject')?.click()
+    }
+  }
+
   const _menuItems = [
     {
       key: "new",
@@ -68,9 +77,7 @@ const Nav = () => {
       label: t("Open from file"),
       icon: <FolderOpen24Regular />,
       disabled: isRunning,
-      onClick: () => {
-        document.getElementById('openProject')?.click()
-      }
+      onClick: () => handleOpenClick()
     },
     {
       key: "save",
