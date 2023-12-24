@@ -16,6 +16,7 @@ todo.todo
 next-env.d.ts
 .eslintrc.json
 embedded.provisionprofile
+distribute.sh
 *.pkg
 
 # OS generated files #
