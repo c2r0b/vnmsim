@@ -79,7 +79,12 @@ impl Variables {
             "Z" => self.Z,
             "W" => self.W,
             _ => {
-                let t = var.replace("T", "").parse::<usize>().unwrap();
+                let t = match var.replace("T", "").parse::<usize>() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        return Some(0);
+                    },
+                };
                 self.get_t(t)
             }
         }
