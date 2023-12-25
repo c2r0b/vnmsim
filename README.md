@@ -5,10 +5,10 @@
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
-## Try it
+
+[<img src="images/mac-app-store.svg">](https://apps.apple.com/it/app/von-neumann-machine-simulator/id6474739902)
 
 Online version: [vnmsim.app](https://vnmsim.app)
-
 Windows, Ubuntu and MacOS offline version: [releases](https://github.com/c2r0b/vnmsim/releases)
 
 ## How to use
