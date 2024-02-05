@@ -1,6 +1,6 @@
 import { SimulatorState } from '../types/simulatorState'
-import { open as tauriOpen, save as tauriSave } from '@tauri-apps/api/dialog'
-import { readTextFile, writeFile } from '@tauri-apps/api/fs'
+import { open as tauriOpen, save as tauriSave } from '@tauri-apps/plugin-dialog'
+import { readTextFile, writeFile } from '@tauri-apps/plugin-fs'
 
 export const save = async ({ obj, title, date }) => {
   const jsonObj = JSON.stringify(obj)
