@@ -16,7 +16,14 @@
     "fs:allow-read-file",
     "fs:allow-write-file",
     "dialog:allow-open",
-    "dialog:allow-save"
+    "dialog:allow-save",
+    "window:allow-maximize",
+    "window:allow-minimize",
+    "window:allow-unmaximize",
+    "window:allow-unminimize",
+    "window:allow-close",
+    "window:allow-hide",
+    "window:allow-show"
   ],
   "platforms": [
     "linux",
