@@ -3295,7 +3295,7 @@ dependencies = [
 
 [[package]]
 name = "shared"
-version = "2.3.1"
+version = "2.4.0"
 dependencies = [
  "serde",
  "serde_with",
@@ -4238,7 +4238,7 @@ checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
 
 [[package]]
 name = "vnms"
-version = "2.3.1"
+version = "2.4.0"
 dependencies = [
  "serde",
  "serde_json",
