@@ -18,6 +18,8 @@ fn execute(input: String) -> SimulatorState {
 pub fn run() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![execute])
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             let win_builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
                 .title("")

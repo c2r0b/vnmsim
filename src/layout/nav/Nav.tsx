@@ -63,7 +63,7 @@ const Nav = () => {
     });
 
   const handleOpenClick = async () => {
-    if ("__TAURI__" in window) {
+    if ("__TAURI_INTERNALS__" in window) {
       onOpen(await readFileTauri());
     } else {
       document.getElementById("openProject")?.click();

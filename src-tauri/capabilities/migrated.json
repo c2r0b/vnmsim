@@ -11,6 +11,7 @@
     "resources:default",
     "menu:default",
     "tray:default",
+    "fs:allow-app-read",
     "fs:allow-read-file",
     "fs:allow-write-file",
     "dialog:allow-open",
