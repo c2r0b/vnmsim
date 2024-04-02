@@ -31,7 +31,7 @@ export const THEMES = {
     black: "#000000",
     logoOrange: "#eabb60",
     lightBorder: "#F6F5F6",
-    
+
     // code mirror
     codeCmd: "blue",
     codeNum: "green",
@@ -82,5 +82,5 @@ export const THEMES = {
 
     // github icon
     invert: 1,
-  }
-}
+  },
+};

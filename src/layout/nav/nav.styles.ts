@@ -24,28 +24,24 @@ export const Input = styled.input`
 export const MenuButton = styled(Button)`
   min-width: 0;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 12px;
   padding: 17px 20px;
-  color: white;
+  color: #cccccc;
   &:hover {
     color: white;
   }
 `;
 
 export const MenuItem = styled.div`
+  &:before {
+    position: absolute;
+    top: 20px;
+    content: "";
+    width: 1px;
+    height: 20px;
+    background-color: #232125;
+  }
   &:hover {
     cursor: pointer;
-    background-color: #222;
   }
-`;
-
-export const Logo = styled(Image)`
-  width: 35px;
-  height: 35px;
-  border: 1px solid var(--logoOrange);
-  border-radius: 100px;
-  margin-top: 12px;
-  margin-left: 7px;
-  margin-right: 10px;
-  cursor: default;
 `;

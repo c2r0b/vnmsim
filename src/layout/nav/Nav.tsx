@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useT } from "@transifex/react";
-import { Tooltip } from "@fluentui/react-components";
 import {
   Microscope24Regular,
   Beaker24Regular,
@@ -18,7 +17,6 @@ import Settings from "../../modals/settings";
 import Stats from "../../modals/stats";
 
 import { readFile, readFileTauri, save } from "../../utility/io";
-import logoImg from "public/images/logo.png";
 
 import { setError } from "src/store/errors.slice";
 import { isSimulatorRunning } from "src/selectors";
@@ -123,22 +121,15 @@ const Nav = () => {
   const menuItems = _menuItems.map((props) => {
     return (
       <Styled.MenuItem key={props.key}>
-        <Tooltip
-          content={props.label}
-          relationship="label"
-          positioning="below"
-          withArrow
+        <Styled.MenuButton
+          aria-label={props.label}
+          icon={props.icon}
+          disabled={props.disabled}
+          onClick={props.onClick}
+          appearance="transparent"
         >
-          <Styled.MenuButton
-            aria-label={props.label}
-            icon={props.icon}
-            disabled={props.disabled}
-            onClick={props.onClick}
-            appearance="transparent"
-          >
-            {props.label}
-          </Styled.MenuButton>
-        </Tooltip>
+          {props.label}
+        </Styled.MenuButton>
       </Styled.MenuItem>
     );
   });
@@ -169,10 +160,7 @@ const Nav = () => {
         }}
       />
 
-      <Styled.Container>
-        <Styled.Logo src={logoImg} alt="VNMS" />
-        {menuItems}
-      </Styled.Container>
+      <Styled.Container>{menuItems}</Styled.Container>
     </>
   );
 };

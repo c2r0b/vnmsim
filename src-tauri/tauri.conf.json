@@ -4,16 +4,8 @@
     "security": {
       "csp": null
     },
-    "windows": [
-      {
-        "decorations": false,
-        "fullscreen": false,
-        "height": 750,
-        "resizable": true,
-        "title": "Von Neumann Machine Simultator",
-        "width": 1280
-      }
-    ]
+    "macOSPrivateApi": true,
+    "windows": []
   },
   "build": {
     "beforeBuildCommand": "npm run build:next",
@@ -64,6 +56,6 @@
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ3ODY2NjhBOEQ5QjM0RUYKUldUdk5KdU5pbWFHUit6eTQ1TVlQcUsyNEtsOW96cDFBOFdjdzRBc25KbFBrUGJWMjZlNmNsMHcK"
     }
   },
-  "productName": "vnmsim",
+  "productName": "Von Neumann Simulator",
   "version": "../package.json"
 }
