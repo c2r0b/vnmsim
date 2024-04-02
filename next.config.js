@@ -31,8 +31,6 @@ module.exports = async () => {
         },
       };
     },
-    // Configure assetPrefix or else the server won't properly resolve your assets.
-    assetPrefix: isProd ? `http://${internalHost}:3000` : null,
     experimental: {
       swcPlugins: [
         [
