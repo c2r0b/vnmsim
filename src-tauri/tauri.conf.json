@@ -1,71 +1,61 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
-  "build": {
-    "beforeBuildCommand": "npm run build:next",
-    "beforeDevCommand": "npm run dev:next",
-    "devPath": "http://localhost:3000",
-    "distDir": "../out"
-  },
-  "package": {
-    "productName": "vnmsim",
-    "version": "../package.json"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false
-    },
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.vnmsim.app",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": [],
-      "shortDescription": "",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
-      }
-    },
+  "app": {
     "security": {
       "csp": null
     },
+    "macOSPrivateApi": true,
+    "windows": []
+  },
+  "build": {
+    "beforeBuildCommand": "npm run build:next",
+    "beforeDevCommand": "npm run dev:next",
+    "devUrl": "http://localhost:3000",
+    "frontendDist": "../out"
+  },
+  "bundle": {
+    "active": true,
+    "category": "DeveloperTool",
+    "copyright": "",
+    "externalBin": [],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "linux": {
+      "deb": {
+        "depends": []
+      }
+    },
+    "longDescription": "",
+    "macOS": {
+      "entitlements": "../entitlements.plist",
+      "exceptionDomain": "",
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null
+    },
+    "resources": [],
+    "shortDescription": "",
+    "targets": "all",
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    }
+  },
+  "identifier": "com.c2r0b.vnms",
+  "plugins": {
     "updater": {
-      "active": true,
       "endpoints": [
         "https://gist.github.com/c2r0b/7a1098aabf300222d8313c1fdf645387/raw"
       ],
-      "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ3ODY2NjhBOEQ5QjM0RUYKUldUdk5KdU5pbWFHUit6eTQ1TVlQcUsyNEtsOW96cDFBOFdjdzRBc25KbFBrUGJWMjZlNmNsMHcK"
-    },
-    "windows": [
-      {
-        "fullscreen": false,
-        "height": 750,
-        "resizable": true,
-        "title": "Von Neumann Machine Simultator",
-        "width": 1280
-      }
-    ]
-  }
+    }
+  },
+  "productName": "Von Neumann Simulator",
+  "version": "../package.json"
 }

@@ -15,7 +15,7 @@ export const instant = (dispatch, getState) => {
   const serializedData = serialize(params)
   
   // on desktop use Rust bindings
-  if ('__TAURI__' in window) {
+  if ('__TAURI_INTERNALS__' in window) {
     invoke('execute', { input: serializedData })
       .then(response => {
         dispatch(load(response as SimulatorStateData))
