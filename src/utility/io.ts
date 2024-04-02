@@ -1,6 +1,6 @@
 import { SimulatorState } from '../types/simulatorState'
-import { open as tauriOpen, save as tauriSave } from '@tauri-apps/api/dialog'
-import { readTextFile, writeFile } from '@tauri-apps/api/fs'
+import { open as tauriOpen, save as tauriSave } from '@tauri-apps/plugin-dialog'
+import { readTextFile, writeFile } from '@tauri-apps/plugin-fs'
 
 export const save = async ({ obj, title, date }) => {
   const jsonObj = JSON.stringify(obj)
@@ -9,7 +9,7 @@ export const save = async ({ obj, title, date }) => {
   const fileName = title + "_" + date + ".json"
 
   // on desktop use Tauri dialog
-  if ('__TAURI__' in window) {
+  if ('__TAURI_INTERNALS__' in window) {
     const filePath = await tauriSave({
       defaultPath: fileName,
       filters: [{
@@ -18,7 +18,12 @@ export const save = async ({ obj, title, date }) => {
       }]
     })
     if (filePath === null) return
-    await writeFile(filePath, jsonObj)
+
+    // Convert the JSON string to a Uint8Array
+    const buffer = new TextEncoder().encode(jsonObj);
+
+    // Write the Uint8Array to file
+    await writeFile(filePath, buffer);
   }
   else {
     // construct output file
@@ -36,21 +41,35 @@ export const save = async ({ obj, title, date }) => {
 }
 
 export const readFileTauri = async () => {
-  const filePath = await tauriOpen({
+  const fileSelection = await tauriOpen({
     directory: false,
     multiple: false,
     filters: [
       { name: 'VNMS Project', extensions: ['vnsp'] },
       { name: 'JSON', extensions: ['json'] }
     ]
-  }) as unknown as string
-  if (!filePath) return
+  }) as any;
+
+  // Ensure fileSelection is not null and has a path
+  if (!fileSelection?.path) {
+    console.error('No file selected or file has no path');
+    return;
+  }
+
+  const filePath = fileSelection.path;
   const content = await readTextFile(filePath);
-  const file = new File([content], filePath, { type: "application/json" })
-  return file
-}
+  
+  // Create a File object if needed, using the file name and mime type from the selection.
+  const blob = new Blob([content], { type: "application/json" });
+  return new File([blob], fileSelection.name, { type: fileSelection.mimeType || "application/json" });
+};
 
 export const readFile = (input, onSuccess, onError) => {
+  if (!(input instanceof Blob) && !(input instanceof File)) {
+    onError()
+    return
+  }
+
   // file reader init
   const reader = new FileReader()
   reader.readAsText(input, "UTF-8")
