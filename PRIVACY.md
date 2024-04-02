@@ -2,4 +2,4 @@ VNMS and its developer take your privacy very seriously. Beyond the information 
 
 VNMS does not collect, transmit, distribute or sell your data.
 
-© 2023, VNMS by c2r0b (Lorenzo Ganni)
+© 2024, VNMS by c2r0b (Lorenzo Ganni)
