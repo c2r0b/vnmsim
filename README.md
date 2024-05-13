@@ -1,6 +1,4 @@
-<img align="left" width="80" height="80" src="https://github.com/c2r0b/vnmsim/blob/main/src-tauri/icons/Square89x89Logo.png" />
-
-# Von Neumann Machine Sim
+# Von Neumann Machine Sim <img align="left" width="45" height="45" src="/src-tauri/icons/128x128.png" style="margin-right:15px" />
 
 A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
