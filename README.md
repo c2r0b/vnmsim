@@ -1,15 +1,12 @@
-<img align="left" width="80" height="80" src="https://github.com/c2r0b/vnmsim/blob/main/src-tauri/icons/Square89x89Logo.png" />
+# Von Neumann Machine Sim <img align="left" width="45" height="45" src="/src-tauri/icons/128x128.png" style="margin-right:15px" />
 
-# Von Neumann Machine Sim
-
-A simulator of the Von Neumann machine.
+A simulator of the Von Neumann machine.  
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
+Online version: [vnmsim.c2r0b.ovh](https://vnmsim.c2r0b.ovh/)  
+Windows, Linux and MacOS desktop version: [releases](https://github.com/c2r0b/vnmsim/releases) 
 
-[<img src="images/mac-app-store.svg">](https://apps.apple.com/it/app/von-neumann-machine-simulator/id6474739902)
-
-Online version: [vnmsim.app](https://vnmsim.app)  
-Windows, Linux and MacOS desktop version: [releases](https://github.com/c2r0b/vnmsim/releases)
+[<img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/ef/a6/08/efa60861-f6b9-6943-1018-9db026374842/acb89f71-72cc-4ec5-8340-79f805c2fd62_Screenshot_2023-12-21_at_14.37.22.png/313x0w.webp">](https://apps.apple.com/it/app/von-neumann-machine-simulator/id6474739902)
 
 ## How to use
 

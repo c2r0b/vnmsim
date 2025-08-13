@@ -95,7 +95,7 @@ export const execute = (dispatch, getState) => {
           break
         }
         case 'HLT': {
-          dispatch(setStep(lastStep))
+          dispatch(setStep(0))
           dispatch(setPc(0))
           dispatch(stopSim())
           break
