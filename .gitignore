@@ -10,6 +10,7 @@ public/workbox-*
 yarn.lock
 yarn-error.log
 package-lock.json
+pnpm-lock.yaml
 .yarnrc
 .next
 todo.todo

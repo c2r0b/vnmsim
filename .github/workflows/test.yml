@@ -5,13 +5,16 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+            - uses: pnpm/action-setup@v4
+              with:
+                version: 10
             - name: Install dependencies
-              run: npm install
+              run: pnpm install
             - name: install Rust stable
               uses: dtolnay/rust-toolchain@stable
             - name: Install wasm-pack
               run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
             - name: Build wasm
-              run: npm run build:wasm
+              run: pnpm run build:wasm
             - name: Run tests
-              run: npm test
+              run: pnpm test
