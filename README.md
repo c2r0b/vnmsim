@@ -3,9 +3,6 @@
 A simulator of the Von Neumann machine.  
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
-
-[<img src="images/mac-app-store.svg">](https://apps.apple.com/it/app/von-neumann-machine-simulator/id6474739902)
-
 Online version: [vnmsim.c2r0b.ovh](https://vnmsim.c2r0b.ovh/)  
 Windows, Linux and MacOS desktop version: [releases](https://github.com/c2r0b/vnmsim/releases) 
 
