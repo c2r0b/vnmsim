@@ -8,7 +8,7 @@ echo "Installing wasm-pack..."
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -y
 echo "Building wasm-parser..."
 # Build wasm-parser 
-npm run build:wasm
+pnpm run build:wasm
 # Build next
 echo "Building next..."
-npm run build:next
+pnpm run build:next
