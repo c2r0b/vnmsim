@@ -30,6 +30,9 @@ jobs:
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
       - name: install frontend dependencies
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
         run: pnpm install
       - name: build wasm
         run: pnpm build:wasm
