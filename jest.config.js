@@ -3,6 +3,7 @@ const { compilerOptions } = require('./tsconfig')
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: "jsdom",
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
   testPathIgnorePatterns: [
     "/node_modules/",
     "/.next/"

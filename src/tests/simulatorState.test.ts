@@ -64,8 +64,8 @@ describe('SimulatorState', () => {
 
   describe('fromVNSP', () => {
     it('should correctly parse and set state from VNSP file content', () => {
-      const variablesToString = (variables: Record<string, bigint | bigint[] | BigInt[]>) => {
-        return Object.keys(variables).filter(([key]) => key !== 'T')
+      const variablesToString = (variables: Record<string, bigint | bigint[] | BigInt[] | undefined>) => {
+        return Object.entries(variables).filter(([key]) => key !== 'T')
           .map(([_, value]) => value?.toString())
       }
       const simulatorState = new SimulatorState();
