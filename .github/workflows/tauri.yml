@@ -51,7 +51,7 @@ jobs:
       - name: build wasm
         run: pnpm build:wasm
 
-      - uses: tauri-apps/tauri-action@v1
+      - uses: tauri-apps/tauri-action@v0.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
