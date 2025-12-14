@@ -1,6 +1,6 @@
 # Von Neumann Machine Sim <img align="left" width="45" height="45" src="/src-tauri/icons/128x128.png" style="margin-right:15px" />
 
-![Vercel Deploy](https://deploy-badge.vercel.app/vercel/vnmsim?name=webapp)
+[![Vercel Deploy](https://deploy-badge.vercel.app/vercel/vnmsim?name=webapp)](https://vnmsim.c2r0b.ovh/)
 [![publish](https://github.com/c2r0b/vnmsim/actions/workflows/tauri.yml/badge.svg)](https://github.com/c2r0b/vnmsim/actions/workflows/tauri.yml)
 
 A simulator of the Von Neumann machine.  
