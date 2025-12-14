@@ -4,7 +4,7 @@ A simulator of the Von Neumann machine.
 This simulator is meant to be a solution for students and teachers to study how a Von Neumann Machine works.
 
 Online version: [vnmsim.c2r0b.ovh](https://vnmsim.c2r0b.ovh/)  
-Windows, Linux and MacOS desktop version: [releases](https://github.com/c2r0b/vnmsim/releases) 
+Windows, Linux and MacOS (unsigned) desktop version: [releases](https://github.com/c2r0b/vnmsim/releases) 
 
 [<img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/ef/a6/08/efa60861-f6b9-6943-1018-9db026374842/acb89f71-72cc-4ec5-8340-79f805c2fd62_Screenshot_2023-12-21_at_14.37.22.png/313x0w.webp">](https://apps.apple.com/it/app/von-neumann-machine-simulator/id6474739902)
 
@@ -20,7 +20,7 @@ The simulator is developed as a NextJS app developed using React, Redux, Typescr
 The chosen design framework is FluentUI by Microsoft.  
 The offline version of the simulator is built using Tauri.
 
-After downloading the repository and installing the dependencies using `npm install`, a simple `npm run dev` is enough to start a compiled and live updated version at `localhost:3000`.
+After downloading the repository and installing the dependencies using `pnpm install`, a simple `pnpm run dev` is enough to start a compiled and live updated version at `localhost:3000`.
 
 ## Translations
 
@@ -28,10 +28,6 @@ The simulator is available in multiple languages using Transifex.
 If you want to contribute to the translation of the simulator, you can do it [here](https://www.transifex.com/lorenzo-ganni/vnmsim/).
 
 ## Other versions
-
-### AngularJS version
-
-The previous version written in AngularJS is available in the `old` repository.
 
 ### Zanichelli version
 
