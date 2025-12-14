@@ -21,7 +21,7 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
-            let win_builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
+            let mut win_builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
                 .title("")
                 .inner_size(1280.0, 750.0);
 
@@ -29,7 +29,7 @@ pub fn run() {
             #[cfg(target_os = "macos")]
             {
                 use tauri::TitleBarStyle;
-                let win_builder = win_builder.title_bar_style(TitleBarStyle::Transparent);
+                win_builder = win_builder.title_bar_style(TitleBarStyle::Transparent);
             }
 
             let window = win_builder.build().unwrap();
