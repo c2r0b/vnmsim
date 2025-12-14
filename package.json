@@ -13,7 +13,9 @@
     "start": "next start",
     "lint": "next lint",
     "tauri": "tauri",
-    "test": "npm run build:wasm-node && jest"
+    "test": "npm run build:wasm-node && jest",
+    "install-hooks": "git config core.hooksPath .githooks",
+    "postinstall": "pnpm run install-hooks"
   },
   "repository": {
     "type": "git",
