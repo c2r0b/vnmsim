@@ -5,7 +5,7 @@
 
 use shared::execute as simExecute;
 use shared::types::SimulatorState;
-use tauri::{TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
+use tauri::{WebviewUrl, WebviewWindowBuilder};
 
 #[tauri::command]
 fn execute(input: String) -> SimulatorState {
@@ -27,7 +27,10 @@ pub fn run() {
 
             // set transparent title bar only when building for macOS
             #[cfg(target_os = "macos")]
-            let win_builder = win_builder.title_bar_style(TitleBarStyle::Transparent);
+            {
+                use tauri::TitleBarStyle;
+                let win_builder = win_builder.title_bar_style(TitleBarStyle::Transparent);
+            }
 
             let window = win_builder.build().unwrap();
 
@@ -49,6 +52,9 @@ pub fn run() {
                     ns_window.setBackgroundColor_(bg_color);
                 }
             }
+
+            #[cfg(not(target_os = "macos"))]
+            let _ = window;
 
             Ok(())
         })

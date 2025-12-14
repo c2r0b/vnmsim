@@ -138,6 +138,7 @@ describe('instant middleware', () => {
                 codeLine: 0,
                 created: '2021-01-01',
                 focus: simInitalState.focus,
+                interval: simInitalState.interval,
                 status: Status.PLAY,
                 title: name
             });

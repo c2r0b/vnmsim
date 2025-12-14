@@ -1,0 +1,13 @@
+#!/bin/sh
+# Pre-push hook to run tests before allowing push
+
+echo "Running tests before push..."
+pnpm run test
+
+if [ $? -ne 0 ]; then
+    echo "❌ Tests failed. Push aborted."
+    exit 1
+fi
+
+echo "✅ All tests passed. Proceeding with push..."
+exit 0
