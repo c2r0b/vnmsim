@@ -8,8 +8,11 @@ module.exports = {
     "/node_modules/",
     "/.next/"
   ],
+  transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest'
+  },
   transformIgnorePatterns: [
-    "/node_modules/",
+    "/node_modules/(?!sanitize-html|htmlparser2)/",
     "^.+\\.module\\.(css|sass|scss)$"
   ],
   moduleNameMapper: {
