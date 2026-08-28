@@ -1,8 +1,16 @@
+#!/bin/bash
 echo "Installing Rustup..."
 # Install Rustup (compiler)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # Adding binaries to path
-source "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+elif [ -f "/rust/env" ]; then
+  source "/rust/env"
+else
+  echo "Error: Could not find Rust environment file"
+  exit 1
+fi
 echo "Installing wasm-pack..."
 # Install wasm-pack
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -y
