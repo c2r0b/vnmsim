@@ -1,3 +1,4 @@
+import sanitizeHtml from 'sanitize-html'
 import { setE1, setE2, setOp, setAcc } from 'src/store/alu.slice'
 import { setIrCmd, setIrLoc } from 'src/store/ir.slice'
 import { setPc } from 'src/store/pc.slice'
@@ -24,7 +25,7 @@ export const load = (obj:SimulatorStateData) => {
     dispatch(setStep(obj.pc.step))
 
     // sim
-    dispatch(setTitle(obj.sim.title))
+    dispatch(setTitle(sanitizeHtml(obj.sim.title, { allowedTags: [], allowedAttributes: {} })))
     dispatch(setCreated(obj.sim.created))
     dispatch(setStatus(obj.sim.status))
     dispatch(setStep(obj.sim.step))
