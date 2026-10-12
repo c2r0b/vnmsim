@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { T } from '@transifex/react'
 import ContentEditable from 'react-contenteditable'
+import sanitizeHtml from 'sanitize-html'
 
 import { setTitle } from 'src/store/sim.slice'
 import { useAppDispatch, useAppSelector } from 'src/hooks/store'
@@ -15,7 +16,8 @@ const WorkTitle = () => {
   const workTitleRef = useRef<HTMLElement | null>(null)
 
   const onTitleChange = (ev) => {
-    dispatch(setTitle(ev.target.value))
+    // Sanitize user input from ContentEditable to prevent XSS
+    dispatch(setTitle(sanitizeHtml(ev.target.value, { allowedTags: [], allowedAttributes: {} })))
   }
 
   return (
