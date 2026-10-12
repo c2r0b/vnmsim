@@ -9,7 +9,7 @@ module.exports = {
     "/.next/"
   ],
   transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest'
+    '^.+\\.(js|jsx)$': ['babel-jest', { configFile: './babel.config.jest.js' }]
   },
   transformIgnorePatterns: [
     "/node_modules/(?!sanitize-html|htmlparser2)/",
